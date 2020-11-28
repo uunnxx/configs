@@ -1,0 +1,38 @@
+set selection-clipboard clipboard
+# include theme
+
+# Use map i instead of set recolor
+# set recolor true
+set default-bg "#282828"
+# set recolor-darkcolor "#f1f1f1"
+set recolor-darkcolor "#ebdbb2"
+set recolor-lightcolor "#282828"
+
+set statusbar-h-padding 0
+set statusbar-v-padding 0
+
+# set smooth-scroll true
+
+set page-padding 2
+
+map u scroll half-up
+map e scroll half-down
+
+map p toggle_page_mode
+
+map R reload
+map r rotate
+
+map K zoom in
+map J zoom out
+
+map i recolor
+map q recolor
+
+map Esc abort
+
+map . quit
+# 
+map Q quit
+
+# set sandbox strict
