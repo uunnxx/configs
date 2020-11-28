@@ -12,7 +12,7 @@ Plug 'lilydjwg/fcitx.vim'
 
 
 " Debugger
-Plug 'hagsteel/vim-vebugger'
+" Plug 'hagsteel/vim-vebugger'
 
 
 
@@ -22,7 +22,7 @@ Plug 'pangloss/vim-javascript'
 
 " User Interface
 Plug 'morhetz/gruvbox'
-Plug 'ryanoasis/vim-devicons'
+" Plug 'ryanoasis/vim-devicons'
 Plug 'wfxr/minimap.vim'
 
 " Julia
@@ -43,6 +43,8 @@ Plug 'slim-template/vim-slim', { 'for': 'slim' }
 Plug 'https://github.com/whatyouhide/vim-textobj-erb'
 Plug 'stjernstrom/vim-ruby-run'
 Plug 'hallison/vim-ruby-sinatra', { 'for': 'ruby' }
+
+
 Plug 'tpope/vim-endwise'
 
 
@@ -60,9 +62,9 @@ Plug 'davidhalter/jedi-vim', { 'for': 'py' }
 
 
 " Go
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
 " For debugging 
-Plug 'sebdah/vim-delve', { 'for': 'go' }
+" Plug 'sebdah/vim-delve', { 'for': 'go' }
 
 
 " Syntax
@@ -71,7 +73,7 @@ Plug 'hail2u/vim-css3-syntax', { 'for': 'css' }
 Plug 'othree/html5.vim', { 'for': 'html' }
 Plug 'elzr/vim-json', { 'for': 'json' }                   " JSON
 Plug 'hdima/python-syntax'
-Plug 'tpope/vim-ragtag' " A set of mappings for HTML, XML, PHP, ASP, eRuby, JSP, and more
+Plug 'tpope/vim-ragtag' " A set of mappings for HTML, XML, eRuby, JSP, and more
 Plug 'plasticboy/vim-markdown', { 'for': 'md' }
 Plug 'mboughaba/i3config.vim' " i3config syntax
 
@@ -84,7 +86,6 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 
 Plug 'wellle/targets.vim'
-
 
 Plug 'https://github.com/itchyny/calendar.vim'
 
@@ -107,10 +108,10 @@ Plug 'junegunn/fzf.vim'
 Plug 'yegappan/mru'
 Plug 'mhinz/vim-startify'
 Plug 'jiangmiao/auto-pairs'
-" Plug 'itchyny/vim-cursorword'            " Underlines the word under the cursor
+Plug 'itchyny/vim-cursorword'            " Underlines the word under the cursor
 Plug 'kana/vim-textobj-user'
 Plug 'mattn/emmet-vim'
-" Plug 'terryma/vim-multiple-cursors'    " True Sublime Text style multiple cursors
+Plug 'terryma/vim-multiple-cursors'    " True Sublime Text style multiple cursors
 " Plug 'rhysd/vim-textobj-anyblock'         
 Plug 'kana/vim-textobj-user'
 Plug 'sbdchd/neoformat'
@@ -144,6 +145,7 @@ let g:config_files = [
       \ 'plugin_settings',
       \ 'emmet',
       \ 'js',
+      \ 'multicursor'
       \ ]
 
 for s:filename in g:config_files

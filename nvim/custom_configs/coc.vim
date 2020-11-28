@@ -64,7 +64,7 @@ omap ic <Plug>(coc-classobj-i)
 xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
 
-nmap <expr> <silent> <M-d> <SID>select_current_word()
+" nmap <expr> <silent> <M-d> <SID>select_current_word()
 
 function! s:select_current_word()
   if !get(g:, 'coc_cursors_activated', 0)
