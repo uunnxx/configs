@@ -1,0 +1,441 @@
+set $mod Mod4
+set $ctrl Control
+set $alt Mod1
+set $mod3 Mod3
+set $sh Shift
+set $term "alacritty"
+set $term_float "alacritty --class float"
+set $ranger "alacritty --class ranger -e ranger"
+# set $trans "alacritty --class translator -e trans -t ru -I"
+set $trans "urxvt -name translator -e trans -t ru -I"
+# set $term "contour"
+# set $term_float "contour --class float"
+# set $ranger "contour --class ranger -e ranger"
+# set $trans "contour --class translator -e trans -t ru -I"
+set $fm "nautilus"
+set $menu "rofi -show drun"
+set $menu2 "rofi -show run"
+set $dmenu "dmenu_run"
+set $barcmd i3status
+set $calc rofi -show calc -modi calc -no-show-match -no-sort -calc-command "echo -n '{result}' | xclip"
+
+
+# font -Wuncon-Siji-Medium-R-Normal--10-100-75-75-C-80-iso10646-1
+font pango:Iosevka Nerd Font Bold 10
+# font -aaron-bitocra-medium-r-normal--11-100-72-72-m-90-iso8859-1
+# font pango: bitocra 8
+# font pango:bitocra, Siji 8
+
+floating_modifier $mod
+
+# Gaps
+smart_gaps on
+gaps top 0
+gaps bottom 1
+gaps left 0
+gaps right 1
+
+# Hide borders
+hide_edge_borders both
+bindsym $mod+u border none
+bindsym $mod+y border pixel 2
+bindsym $mod+$sh+u border normal
+
+# focus next/previous visible window
+# bindsym $mod+n exec --no-startup-id ~/.config/i3/scripts/focus_next_visible.py
+# bindsym $mod+$sh+n exec --no-startup-id ~/.config/i3/scripts/focus_next_visible.py reverse
+
+bindsym $mod+g exec --no-startup-id /home/unx/.config/i3/scripts/wmfocus.sh
+
+bindsym $mod+Return exec $term
+bindsym $mod+$sh+Return exec $term_float
+bindsym $mod+$sh+a kill
+bindsym $mod+$sh+c kill
+bindsym $mod+d exec --no-startup-id $menu
+bindsym $mod+$sh+d exec --no-startup-id $menu2
+
+# Rofi - calc
+# <C-CR> copy result
+# <CR> add to history
+bindsym $mod+$sh+g exec --no-startup-id $calc
+
+
+bindsym $alt+Up exec "pactl set-sink-volume @DEFAULT_SINK@ +1000"; exec notify-send -u low "Volume UP"
+bindsym $alt+Down exec "pactl set-sink-volume @DEFAULT_SINK@ -1000"; exec notify-send -u low "Volume DOWN"
+
+bindsym $mod+F3 exec $fm
+bindsym $mod+F2 exec $ranger
+bindsym Print exec --no-startup-id ~/.config/i3/scripts/scrot.sh
+bindsym $ctrl+Print exec "flameshot gui"
+
+# change and move focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+bindsym $mod+$sh+h move left
+bindsym $mod+$sh+j move down
+bindsym $mod+$sh+k move up
+bindsym $mod+$sh+l move right
+
+# workspace back and forth (with/without active container)
+workspace_auto_back_and_forth yes
+bindsym $mod+b workspace back_and_forth
+bindsym $mod+$sh+b move container to workspace back_and_forth; workspace back_and_forth
+
+# split orientation
+bindsym $alt+s split toggle
+
+# toggle fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+bindsym $mod+$sh+f fullscreen toggle global
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+$sh+space floating toggle
+bindsym $mod+space focus mode_toggle
+bindsym $mod+$sh+s sticky toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# move the currently focused window to the scratchpad
+bindsym $mod+$sh+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+
+bindsym $mod+t exec --no-startup-id $trans
+bindsym $mod+Tab exec --no-startup-id "rofi -show window"
+
+bindsym $mod+c move position center
+
+
+bindsym $mod+m bar mode toggle
+
+#navigate workspaces next / previous
+bindsym $alt+$sh+l workspace next
+bindsym $alt+$sh+h workspace prev
+
+# Workspaces
+set $left DVI-D-0
+set $right HDMI-A-0
+
+# bindsym $alt+$sh+Right focus output $left; workspace next; focus output $right; workspace next
+
+# switch between outputs
+bindsym $alt+l focus output right
+bindsym $alt+h focus output left
+
+set $right0 "0000 零"
+set $right1 "0001 一"
+set $right2 "0010 二"
+set $right3 "0011 三"
+set $right4 "0100 四"
+set $right5 "0101 五"
+set $right6 "0110 六"
+set $right7 "0111 七"
+set $right8 "1000 八"
+set $right9 "1001 九"
+
+set $left0 "零 00000"
+set $left1 "一 00001"
+set $left2 "二 00010"
+set $left3 "三 00011"
+set $left4 "四 00100"
+set $left5 "五 00101"
+set $left6 "六 00110"
+set $left7 "七 00111"
+set $left8 "八 01000"
+set $left9 "九 01001"
+
+# more workspaces
+set $leftA "十 01010"
+set $leftB "十一 01011"
+set $leftC "十二 01100"
+set $leftD "十三 01101"
+set $leftE "十四 01110"
+set $leftF "十五 01111"
+
+set $leftG "十六 10000"
+set $leftH "十七 10001"
+set $leftI "十八 10010"
+set $leftJ "十九 10011"
+set $leftK "二十 10100"
+
+workspace $right0 output $right
+workspace $right1 output $right
+workspace $right2 output $right
+workspace $right3 output $right
+workspace $right4 output $right
+workspace $right5 output $right
+workspace $right6 output $right
+workspace $right7 output $right
+workspace $right8 output $right
+workspace $right9 output $right
+
+workspace $left0 output $left
+workspace $left1 output $left
+workspace $left2 output $left
+workspace $left3 output $left
+workspace $left4 output $left
+workspace $left5 output $left
+workspace $left6 output $left
+workspace $left7 output $left
+workspace $left8 output $left
+workspace $left9 output $left
+workspace $leftA output $left
+workspace $leftB output $left
+workspace $leftC output $left
+workspace $leftD output $left
+workspace $leftE output $left
+workspace $leftF output $left
+workspace $leftG output $left
+workspace $leftH output $left
+workspace $leftI output $left
+workspace $leftJ output $left
+workspace $leftK output $left
+
+bindsym $mod+0 workspace $right0
+bindsym $mod+1 workspace $right1
+bindsym $mod+2 workspace $right2
+bindsym $mod+3 workspace $right3
+bindsym $mod+4 workspace $right4
+bindsym $mod+5 workspace $right5
+bindsym $mod+6 workspace $right6
+bindsym $mod+7 workspace $right7
+bindsym $mod+8 workspace $right8
+bindsym $mod+9 workspace $right9
+
+bindsym $alt+0 workspace $left0
+bindsym $alt+1 workspace $left1
+bindsym $alt+2 workspace $left2
+bindsym $alt+3 workspace $left3
+bindsym $alt+4 workspace $left4
+bindsym $alt+5 workspace $left5
+bindsym $alt+6 workspace $left6
+bindsym $alt+7 workspace $left7
+bindsym $alt+8 workspace $left8
+bindsym $alt+9 workspace $left9
+
+
+bindsym $mod+p mode "$more_workspaces"
+set $more_workspaces a-k    十    十一    十二    十三    十四    十五    十六    十七    十八    十九    二十
+mode "$more_workspaces" {
+  bindsym a workspace $leftA, mode "default"
+  bindsym b workspace $leftB, mode "default"
+  bindsym c workspace $leftC, mode "default"
+  bindsym d workspace $leftD, mode "default"
+  bindsym e workspace $leftE, mode "default"
+  bindsym f workspace $leftF, mode "default"
+  bindsym g workspace $leftG, mode "default"
+  bindsym h workspace $leftH, mode "default"
+  bindsym i workspace $leftI, mode "default"
+  bindsym j workspace $leftJ, mode "default"
+  bindsym k workspace $leftK, mode "default"
+
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+# bindsym $mod+$sh+0 move container to workspace $ws0; workspace $ws0
+bindsym $mod+$sh+0 move container to workspace $right0
+bindsym $mod+$sh+1 move container to workspace $right1
+bindsym $mod+$sh+2 move container to workspace $right2
+bindsym $mod+$sh+3 move container to workspace $right3
+bindsym $mod+$sh+4 move container to workspace $right4
+bindsym $mod+$sh+5 move container to workspace $right5
+bindsym $mod+$sh+6 move container to workspace $right6
+bindsym $mod+$sh+7 move container to workspace $right7
+bindsym $mod+$sh+8 move container to workspace $right8
+bindsym $mod+$sh+9 move container to workspace $right9
+
+bindsym $alt+$sh+0 move container to workspace $left0
+bindsym $alt+$sh+1 move container to workspace $left1
+bindsym $alt+$sh+2 move container to workspace $left2
+bindsym $alt+$sh+3 move container to workspace $left3
+bindsym $alt+$sh+4 move container to workspace $left4
+bindsym $alt+$sh+5 move container to workspace $left5
+bindsym $alt+$sh+6 move container to workspace $left6
+bindsym $alt+$sh+7 move container to workspace $left7
+bindsym $alt+$sh+8 move container to workspace $left8
+bindsym $alt+$sh+9 move container to workspace $left9
+
+
+for_window [class="^.*"] border pixel 2
+for_window [title="File Transfer*"] floating enable
+for_window [class="GParted"] floating enable border normal
+for_window [class="Lightdm-settings"] floating enable
+for_window [class="Lxappearance"] floating enable sticky enable border normal
+for_window [class="Pavucontrol"] floating enable
+
+for_window [class="URxvt" instance="translator"] floating enable resize set 880 400
+for_window [class="URxvt" instance="translator"] move position 1040 674
+
+for_window [class="Alacritty" instance="ranger"] floating enable resize set 1240 690
+for_window [class="Alacritty" instance="ranger"] move position center
+for_window [class="Alacritty" instance="float"] floating enable resize set 900 450
+for_window [class="Alacritty" instance="float"] move position center
+for_window [class="Picture-in-picture"] floating enable border none
+for_window [class="mpv"] floating enable resize set 1240 690
+for_window [class="mpv"] move position center
+for_window [class="mpv"] border normal
+for_window [class="Eog"] floating enable resize set 1240 690
+for_window [class="Eog"] move position center
+for_window [class="Zathura"] floating enable resize set 1340 780
+for_window [class="Zathura"] move position center
+# for_window [class="Zathura"] border normal
+for_window [class="File-roller"] floating enable resize set 1340 780
+for_window [class="File-roller"] move position center
+for_window [class="File-roller"] border normal
+for_window [class="Evince"] floating enable resize set 1340 780
+for_window [class="Evince"] move position center
+for_window [class="Zeal"] floating enable resize set 1340 780
+for_window [class="Zeal"] move position center
+for_window [urgent=latest] focus
+for_window [class="komorebi"] border none floating disable
+
+bindsym $mod+Escape mode "$mode_system"
+set $mode_system (l)ock, (e)xit, (s)uspend, (S-r)eboot, (S-s)hutdown, I3:(r)estart, re(l)oad, (c)aps2mod, (w)allpapers
+mode "$mode_system" {
+  bindsym e exec --no-startup-id i3-msg exit, mode "default"
+  bindsym s exec --no-startup-id systemctl suspend, mode "default"
+  bindsym $sh+r exec --no-startup-id reboot, mode "default"
+  bindsym r exec --no-startup-id i3-msg restart, "default"
+  bindsym l exec --no-startup-id i3-msg reload, "default"
+  bindsym $sh+s exec --no-startup-id shutdown, mode "default"
+  bindsym c exec --no-startup-id "setxkbmap -option caps:super", mode "default"
+  bindsym w exec --no-startup-id feh --bg-scale --randomize ~/Pictures/wallpapers/*
+
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+# Resize window (you can also use the mouse for that)
+bindsym $mod+r mode "resize"
+mode "resize" {
+        bindsym h resize shrink width 5 px or 5 ppt
+        bindsym j resize grow height 5 px or 5 ppt
+        bindsym k resize shrink height 5 px or 5 ppt
+        bindsym l resize grow width 5 px or 5 ppt
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+#
+# Colors
+#
+set $colour1 #FF5555
+set $colour3 #FFFFFF
+
+# Gruvbox
+set $gruv0 #1d2021
+set $gruv8 #928374
+
+set $gruv1 #CC241D
+set $gruv9 #FB4934
+
+set $gruv2 #98971A
+set $gruvA #B8BB26
+
+set $gruv3 #D79921
+set $gruvB #FABD2F
+
+set $gruv4 #458588
+set $gruvC #83A598
+
+set $gruv5 #B16286
+set $gruvD #D3869B
+
+set $gruv6 #689D6A
+set $gruvE #8EC07C
+
+set $gruv7 #A89984
+set $gruvF #EBDBB2
+
+
+# right monitor
+bar {
+  output $right
+  tray_output none
+  i3bar_command i3bar
+  status_command i3status --config ~/.config/i3/i3status.conf
+  position top
+  separator_symbol "|"
+  colors {
+      background $gruv0
+      statusline $gruvB
+      # statusline $colour1
+      separator $gruv8
+      #                  border     backgr.   text
+      focused_workspace  $colour1   $colour1  $colour3
+      inactive_workspace $colour3   $colour3  $colour1
+      urgent_workspace   $gruv9     $gruv9    $gruv0
+  }
+  workspace_buttons yes
+  hidden_state hide
+  binding_mode_indicator yes
+  # mode hide
+  modifier none
+}
+
+# left monitor
+bar {
+  output $left
+  tray_output $left
+  i3bar_command i3bar
+  status_command i3status --config ~/.config/i3/i3status-small.conf
+  position top
+  separator_symbol "|"
+  colors {
+      background $gruv0
+      statusline $gruvB
+      # statusline $colour1
+      separator $gruv8
+      #                  border     backgr.   text
+      focused_workspace  $colour1   $colour1  $colour3
+      inactive_workspace $colour3   $colour3  $colour1
+      urgent_workspace   $gruv9     $gruv9    $gruv0
+  }
+  workspace_buttons yes
+  hidden_state hide
+  binding_mode_indicator yes
+  # mode hide
+  modifier none
+}
+
+# class                   border  backgr. text    indic.   child_border
+client.focused            $gruv3 $gruv3 $gruv0 $gruv1
+client.focused_inactive   $gruv2 $gruv2 $gruv0 $gruv1
+client.unfocused          $gruv4 $gruv4 $gruv0 $gruv1
+client.urgent             $gruv9 $gruv9 $gruv0 $gruv1
+
+focus_follows_mouse no
+
+# Autostart applications
+exec --no-startup-id /usr/bin/fcitx
+exec --no-startup-id /usr/bin/diodon
+exec --no-startup-id xclip
+exec --no-startup-id flameshot
+exec --no-startup-id volumeicon
+exec --no-startup-id nm-applet
+exec --no-startup-id unagi
+
+exec_always --no-startup-id xset r rate 150 40
+
+# Make displays work as expected
+exec --no-startup-id xrandr --output DVI-D-0 --auto --left-of HDMI-A-0
+
+# CapsLock is Mod4
+exec_always --no-startup-id setxkbmap -option caps:super
+
+
+
+# Input method settings
+# Comment this lines out because we using fcitx right now
+# bindsym d exec --no-startup-id "setxkbmap -layout us,ru -variant dvp, -option grp:alt_space_toggle", mode "default"
+# bindsym q exec --no-startup-id "setxkbmap -layout us,ru -option grp:alt_space_toggle", mode "default"

@@ -1,0 +1,46 @@
+{
+  "codeLens.enable": true,
+  "diagnostic.displayByAle": true,
+  "diagnostic.errorSign": "❗",
+  "diagnostic.warningSign": "⚠️",
+  "diagnostic.infoSign": "ℹ️",
+  "elixirLS.dialyzerEnabled": false,
+
+  "languageserver": {
+    "elixirLS": {
+      "command": "/home/unx/apps/elixirLS/language_server.sh",
+      "filetypes": ["elixir", "eelixir"]
+    },
+    "ccls": {
+      "command": "ccls",
+      "filetypes": [ "c", "cc", "c++", "cpp", "objc", "objcpp" ],
+      "rootPatterns": [ ".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/" ],
+      "initializationOptions": {
+        "cache": {
+          "directory": "/tmp/ccls"
+        }
+      }
+    },
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod"],
+      "disableWorkspaceFolders": true,
+      "filetypes": ["go"]
+    },
+    "clangd": {
+      "command": "clangd-11",
+      "args": ["--background-index"],
+      "trace.server": "verbose",
+      "rootPatterns": ["compile_commands.json"],
+      "filetypes": ["c", "cpp", "objc", "objcpp"]
+    },
+    "cmake": {
+      "command": "cmake-language-server",
+      "filetypes": ["cmake"],
+      "rootPatterns": ["build/"],
+      "initializationOptions": {
+        "buildDirectory": "build"
+      }
+    }
+  }
+}
