@@ -31,12 +31,12 @@ floating_modifier $mod
 # Gaps
 smart_gaps on
 gaps top 0
-gaps bottom 1
+gaps bottom 0
 gaps left 0
-gaps right 1
+gaps right 0
 
 # Hide borders
-hide_edge_borders both
+# hide_edge_borders both
 bindsym $mod+u border none
 bindsym $mod+y border pixel 2
 bindsym $mod+$sh+u border normal
