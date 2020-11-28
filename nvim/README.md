@@ -1,3 +1,3 @@
 ### NVIM configs
 
-[!NVIM](/home/unx/Pictures/vim.png)
+![NVIM](./vim.png)
