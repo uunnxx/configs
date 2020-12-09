@@ -8,15 +8,15 @@ nnoremap & %
 
 " Quicker way to open command window
 nnoremap <space>; q:
-nnoremap Q :q<cr>
-nnoremap QQ :q!<cr>
-nnoremap Qt :qall!<cr>
+nnoremap QQ :q<cr>
+nnoremap Qt :q!<cr>
+nnoremap Qa :qall!<cr>
 
 nnoremap <left> g;
 nnoremap <right> g,
 
 
-inoremap <silent> eu <Esc>
+inoremap <silent><nowait> eu <Esc>
 
 nnoremap <silent> <up>    :resize +1<CR>
 nnoremap <silent> <down>  :resize -1<CR>
@@ -61,11 +61,13 @@ nmap <nowait> <leader>t :FZF<CR>
 nmap <S-CR> :Files<CR>
 imap <S-CR> <Esc>:Files<CR>
 
-nmap <space>tt :Tags<cr>
+" nmap <space>tt :Tags<cr>
 nmap <silent> <nowait><M-f> :Rg<cr>
 imap <silent> <nowait><M-f> <Esc>:Rg<cr>
 nmap <silent> <nowait><leader>u :UndotreeToggle<cr>
-nmap <silent> <nowait><leader>n :TagbarToggle<CR>
+" nmap <silent> <nowait><leader>n :TagbarToggle<CR>
+nmap <silent> <nowait><leader>n :Vista!!<CR>
+nmap <silent> <nowait><space>tt :Vista finder<CR>
 
 " Fkeys:
 nmap <silent> <F1> :vert help normal-index<cr>
@@ -352,6 +354,3 @@ vnoremap - g<C-x>gv
 " Run crystal and python code
 autocmd FileType crystal nmap <buffer> <leader>rr :w\|:!crystal ./%<cr>
 autocmd FileType python nmap <buffer> <leader>rr :w\|:!python3 ./%<cr>
-
-" Vebugger
-" let g:vebugger_leader='<leader>d'

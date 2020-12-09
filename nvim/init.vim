@@ -1,36 +1,35 @@
 filetype off                           " required
-
 call plug#begin('~/.nvim/plugged')
 
 " Git
-Plug 'tpope/vim-fugitive'              " A Git wrapper
-Plug 'airblade/vim-gitgutter'          " A Vim plugin which shows a git diff in the gutter
+Plug 'tpope/vim-fugitive'           " A Git wrapper
+Plug 'airblade/vim-gitgutter'       " A Vim plugin which shows a git diff in the gutter
 
 " Writing
 " fcitx toggle layout to en in command mode and back to
 Plug 'lilydjwg/fcitx.vim'
 
-
 " Debugger
 " Plug 'hagsteel/vim-vebugger'
 
+" FrontEnd:
+Plug 'mattn/emmet-vim'
+Plug 'AndrewRadev/tagalong.vim'
+Plug 'turbio/bracey.vim'
 
-
-" Javascript
-Plug 'pangloss/vim-javascript'
 
 
 " User Interface
 Plug 'morhetz/gruvbox'
-" Plug 'ryanoasis/vim-devicons'
-Plug 'wfxr/minimap.vim'
-
-" Julia
-Plug 'JuliaEditorSupport/julia-vim'
-
 Plug 'itchyny/lightline.vim'           " LightLine
 Plug 'maximbaz/lightline-ale'          " Ale info in LightLine
 Plug 'mengelbrecht/lightline-bufferline' " Bufferline
+" Plug 'ryanoasis/vim-devicons'
+" Plug 'wfxr/minimap.vim'
+
+
+" Julia
+Plug 'JuliaEditorSupport/julia-vim'
 
 
 " Ruby
@@ -45,12 +44,10 @@ Plug 'stjernstrom/vim-ruby-run'
 Plug 'hallison/vim-ruby-sinatra', { 'for': 'ruby' }
 
 
-Plug 'tpope/vim-endwise'
-
-
 " Elixir
 Plug 'elixir-editors/vim-elixir', { 'for': 'elixir' }
 Plug 'slashmili/alchemist.vim', { 'for': 'elixir' }
+Plug 'mhinz/vim-mix-format'
 
 " Crystal
 Plug 'vim-crystal/vim-crystal', { 'for': 'cr' }
@@ -61,16 +58,12 @@ Plug 'davidhalter/jedi-vim', { 'for': 'py' }
 " Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'py' }
 
 
-" Go
-" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
-" For debugging 
-" Plug 'sebdah/vim-delve', { 'for': 'go' }
-
-
 " Syntax
-Plug 'sheerun/vim-polyglot' " A solid language pack for Vim.
+Plug 'pangloss/vim-javascript'
+Plug 'valloric/MatchTagAlways' " HTML/XML
 Plug 'hail2u/vim-css3-syntax', { 'for': 'css' }
 Plug 'othree/html5.vim', { 'for': 'html' }
+Plug 'sheerun/vim-polyglot' " A solid language pack for Vim.
 Plug 'elzr/vim-json', { 'for': 'json' }                   " JSON
 Plug 'hdima/python-syntax'
 Plug 'tpope/vim-ragtag' " A set of mappings for HTML, XML, eRuby, JSP, and more
@@ -80,17 +73,14 @@ Plug 'mboughaba/i3config.vim' " i3config syntax
 " Rust
 Plug 'rust-lang/rust.vim', { 'for': 'rs' }
 
-" Testing!!!
-" Neovim lsp server
-Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
-
 Plug 'wellle/targets.vim'
 
-Plug 'https://github.com/itchyny/calendar.vim'
 
 " Functionality for Vim
+Plug 'tpope/vim-endwise'
 Plug 'majutsushi/tagbar'               " Vim plugin that displays tags in window, ordered by scope
+Plug 'liuchengxu/vista.vim'
+
 Plug 'tpope/vim-abolish'                " Subvert
 Plug 'tpope/vim-surround'
 Plug 'troydm/easytree.vim'
@@ -99,7 +89,7 @@ Plug 'godlygeek/tabular'               " Vim script for text filtering and align
 Plug 'bagrat/vim-buffet'               " Vim Buffet
 Plug 'easymotion/vim-easymotion'       " EasyMotion
 Plug 'tpope/vim-repeat'                " Vim Repeat
-Plug 'tpope/vim-unimpaired'            " Pairs of handy bracket mappings
+" Plug 'tpope/vim-unimpaired'            " Pairs of handy bracket mappings
 Plug 'tpope/vim-commentary'
 Plug 'isa/vim-matchit'
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
@@ -108,20 +98,16 @@ Plug 'junegunn/fzf.vim'
 Plug 'yegappan/mru'
 Plug 'mhinz/vim-startify'
 Plug 'jiangmiao/auto-pairs'
-Plug 'itchyny/vim-cursorword'            " Underlines the word under the cursor
+" Plug 'itchyny/vim-cursorword'            " Underlines the word under the cursor
 Plug 'kana/vim-textobj-user'
-Plug 'mattn/emmet-vim'
 Plug 'terryma/vim-multiple-cursors'    " True Sublime Text style multiple cursors
-" Plug 'rhysd/vim-textobj-anyblock'         
+" Plug 'rhysd/vim-textobj-anyblock'
 Plug 'kana/vim-textobj-user'
 Plug 'sbdchd/neoformat'
 Plug 'Yggdroot/indentLine'
 Plug 'nicwest/vim-camelsnek'
-
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
 Plug 'markonm/traces.vim'
-
 Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
 
 " Linting
@@ -167,9 +153,9 @@ endfor
 "   endif
 " endfor
 
-" Minimap 
-nmap <silent> <leader>m :MinimapToggle<CR>
-let g:minimap_width=15
+" Minimap
+" nmap <silent> <leader>m :MinimapToggle<CR>
+" let g:minimap_width=15
 
 hi MinimapCurrentLine ctermfg=Green guifg=#50FA7B guibg=#32302f
 let g:minimap_highlight = 'MinimapCurrentLine'

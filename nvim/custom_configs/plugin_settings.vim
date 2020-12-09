@@ -1,41 +1,21 @@
 " Tagbar section:
-"
-let g:tagbar_type_ruby = {
-      \ 'kinds' : [
-      \ 'm:modules',
-      \ 'c:classes',
-      \ 'd:describes',
-      \ 'C:contexts',
-      \ 'f:methods',
-      \ 'F:singleton methods'
-      \ ]
-      \ }
 
-let g:tagbar_type_clojure = {
-      \ 'ctagstype': 'clojure',
-      \ 'kinds' : [
-      \   'n:namespace',
-      \   'd:definition',
-      \   'f:function',
-      \   'm:macro',
-      \   'i:inline',
-      \   'a:multimethod definition',
-      \   'b:multimethod implementation',
-      \   'c:defonce',
-      \   's:struct',
-      \   'v:intern',
-      \ ]
-      \ }
-
-let g:tagbar_type_puppet = {
-      \ 'ctagstype': 'puppet',
+if executable('ripper-tags')
+  let g:tagbar_type_ruby = {
       \ 'kinds': [
-      \    'c:class',
-      \    's:site',
-      \    'n:node',
-      \    'd:definition'
-      \ ]
+      \   'm:modules',
+      \   'c:classes',
+      \   'C:constants',
+      \   'F:singleton methods',
+      \   'f:methods',
+      \   'a:aliases'
+      \ ],
+      \ 'kind2scope' : { 'c' : 'class', 'm' : 'class' },
+      \ 'scope2kind' : { 'class' : 'c' },
+      \ 'ctagsbin'   : 'ripper-tags',
+      \ 'ctagsargs'  : ['-f', '-']
       \ }
+endif
 
 let g:tagbar_type_markdown = {
       \ 'ctagstype' : 'markdown',
@@ -60,6 +40,56 @@ let g:tagbar_type_rust = {
       \ ]
       \ }
 
+let g:tagbar_type_elixir = {
+      \ 'ctagstype' : 'elixir',
+      \ 'kinds' : [
+      \   'p:protocols',
+      \   'm:modules',
+      \   'e:exceptions',
+      \   'y:types',
+      \   'd:delegates',
+      \   'f:functions',
+      \   'c:callbacks',
+      \   'a:macros',
+      \   't:tests',
+      \   'i:implementations',
+      \   'o:operators',
+      \   'r:records'
+      \ ],
+      \ 'sro' : '.',
+      \ 'kind2scope' : {
+      \   'p' : 'protocol',
+      \   'm' : 'module'
+      \ },
+      \ 'scope2kind' : {
+      \   'protocol' : 'p',
+      \   'module' : 'm'
+      \ },
+      \ 'sort' : 0
+      \ }
+
+let g:tagbar_type_css = {
+      \ 'ctagstype' : 'Css',
+      \ 'kinds'     : [
+      \   'c:classes',
+      \   's:selectors',
+      \   'i:identities'
+      \ ]
+      \ }
+
+let g:tagbar_type_crystal = {
+      \ 'ctagstype': 'crystal',
+      \ 'kinds' : [
+      \   'd:defs',
+      \   'f:functions',
+      \   'c:classes',
+      \   'm:modules',
+      \   'l:libs',
+      \   's:structs'
+      \ ]
+      \ }
+
+
 " IndentLine section:
 "
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
@@ -76,32 +106,64 @@ let &colorcolumn=join(range(121,999), ',')
 
 " ALE section:
 let g:ale_disable_lsp = 0
-let g:ale_completion_enabled = 1
+let g:ale_completion_enabled = 0
 let g:ale_fix_on_save = 1
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
+let g:ale_linters_explicit = 1
 "let g:ale_open_list = 1
 "let g:ale_lint_on_text_changed = 'never'
-highlight ALEErrorSign ctermbg=0 ctermfg=magenta
 
-let g:ale_linters = {
-  \ 'ruby': ['solograph', 'rubocop', 'standardrb'],
-  \ 'python': ['flake8', 'pylint'],
-  \ 'javascript': ['eslint'],
-  \ 'cpp': ['clang'],
-  \ 'c': ['clang']
-  \ }
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
-let g:ale_fixers = {
-  \ 'ruby': ['standardrb'],
-  \ }
+highlight ALEErrorSign ctermbg=0 ctermfg=red
+highlight ALEWarningSign ctermbg=0 ctermfg=yellow
+
+
+let g:ale_linters = {}
+let g:ale_linters.scss = ['stylelint']
+let g:ale_linters.css = ['stylelint']
+let g:ale_linters.elixir = ['elixir-ls', 'credo']
+let g:ale_linters.ruby = ['rubocop', 'ruby', 'solargraph']
+
+" Check Python files with flake8 and pylint.
+let b:ale_linters = ['flake8', 'pylint']
+" Fix Python files with autopep8 and yapf.
+let b:ale_fixers = ['autopep8', 'yapf']
+" Disable warnings about trailing whitespace for Python files.
+let b:ale_warn_about_trailing_whitespace = 0
+
+let g:ale_fixers = {'ruby': ['trim_whitespace']}
+let g:ale_fixers = {'ruby': ['remove_trailing_lines']}
+let g:ale_fixers = {'javascript': ['trim_whitespace']}
+let g:ale_fixers = {'javascript': ['remove_trailing_lines']}
+let g:ale_fixers = {'elixir': ['trim_whitespace']}
+let g:ale_fixers = {'elixir': ['remove_trailing_lines']}
+
+let g:ale_fixers.javascript = ['eslint', 'prettier']
+let g:ale_fixers.html = ['prettier']
+let g:ale_fixers.scss = ['stylelint']
+let g:ale_fixers.css = ['stylelint']
+let g:ale_fixers.elm = ['format']
+let g:ale_fixers.ruby = ['rubocop']
+let g:ale_ruby_rubocop_executable = 'bundle'
+let g:ale_fixers.elixir = ['mix_format']
+let g:ale_fixers.xml = ['xmllint']
+
+" let g:ale_sign_column_always = 1
+let g:ale_elixir_credo_strict = 1
+
+
+let g:ale_elixir_elixir_ls_release = expand("~/apps/elixirLS")
+let g:ale_elixir_elixir_ls_config = {'elixirLS': {'dialyzerEnabled': v:false}}
 
 
 " JSON section:
 "
 let g:vim_json_syntax_conceal = 0
-
 
 
 " GitGutter section:
@@ -180,3 +242,12 @@ let g:jedi#completions_enabled = 0
 " open the go-to function in split, not another buffer
 let g:jedi#use_splits_not_buffers = "right"
 
+" Elixir
+autocmd FileType elixir setlocal formatprg=mix\ format\ -
+
+
+" Tagalong
+let g:tagalong_verbose = 1
+
+" Bracey
+let g:bracey_refresh_on_save = 1

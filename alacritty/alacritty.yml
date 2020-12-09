@@ -47,21 +47,22 @@ window:
 
 font:
   normal:
-    # family: DejaVu Sans Mono Nerd Font
-    family: Tamzen
+    family: DejaVu Sans Mono Nerd Font
+    # family: Tamzen
+    # family: FiraCode Nerd Font Mono
     style: Regular
-    # family: FiraCode Nerd Font Mono
   bold:
-    # family: DejaVu Sans Mono Nerd Font
+    family: DejaVu Sans Mono Nerd Font
     # family: FiraCode Nerd Font Mono
-    family: Tamzen
+    # family: Tamzen
     style: Bold
   italic:
     # family: FiraCode Nerd Font Mono
-    family: Tamzen
-    # family: DejaVu Sans Mono Nerd Font
+    family: DejaVu Sans Mono Nerd Font
+    # family: Tamzen
     style: Italic
-  size: 14
+  # size: 14
+  size: 12
 
 # offset:
 #   x: 0

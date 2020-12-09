@@ -4,7 +4,7 @@
 autocmd FileType ruby nmap <buffer> <leader>rr :w\|:!ruby ./%<cr>
 
 autocmd FileType ruby setlocal tags+=./tags;
-autocmd FileType ruby set tags+=/home/unx/.asdf/installs/ruby/2.7.2/lib/ruby/gems/2.7.0/gems;
+autocmd FileType ruby set tags+=/home/unx/.asdf/installs/ruby/2.7.2/lib/ruby/gems/2.7.0/gems/tags;
 
 " Ruby_run.vim plugin's section:
 "
@@ -38,4 +38,3 @@ autocmd FileType eruby inoremap tL <%  %><left><left><left>
 autocmd FileType eruby inoremap tC <%#  %><left><left><left>
 
 " autocmd BufWrite *.rb :!ruby ./%
-

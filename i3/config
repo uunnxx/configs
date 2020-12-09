@@ -17,12 +17,17 @@ set $menu "rofi -show drun"
 set $menu2 "rofi -show run"
 set $dmenu "dmenu_run"
 set $barcmd i3status
-set $calc rofi -show calc -modi calc -no-show-match -no-sort -calc-command "echo -n '{result}' | xclip"
+set $calc "qalculate-gtk"
+
+# Rofi - calc
+# <C-CR> copy result
+# <CR> add to history
+# set $calc rofi -show calc -modi calc -no-show-match -no-sort -calc-command "echo -n '{result}' | xclip"
 
 
 # font -Wuncon-Siji-Medium-R-Normal--10-100-75-75-C-80-iso10646-1
-font pango:Iosevka Nerd Font Bold 10
 # font -aaron-bitocra-medium-r-normal--11-100-72-72-m-90-iso8859-1
+font pango:Iosevka Nerd Font Bold 10
 # font pango: bitocra 8
 # font pango:bitocra, Siji 8
 
@@ -37,6 +42,8 @@ gaps right 0
 
 # Hide borders
 # hide_edge_borders both
+# hide_edge_borders smart
+hide_edge_borders horizontal
 bindsym $mod+u border none
 bindsym $mod+y border pixel 2
 bindsym $mod+$sh+u border normal
@@ -45,19 +52,19 @@ bindsym $mod+$sh+u border normal
 # bindsym $mod+n exec --no-startup-id ~/.config/i3/scripts/focus_next_visible.py
 # bindsym $mod+$sh+n exec --no-startup-id ~/.config/i3/scripts/focus_next_visible.py reverse
 
-bindsym $mod+g exec --no-startup-id /home/unx/.config/i3/scripts/wmfocus.sh
 
 bindsym $mod+Return exec $term
 bindsym $mod+$sh+Return exec $term_float
+
+# Kill
 bindsym $mod+$sh+a kill
 bindsym $mod+$sh+c kill
+
 bindsym $mod+d exec --no-startup-id $menu
 bindsym $mod+$sh+d exec --no-startup-id $menu2
 
-# Rofi - calc
-# <C-CR> copy result
-# <CR> add to history
 bindsym $mod+$sh+g exec --no-startup-id $calc
+bindsym $mod+g exec --no-startup-id /home/unx/.config/i3/scripts/wmfocus.sh
 
 
 bindsym $alt+Up exec "pactl set-sink-volume @DEFAULT_SINK@ +1000"; exec notify-send -u low "Volume UP"
@@ -279,6 +286,10 @@ for_window [class="Alacritty" instance="ranger"] floating enable resize set 1240
 for_window [class="Alacritty" instance="ranger"] move position center
 for_window [class="Alacritty" instance="float"] floating enable resize set 900 450
 for_window [class="Alacritty" instance="float"] move position center
+
+for_window [class="Qalculate-gtk"] floating enable resize set 900 450
+for_window [class="Qalculate-gtk"] move position center
+
 for_window [class="Picture-in-picture"] floating enable border none
 for_window [class="mpv"] floating enable resize set 1240 690
 for_window [class="mpv"] move position center

@@ -88,7 +88,7 @@ set showcmd
 set so=15
 
 " Switch to an existing buffer if one exists
-set switchbuf=useopen 
+set switchbuf=useopen
 
 set mousemodel=popup
 set guioptions=egmrti
@@ -98,9 +98,10 @@ set mousehide
 set updatetime=400
 
 " show invisibles
-set listchars=tab:▸\ 
+set listchars=tab:▸\
 set listchars+=trail:·
 set listchars+=eol:¬
+" set listchars+=eol:᚜
 set listchars+=extends:»
 set listchars+=precedes:«
 set listchars+=nbsp:░
@@ -186,3 +187,5 @@ set gdefault
 
 set colorcolumn=120
 highlight ColorColumn ctermbg=6
+
+set tags=./tags;/
