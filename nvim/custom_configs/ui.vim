@@ -23,8 +23,8 @@ let g:lightline.active = {
       \
       \ 'left': [
       \   ['mode', 'paste'],
-      \   ['cocstatus', 'filename', 'tagbar'],
-      \   ],
+      \   ['cocstatus', 'filename',],
+      \   ['tagbar']],
       \
       \ 'right': [
       \   ['linter_checking','linter_errors','linter_warnings','linter_infos','linter_ok'],
