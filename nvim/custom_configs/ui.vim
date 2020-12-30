@@ -124,6 +124,7 @@ let g:lightline#ale#indicator_ok = "\uf00c "
 aug i3config_ft_detection
   au!
   au BufNewFile,BufRead ~/.config/i3/config set filetype=i3config
+  au BufNewFile,BufRead ~/dots/configs/i3/config set filetype=i3config
 aug END
 
 " highlight NonText ctermfg=4

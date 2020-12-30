@@ -6,8 +6,8 @@ set $sh Shift
 set $term "alacritty"
 set $term_float "alacritty --class float"
 set $ranger "alacritty --class ranger -e ranger"
-# set $trans "alacritty --class translator -e trans -t ru -I"
-set $trans "urxvt -name translator -e trans -t ru -I"
+set $trans "alacritty --class translator -e trans -t ru -I"
+# set $trans "urxvt -name translator -e trans -t ru -I"
 # set $term "contour"
 # set $term_float "contour --class float"
 # set $ranger "contour --class ranger -e ranger"
@@ -34,11 +34,11 @@ font pango:Iosevka Nerd Font Bold 10
 floating_modifier $mod
 
 # Gaps
-smart_gaps on
-gaps top 0
-gaps bottom 0
-gaps left 0
-gaps right 0
+# smart_gaps on
+# gaps top 0
+# gaps bottom 0
+# gaps left 0
+# gaps right 0
 
 # Hide borders
 # hide_edge_borders both
@@ -281,6 +281,9 @@ for_window [class="Pavucontrol"] floating enable
 
 for_window [class="URxvt" instance="translator"] floating enable resize set 880 400
 for_window [class="URxvt" instance="translator"] move position 1040 674
+
+for_window [class="Alacritty" instance="translator"] floating enable resize set 880 400
+for_window [class="Alacritty" instance="translator"] move position 1040 674
 
 for_window [class="Alacritty" instance="ranger"] floating enable resize set 1240 690
 for_window [class="Alacritty" instance="ranger"] move position center

@@ -110,6 +110,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'markonm/traces.vim'
 Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
 
+
 " Linting
 Plug 'dense-analysis/ale'
 
