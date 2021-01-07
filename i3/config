@@ -425,7 +425,8 @@ bar {
 # class                   border  backgr. text    indic.   child_border
 client.focused            $gruv3 $gruv3 $gruv0 $gruv1
 client.focused_inactive   $gruv2 $gruv2 $gruv0 $gruv1
-client.unfocused          $gruv4 $gruv4 $gruv0 $gruv1
+client.unfocused          $gruv4 $gruv4 #FFFFFF $gruv1
+# client.unfocused          $gruv4 $gruv4 $gruv0 $gruv1
 client.urgent             $gruv9 $gruv9 $gruv0 $gruv1
 
 focus_follows_mouse no

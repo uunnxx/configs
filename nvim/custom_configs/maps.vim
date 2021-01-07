@@ -293,6 +293,12 @@ nmap <silent> <BS> <C-o>
 map <C-c> :%y+<cr>
 " copy selected line
 vmap yy "+y
+nnoremap Y y$
+
+nnoremap ' `
+nnoremap ` '
+
+nnoremap U <C-r>
 
 " Transfer text between two VIM instances
 " Copy and paste & cut and paste between different Vim sessions
