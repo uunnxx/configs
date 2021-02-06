@@ -293,7 +293,7 @@ nmap <silent> <BS> <C-o>
 map <C-c> :%y+<cr>
 " copy selected line
 vmap yy "+y
-nnoremap Y y$
+" nnoremap Y y$
 
 nnoremap ' `
 nnoremap ` '

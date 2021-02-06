@@ -72,7 +72,19 @@ bindsym $alt+Down exec "pactl set-sink-volume @DEFAULT_SINK@ -1000"; exec notify
 
 bindsym $mod+F3 exec $fm
 bindsym $mod+F2 exec $ranger
-bindsym Print exec --no-startup-id ~/.config/i3/scripts/scrot.sh
+
+
+bindsym Print mode "$screenshot"
+
+set $screenshot [return], [space] focused, [c-space] selected
+mode "$screenshot" {
+
+  bindsym --release Return exec --no-startup-id ~/.config/i3/scripts/scrot.sh
+  bindsym --release space exec --no-startup-id ~/.config/i3/scripts/scrot_focused.sh
+  bindsym --release $ctrl+space exec --no-startup-id ~/.config/i3/scripts/scrot_select.sh
+  bindsym Escape mode "default"
+}
+
 bindsym $ctrl+Print exec "flameshot gui"
 
 # change and move focus
@@ -336,6 +348,11 @@ mode "resize" {
         bindsym k resize shrink height 5 px or 5 ppt
         bindsym l resize grow width 5 px or 5 ppt
 
+        bindsym Left resize shrink width 50 px or 50 ppt
+        bindsym Down resize grow height 50 px or 50 ppt
+        bindsym Up resize shrink height 50 px or 50 ppt
+        bindsym Right resize grow width 50 px or 50 ppt
+
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
@@ -454,3 +471,7 @@ exec_always --no-startup-id setxkbmap -option caps:super
 # Comment this lines out because we using fcitx right now
 # bindsym d exec --no-startup-id "setxkbmap -layout us,ru -variant dvp, -option grp:alt_space_toggle", mode "default"
 # bindsym q exec --no-startup-id "setxkbmap -layout us,ru -option grp:alt_space_toggle", mode "default"
+
+# exec_always --no-startup-id killall back4
+exec_always --no-startup-id back4 0.07 /home/unx/Pictures/lv/3.gif
+# bindsym $mod+n exec --no-startup-id back4 0.07 /home/unx/Pictures/lv/3.gif

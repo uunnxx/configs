@@ -60,11 +60,11 @@ Plug 'davidhalter/jedi-vim', { 'for': 'py' }
 
 " Syntax
 Plug 'pangloss/vim-javascript'
-Plug 'valloric/MatchTagAlways' " HTML/XML
+Plug 'valloric/MatchTagAlways'
 Plug 'hail2u/vim-css3-syntax', { 'for': 'css' }
 Plug 'othree/html5.vim', { 'for': 'html' }
-Plug 'sheerun/vim-polyglot' " A solid language pack for Vim.
-Plug 'elzr/vim-json', { 'for': 'json' }                   " JSON
+Plug 'sheerun/vim-polyglot'
+Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'hdima/python-syntax'
 Plug 'tpope/vim-ragtag' " A set of mappings for HTML, XML, eRuby, JSP, and more
 Plug 'plasticboy/vim-markdown', { 'for': 'md' }
@@ -109,6 +109,9 @@ Plug 'nicwest/vim-camelsnek'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'markonm/traces.vim'
 Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
+
+Plug 'ekickx/clipboard-image.nvim'
+
 
 
 " Linting
