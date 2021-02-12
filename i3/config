@@ -8,10 +8,6 @@ set $term_float "alacritty --class float"
 set $ranger "alacritty --class ranger -e ranger"
 set $trans "alacritty --class translator -e trans -t ru -I"
 # set $trans "urxvt -name translator -e trans -t ru -I"
-# set $term "contour"
-# set $term_float "contour --class float"
-# set $ranger "contour --class ranger -e ranger"
-# set $trans "contour --class translator -e trans -t ru -I"
 set $fm "nautilus"
 set $menu "rofi -show drun"
 set $menu2 "rofi -show run"
@@ -19,17 +15,7 @@ set $dmenu "dmenu_run"
 set $barcmd i3status
 set $calc "qalculate-gtk"
 
-# Rofi - calc
-# <C-CR> copy result
-# <CR> add to history
-# set $calc rofi -show calc -modi calc -no-show-match -no-sort -calc-command "echo -n '{result}' | xclip"
-
-
-# font -Wuncon-Siji-Medium-R-Normal--10-100-75-75-C-80-iso10646-1
-# font -aaron-bitocra-medium-r-normal--11-100-72-72-m-90-iso8859-1
 font pango:Iosevka Nerd Font Bold 10
-# font pango: bitocra 8
-# font pango:bitocra, Siji 8
 
 floating_modifier $mod
 
@@ -63,15 +49,12 @@ bindsym $mod+$sh+c kill
 bindsym $mod+d exec --no-startup-id $menu
 bindsym $mod+$sh+d exec --no-startup-id $menu2
 
-bindsym $mod+$sh+g exec --no-startup-id $calc
 bindsym $mod+g exec --no-startup-id /home/unx/.config/i3/scripts/wmfocus.sh
+# bindsym $mod+$sh+g exec --no-startup-id
 
 
 bindsym $alt+Up exec "pactl set-sink-volume @DEFAULT_SINK@ +1000"; exec notify-send -u low "Volume UP"
 bindsym $alt+Down exec "pactl set-sink-volume @DEFAULT_SINK@ -1000"; exec notify-send -u low "Volume DOWN"
-
-bindsym $mod+F3 exec $fm
-bindsym $mod+F2 exec $ranger
 
 
 bindsym Print mode "$screenshot"
@@ -83,6 +66,7 @@ mode "$screenshot" {
   bindsym --release space exec --no-startup-id ~/.config/i3/scripts/scrot_focused.sh
   bindsym --release $ctrl+space exec --no-startup-id ~/.config/i3/scripts/scrot_select.sh
   bindsym Escape mode "default"
+
 }
 
 bindsym $ctrl+Print exec "flameshot gui"
@@ -131,7 +115,6 @@ bindsym $mod+t exec --no-startup-id $trans
 bindsym $mod+Tab exec --no-startup-id "rofi -show window"
 
 bindsym $mod+c move position center
-
 
 bindsym $mod+m bar mode toggle
 
@@ -325,10 +308,9 @@ for_window [urgent=latest] focus
 for_window [class="komorebi"] border none floating disable
 
 bindsym $mod+Escape mode "$mode_system"
-set $mode_system (l)ock, (e)xit, (s)uspend, (S-r)eboot, (S-s)hutdown, I3:(r)estart, re(l)oad, (c)aps2mod, (w)allpapers
+set $mode_system (l)ock, (e)xit, (S-r)eboot, (S-s)hutdown, I3:(r)estart, re(l)oad, (c)aps2mod, (w)allpapers
 mode "$mode_system" {
   bindsym e exec --no-startup-id i3-msg exit, mode "default"
-  bindsym s exec --no-startup-id systemctl suspend, mode "default"
   bindsym $sh+r exec --no-startup-id reboot, mode "default"
   bindsym r exec --no-startup-id i3-msg restart, "default"
   bindsym l exec --no-startup-id i3-msg reload, "default"
@@ -339,6 +321,8 @@ mode "$mode_system" {
   bindsym Return mode "default"
   bindsym Escape mode "default"
 }
+
+bindsym Pause exec --no-startup-id systemctl suspend
 
 # Resize window (you can also use the mouse for that)
 bindsym $mod+r mode "resize"
@@ -475,3 +459,34 @@ exec_always --no-startup-id setxkbmap -option caps:super
 # exec_always --no-startup-id killall back4
 exec_always --no-startup-id back4 0.07 /home/unx/Pictures/lv/3.gif
 # bindsym $mod+n exec --no-startup-id back4 0.07 /home/unx/Pictures/lv/3.gif
+
+
+# Not used keys:
+# 0..9 num_lock: off
+
+# bindsym KP_End exec $fm 
+# bindsym KP_Down exec $fm
+# bindsym KP_Next exec $fm
+
+bindsym KP_Left move container to output left; focus output left
+bindsym $mod + KP_Left move workspace to output left
+
+bindsym KP_Begin exec 
+
+bindsym KP_Right move container to output right; focus output right
+bindsym $mod + KP_Right move workspace to output right
+
+# bindsym KP_Home exec $fm
+# bindsym KP_Up exec $fm
+# bindsym KP_Prior exec $fm
+
+# Right side:
+bindsym KP_Insert exec $fm
+bindsym KP_Delete exec chromium
+bindsym KP_Enter exec alacritty -e irb
+# bindsym $mod + KP_Enter exec ipython
+bindsym KP_Add exec $calc
+
+# bindsym KP_Subtract exec $fm
+# bindsym KP_Multiply exec $fm
+bindsym --release KP_Divide exec xkill
