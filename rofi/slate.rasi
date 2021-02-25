@@ -1,44 +1,40 @@
 * {
-  background-color: #282C33;
-  border-color: #2e343f;
-  text-color: #8ca0aa;
-  spacing: 0;
-  width: 1212px;
-}
-
-inputbar {
-  border: 0 0 1px 0;
-  children: [prompt,entry];
+  background-color: #280F28ff;
+  text-color: #ffffffA6;
+  height: 1080px;
+  width: 1920px;
 }
 
 prompt {
-  padding: 16px;
-  border: 0 1px 0 0;
-}
-
-textbox {
-  background-color: #2e343f;
-  border: 0 0 1px 0;
-  border-color: #282C33;
-  padding: 8px 16px;
+  padding: 20px;
+  background-color: #510A3299;
+  text-color: #EE4540ff;
+  margin: 20px 5px 10px 20px;
 }
 
 entry {
-  padding: 16px;
+  padding: 20px;
+  background-color: #2D142Cff;
+  margin: 20px 20px 10px 5px;
+  border: 0 0 0 6px;
+  border-color: #EE4540ff;
 }
 
 listview {
-  cycle: false;
-  margin: 0 0 -1px 0;
+  cycle: true;
+  margin: 0;
   scrollbar: false;
 }
 
 element {
-  border: 0 0 1px 0;
-  padding: 16px;
+  background-color: #2D142Cff;
+  border-color: #C92A42ff;
+  border: 0 0 0px 6px;
+  padding: 30px;
+  margin: 10px 20px;
 }
 
 element selected {
-  background-color: #2e343f;
+  background-color: #510A3299;
+  border-color: #EE4540ff;
 }
-

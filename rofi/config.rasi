@@ -138,5 +138,6 @@ configuration {
   scrollbar-width: 18;
   tokenize: false;
   show-icons: false;
+  icon-theme: "Papirus";
   columns: 2;
 }

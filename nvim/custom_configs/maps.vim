@@ -357,6 +357,9 @@ nnoremap - <C-x>
 vnoremap + g<C-a>gv
 vnoremap - g<C-x>gv
 
+" Run ruby code <leader>rr
+autocmd FileType ruby nmap <buffer> <leader>rr :w\|:!ruby ./%<cr>
 " Run crystal and python code
 autocmd FileType crystal nmap <buffer> <leader>rr :w\|:!crystal ./%<cr>
 autocmd FileType python nmap <buffer> <leader>rr :w\|:!python3 ./%<cr>
+autocmd FileType cpp nmap <buffer> <leader>rr :w\|:!g++ ./% -o out.tmp && ./out.tmp<cr>

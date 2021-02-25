@@ -481,12 +481,12 @@ bindsym $mod + KP_Right move workspace to output right
 # bindsym KP_Prior exec $fm
 
 # Right side:
-bindsym KP_Insert exec $fm
-bindsym KP_Delete exec chromium
-bindsym KP_Enter exec alacritty -e irb
-# bindsym $mod + KP_Enter exec ipython
+# bindsym KP_Insert exec $fm
+# bindsym KP_Delete exec chromium
+# bindsym KP_Enter exec alacritty -e irb
+bindsym $mod + KP_Enter exec $fm
 bindsym KP_Add exec $calc
 
-# bindsym KP_Subtract exec $fm
 # bindsym KP_Multiply exec $fm
-bindsym --release KP_Divide exec xkill
+# bindsym --release KP_Divide exec xkill
+bindsym --release KP_Subtract exec xkill
