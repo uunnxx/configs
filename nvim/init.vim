@@ -27,6 +27,11 @@ Plug 'mengelbrecht/lightline-bufferline' " Bufferline
 " Plug 'ryanoasis/vim-devicons'
 " Plug 'wfxr/minimap.vim'
 
+" Not working as expected:
+" goyo with colorscheme issues, and writer with a function definition issues
+" Plug 'junegunn/goyo.vim' " Distraction free mode for vim
+" Plug 'dsanson/writer.vim'" Distraction free mode for vim
+
 
 " Julia
 Plug 'JuliaEditorSupport/julia-vim'
@@ -161,8 +166,8 @@ endfor
 " nmap <silent> <leader>m :MinimapToggle<CR>
 " let g:minimap_width=15
 
-hi MinimapCurrentLine ctermfg=Green guifg=#50FA7B guibg=#32302f
-let g:minimap_highlight = 'MinimapCurrentLine'
+" hi MinimapCurrentLine ctermfg=Green guifg=#50FA7B guibg=#32302f
+" let g:minimap_highlight = 'MinimapCurrentLine'
 " let g:minimap_auto_start = 0
 
 

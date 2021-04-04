@@ -185,7 +185,4 @@ set stal=1
 " use g for reverse
 set gdefault
 
-set colorcolumn=120
-highlight ColorColumn ctermbg=6
-
 set tags=./tags;/

@@ -112,7 +112,7 @@ bindsym $mod+minus scratchpad show
 
 
 bindsym $mod+t exec --no-startup-id $trans
-bindsym $mod+Tab exec --no-startup-id "rofi -show window"
+bindsym $alt+space exec --no-startup-id "rofi -show window"
 
 bindsym $mod+c move position center
 
@@ -350,25 +350,18 @@ set $colour3 #FFFFFF
 # Gruvbox
 set $gruv0 #1d2021
 set $gruv8 #928374
-
 set $gruv1 #CC241D
 set $gruv9 #FB4934
-
 set $gruv2 #98971A
 set $gruvA #B8BB26
-
 set $gruv3 #D79921
 set $gruvB #FABD2F
-
 set $gruv4 #458588
 set $gruvC #83A598
-
 set $gruv5 #B16286
 set $gruvD #D3869B
-
 set $gruv6 #689D6A
 set $gruvE #8EC07C
-
 set $gruv7 #A89984
 set $gruvF #EBDBB2
 
@@ -409,7 +402,6 @@ bar {
   colors {
       background $gruv0
       statusline $gruvB
-      # statusline $colour1
       separator $gruv8
       #                  border     backgr.   text
       focused_workspace  $colour1   $colour1  $colour3
@@ -427,7 +419,6 @@ bar {
 client.focused            $gruv3 $gruv3 $gruv0 $gruv1
 client.focused_inactive   $gruv2 $gruv2 $gruv0 $gruv1
 client.unfocused          $gruv4 $gruv4 #FFFFFF $gruv1
-# client.unfocused          $gruv4 $gruv4 $gruv0 $gruv1
 client.urgent             $gruv9 $gruv9 $gruv0 $gruv1
 
 focus_follows_mouse no
@@ -439,16 +430,14 @@ exec --no-startup-id xclip
 exec --no-startup-id flameshot
 exec --no-startup-id volumeicon
 exec --no-startup-id nm-applet
-exec --no-startup-id unagi
+exec --no-startup-id compton --config ~/.config/compton.conf -b
+# exec --no-startup-id unagi
 
 exec_always --no-startup-id xset r rate 150 40
-
 # Make displays work as expected
 exec --no-startup-id xrandr --output DVI-D-0 --auto --left-of HDMI-A-0
-
 # CapsLock is Mod4
 exec_always --no-startup-id setxkbmap -option caps:super
-
 
 
 # Input method settings
@@ -456,7 +445,6 @@ exec_always --no-startup-id setxkbmap -option caps:super
 # bindsym d exec --no-startup-id "setxkbmap -layout us,ru -variant dvp, -option grp:alt_space_toggle", mode "default"
 # bindsym q exec --no-startup-id "setxkbmap -layout us,ru -option grp:alt_space_toggle", mode "default"
 
-# exec_always --no-startup-id killall back4
 exec_always --no-startup-id back4 0.07 /home/unx/Pictures/lv/3.gif
 # bindsym $mod+n exec --no-startup-id back4 0.07 /home/unx/Pictures/lv/3.gif
 
@@ -466,27 +454,37 @@ exec_always --no-startup-id back4 0.07 /home/unx/Pictures/lv/3.gif
 
 # bindsym KP_End exec $fm 
 # bindsym KP_Down exec $fm
-# bindsym KP_Next exec $fm
+# bindsym KP_Next exec mpvctl next
 
 bindsym KP_Left move container to output left; focus output left
 bindsym $mod + KP_Left move workspace to output left
 
-bindsym KP_Begin exec 
+# bindsym KP_Begin exec 
 
 bindsym KP_Right move container to output right; focus output right
 bindsym $mod + KP_Right move workspace to output right
 
 # bindsym KP_Home exec $fm
 # bindsym KP_Up exec $fm
-# bindsym KP_Prior exec $fm
+# bindsym KP_Prior exec mpvctl previous
 
 # Right side:
 # bindsym KP_Insert exec $fm
 # bindsym KP_Delete exec chromium
 # bindsym KP_Enter exec alacritty -e irb
 bindsym $mod + KP_Enter exec $fm
-bindsym KP_Add exec $calc
+bindsym $mod + KP_Add exec $calc
 
 # bindsym KP_Multiply exec $fm
 # bindsym --release KP_Divide exec xkill
 bindsym --release KP_Subtract exec xkill
+
+# mpvctl https://gist.github.com/dwgill/a66769e0edef69c04d3b
+#
+bindsym $mod+Left exec mpvctl previous
+bindsym $mod+Right exec mpvctl next
+bindsym $mod+Down exec mpvctl pause
+bindsym $mod+Up exec mpvctl play
+
+
+
