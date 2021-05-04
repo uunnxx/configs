@@ -1,4 +1,24 @@
 configuration {
+  modi: "window,drun,ssh,combi,run";
+  theme: "slate";
+  combi-modi: "window,drun,ssh";
+  cycle: true;
+  lines: 10;
+  scrollbar-width: 18;
+  tokenize: false;
+  show-icons: false;
+  icon-theme: "Papirus";
+  columns: 2;
+  case-sensitive: false;
+  location: 0;
+  kb-accept-entry: "Control+j,Control+m,Return,KP_Enter";
+  kb-accept-custom: "Control+Return";
+  kb-accept-alt: "Shift+Return";
+}
+
+
+
+configuration {
 /*	width: 50;*/
 /*	font: "mono 12";*/
 /*	bw: 1;*/
@@ -119,22 +139,4 @@ configuration {
 /*	me-select-entry: "MousePrimary";*/
 /*	me-accept-entry: "MouseDPrimary";*/
 /*	me-accept-custom: "Control+MouseDPrimary";*/
-}
-
-configuration {
-  modi: "window,drun,ssh,combi,run";
-  theme: "slate";
-  combi-modi: "window,drun,ssh";
-  cycle: true;
-  lines: 10;
-  scrollbar-width: 18;
-  tokenize: false;
-  show-icons: false;
-  icon-theme: "Papirus";
-  columns: 2;
-  case-sensitive: false;
-  location: 0;
-  kb-accept-entry: "Control+j,Control+m,Return,KP_Enter";
-  kb-accept-custom: "Control+Return";
-  kb-accept-alt: "Shift+Return";
 }

@@ -72,8 +72,8 @@ Plug 'sheerun/vim-polyglot'
 Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'hdima/python-syntax'
 Plug 'tpope/vim-ragtag' " A set of mappings for HTML, XML, eRuby, JSP, and more
-Plug 'plasticboy/vim-markdown', { 'for': 'md' }
-Plug 'mboughaba/i3config.vim' " i3config syntax
+" Plug 'plasticboy/vim-markdown', { 'for': 'md' }
+Plug 'mboughaba/i3config.vim'
 
 " Rust
 Plug 'rust-lang/rust.vim', { 'for': 'rs' }

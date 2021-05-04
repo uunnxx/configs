@@ -19,13 +19,6 @@ font pango:Iosevka Nerd Font Bold 10
 
 floating_modifier $mod
 
-# Gaps
-# smart_gaps on
-# gaps top 0
-# gaps bottom 0
-# gaps left 0
-# gaps right 0
-
 # Hide borders
 # hide_edge_borders both
 # hide_edge_borders smart
@@ -37,7 +30,6 @@ bindsym $mod+$sh+u border normal
 # focus next/previous visible window
 # bindsym $mod+n exec --no-startup-id ~/.config/i3/scripts/focus_next_visible.py
 # bindsym $mod+$sh+n exec --no-startup-id ~/.config/i3/scripts/focus_next_visible.py reverse
-
 
 bindsym $mod+Return exec $term
 bindsym $mod+$sh+Return exec $term_float
@@ -52,11 +44,7 @@ bindsym $mod+$sh+d exec --no-startup-id $menu2
 bindsym $mod+g exec --no-startup-id /home/unx/.config/i3/scripts/wmfocus.sh
 # bindsym $mod+$sh+g exec --no-startup-id
 
-
-bindsym $alt+Up exec "pactl set-sink-volume @DEFAULT_SINK@ +1000"; exec notify-send -u low "Volume UP"
-bindsym $alt+Down exec "pactl set-sink-volume @DEFAULT_SINK@ -1000"; exec notify-send -u low "Volume DOWN"
-
-
+bindsym $ctrl+Print exec "flameshot gui"
 bindsym Print mode "$screenshot"
 
 set $screenshot [return], [space] focused, [c-space] selected
@@ -68,8 +56,6 @@ mode "$screenshot" {
   bindsym Escape mode "default"
 
 }
-
-bindsym $ctrl+Print exec "flameshot gui"
 
 # change and move focus
 bindsym $mod+h focus left
@@ -304,7 +290,7 @@ for_window [class="Evince"] floating enable resize set 1340 780
 for_window [class="Evince"] move position center
 for_window [class="Zeal"] floating enable resize set 1340 780
 for_window [class="Zeal"] move position center
-for_window [urgent=latest] focus
+# for_window [urgent=latest] focus
 for_window [class="komorebi"] border none floating disable
 
 bindsym $mod+Escape mode "$mode_system"
@@ -445,8 +431,7 @@ exec_always --no-startup-id setxkbmap -option caps:super
 # bindsym d exec --no-startup-id "setxkbmap -layout us,ru -variant dvp, -option grp:alt_space_toggle", mode "default"
 # bindsym q exec --no-startup-id "setxkbmap -layout us,ru -option grp:alt_space_toggle", mode "default"
 
-exec_always --no-startup-id back4 0.07 /home/unx/Pictures/lv/3.gif
-# bindsym $mod+n exec --no-startup-id back4 0.07 /home/unx/Pictures/lv/3.gif
+# exec_always --no-startup-id back4 0.07 /home/unx/Pictures/lv/3.gif
 
 
 # Not used keys:
@@ -479,12 +464,14 @@ bindsym $mod + KP_Add exec $calc
 # bindsym --release KP_Divide exec xkill
 bindsym --release KP_Subtract exec xkill
 
+
+
+bindsym $alt+Up exec "pactl set-sink-volume @DEFAULT_SINK@ +1000"; exec notify-send -u low "Volume UP"
+bindsym $alt+Down exec "pactl set-sink-volume @DEFAULT_SINK@ -1000"; exec notify-send -u low "Volume DOWN"
+
 # mpvctl https://gist.github.com/dwgill/a66769e0edef69c04d3b
 #
-bindsym $mod+Left exec mpvctl previous
-bindsym $mod+Right exec mpvctl next
-bindsym $mod+Down exec mpvctl pause
-bindsym $mod+Up exec mpvctl play
-
-
-
+bindsym $mod+Left exec mpvctl previous; exec notify-send -u low "PREVIOUS TRACK"
+bindsym $mod+Right exec mpvctl next; exec notify-send -u low "NEXT TRACK"
+bindsym $mod+Down exec mpvctl pause; exec notify-send -u low "PAUSE"
+bindsym $mod+Up exec mpvctl play; exec notify-send -u low "PLAY"
