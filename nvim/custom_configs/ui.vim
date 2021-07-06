@@ -8,7 +8,7 @@ set t_Co=256
 
 
 let g:gruvbox_contrast_dark="hard"
-let g:gruvbox_contrast_light="soft"
+" let g:gruvbox_contrast_light="soft"
 let g:gruvbox_invert_selection=0
 let g:gruvbox_italic=1
 let g:gruvbox_transparent_bg=1
@@ -172,7 +172,7 @@ hi Normal guibg=NONE ctermbg=NONE
 
 
 set colorcolumn=120
-" hi! ColorColumn ctermbg=6
+hi! ColorColumn ctermbg=6
 hi! ColorColumn ctermbg=none
 hi! ColorColumn guibg=none
 

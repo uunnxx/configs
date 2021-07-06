@@ -3,6 +3,8 @@
 " Run ruby code <leader>rr
 autocmd FileType ruby nmap <buffer> <leader>rr :w\|:!ruby ./%<cr>
 
+autocmd FileType ruby set iskeyword=@,!,?,48-57,192-255
+
 autocmd FileType ruby setlocal tags+=./tags;
 autocmd FileType ruby set tags+=/home/unx/.asdf/installs/ruby/3.0.0/lib/ruby/gems/3.0.0/gems/tags;
 

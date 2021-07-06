@@ -5,7 +5,6 @@ set wildmode=longest,list,full
 set wildmenu
 set wildignorecase
 
-
 " Ignore files vim doesnt use
 set wildignore+=.git,.hg,.svn,node_modules
 set wildignore+=*.aux,*.out,*.toc
@@ -135,6 +134,24 @@ set smarttab
 " set tw=120
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 " Copy indent from previous line
 set autoindent
 set cindent
@@ -173,9 +190,6 @@ set diffopt+=vertical
 
 set dictionary=/usr/share/dict/british-english
 
-" for css
-set iskeyword-=-
-
 " Specify the behavior when switching between buffers
 set switchbuf=useopen,usetab,newtab
 set stal=1
@@ -186,3 +200,5 @@ set stal=1
 set gdefault
 
 set tags=./tags;/
+
+set iskeyword=@,_,48-57,192-255

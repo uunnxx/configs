@@ -25,7 +25,7 @@
       "filetypes": ["go"]
     },
     "clangd": {
-      "command": "clangd-11",
+      "command": "clangd-12",
       "args": ["--background-index"],
       "trace.server": "verbose",
       "rootPatterns": ["compile_commands.json"],

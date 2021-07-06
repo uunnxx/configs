@@ -18,23 +18,18 @@ Plug 'AndrewRadev/tagalong.vim'
 Plug 'turbio/bracey.vim'
 
 
-
 " User Interface
 Plug 'morhetz/gruvbox'
-Plug 'itchyny/lightline.vim'           " LightLine
-Plug 'maximbaz/lightline-ale'          " Ale info in LightLine
-Plug 'mengelbrecht/lightline-bufferline' " Bufferline
+Plug 'dikiaap/minimalist'
+Plug 'itchyny/lightline.vim'
+Plug 'maximbaz/lightline-ale'
+Plug 'mengelbrecht/lightline-bufferline'
 " Plug 'ryanoasis/vim-devicons'
 " Plug 'wfxr/minimap.vim'
 
-" Not working as expected:
-" goyo with colorscheme issues, and writer with a function definition issues
-" Plug 'junegunn/goyo.vim' " Distraction free mode for vim
-" Plug 'dsanson/writer.vim'" Distraction free mode for vim
-
 
 " Julia
-Plug 'JuliaEditorSupport/julia-vim'
+Plug 'JuliaEditorSupport/julia-vim', { 'for': 'julia' }
 
 
 " Ruby
@@ -104,7 +99,6 @@ Plug 'yegappan/mru'
 Plug 'mhinz/vim-startify'
 Plug 'jiangmiao/auto-pairs'
 " Plug 'itchyny/vim-cursorword'            " Underlines the word under the cursor
-Plug 'kana/vim-textobj-user'
 Plug 'terryma/vim-multiple-cursors'    " True Sublime Text style multiple cursors
 " Plug 'rhysd/vim-textobj-anyblock'
 Plug 'kana/vim-textobj-user'
@@ -115,15 +109,11 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'markonm/traces.vim'
 Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
 
-Plug 'ekickx/clipboard-image.nvim'
-
-
 
 " Linting
 Plug 'dense-analysis/ale'
 
 call plug#end()
-
 filetype plugin indent on 	" required
 
 " Source config files
@@ -131,7 +121,6 @@ let g:nvim_config_root = expand('<sfile>:p:h')
 let g:config_files = [
       \ 'general',
       \ 'function',
-      \ 'functionality',
       \ 'abbr',
       \ 'ui',
       \ 'maps',
@@ -147,21 +136,6 @@ for s:filename in g:config_files
   execute 'source ' . g:nvim_config_root . '/custom_configs/' . s:filename . '.vim'
 endfor
 
-" let configs = [
-"       \ "general",
-"       \ "ui",
-"       \ "commands",
-"       \ "plugins",
-"       \ "plugin_settings",
-"       \ ]
-
-" for file in configs
-"   let x = expand("~/.vim/".file.".vim")
-"   if filereadable(x)
-"     execute 'source' x
-"   endif
-" endfor
-
 " Minimap
 " nmap <silent> <leader>m :MinimapToggle<CR>
 " let g:minimap_width=15
@@ -170,6 +144,10 @@ endfor
 " let g:minimap_highlight = 'MinimapCurrentLine'
 " let g:minimap_auto_start = 0
 
-
 set completeopt=menuone,noinsert,noselect
 let g:completion_matching_straetgy_list = ['exact', 'substring', 'fuzzy']
+
+
+" Built-in packages:
+"
+packadd termdebug

@@ -67,7 +67,8 @@ imap <silent> <nowait><M-f> <Esc>:Rg<cr>
 nmap <silent> <nowait><leader>u :UndotreeToggle<cr>
 " nmap <silent> <nowait><leader>n :TagbarToggle<CR>
 nmap <silent> <nowait><leader>n :Vista!!<CR>
-nmap <silent> <nowait><space>tt :Vista finder<CR>
+" nmap <silent> <nowait><space>tt :Vista finder<CR>
+
 
 " Fkeys:
 nmap <silent> <F1> :vert help normal-index<cr>
@@ -118,9 +119,9 @@ nmap Du df_
 nmap cu ct_
 nmap Cu cf_
 
-" wwww = ['text', 'hereb', 'text', 'hereb', 'text', 'hereb', 'text', 'hereb', 'text', 'hereb']
-" hash = {:foo => 'text', :bar => 2}
-" some_cmd = `command to execute`
+" test_array = ['text', 'hereb', 'text', 'hereb', 'text', 'hereb', 'text', 'hereb', 'text', 'hereb']
+" test_hash = {:foo => 'text', :bar => 2}
+" test_cmd = `command to execute`
 
 " Delete array|hash's first key
 nnoremap dcd 0f[ldW
@@ -140,27 +141,58 @@ nnoremap chD 0f{f,lct}
 "   do_something
 " end
 
-" cid => ci[, ciD => ci` just as cib => ci(, ciB => ci{
-" because of dvorak-programmer keyboard layout I don't know exact place of the
-" key [] and it's hard to press ``
+" Defaults:
+"   By VIM core:
+"
+"     cib => ci(
+"     cab => ca(
+"     ciB => ci{
+"     caB => ca{
+"
+" Additional:
+"   Because of dvorak-programmer keyboard layout I don't know the exact place of the
+"   key [] and it's hard to press `
+"
+"     cid => ci[
+"     cad => ca[
+"     ciD => ci`
+"     caD => ca`
+"
+"     did => di[
+"     dad => da[
+"     diD => di`
+"     daD => da`
+"
+"     vid => vi[
+"     vad => va[
+"     viD => vi`
+"     vaD => va`
+"
+"     yid => yi[
+"     yad => ya[
+"     yiD => yi`
+"     yaD => ya`
 
-nnoremap cad ca[
 nnoremap cid ci[
-nnoremap dad da[
-nnoremap did di[
-nnoremap yad ya[
-nnoremap yid yi[
-nnoremap vad va[
-nnoremap vid vi[
-
-nnoremap caD ca`
+nnoremap cad ca[
 nnoremap ciD ci`
-nnoremap daD da`
+nnoremap caD ca`
+
+nnoremap did di[
+nnoremap dad da[
 nnoremap diD di`
-nnoremap yaD ya`
-nnoremap yiD yi`
-nnoremap vaD va`
+nnoremap daD da`
+
+nnoremap vid vi[
+nnoremap vad va[
 nnoremap viD vi`
+nnoremap vaD va`
+
+nnoremap yid yi[
+nnoremap yad ya[
+nnoremap yiD yi`
+nnoremap yaD ya`
+
 
 
 " Change text _without putting the text into register,
@@ -280,8 +312,6 @@ let g:easytree_show_hidden_files=1
 " xnoremap > >gv
 
 
-
-
 " Go to file under cursor
 nmap <silent> gf <C-]>
 " Back to location you were
@@ -315,28 +345,9 @@ nnoremap J mjJ`j
 nmap <leader><leader><space> :%bd <bar> e# <bar> bd#<cr>
 
 
-" expansions
-" inoremap ><tab> ><Esc>%lvey%%a</<C-r>"><Esc>%i
-" inoremap ><tab><tab> ><Esc>%lvey%%a<CR></<C-r>"><Esc>O
-" inoremap {<tab> {}<Left>
-" inoremap {<tab><tab> {<CR>}<Esc>O
-" inoremap [<tab> []<Left>
-" inoremap [<tab><tab> [<CR>]<Esc>O<tab>
-" inoremap (<tab> ()<Left>
-" inoremap (<tab><tab> (<CR>)<Esc>O<tab>
-" inoremap ({<tab> ({})<Left>
-" inoremap ({<tab><tab> ({<CR>})<Esc>O<tab>
-" inoremap <C-u> <Esc>O<tab>
-" inoremap <C-h> <Esc>jA
-" nnoremap p p=`]$
-" nnoremap <leader>{} A {<Esc>jo}<Esc>O
-
-
-
-" AutoPairs section:
-"
-" let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '```':'```', '"""':'"""', "'''":"'''", "`":"`"}
-
+" Terminal section
+nnoremap <space><space>t :split term://zsh<CR>
+nnoremap <space><space>v :vsplit term://zsh<CR>
 
 " tnoremaps:
 " Use Esc or ',,' to quit builtin terminal
@@ -357,9 +368,9 @@ nnoremap - <C-x>
 vnoremap + g<C-a>gv
 vnoremap - g<C-x>gv
 
-" Run ruby code <leader>rr
-autocmd FileType ruby nmap <buffer> <leader>rr :w\|:!ruby ./%<cr>
-" Run crystal and python code
+" Run code <leader>rr
+autocmd FileType ruby    nmap <buffer> <leader>rr :w\|:!ruby ./%<cr>
 autocmd FileType crystal nmap <buffer> <leader>rr :w\|:!crystal ./%<cr>
-autocmd FileType python nmap <buffer> <leader>rr :w\|:!python3 ./%<cr>
-autocmd FileType cpp nmap <buffer> <leader>rr :w\|:!g++ ./% -o out.tmp && ./out.tmp<cr>
+autocmd FileType python  nmap <buffer> <leader>rr :w\|:!python3 ./%<cr>
+autocmd FileType cpp     nmap <buffer> <leader>rr :w\|:!g++ ./% -o %_tmp && ./%_tmp<cr>
+autocmd FileType c       nmap <buffer> <leader>rr :w\|:!gcc ./% -o %_tmp && ./%_tmp<cr>

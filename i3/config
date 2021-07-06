@@ -20,9 +20,9 @@ font pango:Iosevka Nerd Font Bold 10
 floating_modifier $mod
 
 # Hide borders
-# hide_edge_borders both
-# hide_edge_borders smart
-hide_edge_borders horizontal
+hide_edge_borders smart
+hide_edge_borders both
+# hide_edge_borders horizontal
 bindsym $mod+u border none
 bindsym $mod+y border pixel 2
 bindsym $mod+$sh+u border normal
@@ -35,7 +35,7 @@ bindsym $mod+Return exec $term
 bindsym $mod+$sh+Return exec $term_float
 
 # Kill
-bindsym $mod+$sh+a kill
+# bindsym $mod+$sh+a kill
 bindsym $mod+$sh+c kill
 
 bindsym $mod+d exec --no-startup-id $menu
@@ -129,30 +129,29 @@ set $right7 "0111 七"
 set $right8 "1000 八"
 set $right9 "1001 九"
 
-set $left0 "零 00000"
-set $left1 "一 00001"
-set $left2 "二 00010"
-set $left3 "三 00011"
-set $left4 "四 00100"
-set $left5 "五 00101"
-set $left6 "六 00110"
-set $left7 "七 00111"
-set $left8 "八 01000"
-set $left9 "九 01001"
+set $left0 "零 0000"
+set $left1 "一 0001"
+set $left2 "二 0010"
+set $left3 "三 0011"
+set $left4 "四 0100"
+set $left5 "五 0101"
+set $left6 "六 0110"
+set $left7 "七 0111"
+set $left8 "八 1000"
+set $left9 "九 1001"
 
 # more workspaces
-set $leftA "十 01010"
-set $leftB "十一 01011"
-set $leftC "十二 01100"
-set $leftD "十三 01101"
-set $leftE "十四 01110"
-set $leftF "十五 01111"
-
-set $leftG "十六 10000"
-set $leftH "十七 10001"
-set $leftI "十八 10010"
-set $leftJ "十九 10011"
-set $leftK "二十 10100"
+set $leftA "RUBY"
+set $leftB "PYTHON"
+set $leftC "ELIXIR"
+set $leftD "LINUX"
+set $leftE "SCIENCE"
+set $leftF "LINGUISTICS"
+set $leftG "SECURITY"
+set $leftH "WEB"
+set $leftI "CS"
+set $leftJ "RE"
+set $leftK "BOOKS"
 
 workspace $right0 output $right
 workspace $right1 output $right
@@ -211,7 +210,7 @@ bindsym $alt+9 workspace $left9
 
 
 bindsym $mod+p mode "$more_workspaces"
-set $more_workspaces a-k    十    十一    十二    十三    十四    十五    十六    十七    十八    十九    二十
+set $more_workspaces    a:RUBY   b:PYTHON   c:ELIXIR   d:LINUX   e:SCIENCE   f:LINGUISTICS   g:SECURITY   h:WEB   i:CS   j:RE   k:BOOKS
 mode "$more_workspaces" {
   bindsym a workspace $leftA, mode "default"
   bindsym b workspace $leftB, mode "default"
@@ -462,8 +461,7 @@ bindsym $mod + KP_Add exec $calc
 
 # bindsym KP_Multiply exec $fm
 # bindsym --release KP_Divide exec xkill
-bindsym --release KP_Subtract exec xkill
-
+bindsym --release $mod + KP_Subtract exec xkill
 
 
 bindsym $alt+Up exec "pactl set-sink-volume @DEFAULT_SINK@ +1000"; exec notify-send -u low "Volume UP"

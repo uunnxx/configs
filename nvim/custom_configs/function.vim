@@ -3,8 +3,8 @@
 " Persistent Undo
 " Keep undo history across sessions, by storing in file.
 " Only works all the time.
-if has('persistent_undo') && isdirectory(expand('~').'/.nvim/undo')
-	set undodir=~/.nvim/undo
+if has('persistent_undo') && isdirectory(expand('~').'/tmp/undo')
+	set undodir=~/tmp/undo
 	set undofile
 endif
 
