@@ -30,6 +30,8 @@ set tabstop=2
 set softtabstop=2
 
 " For security reasons
+set exrc
+set secure
 set modelines=0
 
 " Hide buffers, not close them
@@ -64,9 +66,12 @@ set mouse=a
 set diffopt+=vertical
 
 set completeopt=noinsert,menuone,noselect
+
+" Don't pass messages to |ins-completion-menu|
 set shortmess+=c
 
-" Encoding
+
+" ENCODING
 set encoding=UTF-8
 set fileencoding=UTF-8
 set fileencodings=UTF-8
@@ -76,7 +81,8 @@ set autoread
 
 set fileformats=unix,dos,mac
 
-" Visual Settings
+
+" VISUAL SETTINGS
 syntax on
 set ruler
 set number
@@ -94,7 +100,7 @@ set guioptions=egmrti
 set nocompatible
 set mousehide
 
-set updatetime=400
+set updatetime=300
 
 " show invisibles
 set listchars=tab:▸\
@@ -128,30 +134,6 @@ set noswapfile
 " Be smart when using tabs :)
 set smarttab
 
-" Linebreak on 120 characters
-" set lbr
-" set breakindent
-" set tw=120
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 " Copy indent from previous line
 set autoindent
 set cindent
@@ -165,16 +147,20 @@ set spell spelllang=ru,en_us
 " Fastening
 set re=1
 
-set cursorline
-set nocursorcolumn
 
 syntax sync minlines=256
 set synmaxcol=300
 
 set wrap
 
-set cmdheight=1
-set signcolumn=yes
+set cmdheight=2
+
+" Recently vim || nvim can merge signcolumn and number column into one
+" if has("nvim-0.5.0") || has("patch-8.1.1564")
+set signcolumn=number
+" else
+"  set signcolumn=yes
+" endif
 
 " Use one space, not two, after punctuation.
 set nojoinspaces

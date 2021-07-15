@@ -94,14 +94,6 @@ let g:tagbar_type_crystal = {
 "
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
-" Colorcolumn
-"
-let &colorcolumn=join(range(121,999), ',')
-
-" WebDevIcons section:
-"
-" let g:webdevicons_enable = 1
-" let g:webdevicons_enable_startify = 1
 
 
 " ALE section:
@@ -156,14 +148,15 @@ let g:ale_fixers.xml = ['xmllint']
 " let g:ale_sign_column_always = 1
 let g:ale_elixir_credo_strict = 1
 
-
 let g:ale_elixir_elixir_ls_release = expand("~/apps/elixirLS")
 let g:ale_elixir_elixir_ls_config = {'elixirLS': {'dialyzerEnabled': v:false}}
+
 
 
 " JSON section:
 "
 let g:vim_json_syntax_conceal = 0
+
 
 
 " GitGutter section:
@@ -237,7 +230,7 @@ let g:neoformat_basic_format_trim = 1
 "
 
 " disable autocomplition, cause we use deoplete for completion
-let g:jedi#completions_enabled = 0
+let g:jedi#completions_enabled = 1
 
 " open the go-to function in split, not another buffer
 let g:jedi#use_splits_not_buffers = "right"
@@ -249,13 +242,15 @@ autocmd FileType elixir setlocal formatprg=mix\ format\ -
 " Tagalong
 let g:tagalong_verbose = 1
 
+
 " Bracey
 let g:bracey_refresh_on_save = 1
 
 
 " AutoPairs section:
 
-autocmd FileType cpp let g:AutoPairs = AutoPairsDefine({ '<' : '>' })
+autocmd FileType ruby,eruby let g:AutoPairs = AutoPairsDefine({ '|' : '|', '<%=' : '%>' })
+autocmd FileType c,cpp let g:AutoPairs = AutoPairsDefine({ '<' : '>' })
 
 
 autocmd FileType c,cpp           setlocal path+=/usr/include include&
@@ -263,3 +258,6 @@ autocmd FileType sh,zsh,csh,tcsh setlocal include=^\\s*\\%(\\.\\\|source\\)\\s
 
 autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/
 autocmd BufWritePost *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&" | redraw!
+
+
+let &path.="src/include,/usr/include/AL,"

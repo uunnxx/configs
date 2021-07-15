@@ -2,6 +2,7 @@
   "codeLens.enable": true,
   "diagnostic.displayByAle": true,
   "elixirLS.dialyzerEnabled": false,
+  "elixirLS.dialyzerWarnOpts": false,
 
   "languageserver": {
     "elixirLS": {
@@ -10,7 +11,7 @@
     },
     "ccls": {
       "command": "ccls",
-      "filetypes": [ "c", "cc", "c++", "cpp", "objc", "objcpp" ],
+      "filetypes": [ "c", "cc", "c++", "cpp"],
       "rootPatterns": [ ".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/" ],
       "initializationOptions": {
         "cache": {
@@ -18,18 +19,21 @@
         }
       }
     },
-    "golang": {
-      "command": "gopls",
-      "rootPatterns": ["go.mod"],
-      "disableWorkspaceFolders": true,
-      "filetypes": ["go"]
-    },
     "clangd": {
-      "command": "clangd-12",
-      "args": ["--background-index"],
-      "trace.server": "verbose",
+      "command": "clangd",
+      "filetypes": ["c", "cpp"],
       "rootPatterns": ["compile_commands.json"],
-      "filetypes": ["c", "cpp", "objc", "objcpp"]
+      "trace.server": "verbose",
+      "args": [
+        "--background-index",
+        "--all-scopes-completion",
+        "--clang-tidy",
+        "--cross-file-rename",
+        "--completion-style=detailed",
+        "--header-insertion-decorators",
+        "--header-insertion=iwyu",
+        "--pch-storage=memory"
+      ]
     },
     "cmake": {
       "command": "cmake-language-server",
@@ -37,8 +41,17 @@
       "rootPatterns": ["build/"],
       "initializationOptions": {
         "buildDirectory": "build"
+      },
+      "lua": {
+        "command": "lua-lsp",
+        "filetypes": ["lua"]
       }
     }
+  },
+  "diagnostic-languageserver.enable": {
+    "type": "boolean",
+    "default": true,
+    "description": "enable this extension?"
   },
   "diagnostic-languageserver.filetypes": {
     "sh": "shellcheck",

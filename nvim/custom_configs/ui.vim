@@ -129,6 +129,7 @@ aug i3config_ft_detection
   au BufNewFile,BufRead ~/dots/configs/i3/config set filetype=i3config
 aug END
 
+
 " highlight NonText ctermfg=4
 " highlight SpecialKey ctermfg=4
 
@@ -170,9 +171,24 @@ let g:vista#renderer#icons = {
 hi Normal guibg=NONE ctermbg=NONE
 
 
+" Colorcolumn
+"
+let &colorcolumn=join(range(121,999), ',')
 
 set colorcolumn=120
 hi! ColorColumn ctermbg=6
 hi! ColorColumn ctermbg=none
 hi! ColorColumn guibg=none
 
+
+" Linebreak on 120 characters
+" set lbr
+" set breakindent
+" set tw=120
+
+set cursorline
+set nocursorcolumn
+
+
+" RetDec syntax highlight
+autocmd BufNewFile,BufRead *.dsm set filetype=retdecdsm

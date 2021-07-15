@@ -1,30 +1,38 @@
-" Leader
 let mapleader = ","
 let g:mapleadre =","
+inoremap <silent><nowait> eu <Esc>
 
 nnoremap ; :
 xnoremap ; :
 nnoremap & %
 
 " Quicker way to open command window
-nnoremap <space>; q:
+nnoremap <silent> <leader>ww :update<CR>
+nnoremap <silent> <space>qq :x<CR>
 nnoremap QQ :q<cr>
 nnoremap Qt :q!<cr>
-nnoremap Qa :qall!<cr>
+nnoremap Qa :qall<cr>
+nnoremap QA :qall!<cr>
+
+nnoremap <space>; q:
+nnoremap <silent> <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 nnoremap <left> g;
 nnoremap <right> g,
 
-
-inoremap <silent><nowait> eu <Esc>
-
-nnoremap <silent> <up>    :resize +1<CR>
-nnoremap <silent> <down>  :resize -1<CR>
-nnoremap <silent> <M-left>  :vertical resize -1<CR>
-nnoremap <silent> <M-right> :vertical resize +1<CR>
+nnoremap <silent> <up>      : resize +1<CR>
+nnoremap <silent> <down>    : resize -1<CR>
+nnoremap <silent> <M-left>  : vertical resize -1<CR>
+nnoremap <silent> <M-right> : vertical resize +1<CR>
 
 inoremap <up> <Esc>ddkPi
 inoremap <down> <Esc>ddpi
+
+" Go to file under cursor
+nmap <silent> gf <C-]>
+" Back to location you were
+nmap <silent> <BS> <C-o>
+
 
 " Switch between the last two files
 nnoremap \| <C-^>
@@ -43,8 +51,9 @@ nnoremap <nowait><space><space>k <C-W>K
 nnoremap <nowait><space><space>h <C-W>H
 nnoremap <nowait><space><space>l <C-W>L
 
-" to comment out output of the codeline
-inoremap TTT # => 
+" Split windows
+nmap <nowait><leader><leader>v <C-W>v:Files<CR>
+nmap <nowait><leader><leader>s <C-W>s:Files<CR>
 
 " CALLING FUNCTIONS:
 "
@@ -60,6 +69,9 @@ nmap <nowait> <leader>t :FZF<CR>
 " no preview
 nmap <S-CR> :Files<CR>
 imap <S-CR> <Esc>:Files<CR>
+
+" Buffer
+nmap <silent> <nowait><C-CR> :Buffer<cr>
 
 " nmap <space>tt :Tags<cr>
 nmap <silent> <nowait><M-f> :Rg<cr>
@@ -83,9 +95,6 @@ map <silent> <F6> :set cursorline!<CR>
 nmap <silent> FF :Filetypes<cr>
 nmap <silent> <leader>R :redo<cr>
 nmap <nowait> <leader>g :BLines<cr>
-
-" Buffer
-nmap <silent> <nowait><cr> :Buffer<cr>
 
 map <silent> <space>nn :call NumberToggle()<cr>
 
@@ -113,15 +122,19 @@ map <silent> <space>nn :call NumberToggle()<cr>
 " noremap ds) F(xf)x
 " noremap cs) F(xf)xi
 
-" Delete || change word separated by underscores
+" Delete || change word separated by underscores or alternatively
+" set iskeyword-=_
 nmap du dt_
 nmap Du df_
 nmap cu ct_
 nmap Cu cf_
 
-" test_array = ['text', 'hereb', 'text', 'hereb', 'text', 'hereb', 'text', 'hereb', 'text', 'hereb']
-" test_hash = {:foo => 'text', :bar => 2}
-" test_cmd = `command to execute`
+
+" FOR_EDU:
+"   Ruby:
+"     test_array = ['text', 'hereb', 'text', 'hereb', 'text', 'hereb', 'text', 'hereb']
+"     test_hash = {:foo => 'text', :bar => 2}
+"     test_cmd = `command to execute`
 
 " Delete array|hash's first key
 nnoremap dcd 0f[ldW
@@ -141,6 +154,8 @@ nnoremap chD 0f{f,lct}
 "   do_something
 " end
 
+
+
 " Defaults:
 "   By VIM core:
 "
@@ -150,7 +165,7 @@ nnoremap chD 0f{f,lct}
 "     caB => ca{
 "
 " Additional:
-"   Because of dvorak-programmer keyboard layout I don't know the exact place of the
+"   Because of dvp keyboard layout I don't know the exact place of the
 "   key [] and it's hard to press `
 "
 "     cid => ci[
@@ -194,13 +209,13 @@ nnoremap yiD yi`
 nnoremap yaD ya`
 
 
-
 " Change text _without putting the text into register,
 " see http://tinyurl.com/y2ap4h69
 nnoremap c "_c
 nnoremap C "_C
 nnoremap cc "_cc
 
+" Empty || Change current line
 nnoremap <nowait>dD I<Esc>D
 nnoremap <nowait>cC I<Esc>C
 
@@ -216,13 +231,7 @@ vnoremap <silent> * :call VisualSelection('f', '')<CR>
 vnoremap <silent> # :call VisualSelection('b', '')<CR>
 
 
-
 " Find and replace
-" inoremap <silent> <C-h>h <Esc>:%s/
-" inoremap <silent> <C-h>l <Esc>:s/
-" inoremap <silent> hhH <Esc>:%s/\C\<<C-r><C-w>\>//<left>
-" nnoremap <silent> <C-h>h :%s/
-" nnoremap <silent> <C-h>l :s/
 nnoremap <nowait> <C-h> :%s/\C\<<C-r><C-w>\>//<left>
 xnoremap <nowait> <C-h> :s/
 vnoremap <leader>* "hy:%s/\V<C-r>h//<left>
@@ -251,23 +260,6 @@ vnoremap <ESC> o<ESC>
 " Redraw screen after turning off search highlighting
 nnoremap <silent> <C-l> :nohl<cr><C-l>
 
-
-" Switch CWD to the directory of the open buffer
-nnoremap <silent> <leader>cd :cd %:p:h<cr>:pwd<cr>
-
-
-" Vimgrep searching and cope displaying
-" When you press gv you vimgrep after the selected text
-" vnoremap <silent> gv :call VisualSelection('gv', '')<CR>
-
-
-" Shortcut for faster save and quit
-nnoremap <silent> <leader>ww :update<CR>
-" Saves the file if modified and quit
-nnoremap <silent> <space>qq :x<CR>
-" Quit all opened buffers
-nnoremap <silent> <space>Q :qa<CR>
-
 " In vim, use gp and gP instead of p and P to leave the cursor after the pasted text.
 noremap p gp
 noremap P gP
@@ -275,47 +267,32 @@ noremap gp p
 noremap gP P
 
 
-" EasyMotion's config
+" EasyMotion:
 nmap ss <Plug>(easymotion-overwin-f2)
-" Move to line
-" map <leader>L <Plug>(easymotion-bd-jk)
-" nmap <space>L <Plug>(easymotion-overwin-line)
-" nmap <space>s <Plug>(easymotion-s2)
-" nmap <space>t <Plug>(easymotion-t2)
-
 map  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
-
 nmap  n <Plug>(easymotion-next)
 nmap  N <Plug>(easymotion-prev)
-
 " nmap <space>l <Plug>(easymotion-lineforward)
 " nmap <space>j <Plug>(easymotion-j)
 " nmap <space>k <Plug>(easymotion-k)
 " nmap <space>h <Plug>(easymotion-linebackward)
 
-" Tabs
+" Tabs:
 noremap <Tab> gt
 
-" EasyTree
+" EasyTree:
 map <silent> <C-n> :EasyTreeToggle<CR>
-" let g:easytree_show_line_numbers=1
-" let g:easytree_show_relative_line_numbers=1
 let g:easytree_show_hidden_files=1
+
 
 " Insert a space before current character
 " nnoremap <silent> <space><space> i<TAB><ESC>l
 
-" Continuous visual shifting (does not exit Visual mode), `gv` means
-" to reselect previous visual area, see https://goo.gl/m1UeiT
+" Continuous visual shifting (do not exit Visual mode)
+" `gv` means to reselect previous visual area, see https://goo.gl/m1UeiT
 " xnoremap < <gv
 " xnoremap > >gv
-
-
-" Go to file under cursor
-nmap <silent> gf <C-]>
-" Back to location you were
-nmap <silent> <BS> <C-o>
 
 
 " COPY:
@@ -341,9 +318,7 @@ nmap <space>P :r ~/.vi_tmp<CR>
 " Join lines and restore cursor location (J)
 nnoremap J mjJ`j
 
-
 nmap <leader><leader><space> :%bd <bar> e# <bar> bd#<cr>
-
 
 " Terminal section
 nnoremap <space><space>t :split term://zsh<CR>
@@ -368,9 +343,20 @@ nnoremap - <C-x>
 vnoremap + g<C-a>gv
 vnoremap - g<C-x>gv
 
-" Run code <leader>rr
+
+" Run code w/o arg  <leader>rr
+" Run with argument <leader>rc
 autocmd FileType ruby    nmap <buffer> <leader>rr :w\|:!ruby ./%<cr>
+autocmd FileType ruby    nmap <buffer> <leader>rc :w\|:!ruby ./%
 autocmd FileType crystal nmap <buffer> <leader>rr :w\|:!crystal ./%<cr>
+autocmd FileType crystal nmap <buffer> <leader>rc :w\|:!crystal ./%
 autocmd FileType python  nmap <buffer> <leader>rr :w\|:!python3 ./%<cr>
-autocmd FileType cpp     nmap <buffer> <leader>rr :w\|:!g++ ./% -o %_tmp && ./%_tmp<cr>
-autocmd FileType c       nmap <buffer> <leader>rr :w\|:!gcc ./% -o %_tmp && ./%_tmp<cr>
+autocmd FileType python  nmap <buffer> <leader>rc :w\|:!python3 ./%
+autocmd FileType cpp     nmap <buffer> <leader>rr :w\|:!g++ ./% -g -o %:r_temp && ./%:r_temp<cr>
+autocmd FileType cpp     nmap <buffer> <leader>rc :w\|:!g++ ./% -g -o %:r_temp && ./%:r_temp
+autocmd FileType c       nmap <buffer> <leader>rr :w\|:!gcc ./% -g -o %:r_temp && ./%:r_temp<cr>
+autocmd FileType c       nmap <buffer> <leader>rc :w\|:!gcc ./% -g -o %:r_temp && ./%:r_temp
+
+
+autocmd FileType c,cpp   imap <buffer> iinc #include <><left>
+autocmd FileType c,cpp   imap <buffer> innc #include ""<left>

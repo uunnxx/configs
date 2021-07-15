@@ -3,10 +3,8 @@
 " Persistent Undo
 " Keep undo history across sessions, by storing in file.
 " Only works all the time.
-if has('persistent_undo') && isdirectory(expand('~').'/tmp/undo')
-	set undodir=~/tmp/undo
-	set undofile
-endif
+set undodir=/home/unx/tmp/vim_undo
+set undofile
 
 
 " Return to last edit position when opening files
@@ -31,7 +29,6 @@ function! VisualSelection(direction, extra_filter) range
   let l:saved_reg = @"
   execute "normal! vgvy"
 
-
   let l:pattern = escape(@", "\\/.*'$^~[]")
   let l:pattern = substitute(l:pattern, "\n$", "", "")
 
@@ -44,7 +41,6 @@ function! VisualSelection(direction, extra_filter) range
   let @/ = l:pattern
   let @" = l:saved_reg
 endfunction
-
 
 
 augroup term_settings
@@ -76,7 +72,7 @@ augroup END
 augroup non_utf8_file_warn
   autocmd!
   autocmd BufRead * if &fileencoding != 'utf-8'
-              \ | unsilent echomsg 'File not in UTF-8 format!' | endif
+              \ | unsilent echomsg 'FILE NOT IN UTF-8 FORMAT!' | endif
 augroup END
 
 " Automatically reload the file if it is changed outside of Nvim, see
@@ -107,6 +103,7 @@ function! UnMinify()
   normal ggVG=
 endfunction
 
+
 command! Prettify :call UnMinify()
 
 " remove trailing white space
@@ -119,7 +116,6 @@ command! Noblanklines :g/^\s*$/d
 command! Chmodx :!chmod a+x %
 
 function! AsciiMode()
-  e ++enc=cp850
   set nu!
   set virtualedit=all
   set colorcolumn=80

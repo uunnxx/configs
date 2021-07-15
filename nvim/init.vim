@@ -4,6 +4,9 @@ call plug#begin('~/.nvim/plugged')
 " Git
 Plug 'tpope/vim-fugitive'           " A Git wrapper
 Plug 'airblade/vim-gitgutter'       " A Vim plugin which shows a git diff in the gutter
+" Try to replace it with `gitsigns.nvim`
+" Plug 'lewis6991/gitsigns.nvim'
+" Plug 'nvim-lua/plenary.nvim'
 
 " Writing
 " fcitx toggle layout to en in command mode and back to
@@ -13,7 +16,7 @@ Plug 'lilydjwg/fcitx.vim'
 " Plug 'hagsteel/vim-vebugger'
 
 " FrontEnd:
-Plug 'mattn/emmet-vim'
+Plug 'mattn/emmet-vim', { 'for': 'html' }
 Plug 'AndrewRadev/tagalong.vim'
 Plug 'turbio/bracey.vim'
 
@@ -69,6 +72,7 @@ Plug 'hdima/python-syntax'
 Plug 'tpope/vim-ragtag' " A set of mappings for HTML, XML, eRuby, JSP, and more
 " Plug 'plasticboy/vim-markdown', { 'for': 'md' }
 Plug 'mboughaba/i3config.vim'
+Plug 'https://github.com/s3rvac/vim-syntax-retdecdsm'
 
 " Rust
 Plug 'rust-lang/rust.vim', { 'for': 'rs' }
@@ -80,6 +84,7 @@ Plug 'wellle/targets.vim'
 Plug 'tpope/vim-endwise'
 Plug 'majutsushi/tagbar'               " Vim plugin that displays tags in window, ordered by scope
 Plug 'liuchengxu/vista.vim'
+Plug 'KabbAmine/zeavim.vim'               " Zeal integration
 
 Plug 'tpope/vim-abolish'                " Subvert
 Plug 'tpope/vim-surround'
@@ -116,6 +121,10 @@ Plug 'dense-analysis/ale'
 call plug#end()
 filetype plugin indent on 	" required
 
+" Built_in_packages:
+"
+packadd termdebug
+
 " Source config files
 let g:nvim_config_root = expand('<sfile>:p:h')
 let g:config_files = [
@@ -146,8 +155,3 @@ endfor
 
 set completeopt=menuone,noinsert,noselect
 let g:completion_matching_straetgy_list = ['exact', 'substring', 'fuzzy']
-
-
-" Built-in packages:
-"
-packadd termdebug
