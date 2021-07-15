@@ -70,3 +70,5 @@ map . quit
 map Q quit
 
 # set sandbox strict
+
+map BackSpace ^o
