@@ -358,5 +358,8 @@ autocmd FileType c       nmap <buffer> <leader>rr :w\|:!gcc ./% -g -o %:r_temp &
 autocmd FileType c       nmap <buffer> <leader>rc :w\|:!gcc ./% -g -o %:r_temp && ./%:r_temp
 
 
+" Move this maps to cpp_c_settings.vim file
 autocmd FileType c,cpp   imap <buffer> iinc #include <><left>
 autocmd FileType c,cpp   imap <buffer> innc #include ""<left>
+
+inoremap <leader><leader>l <C-x><C-l>

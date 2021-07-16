@@ -332,6 +332,14 @@ mode "resize" {
 set $colour1 #FF5555
 set $colour3 #FFFFFF
 
+set $cla #39375B
+set $clb #745C97
+set $clc #443850
+set $cld #2D1E2F
+set $cle #9C89B8
+
+set $clf #C38D94
+
 # Gruvbox
 set $gruv0 #1d2021
 set $gruv8 #928374
@@ -360,14 +368,15 @@ bar {
   position top
   separator_symbol "|"
   colors {
-      background $gruv0
-      statusline $gruvB
-      # statusline $colour1
-      separator $gruv8
-      #                  border     backgr.   text
-      focused_workspace  $colour1   $colour1  $colour3
-      inactive_workspace $colour3   $colour3  $colour1
-      urgent_workspace   $gruv9     $gruv9    $gruv0
+    background $cla
+    statusline $colour3
+    separator  $colour3
+    #                  border     backgr.   text
+    focused_workspace  $cla       $cla      $colour3
+    active_workspace   $clf       $clf      $gruv0
+    inactive_workspace $clb       $clb      $colour3
+    urgent_workspace   $colour1   $colour1  $colour3
+    binding_mode       $gruvB     $gruvB    $gruv0
   }
   workspace_buttons yes
   hidden_state hide
@@ -380,18 +389,21 @@ bar {
 bar {
   output $left
   tray_output $left
+  # i3bar_command i3bar --transparency
   i3bar_command i3bar
   status_command i3status --config ~/.config/i3/i3status-small.conf
   position top
-  separator_symbol "|"
+  separator_symbol " | "
   colors {
-      background $gruv0
-      statusline $gruvB
-      separator $gruv8
+      background $cla
+      statusline $colour3
+      separator  $colour3
       #                  border     backgr.   text
-      focused_workspace  $colour1   $colour1  $colour3
-      inactive_workspace $colour3   $colour3  $colour1
-      urgent_workspace   $gruv9     $gruv9    $gruv0
+      focused_workspace  $cla       $cla      $colour3
+      active_workspace   $clf       $clf      $gruv0
+      inactive_workspace $clb       $clb      $colour3
+      urgent_workspace   $colour1   $colour1  $colour3
+      binding_mode       $gruvB     $gruvB    $gruv0
   }
   workspace_buttons yes
   hidden_state hide
@@ -400,11 +412,11 @@ bar {
   modifier none
 }
 
-# class                   border  backgr. text    indic.   child_border
-client.focused            $gruv3 $gruv3 $gruv0 $gruv1
-client.focused_inactive   $gruv2 $gruv2 $gruv0 $gruv1
-client.unfocused          $gruv4 $gruv4 #FFFFFF $gruv1
-client.urgent             $gruv9 $gruv9 $gruv0 $gruv1
+# class                   border    backgr.   text        indic.   child_border
+client.focused            $cla    $cla    $colour3      $gruv1
+client.focused_inactive   $clf      $clf      $gruv0    $gruv1
+client.unfocused          $clb      $clb      $colour3    $gruv1
+client.urgent             $gruv9    $gruv9    $gruv0      $gruv1
 
 focus_follows_mouse no
 
