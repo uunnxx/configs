@@ -25,7 +25,7 @@ let g:lightline.active = {
       \
       \ 'left': [
       \   ['mode', 'paste'],
-      \   ['cocstatus', 'filename',],
+      \   ['cocstatus', 'filename', 'branch_name'],
       \   ['tagbar']],
       \
       \ 'right': [
@@ -40,6 +40,7 @@ let g:lightline.component = {
 
 let g:lightline.component_function = {
       \ 'filename': 'LightLineFilename',
+      \ 'branch_name': 'FugitiveStatusLine',
       \ 'cocstatus': 'coc#status',
       \ 'mode': 'LightLineMode',
       \ 'method': 'NearestMethodOrFunction'
@@ -74,7 +75,7 @@ function! LightLineFilename()
   let fname = expand('%:t')
   return fname == '__Tagbar__' ? g:lightline.fname :
         \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-        \ ('' != fname ? fname : '[no name]') .
+        \ ('' != fname ? fname : '[ no name ]') .
         \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
 endfunction
 
@@ -82,6 +83,11 @@ function! LightLineMode()
   let fname = expand('%:t')
   return fname == '__Tagbar__' ? 'Tagbar' :
         \ winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
+
+function! FugitiveStatusLine()
+  let branch_name = FugitiveHead()
+  return branch_name == '' ? '' : "[ " . branch_name . " ]"
 endfunction
 
 
@@ -95,11 +101,11 @@ endfunction
 
 
 function! LightLineModified()
-  return &ft =~ 'help' ? '[help]' : &modified ? '[*]' : &modifiable ? '' : '[x]'
+  return &ft =~ 'help' ? '[ help ]' : &modified ? '*' : &modifiable ? '' : '[ x ]'
 endfunction
 
 function! LightLineReadonly()
-  return &ft !~? 'help' && &readonly ? '[ro]' : ''
+  return &ft !~? 'help' && &readonly ? '[ ro ]' : ''
 endfunction
 
 
@@ -116,9 +122,9 @@ let g:lightline#ale#indicator_warnings = "\uf071 "
 let g:lightline#ale#indicator_errors = "\uf05e "
 let g:lightline#ale#indicator_ok = "\uf00c "
 
-" let g:lightline#ale#indicator_checking = "[ch]"
+" let g:lightline#ale#indicator_checking = "[c]"
 " let g:lightline#ale#indicator_infos = "[i]"
-" let g:lightline#ale#indicator_warnings = "[*]"
+" let g:lightline#ale#indicator_warnings = "[w]"
 " let g:lightline#ale#indicator_errors = "[x]"
 " let g:lightline#ale#indicator_ok = "[ok]"
 

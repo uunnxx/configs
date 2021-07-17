@@ -23,8 +23,13 @@ floating_modifier $mod
 hide_edge_borders smart
 hide_edge_borders both
 # hide_edge_borders horizontal
+
+# `new_window pixel 4` will be deprecated soon
+# use `default_border`, and  `default_floating_border` instead
+default_border pixel 8
+default_floating_border pixel 8
 bindsym $mod+u border none
-bindsym $mod+y border pixel 2
+bindsym $mod+y border pixel 8
 bindsym $mod+$sh+u border normal
 
 # focus next/previous visible window
@@ -37,6 +42,18 @@ bindsym $mod+$sh+Return exec $term_float
 # Kill
 # bindsym $mod+$sh+a kill
 bindsym $mod+$sh+c kill
+
+# get mouse keys: `xev | grep button`
+# button 1 left primary
+# button 2 middle
+# button 3 right
+# button 4 scroll up
+# button 5 scroll down
+# button 6 scroll left
+# button 7 scroll right
+# button 8 left side 1st button
+# button 9 left side 2nd button
+bindsym --whole-window $alt+button3 kill
 
 bindsym $mod+d exec --no-startup-id $menu
 bindsym $mod+$sh+d exec --no-startup-id $menu2
@@ -82,7 +99,7 @@ bindsym $mod+$sh+f fullscreen toggle global
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+e layout toggle all
 
 # toggle tiling / floating
 bindsym $mod+$sh+space floating toggle
@@ -90,7 +107,7 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+$sh+s sticky toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+bindsym $mod+$sh+w focus parent
 
 # move the currently focused window to the scratchpad
 bindsym $mod+$sh+minus move scratchpad
@@ -99,6 +116,7 @@ bindsym $mod+minus scratchpad show
 
 bindsym $mod+t exec --no-startup-id $trans
 bindsym $alt+space exec --no-startup-id "rofi -show window"
+bindsym $alt+$sh+space exec --no-startup-id "rofi -show windowcd"
 
 bindsym $mod+c move position center
 
@@ -251,8 +269,12 @@ bindsym $alt+$sh+7 move container to workspace $left7
 bindsym $alt+$sh+8 move container to workspace $left8
 bindsym $alt+$sh+9 move container to workspace $left9
 
+for_window [class="^.*"] border pixel 4
 
-for_window [class="^.*"] border pixel 2
+title_align center
+# title_format: %class, %instance, %title
+for_window [class="^.*"] title_format " %title "
+
 for_window [title="File Transfer*"] floating enable
 for_window [class="GParted"] floating enable border normal
 for_window [class="Lightdm-settings"] floating enable
@@ -291,6 +313,14 @@ for_window [class="Zeal"] floating enable resize set 1340 780
 for_window [class="Zeal"] move position center
 # for_window [urgent=latest] focus
 for_window [class="komorebi"] border none floating disable
+
+
+# read 1 character and mark the current window with this character
+bindsym $alt+m exec i3-input -F 'mark --toggle %s' -l 1 -P 'MARK: ' -f '-misc-fixed-*-*-*-*-20-*-*-*-*-*-iso10646-*'
+
+# read 1 character and go to the window with the character
+bindsym $alt+g exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'GOTO: ' -f '-misc-fixed-*-*-*-*-20-*-*-*-*-*-iso10646-*'
+
 
 bindsym $mod+Escape mode "$mode_system"
 set $mode_system (l)ock, (e)xit, (S-r)eboot, (S-s)hutdown, I3:(r)estart, re(l)oad, (c)aps2mod, (w)allpapers
@@ -338,7 +368,10 @@ set $clc #443850
 set $cld #2D1E2F
 set $cle #9C89B8
 
-set $clf #C38D94
+set $clf #EBA6A9
+
+set $clh #F0544F
+
 
 # Gruvbox
 set $gruv0 #1d2021
@@ -361,23 +394,26 @@ set $gruvF #EBDBB2
 
 # right monitor
 bar {
+  font pango:Iosevka Nerd Font Bold 10
+  tray_padding 0
   output $right
   tray_output none
   i3bar_command i3bar
   status_command i3status --config ~/.config/i3/i3status.conf
-  position top
+  position bottom
   separator_symbol "|"
   colors {
     background $cla
     statusline $colour3
     separator  $colour3
     #                  border     backgr.   text
-    focused_workspace  $cla       $cla      $colour3
-    active_workspace   $clf       $clf      $gruv0
+    focused_workspace  $clf       $clf      $gruv0
+    active_workspace   $cla       $cla      $colour3
     inactive_workspace $clb       $clb      $colour3
-    urgent_workspace   $colour1   $colour1  $colour3
+    urgent_workspace   $clh       $clh      $colour3
     binding_mode       $gruvB     $gruvB    $gruv0
   }
+  workspace_min_width 80
   workspace_buttons yes
   hidden_state hide
   binding_mode_indicator yes
@@ -385,26 +421,30 @@ bar {
   modifier none
 }
 
+
 # left monitor
 bar {
+  font pango:Iosevka Nerd Font Bold 10
+  tray_padding 0
   output $left
   tray_output $left
   # i3bar_command i3bar --transparency
   i3bar_command i3bar
   status_command i3status --config ~/.config/i3/i3status-small.conf
-  position top
+  position bottom
   separator_symbol " | "
   colors {
       background $cla
       statusline $colour3
       separator  $colour3
       #                  border     backgr.   text
-      focused_workspace  $cla       $cla      $colour3
-      active_workspace   $clf       $clf      $gruv0
+      focused_workspace  $clf       $clf      $gruv0
+      active_workspace   $cla       $cla      $colour3
       inactive_workspace $clb       $clb      $colour3
-      urgent_workspace   $colour1   $colour1  $colour3
+      urgent_workspace   $clh       $clh      $colour3
       binding_mode       $gruvB     $gruvB    $gruv0
   }
+  workspace_min_width 80
   workspace_buttons yes
   hidden_state hide
   binding_mode_indicator yes
@@ -413,12 +453,16 @@ bar {
 }
 
 # class                   border    backgr.   text        indic.   child_border
-client.focused            $cla    $cla    $colour3      $gruv1
-client.focused_inactive   $clf      $clf      $gruv0    $gruv1
-client.unfocused          $clb      $clb      $colour3    $gruv1
-client.urgent             $gruv9    $gruv9    $gruv0      $gruv1
+client.focused            $clf      $clf      $gruv0      $gruv1
+client.focused_inactive   $clb      $clb      $colour3    $gruv1
+client.unfocused          $cla      $cla      $colour3    $gruv1
+client.urgent             $clh      $clh      $colour3    $gruv1
 
 focus_follows_mouse no
+# mouse_warping none
+
+# smart, ignore, leave_fullscreen
+popup_during_fullscreen ignore
 
 # Autostart applications
 exec --no-startup-id /usr/bin/fcitx

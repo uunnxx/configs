@@ -90,7 +90,7 @@ set laststatus=2
 set noshowmode
 set showmatch
 set showcmd
-set so=15
+set so=20
 
 " Switch to an existing buffer if one exists
 set switchbuf=useopen
@@ -153,7 +153,7 @@ set synmaxcol=300
 
 set wrap
 
-set cmdheight=2
+set cmdheight=1
 
 " Recently vim || nvim can merge signcolumn and number column into one
 " if has("nvim-0.5.0") || has("patch-8.1.1564")

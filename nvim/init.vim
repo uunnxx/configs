@@ -4,16 +4,13 @@ call plug#begin('~/.nvim/plugged')
 " Git
 Plug 'tpope/vim-fugitive'           " A Git wrapper
 Plug 'airblade/vim-gitgutter'       " A Vim plugin which shows a git diff in the gutter
-" Try to replace it with `gitsigns.nvim`
-" Plug 'lewis6991/gitsigns.nvim'
-" Plug 'nvim-lua/plenary.nvim'
 
 " Writing
 " fcitx toggle layout to en in command mode and back to
 Plug 'lilydjwg/fcitx.vim'
 
 " Debugger
-" Plug 'hagsteel/vim-vebugger'
+
 
 " FrontEnd:
 Plug 'mattn/emmet-vim', { 'for': 'html' }
@@ -23,11 +20,9 @@ Plug 'turbio/bracey.vim'
 
 " User Interface
 Plug 'morhetz/gruvbox'
-Plug 'dikiaap/minimalist'
 Plug 'itchyny/lightline.vim'
 Plug 'maximbaz/lightline-ale'
 Plug 'mengelbrecht/lightline-bufferline'
-" Plug 'ryanoasis/vim-devicons'
 " Plug 'wfxr/minimap.vim'
 
 
@@ -76,6 +71,7 @@ Plug 'https://github.com/s3rvac/vim-syntax-retdecdsm'
 
 " Rust
 Plug 'rust-lang/rust.vim', { 'for': 'rs' }
+
 
 Plug 'wellle/targets.vim'
 
