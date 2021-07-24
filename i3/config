@@ -26,11 +26,11 @@ hide_edge_borders both
 
 # `new_window pixel 4` will be deprecated soon
 # use `default_border`, and  `default_floating_border` instead
-default_border pixel 8
-default_floating_border pixel 8
+default_border pixel 4
+default_floating_border pixel 4
 bindsym $mod+u border none
-bindsym $mod+y border pixel 8
-bindsym $mod+$sh+u border normal
+bindsym $mod+y border pixel 4
+bindsym $mod+$sh+u border normal 4
 
 # focus next/previous visible window
 # bindsym $mod+n exec --no-startup-id ~/.config/i3/scripts/focus_next_visible.py
@@ -53,7 +53,13 @@ bindsym $mod+$sh+c kill
 # button 7 scroll right
 # button 8 left side 1st button
 # button 9 left side 2nd button
+
+bindsym --whole-window $alt+button1 move scratchpad
+bindsym --whole-window $alt+button2 move position center
 bindsym --whole-window $alt+button3 kill
+
+# bindsym --whole-window $alt+button4 focus left
+# bindsym --whole-window $alt+button5 focus down
 
 bindsym $mod+d exec --no-startup-id $menu
 bindsym $mod+$sh+d exec --no-startup-id $menu2
@@ -276,7 +282,7 @@ title_align center
 for_window [class="^.*"] title_format " %title "
 
 for_window [title="File Transfer*"] floating enable
-for_window [class="GParted"] floating enable border normal
+for_window [class="GParted"] floating enable border normal 4
 for_window [class="Lightdm-settings"] floating enable
 for_window [class="Lxappearance"] floating enable sticky enable border normal
 for_window [class="Pavucontrol"] floating enable
@@ -298,15 +304,18 @@ for_window [class="Qalculate-gtk"] move position center
 for_window [class="Picture-in-picture"] floating enable border none
 for_window [class="mpv"] floating enable resize set 1240 690
 for_window [class="mpv"] move position center
-for_window [class="mpv"] border normal
+for_window [class="mpv"] border normal 4
+
+for_window [class="Org.gnome.Nautilus"] border normal 4
+
 for_window [class="Eog"] floating enable resize set 1240 690
 for_window [class="Eog"] move position center
 for_window [class="Zathura"] floating enable resize set 1340 780
 for_window [class="Zathura"] move position center
-# for_window [class="Zathura"] border normal
+# for_window [class="Zathura"] border normal 4
 for_window [class="File-roller"] floating enable resize set 1340 780
 for_window [class="File-roller"] move position center
-for_window [class="File-roller"] border normal
+for_window [class="File-roller"] border normal 4
 for_window [class="Evince"] floating enable resize set 1340 780
 for_window [class="Evince"] move position center
 for_window [class="Zeal"] floating enable resize set 1340 780
@@ -323,7 +332,7 @@ bindsym $alt+g exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'GOTO: ' -f '-mi
 
 
 bindsym $mod+Escape mode "$mode_system"
-set $mode_system (l)ock, (e)xit, (S-r)eboot, (S-s)hutdown, I3:(r)estart, re(l)oad, (c)aps2mod, (w)allpapers
+set $mode_system (e)xit, (S-r)eboot, (S-s)hutdown, I3:(r)estart, re(l)oad, (c)aps2mod, (w)allpapers
 mode "$mode_system" {
   bindsym e exec --no-startup-id i3-msg exit, mode "default"
   bindsym $sh+r exec --no-startup-id reboot, mode "default"
@@ -359,18 +368,17 @@ mode "resize" {
 #
 # Colors
 #
-set $colour1 #FF5555
-set $colour3 #FFFFFF
+set $fff #FFFFFF
 
 set $cla #39375B
 set $clb #745C97
 set $clc #443850
 set $cld #2D1E2F
 set $cle #9C89B8
-
 set $clf #EBA6A9
-
+set $clg #25044B
 set $clh #F0544F
+set $cli #462A67
 
 
 # Gruvbox
@@ -404,13 +412,13 @@ bar {
   separator_symbol "|"
   colors {
     background $cla
-    statusline $colour3
-    separator  $colour3
+    statusline $gruvD
+    separator  $gruvD
     #                  border     backgr.   text
     focused_workspace  $clf       $clf      $gruv0
-    active_workspace   $cla       $cla      $colour3
-    inactive_workspace $clb       $clb      $colour3
-    urgent_workspace   $clh       $clh      $colour3
+    active_workspace   $cla       $cla      $fff
+    inactive_workspace $clb       $clb      $fff
+    urgent_workspace   $clh       $clh      $fff
     binding_mode       $gruvB     $gruvB    $gruv0
   }
   workspace_min_width 80
@@ -435,13 +443,13 @@ bar {
   separator_symbol " | "
   colors {
       background $cla
-      statusline $colour3
-      separator  $colour3
+      statusline $gruvD
+      separator  $gruvD
       #                  border     backgr.   text
       focused_workspace  $clf       $clf      $gruv0
-      active_workspace   $cla       $cla      $colour3
-      inactive_workspace $clb       $clb      $colour3
-      urgent_workspace   $clh       $clh      $colour3
+      active_workspace   $cla       $cla      $fff
+      inactive_workspace $clb       $clb      $fff
+      urgent_workspace   $clh       $clh      $fff
       binding_mode       $gruvB     $gruvB    $gruv0
   }
   workspace_min_width 80
@@ -453,10 +461,10 @@ bar {
 }
 
 # class                   border    backgr.   text        indic.   child_border
-client.focused            $clf      $clf      $gruv0      $gruv1
-client.focused_inactive   $clb      $clb      $colour3    $gruv1
-client.unfocused          $cla      $cla      $colour3    $gruv1
-client.urgent             $clh      $clh      $colour3    $gruv1
+client.focused            #5B3758   #5B3758   $fff        $gruv1
+client.focused_inactive   $clb      $clb      $fff        $gruv1
+client.unfocused          $cla      $cla      $fff        $gruv1
+client.urgent             $clh      $clh      $fff        $gruv1
 
 focus_follows_mouse no
 # mouse_warping none

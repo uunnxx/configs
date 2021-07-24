@@ -25,6 +25,7 @@ Plug 'maximbaz/lightline-ale'
 Plug 'mengelbrecht/lightline-bufferline'
 " Plug 'wfxr/minimap.vim'
 
+Plug 'https://github.com/dhruvasagar/vim-table-mode'
 
 " Julia
 Plug 'JuliaEditorSupport/julia-vim', { 'for': 'julia' }

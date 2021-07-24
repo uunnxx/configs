@@ -30,4 +30,18 @@ function name inside the parentheses.
   "hello"                   ysW<C-f>print<cr> (print "hello")
 
 
+Table-move
+  https://github.com/dhruvasagar/vim-table-mode
 
+<leader>tm :TableModeToggle
+<leader>tr :TableModeRealign
+<leader>tt :Tableize
+
+:Tableize/;  uses ';' as the delimeter
+
+| Manipulate Table | Map          |
+|------------------+--------------|
+| Cell Text Object | i    a       |
+| Delete Row       | <leader>tdd> |
+| Delete Column    | <leader>tdc  |
+| Insert Column    | <leader>tic  |

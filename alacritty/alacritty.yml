@@ -1,7 +1,5 @@
 colors:
-  # Default colors
   primary:
-    # hard contrast: background = '#1d2021'
     background: '#1d2021'
     # soft contrast: background = '#32302f'
     foreground: '#ebdbb2'
@@ -36,9 +34,9 @@ window:
   # dimensions:
   #   columns: 0
   #   lines: 0
-  # padding:
-  #   x: 0
-  #   y: 0
+  padding:
+    x: 5
+    y: 5
   # dynamic_padding: false
   # decorations: full
   scrolling: null
@@ -47,27 +45,14 @@ window:
 
 font:
   normal:
-    # family: DejaVu Sans Mono Nerd Font
-    # family: Monoid
-    # family: Tamzen
-    # family: FiraCode Nerd Font Mono
     family: Iosevka NF
     style: Regular
   bold:
-    # family: DejaVu Sans Mono Nerd Font
-    # family: Monoid
     family: Iosevka NF
-    # family: FiraCode Nerd Font Mono
-    # family: Tamzen
     style: Bold
   italic:
-    # family: FiraCode Nerd Font Mono
-    # family: Monoid
     family: Iosevka NF
-    # family: DejaVu Sans Mono Nerd Font
-    # family: Tamzen
     style: Italic
-  # size: 14
   size: 13
 
 # offset:
@@ -78,8 +63,7 @@ font:
 #   y: 0
 draw_bold_text_with_bright_colors: true
 
-background_opacity: 0.9
-# background_opacity: 1
+background_opacity: 0.92
 
 
 bell:
@@ -96,7 +80,8 @@ mouse:
 
   hide_when_typing: true
   url:
-    launcher: xdg-open
+    launcher: ungoogled
+    # launcher: xdg-open
     modifiers: None
 
 selection:
@@ -109,10 +94,7 @@ cursor:
   #   - _ Underline
   #   - | Beam
   style: Block
-
-  # If this is `true`, the cursor will be rendered as a hollow box when the
-  # window is not focused.
-  unfocused_hollow: false
+  unfocused_hollow: true
 
 # Live config reload (changes require restart)
 live_config_reload: true
@@ -127,11 +109,7 @@ alt_send_esc: true
 key_bindings:
   - { key: V, mods: Control|Shift, action: Paste }
   - { key: C, mods: Control|Shift, action: Copy }
-  - {
-      key: Return,
-      mods: Control|Shift,
-      action: SpawnNewInstance
-    }
+  - { key: Return, mods: Control|Shift, action: SpawnNewInstance }
   - { key: Return, mods: Alt, action: ToggleFullscreen }
   - { key: Return, mods: Shift, chars: "\e[13;2u" }
   - { key: Return, mods: Control, chars: "\e[13;5u" }

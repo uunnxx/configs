@@ -129,6 +129,9 @@ nmap Du df_
 nmap cu ct_
 nmap Cu cf_
 
+nnoremap cU bf_ldea
+nnoremap dU bf_lde
+
 
 " FOR_EDU:
 "   Ruby:
