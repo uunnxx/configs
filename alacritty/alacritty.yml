@@ -79,10 +79,10 @@ mouse:
   triple_click: { threshold: 300 }
 
   hide_when_typing: true
-  url:
-    launcher: ungoogled
-    # launcher: xdg-open
-    modifiers: None
+  #url:
+  #  launcher: ungoogled
+  #  # launcher: xdg-open
+  #  modifiers: None
 
 selection:
   semantic_escape_chars: ',│`|:"'' ()[]{}<>'

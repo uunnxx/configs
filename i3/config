@@ -64,7 +64,7 @@ bindsym --whole-window $alt+button3 kill
 bindsym $mod+d exec --no-startup-id $menu
 bindsym $mod+$sh+d exec --no-startup-id $menu2
 
-bindsym $mod+g exec --no-startup-id /home/unx/.config/i3/scripts/wmfocus.sh
+bindsym $mod+g exec --no-startup-id $HOME/.config/i3/scripts/wmfocus.sh
 # bindsym $mod+$sh+g exec --no-startup-id
 
 bindsym $ctrl+Print exec "flameshot gui"
@@ -473,7 +473,7 @@ focus_follows_mouse no
 popup_during_fullscreen ignore
 
 # Autostart applications
-exec --no-startup-id /usr/bin/fcitx
+exec --no-startup-id /usr/bin/fcitx5
 exec --no-startup-id /usr/bin/diodon
 exec --no-startup-id xclip
 exec --no-startup-id flameshot
@@ -494,7 +494,7 @@ exec_always --no-startup-id setxkbmap -option caps:super
 # bindsym d exec --no-startup-id "setxkbmap -layout us,ru -variant dvp, -option grp:alt_space_toggle", mode "default"
 # bindsym q exec --no-startup-id "setxkbmap -layout us,ru -option grp:alt_space_toggle", mode "default"
 
-# exec_always --no-startup-id back4 0.07 /home/unx/Pictures/lv/3.gif
+# exec_always --no-startup-id back4 0.07 $HOME/Pictures/lv/3.gif
 
 
 # Not used keys:

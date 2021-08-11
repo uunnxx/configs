@@ -3,7 +3,7 @@
 " Persistent Undo
 " Keep undo history across sessions, by storing in file.
 " Only works all the time.
-set undodir=/home/unx/tmp/vim_undo
+set undodir=$HOME/tmp/vim_undo
 set undofile
 
 
