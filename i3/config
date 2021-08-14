@@ -21,7 +21,7 @@ floating_modifier $mod
 
 # Hide borders
 hide_edge_borders smart
-hide_edge_borders both
+# hide_edge_borders both
 # hide_edge_borders horizontal
 
 # `new_window pixel 4` will be deprecated soon
@@ -483,6 +483,8 @@ exec --no-startup-id compton --config ~/.config/compton.conf -b
 # exec --no-startup-id unagi
 
 exec_always --no-startup-id xset r rate 150 40
+# Set screentimeout to 600 sec
+exec_always --no-startup-id xset dpms 600
 # Make displays work as expected
 exec --no-startup-id xrandr --output DVI-D-0 --auto --left-of HDMI-A-0
 # CapsLock is Mod4
@@ -532,8 +534,8 @@ bindsym $alt+Up exec "pactl set-sink-volume @DEFAULT_SINK@ +1000"; exec notify-s
 bindsym $alt+Down exec "pactl set-sink-volume @DEFAULT_SINK@ -1000"; exec notify-send -u low "Volume DOWN"
 
 # mpvctl https://gist.github.com/dwgill/a66769e0edef69c04d3b
-#
+
 bindsym $mod+Left exec mpvctl previous; exec notify-send -u low "PREVIOUS TRACK"
 bindsym $mod+Right exec mpvctl next; exec notify-send -u low "NEXT TRACK"
+bindsym $mod+Up exec notify-send -u normal "PLAYING" "$(exec mpvctl play)"
 bindsym $mod+Down exec mpvctl pause; exec notify-send -u low "PAUSE"
-bindsym $mod+Up exec mpvctl play; exec notify-send -u low "PLAY"
