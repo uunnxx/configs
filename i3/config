@@ -530,12 +530,12 @@ bindsym $mod + KP_Add exec $calc
 bindsym --release $mod + KP_Subtract exec xkill
 
 
-bindsym $alt+Up exec "pactl set-sink-volume @DEFAULT_SINK@ +1000"; exec notify-send -u low "Volume UP"
-bindsym $alt+Down exec "pactl set-sink-volume @DEFAULT_SINK@ -1000"; exec notify-send -u low "Volume DOWN"
+bindsym $alt+Up exec "pactl set-sink-volume @DEFAULT_SINK@ +1000"; exec dunstify -r 1111 -u low "Volume: $(pactl list sinks | tr ' ' '\n' | grep -m1 '%' | tr -d '%')"
+bindsym $alt+Down exec "pactl set-sink-volume @DEFAULT_SINK@ -1000"; exec dunstify -r 1111 -u low "Volume: $(pactl list sinks | tr ' ' '\n' | grep -m1 '%' | tr -d '%')"
 
 # mpvctl https://gist.github.com/dwgill/a66769e0edef69c04d3b
 
-bindsym $mod+Left exec mpvctl previous; exec notify-send -u low "PREVIOUS TRACK"
-bindsym $mod+Right exec mpvctl next; exec notify-send -u low "NEXT TRACK"
-bindsym $mod+Up exec notify-send -u normal "PLAYING" "$(exec mpvctl play)"
-bindsym $mod+Down exec mpvctl pause; exec notify-send -u low "PAUSE"
+bindsym $mod+Left exec mpvctl previous; exec dunstify -r 1111 -u low "PREVIOUS TRACK"
+bindsym $mod+Right exec mpvctl next; exec dunstify -r 1111 -u low "NEXT TRACK"
+bindsym $mod+Up exec dunstify -r 9999 -u normal "NOW PLAYING:" "$(exec mpvctl play)"
+bindsym $mod+Down exec mpvctl pause; exec dunstify -r 1111 -u low "PAUSE"

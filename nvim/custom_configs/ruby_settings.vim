@@ -1,9 +1,4 @@
-" Ruby autocomplete
-let g:rubycomplete_buffer_loading = 1
-let g:rubycomplete_rails = 1
-
 autocmd BufRead,BufNewFile Rakefile,Capfile,Gemfile,.autotest,.irbrc,*.treetop,*.tt set ft=ruby syntax=ruby
-
 autocmd FileType ruby,eruby call RubyOptions()
 
 function RubyOptions()
@@ -28,7 +23,7 @@ function RubyOptions()
 
   set iskeyword=@,!,?,48-57,192-255
   setlocal tags+=./tags;
-  set tags+=/home/unx/.asdf/installs/ruby/3.0.0/lib/ruby/gems/3.0.0/gems/tags;
+  set tags+=/home/baka/.asdf/installs/ruby/3.0.2/lib/ruby/gems/3.0.0/gems/tags;
 
 
   " eRuby
@@ -46,3 +41,7 @@ endfunction
 let ruby_operators = 1
 let ruby_space_errors = 1
 let ruby_fold = 1
+
+" Ruby autocomplete
+let g:rubycomplete_buffer_loading = 1
+let g:rubycomplete_rails = 1

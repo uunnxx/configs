@@ -111,6 +111,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'markonm/traces.vim'
 Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
 
+Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
+
 
 " Linting
 Plug 'dense-analysis/ale'

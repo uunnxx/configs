@@ -1,13 +1,20 @@
-" hmm...
-au FileType javascript inoremap fF function
 
-" console.log
-au FileType javascript inoremap ttL console.log('')<left><left>
-au FileType javascript nnoremap ttL ^Cconsole.log('')<left><left><Esc>p
+autocmd FileType javascript call JSOption()
 
-au FileType javascript inoremap ttH console.log()<left>
-au FileType javascript nnoremap ttH ^Cconsole.log()<left><Esc>p
+function JSOption()
+  " hmm...
+  inoremap fF function
 
-au FileType javascript inoremap ttR require('')<left><left>
-au FileType javascript nnoremap ttR ^Crequire('')<left><left><Esc>p
-" au FileType javascript vnoremap ttR Irequire('')<left><left><Esc>p
+  inoremap ttL console.log('')<left><left>
+  nnoremap ttL ^Cconsole.log('')<left><left><Esc>p
+
+  inoremap ttH console.log()<left>
+  nnoremap ttH ^Cconsole.log()<left><Esc>p
+
+  inoremap ttR require('')<left><left>
+  nnoremap ttR ^Crequire('')<left><left><Esc>p
+
+  inoremap ttC <Esc>^iconsole.log(<Esc>$a)
+  nnoremap ttC ^iconsole.log(<Esc>$a)<Esc>
+
+endfunction
