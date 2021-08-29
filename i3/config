@@ -313,6 +313,10 @@ for_window [class="Eog"] move position center
 for_window [class="Zathura"] floating enable resize set 1340 780
 for_window [class="Zathura"] move position center
 # for_window [class="Zathura"] border normal 4
+
+for_window [class="Org.gnome.Nautilus"] floating enable resize set 1340 780
+for_window [class="Org.gnome.Nautilus"] move position center
+
 for_window [class="File-roller"] floating enable resize set 1340 780
 for_window [class="File-roller"] move position center
 for_window [class="File-roller"] border normal 4
@@ -530,8 +534,10 @@ bindsym $mod + KP_Add exec $calc
 bindsym --release $mod + KP_Subtract exec xkill
 
 
-bindsym $alt+Up exec "pactl set-sink-volume @DEFAULT_SINK@ +1000"; exec dunstify -r 1111 -u low "Volume: $(pactl list sinks | tr ' ' '\n' | grep -m1 '%' | tr -d '%')"
-bindsym $alt+Down exec "pactl set-sink-volume @DEFAULT_SINK@ -1000"; exec dunstify -r 1111 -u low "Volume: $(pactl list sinks | tr ' ' '\n' | grep -m1 '%' | tr -d '%')"
+# bindsym $alt+Up exec "pactl set-sink-volume @DEFAULT_SINK@ +1000"; exec dunstify -r 2222 -u low "Volume: $(pactl list sinks | tr ' ' '\n' | grep -m1 '%' | tr -d '%')"
+# which current_volume: .local/bin/current_volume
+bindsym $alt+Up exec "pactl set-sink-volume @DEFAULT_SINK@ +1000"; exec dunstify -r 2222 -u low "Volume: $(current_volume)"
+bindsym $alt+Down exec "pactl set-sink-volume @DEFAULT_SINK@ -1000"; exec dunstify -r 2222 -u low "Volume: $(current_volume)"
 
 # mpvctl https://gist.github.com/dwgill/a66769e0edef69c04d3b
 

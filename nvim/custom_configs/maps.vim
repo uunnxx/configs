@@ -1,5 +1,5 @@
 let mapleader = ","
-let g:mapleadre =","
+let g:mapleadre = ","
 inoremap <silent><nowait> eu <Esc>
 
 nnoremap ; :
@@ -323,7 +323,7 @@ nnoremap J mjJ`j
 
 nmap <leader><leader><space> :%bd <bar> e# <bar> bd#<cr>
 
-" Terminal section
+" NOTE: TERMINAL SECTION
 nnoremap <space><space>t :split term://zsh<CR>
 nnoremap <space><space>v :vsplit term://zsh<CR>
 
@@ -332,8 +332,11 @@ nnoremap <space><space>v :vsplit term://zsh<CR>
 " tnoremap <ESC>   <C-\><C-n>
 tnoremap <leader><leader>  <C-\><C-n>
 " Exit in command modes: FZF, Tags, Rg, Files, Filetypes
-tnoremap <silent><nowait><Esc><Esc>  <C-\><C-n>:q!<cr>
+tnoremap <silent><nowait><Esc>  <C-\><C-n>:q!<cr>
 " tnoremap <leader>cc <Esc>:q<cr>
+
+
+" END_OF_TERMINAL_SECTION
 
 " Paste spaces without leaving command mode
 nnoremap <silent><space>o :<C-u>call append(line("."),   repeat([""], v:count1))<CR>

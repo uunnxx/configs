@@ -3,7 +3,7 @@ autocmd FileType javascript call JSOption()
 
 function JSOption()
   " hmm...
-  inoremap fF function
+  inoremap ff function
 
   inoremap ttL console.log('')<left><left>
   nnoremap ttL ^Cconsole.log('')<left><left><Esc>p

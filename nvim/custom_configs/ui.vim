@@ -11,6 +11,9 @@ let g:gruvbox_contrast_dark="hard"
 " let g:gruvbox_contrast_light="soft"
 let g:gruvbox_invert_selection=0
 let g:gruvbox_italic=1
+let g:gruvbox_inverse=1
+let g:gruvbox_underline=1
+let g:gruvbox_undercurl=1
 let g:gruvbox_transparent_bg=1
 
 " let no_buffer_menu=1
@@ -135,6 +138,8 @@ aug i3config_ft_detection
   au BufNewFile,BufRead ~/dots/configs/i3/config set filetype=i3config
 aug END
 
+hi! link CursorColumn GruvboxRedSign
+hi! link MatchParen GruvboxOrangeBold
 
 " highlight NonText ctermfg=4
 " highlight SpecialKey ctermfg=4
@@ -146,18 +151,6 @@ aug END
 autocmd Syntax * call matchadd('Todo', '\W\zs\(CONCEPT\|TODO\|FIXME\|CHANGED\|CHANGES\|HACK\)')
 autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\|README\|unx\|SYNTAX\)')
 autocmd Syntax * call matchadd('Error', '\W\zs\(ERROR\|WARNING\|BUG\)')
-
-hi! link elixirDocString Comment
-hi! link elixirStringDelimiter GruvboxGreen
-hi! link elixirInterpolationDelimiter GruvboxAqua
-
-" defmodule [color]mod_name[color] do
-hi! link elixirModuleDeclaration GruvboxYellow
-
-hi! link elixirPrivateFunctionDeclaration GruvboxOrange
-hi! link elixirBlockDefinition GruvboxRed
-
-" hi! link elixirDefine GruvboxAqua
 
 
 " Vista

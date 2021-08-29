@@ -25,7 +25,7 @@ Plug 'maximbaz/lightline-ale'
 Plug 'mengelbrecht/lightline-bufferline'
 " Plug 'wfxr/minimap.vim'
 
-Plug 'https://github.com/dhruvasagar/vim-table-mode'
+Plug 'https://github.com/dhruvasagar/vim-table-mode', { 'for': 'md' }
 
 " Julia
 Plug 'JuliaEditorSupport/julia-vim', { 'for': 'julia' }
@@ -95,7 +95,7 @@ Plug 'tpope/vim-repeat'                " Vim Repeat
 Plug 'tpope/vim-commentary'
 Plug 'isa/vim-matchit'
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'yegappan/mru'
 Plug 'mhinz/vim-startify'
@@ -137,7 +137,9 @@ let g:config_files = [
       \ 'plugin_settings',
       \ 'emmet',
       \ 'js',
-      \ 'multicursor'
+      \ 'multicursor',
+      \ 'ui_elixir',
+      \ 'ui_ruby'
       \ ]
 
 for s:filename in g:config_files
