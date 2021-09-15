@@ -493,7 +493,7 @@ exec_always --no-startup-id xset dpms 600
 exec --no-startup-id xrandr --output DVI-D-0 --auto --left-of HDMI-A-0
 # CapsLock is Mod4
 exec_always --no-startup-id setxkbmap -option caps:super
-
+exec_always --no-startup-id alttab -w 1 -fg "#fabd2f" -bg "#141c21" -frame "#fabd2f" -t 128x150 -i 127x64
 
 # Input method settings
 # Comment this lines out because we using fcitx right now

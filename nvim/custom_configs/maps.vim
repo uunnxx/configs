@@ -17,13 +17,13 @@ nnoremap QA :qall!<cr>
 nnoremap <space>; q:
 nnoremap <silent> <leader>cd :cd %:p:h<cr>:pwd<cr>
 
-nnoremap <left> g;
+nnoremap <left>  g;
 nnoremap <right> g,
 
-nnoremap <silent> <up>      : resize +1<CR>
-nnoremap <silent> <down>    : resize -1<CR>
-nnoremap <silent> <M-left>  : vertical resize -1<CR>
-nnoremap <silent> <M-right> : vertical resize +1<CR>
+nnoremap <silent> <up>      :resize +1<CR>
+nnoremap <silent> <down>    :resize -1<CR>
+nnoremap <silent> <M-left>  :vertical resize -1<CR>
+nnoremap <silent> <M-right> :vertical resize +1<CR>
 
 inoremap <up> <Esc>ddkPi
 inoremap <down> <Esc>ddpi
@@ -61,7 +61,7 @@ nmap <nowait><leader><leader>s <C-W>s:Files<CR>
 nnoremap <nowait><M-t> :tabedit 
 inoremap <nowait><M-t> <Esc>:tabedit 
 nnoremap <nowait><M-e> :edit 
-inoremap <nowait><M-e>e <Esc>:edit 
+inoremap <nowait><M-e><M-e> <Esc>:edit 
 
 " FZF open files: with preview 
 " Use <C-x> for horizontal split and <C-v> for vertical
@@ -317,13 +317,14 @@ vmap <space>Y :w! ~/.vi_tmp<CR>
 nmap <space>X :!echo ""> ~/.vi_tmp<CR><CR>:w! ~/.vi_tmp<CR>
 vmap <space>X :w! ~/.vi_tmp<CR>gvd
 nmap <space>P :r ~/.vi_tmp<CR>
+" vmap <leader>wr :w! expand("%:p:h")/
 
 " Join lines and restore cursor location (J)
 nnoremap J mjJ`j
 
 nmap <leader><leader><space> :%bd <bar> e# <bar> bd#<cr>
 
-" NOTE: TERMINAL SECTION
+" TERMINAL SECTION:
 nnoremap <space><space>t :split term://zsh<CR>
 nnoremap <space><space>v :vsplit term://zsh<CR>
 
@@ -369,3 +370,9 @@ autocmd FileType c,cpp   imap <buffer> iinc #include <><left>
 autocmd FileType c,cpp   imap <buffer> innc #include ""<left>
 
 inoremap <leader><leader>l <C-x><C-l>
+
+" coc floating popup menu scroll
+nnoremap <nowait><expr> <M-j> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+nnoremap <nowait><expr> <M-k> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+inoremap <nowait><expr> <M-j> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+inoremap <nowait><expr> <M-k> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"

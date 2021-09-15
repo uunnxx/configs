@@ -1,6 +1,12 @@
 filetype off                           " required
 call plug#begin('~/.nvim/plugged')
 
+" TEST:
+
+
+
+" END_OF_TEST_SECTION
+
 " Git
 Plug 'tpope/vim-fugitive'           " A Git wrapper
 Plug 'airblade/vim-gitgutter'       " A Vim plugin which shows a git diff in the gutter
@@ -69,6 +75,9 @@ Plug 'tpope/vim-ragtag' " A set of mappings for HTML, XML, eRuby, JSP, and more
 " Plug 'plasticboy/vim-markdown', { 'for': 'md' }
 Plug 'mboughaba/i3config.vim'
 Plug 'https://github.com/s3rvac/vim-syntax-retdecdsm'
+
+" Haskell
+Plug 'https://github.com/neovimhaskell/haskell-vim.git'
 
 " Rust
 Plug 'rust-lang/rust.vim', { 'for': 'rs' }
@@ -139,7 +148,8 @@ let g:config_files = [
       \ 'js',
       \ 'multicursor',
       \ 'ui_elixir',
-      \ 'ui_ruby'
+      \ 'ui_ruby',
+      \ 'python'
       \ ]
 
 for s:filename in g:config_files

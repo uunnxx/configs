@@ -1,6 +1,7 @@
 {
   "codeLens.enable": true,
   "diagnostic.displayByAle": true,
+  "diagnostic.checkCurrentLine": true,
   "elixirLS.dialyzerEnabled": false,
   "elixirLS.dialyzerWarnOpts": false,
 
@@ -8,6 +9,12 @@
     "elixirLS": {
       "command": "/home/unx/apps/elixirLS/release/language_server.sh",
       "filetypes": ["elixir", "eelixir"]
+    },
+    "haskell": {
+    "command": "haskell-language-server-wrapper",
+    "args": ["--lsp"],
+    "rootPatterns": ["*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"],
+    "filetypes": ["haskell", "lhaskell"]
     },
     "ccls": {
       "command": "ccls",

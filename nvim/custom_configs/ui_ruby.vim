@@ -1,4 +1,4 @@
-hi!   link   Define        GruvboxOrangeBold
+hi!   link   Define        GruvboxOrange
 " Generic type
 hi!   link   rubyType      GruvboxYellowBold
 " Generic statement

@@ -90,7 +90,7 @@ set laststatus=2
 set noshowmode
 set showmatch
 set showcmd
-set so=20
+set so=10
 
 " Switch to an existing buffer if one exists
 set switchbuf=useopen
