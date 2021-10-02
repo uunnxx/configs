@@ -57,6 +57,10 @@ bindsym $mod+$sh+c kill
 bindsym --whole-window $alt+button1 move scratchpad
 bindsym --whole-window $alt+button2 move position center
 bindsym --whole-window $alt+button3 kill
+bindsym --whole-window $alt+button4 resize grow width 25 px or 25 ppt
+bindsym --whole-window $alt+button5 resize grow height 25 px or 25 ppt
+bindsym --whole-window $alt+button8 fullscreen toggle
+bindsym --whole-window $alt+button9 floating toggle
 
 # bindsym --whole-window $alt+button4 focus left
 # bindsym --whole-window $alt+button5 focus down
@@ -373,6 +377,8 @@ mode "resize" {
 # Colors
 #
 set $fff #FFFFFF
+set $aaa #FF7043
+set $ttt #141C21
 
 set $cla #39375B
 set $clb #745C97
@@ -383,6 +389,7 @@ set $clf #EBA6A9
 set $clg #25044B
 set $clh #F0544F
 set $cli #462A67
+set $clj #5B3758
 
 
 # Gruvbox
@@ -410,20 +417,21 @@ bar {
   tray_padding 0
   output $right
   tray_output none
-  i3bar_command i3bar
+  i3bar_command i3bar --transparency
+  # i3bar_command i3bar
   status_command i3status --config ~/.config/i3/i3status.conf
   position bottom
-  separator_symbol "|"
+  separator_symbol " | "
   colors {
-    background $cla
-    statusline $gruvD
-    separator  $gruvD
-    #                  border     backgr.   text
-    focused_workspace  $clf       $clf      $gruv0
-    active_workspace   $cla       $cla      $fff
-    inactive_workspace $clb       $clb      $fff
-    urgent_workspace   $clh       $clh      $fff
-    binding_mode       $gruvB     $gruvB    $gruv0
+    background $gruv044
+    statusline $gruvB
+    separator  $clh
+    #                  border     backgr.    text
+    focused_workspace  $gruvB     $gruvB     $gruv0
+    active_workspace   $clf       $clf       $gruv0
+    inactive_workspace $clj       $clj       $fff
+    urgent_workspace   $gruv9     $gruv9     $fff
+    binding_mode       $gruvB     $gruvB     $gruv0
   }
   workspace_min_width 80
   workspace_buttons yes
@@ -440,21 +448,21 @@ bar {
   tray_padding 0
   output $left
   tray_output $left
-  # i3bar_command i3bar --transparency
-  i3bar_command i3bar
+  i3bar_command i3bar --transparency
+  # i3bar_command i3bar
   status_command i3status --config ~/.config/i3/i3status-small.conf
   position bottom
   separator_symbol " | "
   colors {
-      background $cla
-      statusline $gruvD
-      separator  $gruvD
-      #                  border     backgr.   text
-      focused_workspace  $clf       $clf      $gruv0
-      active_workspace   $cla       $cla      $fff
-      inactive_workspace $clb       $clb      $fff
-      urgent_workspace   $clh       $clh      $fff
-      binding_mode       $gruvB     $gruvB    $gruv0
+    background $gruv044
+    statusline $gruvB
+    separator  $clh
+    #                  border     backgr.    text
+    focused_workspace  $gruvB     $gruvB     $gruv0
+    active_workspace   $clf       $clf       $gruv0
+    inactive_workspace $clj       $clj       $fff
+    urgent_workspace   $gruv9     $gruv9     $fff
+    binding_mode       $gruvB     $gruvB     $gruv0
   }
   workspace_min_width 80
   workspace_buttons yes
@@ -465,7 +473,7 @@ bar {
 }
 
 # class                   border    backgr.   text        indic.   child_border
-client.focused            #5B3758   #5B3758   $fff        $gruv1
+client.focused            $clj      $clj      $fff        $gruv1
 client.focused_inactive   $clb      $clb      $fff        $gruv1
 client.unfocused          $cla      $cla      $fff        $gruv1
 client.urgent             $clh      $clh      $fff        $gruv1
@@ -495,6 +503,9 @@ exec --no-startup-id xrandr --output DVI-D-0 --auto --left-of HDMI-A-0
 exec_always --no-startup-id setxkbmap -option caps:super
 exec_always --no-startup-id alttab -w 1 -fg "#fabd2f" -bg "#141c21" -frame "#fabd2f" -t 128x150 -i 127x64
 
+# To reset settings redshift -x
+exec_always --no-startup-id redshift -x; exec redshift -O 3500
+
 # Input method settings
 # Comment this lines out because we using fcitx right now
 # bindsym d exec --no-startup-id "setxkbmap -layout us,ru -variant dvp, -option grp:alt_space_toggle", mode "default"
@@ -506,14 +517,14 @@ exec_always --no-startup-id alttab -w 1 -fg "#fabd2f" -bg "#141c21" -frame "#fab
 # Not used keys:
 # 0..9 num_lock: off
 
-# bindsym KP_End exec $fm 
+# bindsym KP_End exec $fm
 # bindsym KP_Down exec $fm
 # bindsym KP_Next exec mpvctl next
 
 bindsym KP_Left move container to output left; focus output left
 bindsym $mod + KP_Left move workspace to output left
 
-# bindsym KP_Begin exec 
+# bindsym KP_Begin exec
 
 bindsym KP_Right move container to output right; focus output right
 bindsym $mod + KP_Right move workspace to output right
@@ -545,3 +556,7 @@ bindsym $mod+Left exec mpvctl previous; exec dunstify -r 1111 -u low "PREVIOUS T
 bindsym $mod+Right exec mpvctl next; exec dunstify -r 1111 -u low "NEXT TRACK"
 bindsym $mod+Up exec dunstify -r 9999 -u normal "NOW PLAYING:" "$(exec mpvctl play)"
 bindsym $mod+Down exec mpvctl pause; exec dunstify -r 1111 -u low "PAUSE"
+
+# Next: PageDown, Prior: PageUp
+bindsym $ctrl+$alt+Next exec obs-cli --password "bakabakabaka" scene switch right; exec dunstify -u low -r 7979 "OBS SCENE SWITCHED" "Active scene: <b>RIGHT</b>"
+bindsym $ctrl+$alt+Prior exec obs-cli --password "bakabakabaka" scene switch left; exec dunstify -u low -r 7979 "OBS SCENE SWITCHED" "Active scene: <b>LEFT</b>"

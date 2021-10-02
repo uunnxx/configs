@@ -21,18 +21,19 @@ function RubyOptions()
   " nnoremap ttL $F}i
   " nnoremap ttH 0f{a
 
-  set iskeyword=@,!,?,48-57,192-255
-  setlocal tags+=./tags;
+  set iskeyword=@,!,?,_,48-57,192-255
+
   set tags+=/home/baka/.asdf/installs/ruby/3.0.2/lib/ruby/gems/3.0.0/gems/tags;
+  set tags+=./tags
 
 
   " eRuby
   " Evaluate and print out: _erbout << something.to_s
-  inoremap eH <%=  %><left><left><left>
+  inoremap eHH <%=  %><left><left><left>
   " Evaluate without printing out: something_else
-  inoremap eL <%  %><left><left><left>
+  inoremap eLL <%  %><left><left><left>
   " Comment
-  inoremap eC <%#  %><left><left><left>
+  inoremap eCC <%#  %><left><left><left>
 
 endfunction
 

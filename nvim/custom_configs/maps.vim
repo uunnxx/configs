@@ -1,14 +1,14 @@
 let mapleader = ","
 let g:mapleadre = ","
-inoremap <silent><nowait> eu <Esc>
+inoremap <silent><nowait>eu <esc>
 
 nnoremap ; :
 xnoremap ; :
 nnoremap & %
 
 " Quicker way to open command window
-nnoremap <silent> <leader>ww :update<CR>
-nnoremap <silent> <space>qq :x<CR>
+nnoremap <silent> <leader>ww :update<cr>
+nnoremap <silent> <space>qq :x<cr>
 nnoremap QQ :q<cr>
 nnoremap Qt :q!<cr>
 nnoremap Qa :qall<cr>
@@ -20,13 +20,13 @@ nnoremap <silent> <leader>cd :cd %:p:h<cr>:pwd<cr>
 nnoremap <left>  g;
 nnoremap <right> g,
 
-nnoremap <silent> <up>      :resize +1<CR>
-nnoremap <silent> <down>    :resize -1<CR>
-nnoremap <silent> <M-left>  :vertical resize -1<CR>
-nnoremap <silent> <M-right> :vertical resize +1<CR>
+nnoremap <silent> <up>      :resize +1<cr>
+nnoremap <silent> <down>    :resize -1<cr>
+nnoremap <silent> <M-left>  :vertical resize -1<cr>
+nnoremap <silent> <M-right> :vertical resize +1<cr>
 
-inoremap <up> <Esc>ddkPi
-inoremap <down> <Esc>ddpi
+inoremap <up> <esc>ddkPi
+inoremap <down> <esc>ddpi
 
 " Go to file under cursor
 nmap <silent> gf <C-]>
@@ -52,45 +52,53 @@ nnoremap <nowait><space><space>h <C-W>H
 nnoremap <nowait><space><space>l <C-W>L
 
 " Split windows
-nmap <nowait><leader><leader>v <C-W>v:Files<CR>
-nmap <nowait><leader><leader>s <C-W>s:Files<CR>
+nmap <nowait><leader><leader>v <C-W>v:Files<cr>
+nmap <nowait><leader><leader>s <C-W>s:Files<cr>
 
 " CALLING FUNCTIONS:
 "
 " Open files
 nnoremap <nowait><M-t> :tabedit 
-inoremap <nowait><M-t> <Esc>:tabedit 
+inoremap <nowait><M-t> <esc>:tabedit 
 nnoremap <nowait><M-e> :edit 
-inoremap <nowait><M-e><M-e> <Esc>:edit 
+inoremap <nowait><M-e><M-e> <esc>:edit 
 
 " FZF open files: with preview 
 " Use <C-x> for horizontal split and <C-v> for vertical
-nmap <nowait> <leader>t :FZF<CR>
+nmap <nowait> <leader>t :FZF<cr>
 " no preview
-nmap <S-CR> :Files<CR>
-imap <S-CR> <Esc>:Files<CR>
+nmap <S-cr> :Files<cr>
+imap <S-cr> <esc>:Files<cr>
+
+" Tags
+nnoremap <nowait> <space>tg :Tags<cr>
+inoremap <nowait> <space>tg <esc>:Tags<cr>
 
 " Buffer
-nmap <silent> <nowait><C-CR> :Buffer<cr>
+nmap <silent> <nowait><C-cr> :Buffer<cr>
 
 " nmap <space>tt :Tags<cr>
 nmap <silent> <nowait><M-f> :Rg<cr>
-imap <silent> <nowait><M-f> <Esc>:Rg<cr>
+imap <silent> <nowait><M-f> <esc>:Rg<cr>
 nmap <silent> <nowait><leader>u :UndotreeToggle<cr>
-" nmap <silent> <nowait><leader>n :TagbarToggle<CR>
-nmap <silent> <nowait><leader>n :Vista!!<CR>
-" nmap <silent> <nowait><space>tt :Vista finder<CR>
+" nmap <silent> <nowait><leader>n :TagbarToggle<cr>
+nmap <silent> <nowait><leader>n :Vista!!<cr>
+" nmap <silent> <nowait><space>tt :Vista finder<cr>
 
 
 " Fkeys:
 nmap <silent> <F1> :vert help normal-index<cr>
-imap <silent> <F1> <Esc>:vert help insert-index<cr>
+imap <silent> <F1> <esc>:vert help insert-index<cr>
 
 map <silent> <F2> :update $MYVIMRC <bar> source $MYVIMRC <cr>
 map <silent> <F3> :tabnew $MYVIMRC <bar> tcd %:h<cr>
 
 map <silent> <F5> :set list!<cr>
-map <silent> <F6> :set cursorline!<CR>
+map <silent> <F6> :set cursorline!<cr>
+
+nnoremap <silent> <F11> :set spell!<cr>
+inoremap <silent> <F11> <C-O>:set spell!<cr>
+
 
 nmap <silent> FF :Filetypes<cr>
 nmap <silent> <leader>R :redo<cr>
@@ -103,8 +111,8 @@ map <silent> <space>nn :call NumberToggle()<cr>
 " nmap ci, f,cT,
 
 " Delete || change an argument:
-" nmap da, f,ld2F,i,<Esc>l
-" nmap ca, f,ld2F,i,<Esc>a
+" nmap da, f,ld2F,i,<esc>l
+" nmap ca, f,ld2F,i,<esc>a
 
 " Delete || change surrounding characters
 " noremap ds{ F{xf}x
@@ -130,7 +138,7 @@ nmap cu ct_
 nmap Cu cf_
 
 nnoremap cU bf_ldea
-nnoremap dU bf_lde
+nnoremap dU bf_de
 
 
 " FOR_EDU:
@@ -219,8 +227,8 @@ nnoremap C "_C
 nnoremap cc "_cc
 
 " Empty || Change current line
-nnoremap <nowait>dD I<Esc>D
-nnoremap <nowait>cC I<Esc>C
+nnoremap <nowait>dD I<esc>D
+nnoremap <nowait>cC I<esc>C
 
 " Auto-center
 nmap G Gzz
@@ -230,8 +238,9 @@ nmap <nowait>} }zz
 nmap <nowait>{ {zz
 
 " Select word under cursor and search 
-vnoremap <silent> * :call VisualSelection('f', '')<CR>
-vnoremap <silent> # :call VisualSelection('b', '')<CR>
+vnoremap <silent> * :call VisualSelection('f', '')<cr>
+vnoremap <silent> # :call VisualSelection('b', '')<cr>
+vnoremap // y/\V<C-R>=escape(@",'/\')<cr><cr>
 
 
 " Find and replace
@@ -256,7 +265,7 @@ xnoremap <nowait>L g_
 nnoremap gV `[v`]
 
 " Go to the starting position after visual modes
-vnoremap <ESC> o<ESC>
+vnoremap <esc> o<esc>
 
 " Disable highlight when <leader> <cr> is pressed
 " nnoremap <silent> <space><cr> :noh<cr>
@@ -272,8 +281,8 @@ noremap gP P
 
 " EasyMotion:
 nmap ss <Plug>(easymotion-overwin-f2)
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
+map   / <Plug>(easymotion-sn)
+omap  / <Plug>(easymotion-tn)
 nmap  n <Plug>(easymotion-next)
 nmap  N <Plug>(easymotion-prev)
 " nmap <space>l <Plug>(easymotion-lineforward)
@@ -285,12 +294,12 @@ nmap  N <Plug>(easymotion-prev)
 noremap <Tab> gt
 
 " EasyTree:
-map <silent> <C-n> :EasyTreeToggle<CR>
+map <silent> <C-n> :EasyTreeToggle<cr>
 let g:easytree_show_hidden_files=1
 
 
 " Insert a space before current character
-" nnoremap <silent> <space><space> i<TAB><ESC>l
+" nnoremap <silent> <space><space> i<TAB><esc>l
 
 " Continuous visual shifting (do not exit Visual mode)
 " `gv` means to reselect previous visual area, see https://goo.gl/m1UeiT
@@ -312,36 +321,36 @@ nnoremap U <C-r>
 
 " Transfer text between two VIM instances
 " Copy and paste & cut and paste between different Vim sessions
-nmap <space>Y :!echo ""> ~/.vi_tmp<CR><CR>:w! ~/.vi_tmp<CR>
-vmap <space>Y :w! ~/.vi_tmp<CR>
-nmap <space>X :!echo ""> ~/.vi_tmp<CR><CR>:w! ~/.vi_tmp<CR>
-vmap <space>X :w! ~/.vi_tmp<CR>gvd
-nmap <space>P :r ~/.vi_tmp<CR>
+nnoremap <space>Y :!echo ""> ~/.vi_tmp<cr><cr>:w! ~/.vi_tmp<cr>
+vnoremap <silent>map <space>Y :w! ~/.vi_tmp<cr>
+nnoremap <space>X :!echo ""> ~/.vi_tmp<cr><cr>:w! ~/.vi_tmp<cr>
+vnoremap <space>X :w! ~/.vi_tmp<cr>gvd
+nnoremap <space>P :r ~/.vi_tmp<cr>
 " vmap <leader>wr :w! expand("%:p:h")/
 
 " Join lines and restore cursor location (J)
 nnoremap J mjJ`j
 
-nmap <leader><leader><space> :%bd <bar> e# <bar> bd#<cr>
+nnoremap <leader><leader><space> :%bd <bar> e# <bar> bd#<cr>
 
 " TERMINAL SECTION:
-nnoremap <space><space>t :split term://zsh<CR>
-nnoremap <space><space>v :vsplit term://zsh<CR>
+nnoremap <space><space>t :split term://zsh<cr>
+nnoremap <space><space>v :vsplit term://zsh<cr>
 
 " tnoremaps:
-" Use Esc or ',,' to quit builtin terminal
-" tnoremap <ESC>   <C-\><C-n>
+" Use esc or ',,' to quit builtin terminal
+" tnoremap <esc>   <C-\><C-n>
 tnoremap <leader><leader>  <C-\><C-n>
 " Exit in command modes: FZF, Tags, Rg, Files, Filetypes
-tnoremap <silent><nowait><Esc>  <C-\><C-n>:q!<cr>
-" tnoremap <leader>cc <Esc>:q<cr>
+tnoremap <silent><nowait><esc>  <C-\><C-n>:q!<cr>
+" tnoremap <leader>cc <esc>:q<cr>
 
 
 " END_OF_TERMINAL_SECTION
 
 " Paste spaces without leaving command mode
-nnoremap <silent><space>o :<C-u>call append(line("."),   repeat([""], v:count1))<CR>
-nnoremap <silent><space>O :<C-u>call append(line(".")-1, repeat([""], v:count1))<CR>
+nnoremap <silent><space>o :<C-u>call append(line("."),   repeat([""], v:count1))<cr>
+nnoremap <silent><space>O :<C-u>call append(line(".")-1, repeat([""], v:count1))<cr>
 
 
 " C-a C-x enumerate
@@ -374,5 +383,17 @@ inoremap <leader><leader>l <C-x><C-l>
 " coc floating popup menu scroll
 nnoremap <nowait><expr> <M-j> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
 nnoremap <nowait><expr> <M-k> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-inoremap <nowait><expr> <M-j> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-inoremap <nowait><expr> <M-k> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+inoremap <nowait><expr> <M-j> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<right>"
+inoremap <nowait><expr> <M-k> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<left>"
+
+" Man pages:
+nnoremap <nowait><space>kv :Vman <C-R><C-W><cr>
+nnoremap <nowait><space>kk :Man <C-R><C-W><cr>
+
+nnoremap <silent> <PageUp> <C-U>
+vnoremap <silent> <PageUp> <C-U>
+inoremap <silent> <PageUp> <C-\><C-O><C-U>
+
+nnoremap <silent> <PageDown> <C-D>
+vnoremap <silent> <PageDown> <C-D>
+inoremap <silent> <PageDown> <C-\><C-O><C-D>

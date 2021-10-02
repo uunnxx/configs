@@ -7,7 +7,7 @@
 
   "languageserver": {
     "elixirLS": {
-      "command": "/home/unx/apps/elixirLS/release/language_server.sh",
+      "command": "/home/baka/apps/elixirLS/release/language_server.sh",
       "filetypes": ["elixir", "eelixir"]
     },
     "haskell": {

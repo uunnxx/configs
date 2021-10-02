@@ -157,6 +157,11 @@ autocmd Syntax * call matchadd('Error', '\W\zs\(ERROR\|WARNING\|BUG\)')
 " Ensure you have installed some decent font to show these pretty symbols, then you can enable icon for the kind.
 let g:vista#renderer#enable_icon = 1
 
+" function! NearestMethodOrFunction() abort
+"   return get(b:, 'vista_nearest_method_or_function', '')
+" endfunction
+
+
 " The default icons can't be suitable for all the filetypes, you can extend it as you wish.
 let g:vista#renderer#icons = {
 \   "function": "\uf794",
@@ -165,6 +170,7 @@ let g:vista#renderer#icons = {
 
 
 " let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+
 
 " Transparency background
 hi Normal guibg=NONE ctermbg=NONE
@@ -210,3 +216,6 @@ let g:haskell_indent_in = 4
 
 hi! QuickFixLine ctermbg=none
 hi! QuickFixLine guibg=none
+
+match Error /\s\+$/
+" autocmd Filetype python,ruby,c,cpp match Error /\s\+$/

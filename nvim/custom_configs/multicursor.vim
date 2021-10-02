@@ -7,7 +7,7 @@ let g:multi_cursor_start_key           = 'g<C-b>'
 let g:multi_cursor_select_all_key      = 'g<M-d>'
 let g:multi_cursor_next_key            = '<C-b>'
 let g:multi_cursor_prev_key            = '<C-p>'
-let g:multi_cursor_skip_key            = '<C-x>'
+let g:multi_cursor_skip_key            = '<M-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
 
 

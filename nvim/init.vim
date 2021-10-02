@@ -13,7 +13,7 @@ Plug 'airblade/vim-gitgutter'       " A Vim plugin which shows a git diff in the
 
 " Writing
 " fcitx toggle layout to en in command mode and back to
-Plug 'lilydjwg/fcitx.vim'
+" Plug 'lilydjwg/fcitx.vim'
 
 " Debugger
 
@@ -75,6 +75,11 @@ Plug 'tpope/vim-ragtag' " A set of mappings for HTML, XML, eRuby, JSP, and more
 " Plug 'plasticboy/vim-markdown', { 'for': 'md' }
 Plug 'mboughaba/i3config.vim'
 Plug 'https://github.com/s3rvac/vim-syntax-retdecdsm'
+Plug 'https://github.com/vim-utils/vim-man'
+
+" Auto tags generate
+Plug 'ludovicchabant/vim-gutentags'
+
 
 " Haskell
 Plug 'https://github.com/neovimhaskell/haskell-vim.git'
@@ -149,7 +154,8 @@ let g:config_files = [
       \ 'multicursor',
       \ 'ui_elixir',
       \ 'ui_ruby',
-      \ 'python'
+      \ 'python',
+      \ 'cpp_c_settings'
       \ ]
 
 for s:filename in g:config_files

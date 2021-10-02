@@ -72,9 +72,9 @@ set shortmess+=c
 
 
 " ENCODING
-set encoding=UTF-8
-set fileencoding=UTF-8
-set fileencodings=UTF-8
+set encoding=utf-8
+set fileencoding=utf-8
+set fileencodings=utf-8
 set ttyfast
 
 set autoread
@@ -86,6 +86,7 @@ set fileformats=unix,dos,mac
 syntax on
 set ruler
 set number
+set relativenumber
 set laststatus=2
 set noshowmode
 set showmatch
@@ -142,7 +143,8 @@ set cindent
 set history=1000
 
 " --- Spelling
-set spell spelllang=ru,en_us
+" set spell spelllang=en_us
+set spelllang=en_us,en_gb,ru,cjk
 
 " Fastening
 set re=1
@@ -185,6 +187,4 @@ set stal=1
 " use g for reverse
 set gdefault
 
-set tags=./tags;/
-
-set iskeyword=@,_,48-57,192-255
+set tags=./tags

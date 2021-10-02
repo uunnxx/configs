@@ -1,6 +1,9 @@
 nvim/undo/*
+alacritty/*
 nvim/spell/*
 nvim/tags
+./tags
+tags
 obs-studio/*
 oomox/*
 pulse/*
