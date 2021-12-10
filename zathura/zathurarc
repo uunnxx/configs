@@ -51,6 +51,7 @@ set page-padding 2
 
 map u scroll half-up
 map e scroll half-down
+map space scroll half-down
 
 map p toggle_page_mode
 
@@ -66,7 +67,6 @@ map q recolor
 map Esc abort
 
 map . quit
-# 
 map Q quit
 
 # set sandbox strict

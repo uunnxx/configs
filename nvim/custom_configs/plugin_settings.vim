@@ -99,7 +99,7 @@ let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 " ALE section:
 let g:ale_disable_lsp = 0
 let g:ale_completion_enabled = 0
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 0
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
@@ -255,9 +255,5 @@ autocmd FileType c,cpp let g:AutoPairs = AutoPairsDefine({ '<' : '>' })
 
 autocmd FileType c,cpp           setlocal path+=/usr/include include&
 autocmd FileType sh,zsh,csh,tcsh setlocal include=^\\s*\\%(\\.\\\|source\\)\\s
-
-autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/
-autocmd BufWritePost *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&" | redraw!
-
 
 let &path.="src/include,/usr/include/AL,"

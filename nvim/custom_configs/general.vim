@@ -37,9 +37,11 @@ set modelines=0
 " Hide buffers, not close them
 set hidden
 
-" Maintain undo history between sessions
+" Persistent Undo
+" Keep undo history across sessions, by storing in file.
+" Only works all the time.
+set undodir=$HOME/tmp/vim_undo
 set undofile
-set undodir=~/.config/nvim/undo
 set noswapfile
 
 " Search section
@@ -58,7 +60,11 @@ set backspace=indent,eol,start
 set nofoldenable
 
 " coffee pasta
-set clipboard^=unnamedplus
+" unnamed - copy-on-select, and can be pasted with the
+" middle mouse button
+" unnamedplus - This is copied with c-c, c-v
+" set clipboard^=unnamedplus
+set clipboard+=unnamed
 
 set mouse=a
 
@@ -86,7 +92,7 @@ set fileformats=unix,dos,mac
 syntax on
 set ruler
 set number
-set relativenumber
+" set relativenumber
 set laststatus=2
 set noshowmode
 set showmatch

@@ -373,11 +373,6 @@ autocmd FileType cpp     nmap <buffer> <leader>rc :w\|:!g++ ./% -g -o %:r_temp &
 autocmd FileType c       nmap <buffer> <leader>rr :w\|:!gcc ./% -g -o %:r_temp && ./%:r_temp<cr>
 autocmd FileType c       nmap <buffer> <leader>rc :w\|:!gcc ./% -g -o %:r_temp && ./%:r_temp
 
-
-" Move this maps to cpp_c_settings.vim file
-autocmd FileType c,cpp   imap <buffer> iinc #include <><left>
-autocmd FileType c,cpp   imap <buffer> innc #include ""<left>
-
 inoremap <leader><leader>l <C-x><C-l>
 
 " coc floating popup menu scroll
@@ -397,3 +392,25 @@ inoremap <silent> <PageUp> <C-\><C-O><C-U>
 nnoremap <silent> <PageDown> <C-D>
 vnoremap <silent> <PageDown> <C-D>
 inoremap <silent> <PageDown> <C-\><C-O><C-D>
+
+
+" Zeal Vim
+" default keymaps:
+nmap <leader>z <Plug>Zeavim
+vmap <leader>z <Plug>ZVVisSelection
+" nmap gz <Plug>ZVOperator
+nmap <leader><leader>z <Plug>ZVKeyDocset
+
+
+" Table mode motion
+" vim-table-mode
+autocmd FileType markdown,md call MarkdownOptions()
+
+function MarkdownOptions()
+
+  nmap Th [\|
+  nmap Tl ]\|
+  nmap Tj }\|
+  nmap Tk {\|
+
+endfunction

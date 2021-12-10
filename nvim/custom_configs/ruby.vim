@@ -20,7 +20,7 @@ command! Rroutes :e config/routes.rb
 command! Rschema :e db/schema.rb
 
 " For Haml
-" au! BufRead,BufNewFile *.haml         setfiletype haml
+" au! BufRead,BufNewFile *.haml         set filetype=haml
 
 " Opens an edit command with the path of the currently edited file filled in
 " Normal mode: <leader>e

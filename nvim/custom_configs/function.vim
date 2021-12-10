@@ -1,18 +1,5 @@
 " --- General functions and logics
 "
-" Persistent Undo
-" Keep undo history across sessions, by storing in file.
-" Only works all the time.
-set undodir=$HOME/tmp/vim_undo
-set undofile
-
-
-" Return to last edit position when opening files
-autocmd BufReadPost *
-    \ if line("'\"") > 0 && line("'\"") <= line("$") |
-    \ exe "normal! g`\"" |
-    \ endif
-
 
 " Relative line number toggle
 function! NumberToggle()
@@ -87,12 +74,6 @@ augroup auto_read
               \ | echo "File changed on disk. Buffer reloaded!" | echohl None
 augroup END
 
-" Automatically change working directory
-" if exists('+autochdir')
-"   set autochdir
-" else
-"   autocmd BufEnter * silent! lcd %:p:h:gs/ /\\ /
-" endif
 
 function! UnMinify()
   %s/{\ze[^\r\n]/{\r/g

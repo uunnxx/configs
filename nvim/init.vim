@@ -1,12 +1,6 @@
 filetype off                           " required
 call plug#begin('~/.nvim/plugged')
 
-" TEST:
-
-
-
-" END_OF_TEST_SECTION
-
 " Git
 Plug 'tpope/vim-fugitive'           " A Git wrapper
 Plug 'airblade/vim-gitgutter'       " A Vim plugin which shows a git diff in the gutter
@@ -15,7 +9,13 @@ Plug 'airblade/vim-gitgutter'       " A Vim plugin which shows a git diff in the
 " fcitx toggle layout to en in command mode and back to
 " Plug 'lilydjwg/fcitx.vim'
 
-" Debugger
+" Debugger:
+" Plug 'mfussenegger/nvim-dap'
+" Plug 'rcarriga/nvim-dap-ui'
+
+
+" Snippet:
+Plug 'https://github.com/honza/vim-snippets'
 
 
 " FrontEnd:
@@ -29,30 +29,28 @@ Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'
 Plug 'maximbaz/lightline-ale'
 Plug 'mengelbrecht/lightline-bufferline'
-" Plug 'wfxr/minimap.vim'
 
-Plug 'https://github.com/dhruvasagar/vim-table-mode', { 'for': 'md' }
+Plug 'https://github.com/dhruvasagar/vim-table-mode', { 'for': ['md', 'markdown']}
 
 " Julia
-Plug 'JuliaEditorSupport/julia-vim', { 'for': 'julia' }
+Plug 'JuliaEditorSupport/julia-vim', { 'for': ['julia', 'jl'] }
 
 
 " Ruby
-Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
-Plug 'tpope/vim-rails', { 'for': 'ruby' }
-Plug 'tpope/vim-rake', { 'for': 'ruby' }
-Plug 'tpope/vim-bundler'
-" Plug 'ecomba/vim-ruby-refactoring', { 'for': 'ruby' }
+Plug 'vim-ruby/vim-ruby', { 'for': ['ruby', 'rb'] }
+Plug 'tpope/vim-rails', { 'for': ['ruby', 'rb'] }
+Plug 'tpope/vim-rake', { 'for': ['ruby', 'rb', 'rakefile', 'rake'] }
+Plug 'tpope/vim-bundler',  { 'for': ['ruby', 'rb'] }
 Plug 'slim-template/vim-slim', { 'for': 'slim' }
-Plug 'https://github.com/whatyouhide/vim-textobj-erb'
-Plug 'stjernstrom/vim-ruby-run'
-Plug 'hallison/vim-ruby-sinatra', { 'for': 'ruby' }
+Plug 'https://github.com/whatyouhide/vim-textobj-erb', { 'for': ['ruby', 'rb', 'erb'] }
+Plug 'stjernstrom/vim-ruby-run', { 'for': ['ruby', 'rb'] }
+Plug 'hallison/vim-ruby-sinatra', { 'for': ['ruby', 'rb'] }
 
 
 " Elixir
-Plug 'elixir-editors/vim-elixir', { 'for': 'elixir' }
-Plug 'slashmili/alchemist.vim', { 'for': 'elixir' }
-Plug 'mhinz/vim-mix-format'
+Plug 'elixir-editors/vim-elixir', { 'for': ['ex', 'exs', 'elixir'] }
+Plug 'slashmili/alchemist.vim', { 'for': ['ex', 'exs', 'elixir']}
+Plug 'mhinz/vim-mix-format', { 'for': ['ex', 'exs', 'elixir'] }
 
 " Crystal
 Plug 'vim-crystal/vim-crystal', { 'for': 'cr' }
@@ -60,8 +58,10 @@ Plug 'vim-crystal/vim-crystal', { 'for': 'cr' }
 
 " Python
 Plug 'davidhalter/jedi-vim', { 'for': 'py' }
-" Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'py' }
+Plug 'hdima/python-syntax', { 'for': 'py' }
 
+" A Vim Plugin for Lively Previewing LaTeX PDF Output
+Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 
 " Syntax
 Plug 'pangloss/vim-javascript'
@@ -70,9 +70,7 @@ Plug 'hail2u/vim-css3-syntax', { 'for': 'css' }
 Plug 'othree/html5.vim', { 'for': 'html' }
 Plug 'sheerun/vim-polyglot'
 Plug 'elzr/vim-json', { 'for': 'json' }
-Plug 'hdima/python-syntax'
 Plug 'tpope/vim-ragtag' " A set of mappings for HTML, XML, eRuby, JSP, and more
-" Plug 'plasticboy/vim-markdown', { 'for': 'md' }
 Plug 'mboughaba/i3config.vim'
 Plug 'https://github.com/s3rvac/vim-syntax-retdecdsm'
 Plug 'https://github.com/vim-utils/vim-man'
@@ -82,7 +80,7 @@ Plug 'ludovicchabant/vim-gutentags'
 
 
 " Haskell
-Plug 'https://github.com/neovimhaskell/haskell-vim.git'
+Plug 'https://github.com/neovimhaskell/haskell-vim.git', { 'for': 'hs' }
 
 " Rust
 Plug 'rust-lang/rust.vim', { 'for': 'rs' }
@@ -100,7 +98,6 @@ Plug 'KabbAmine/zeavim.vim'               " Zeal integration
 Plug 'tpope/vim-abolish'                " Subvert
 Plug 'tpope/vim-surround'
 Plug 'troydm/easytree.vim'
-" Plug 'troydm/easybuffer.vim'           " :EasyBuffer
 Plug 'godlygeek/tabular'               " Vim script for text filtering and alignment
 Plug 'bagrat/vim-buffet'               " Vim Buffet
 Plug 'easymotion/vim-easymotion'       " EasyMotion
@@ -118,15 +115,14 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'terryma/vim-multiple-cursors'    " True Sublime Text style multiple cursors
 " Plug 'rhysd/vim-textobj-anyblock'
 Plug 'kana/vim-textobj-user'
-Plug 'sbdchd/neoformat'
-Plug 'Yggdroot/indentLine'
+Plug 'sbdchd/neoformat' " -- DEBUG
+Plug 'Yggdroot/indentLine' " -- DEBUG
 Plug 'nicwest/vim-camelsnek'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'markonm/traces.vim'
 Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
 
 Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
-
 
 " Linting
 Plug 'dense-analysis/ale'
@@ -162,13 +158,8 @@ for s:filename in g:config_files
   execute 'source ' . g:nvim_config_root . '/custom_configs/' . s:filename . '.vim'
 endfor
 
-" Minimap
-" nmap <silent> <leader>m :MinimapToggle<CR>
-" let g:minimap_width=15
-
-" hi MinimapCurrentLine ctermfg=Green guifg=#50FA7B guibg=#32302f
-" let g:minimap_highlight = 'MinimapCurrentLine'
-" let g:minimap_auto_start = 0
-
 set completeopt=menuone,noinsert,noselect
 let g:completion_matching_straetgy_list = ['exact', 'substring', 'fuzzy']
+
+let g:livepreview_previewer = 'zathura'
+let g:livepreview_cursorhold_recompile = 0

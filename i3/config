@@ -6,7 +6,8 @@ set $sh Shift
 set $term "alacritty"
 set $term_float "alacritty --class float"
 set $ranger "alacritty --class ranger -e ranger"
-set $trans "alacritty --class translator -e trans -t ru -I"
+set $trans_ru "alacritty --class translator -e trans -t ru -I"
+set $trans_en "alacritty --class translator -e trans -t en -I"
 # set $trans "urxvt -name translator -e trans -t ru -I"
 set $fm "nautilus"
 set $menu "rofi -show drun"
@@ -124,7 +125,6 @@ bindsym $mod+$sh+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 
-bindsym $mod+t exec --no-startup-id $trans
 bindsym $alt+space exec --no-startup-id "rofi -show window"
 bindsym $alt+$sh+space exec --no-startup-id "rofi -show windowcd"
 
@@ -522,12 +522,12 @@ exec_always --no-startup-id redshift -x; exec redshift -O 3500
 # bindsym KP_Next exec mpvctl next
 
 bindsym KP_Left move container to output left; focus output left
-bindsym $mod + KP_Left move workspace to output left
+bindsym $mod+KP_Left move workspace to output left
 
 # bindsym KP_Begin exec
 
 bindsym KP_Right move container to output right; focus output right
-bindsym $mod + KP_Right move workspace to output right
+bindsym $mod+KP_Right move workspace to output right
 
 # bindsym KP_Home exec $fm
 # bindsym KP_Up exec $fm
@@ -537,12 +537,12 @@ bindsym $mod + KP_Right move workspace to output right
 # bindsym KP_Insert exec $fm
 # bindsym KP_Delete exec chromium
 # bindsym KP_Enter exec alacritty -e irb
-bindsym $mod + KP_Enter exec $fm
-bindsym $mod + KP_Add exec $calc
+bindsym $mod+KP_Enter exec $fm
+bindsym $mod+KP_Add exec $calc
 
 # bindsym KP_Multiply exec $fm
 # bindsym --release KP_Divide exec xkill
-bindsym --release $mod + KP_Subtract exec xkill
+bindsym --release $mod+KP_Subtract exec xkill
 
 
 # bindsym $alt+Up exec "pactl set-sink-volume @DEFAULT_SINK@ +1000"; exec dunstify -r 2222 -u low "Volume: $(pactl list sinks | tr ' ' '\n' | grep -m1 '%' | tr -d '%')"
@@ -560,3 +560,21 @@ bindsym $mod+Down exec mpvctl pause; exec dunstify -r 1111 -u low "PAUSE"
 # Next: PageDown, Prior: PageUp
 bindsym $ctrl+$alt+Next exec obs-cli --password "bakabakabaka" scene switch right; exec dunstify -u low -r 7979 "OBS SCENE SWITCHED" "Active scene: <b>RIGHT</b>"
 bindsym $ctrl+$alt+Prior exec obs-cli --password "bakabakabaka" scene switch left; exec dunstify -u low -r 7979 "OBS SCENE SWITCHED" "Active scene: <b>LEFT</b>"
+
+
+
+
+
+set $run [g]oogle, [f]irefox, [t]rans_en, [T]rans_ru
+mode "$run" {
+  bindsym g exec --no-startup-id google-chrome, mode "default"
+  bindsym f exec --no-startup-id firefox, mode "default"
+
+  bindsym t exec --no-startup-id $trans_en, mode "default"
+  bindsym $sh+t exec --no-startup-id $trans_ru, mode "default"
+
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+bindsym $mod+t mode "$run"
