@@ -64,6 +64,8 @@ nmap <space>qf  <Plug>(coc-fix-current)
 nmap <silent> <C-s> <Plug>(coc-range-select)
 xmap <silent> <C-s> <Plug>(coc-range-select)
 
+nnoremap <silent><nowait> <space>d  :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait> <space>d  :<C-u>CocDiagnostics<cr>
 
 " Map function and class text objects
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.

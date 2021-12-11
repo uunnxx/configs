@@ -73,17 +73,7 @@ bindsym $mod+g exec --no-startup-id $HOME/.config/i3/scripts/wmfocus.sh
 # bindsym $mod+$sh+g exec --no-startup-id
 
 bindsym $ctrl+Print exec "flameshot gui"
-bindsym Print mode "$screenshot"
 
-set $screenshot [return], [space] focused, [c-space] selected
-mode "$screenshot" {
-
-  bindsym --release Return exec --no-startup-id ~/.config/i3/scripts/scrot.sh
-  bindsym --release space exec --no-startup-id ~/.config/i3/scripts/scrot_focused.sh
-  bindsym --release $ctrl+space exec --no-startup-id ~/.config/i3/scripts/scrot_select.sh
-  bindsym Escape mode "default"
-
-}
 
 # change and move focus
 bindsym $mod+h focus left
@@ -236,26 +226,6 @@ bindsym $alt+7 workspace $left7
 bindsym $alt+8 workspace $left8
 bindsym $alt+9 workspace $left9
 
-
-bindsym $mod+p mode "$more_workspaces"
-set $more_workspaces    a:RUBY   b:PYTHON   c:ELIXIR   d:LINUX   e:SCIENCE   f:LINGUISTICS   g:SECURITY   h:WEB   i:CS   j:RE   k:BOOKS
-mode "$more_workspaces" {
-  bindsym a workspace $leftA, mode "default"
-  bindsym b workspace $leftB, mode "default"
-  bindsym c workspace $leftC, mode "default"
-  bindsym d workspace $leftD, mode "default"
-  bindsym e workspace $leftE, mode "default"
-  bindsym f workspace $leftF, mode "default"
-  bindsym g workspace $leftG, mode "default"
-  bindsym h workspace $leftH, mode "default"
-  bindsym i workspace $leftI, mode "default"
-  bindsym j workspace $leftJ, mode "default"
-  bindsym k workspace $leftK, mode "default"
-
-  bindsym Return mode "default"
-  bindsym Escape mode "default"
-}
-
 # bindsym $mod+$sh+0 move container to workspace $ws0; workspace $ws0
 bindsym $mod+$sh+0 move container to workspace $right0
 bindsym $mod+$sh+1 move container to workspace $right1
@@ -339,39 +309,9 @@ bindsym $alt+m exec i3-input -F 'mark --toggle %s' -l 1 -P 'MARK: ' -f '-misc-fi
 bindsym $alt+g exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'GOTO: ' -f '-misc-fixed-*-*-*-*-20-*-*-*-*-*-iso10646-*'
 
 
-bindsym $mod+Escape mode "$mode_system"
-set $mode_system (e)xit, (S-r)eboot, (S-s)hutdown, I3:(r)estart, re(l)oad, (c)aps2mod, (w)allpapers
-mode "$mode_system" {
-  bindsym e exec --no-startup-id i3-msg exit, mode "default"
-  bindsym $sh+r exec --no-startup-id reboot, mode "default"
-  bindsym r exec --no-startup-id i3-msg restart, "default"
-  bindsym l exec --no-startup-id i3-msg reload, "default"
-  bindsym $sh+s exec --no-startup-id shutdown, mode "default"
-  bindsym c exec --no-startup-id "setxkbmap -option caps:super", mode "default"
-  bindsym w exec --no-startup-id feh --bg-scale --randomize ~/Pictures/wallpapers/*
-
-  bindsym Return mode "default"
-  bindsym Escape mode "default"
-}
 
 bindsym Pause exec --no-startup-id systemctl suspend
 
-# Resize window (you can also use the mouse for that)
-bindsym $mod+r mode "resize"
-mode "resize" {
-        bindsym h resize shrink width 5 px or 5 ppt
-        bindsym j resize grow height 5 px or 5 ppt
-        bindsym k resize shrink height 5 px or 5 ppt
-        bindsym l resize grow width 5 px or 5 ppt
-
-        bindsym Left resize shrink width 50 px or 50 ppt
-        bindsym Down resize grow height 50 px or 50 ppt
-        bindsym Up resize shrink height 50 px or 50 ppt
-        bindsym Right resize grow width 50 px or 50 ppt
-
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
 
 #
 # Colors
@@ -562,7 +502,7 @@ bindsym $ctrl+$alt+Next exec obs-cli --password "bakabakabaka" scene switch righ
 bindsym $ctrl+$alt+Prior exec obs-cli --password "bakabakabaka" scene switch left; exec dunstify -u low -r 7979 "OBS SCENE SWITCHED" "Active scene: <b>LEFT</b>"
 
 
-
+# MODES
 
 
 set $run [g]oogle, [f]irefox, [t]rans_en, [T]rans_ru
@@ -576,5 +516,68 @@ mode "$run" {
   bindsym Return mode "default"
   bindsym Escape mode "default"
 }
-
 bindsym $mod+t mode "$run"
+
+
+set $screenshot [return], [space] focused, [c-space] selected
+mode "$screenshot" {
+  bindsym --release Return exec --no-startup-id ~/.config/i3/scripts/scrot.sh
+  bindsym --release space exec --no-startup-id ~/.config/i3/scripts/scrot_focused.sh
+  bindsym --release $ctrl+space exec --no-startup-id ~/.config/i3/scripts/scrot_select.sh
+  bindsym Escape mode "default"
+
+}
+bindsym Print mode "$screenshot"
+
+
+set $more_workspaces    a:RUBY   b:PYTHON   c:ELIXIR   d:LINUX   e:SCIENCE   f:LINGUISTICS   g:SECURITY   h:WEB   i:CS   j:RE   k:BOOKS
+mode "$more_workspaces" {
+  bindsym a workspace $leftA, mode "default"
+  bindsym b workspace $leftB, mode "default"
+  bindsym c workspace $leftC, mode "default"
+  bindsym d workspace $leftD, mode "default"
+  bindsym e workspace $leftE, mode "default"
+  bindsym f workspace $leftF, mode "default"
+  bindsym g workspace $leftG, mode "default"
+  bindsym h workspace $leftH, mode "default"
+  bindsym i workspace $leftI, mode "default"
+  bindsym j workspace $leftJ, mode "default"
+  bindsym k workspace $leftK, mode "default"
+
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+bindsym $mod+p mode "$more_workspaces"
+
+
+set $mode_system (e)xit, (S-r)eboot, (S-s)hutdown, I3:(r)estart, re(l)oad, (c)aps2mod, (w)allpapers
+mode "$mode_system" {
+  bindsym e exec --no-startup-id i3-msg exit, mode "default"
+  bindsym $sh+r exec --no-startup-id reboot, mode "default"
+  bindsym r exec --no-startup-id i3-msg restart, "default"
+  bindsym l exec --no-startup-id i3-msg reload, "default"
+  bindsym $sh+s exec --no-startup-id shutdown, mode "default"
+  bindsym c exec --no-startup-id "setxkbmap -option caps:super", mode "default"
+  bindsym w exec --no-startup-id feh --bg-scale --randomize ~/Pictures/wallpapers/*
+
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+bindsym $mod+Escape mode "$mode_system"
+
+
+mode "resize" {
+  bindsym h resize shrink width 5 px or 5 ppt
+  bindsym j resize grow height 5 px or 5 ppt
+  bindsym k resize shrink height 5 px or 5 ppt
+  bindsym l resize grow width 5 px or 5 ppt
+
+  bindsym Left resize shrink width 50 px or 50 ppt
+  bindsym Down resize grow height 50 px or 50 ppt
+  bindsym Up resize shrink height 50 px or 50 ppt
+  bindsym Right resize grow width 50 px or 50 ppt
+
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"

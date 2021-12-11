@@ -67,15 +67,15 @@ inoremap <nowait><M-e><M-e> <esc>:edit
 " Use <C-x> for horizontal split and <C-v> for vertical
 nmap <nowait> <leader>t :FZF<cr>
 " no preview
-nmap <S-cr> :Files<cr>
-imap <S-cr> <esc>:Files<cr>
+nmap <C-cr> :Files<cr>
+imap <C-cr> <esc>:Files<cr>
+" Buffer
+nmap <silent> <nowait><S-cr> :Buffer<cr>
 
 " Tags
 nnoremap <nowait> <space>tg :Tags<cr>
 inoremap <nowait> <space>tg <esc>:Tags<cr>
 
-" Buffer
-nmap <silent> <nowait><C-cr> :Buffer<cr>
 
 " nmap <space>tt :Tags<cr>
 nmap <silent> <nowait><M-f> :Rg<cr>
@@ -147,17 +147,17 @@ nnoremap dU bf_de
 "     test_hash = {:foo => 'text', :bar => 2}
 "     test_cmd = `command to execute`
 
-" Delete array|hash's first key
+" Delete array|hash's first key/value
 nnoremap dcd 0f[ldW
 nnoremap dhd 0f{ldf,x
-" Delete array|hash's keys but first
+" Delete array|hash's key/values but first
 nnoremap dcD 0f[f,dt]
 nnoremap dhD 0f{f,dt}
 
-" Change array|hash's first key
+" Change array|hash's first key/value
 nnoremap ccd 0f[lcW
 nnoremap chd 0f{lct,
-" Change array|hash's keys but first
+" Change array|hash's key/values but first
 nnoremap ccD 0f[f,lct] 
 nnoremap chD 0f{f,lct} 
 
