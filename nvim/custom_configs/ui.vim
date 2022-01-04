@@ -27,7 +27,7 @@ colorscheme gruvbox
 let g:lightline.active = {
       \
       \ 'left': [
-      \   ['mode', 'paste'],
+      \   ['mode', 'paste', 'method'],
       \   ['cocstatus', 'filename', 'branch_name'],
       \   ['tagbar']],
       \
@@ -45,8 +45,8 @@ let g:lightline.component_function = {
       \ 'filename': 'LightLineFilename',
       \ 'branch_name': 'FugitiveStatusLine',
       \ 'cocstatus': 'coc#status',
+      \ 'method': 'CocCurrentFunction',
       \ 'mode': 'LightLineMode',
-      \ 'method': 'NearestMethodOrFunction'
       \ }
 
 let g:lightline.component_expand = {
@@ -93,10 +93,9 @@ function! FugitiveStatusLine()
   return branch_name == '' ? '' : "[ " . branch_name . " ]"
 endfunction
 
-
-" function! LightlineFiletype()
-"   return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : '[no ft]') : ''
-" endfunction
+function! CocCurrentFunction()
+    return get(b:, 'coc_current_function', '')
+endfunction
 
 function! LightLineFileencoding()
   return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
@@ -124,12 +123,6 @@ let g:lightline#ale#indicator_infos = "\uf129 "
 let g:lightline#ale#indicator_warnings = "\uf071 "
 let g:lightline#ale#indicator_errors = "\uf05e "
 let g:lightline#ale#indicator_ok = "\uf00c "
-
-" let g:lightline#ale#indicator_checking = "[c]"
-" let g:lightline#ale#indicator_infos = "[i]"
-" let g:lightline#ale#indicator_warnings = "[w]"
-" let g:lightline#ale#indicator_errors = "[x]"
-" let g:lightline#ale#indicator_ok = "[ok]"
 
 " Config for autodetecting i3config
 aug i3config_ft_detection
@@ -179,11 +172,9 @@ hi Normal guibg=NONE ctermbg=NONE
 " Colorcolumn
 "
 let &colorcolumn=join(range(121,999), ',')
-
-set colorcolumn=120
+" set colorcolumn=120
 hi! ColorColumn ctermbg=6
-hi! ColorColumn ctermbg=none
-hi! ColorColumn guibg=none
+" hi! ColorColumn guibg=DarkCyan
 
 
 " Linebreak on 120 characters

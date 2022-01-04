@@ -217,10 +217,8 @@ command! -bang -nargs=? -complete=dir Files
 "
 " Enable alignment
 let g:neoformat_basic_format_align = 1
-
 " Enable tab to spaces conversion
 let g:neoformat_basic_format_retab = 1
-
 " Enable trimmming of trailing whitespace
 let g:neoformat_basic_format_trim = 1
 
@@ -228,27 +226,28 @@ let g:neoformat_basic_format_trim = 1
 
 " Jedi
 "
-
 " disable autocomplition, cause we use deoplete for completion
 let g:jedi#completions_enabled = 1
-
 " open the go-to function in split, not another buffer
 let g:jedi#use_splits_not_buffers = "right"
 
 " Elixir
+"
 autocmd FileType elixir setlocal formatprg=mix\ format\ -
 
 
 " Tagalong
+"
 let g:tagalong_verbose = 1
 
 
 " Bracey
+"
 let g:bracey_refresh_on_save = 1
 
 
 " AutoPairs section:
-
+"
 autocmd FileType ruby,eruby let g:AutoPairs = AutoPairsDefine({ '|' : '|', '<%=' : '%>' })
 autocmd FileType c,cpp let g:AutoPairs = AutoPairsDefine({ '<' : '>' })
 

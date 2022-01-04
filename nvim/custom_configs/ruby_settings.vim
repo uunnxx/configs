@@ -23,7 +23,6 @@ function RubyOptions()
 
   set iskeyword=@,!,?,_,48-57,192-255
 
-  set tags+=/home/baka/.asdf/installs/ruby/3.0.2/lib/ruby/gems/3.0.0/gems/tags;
   set tags+=./tags
 
 

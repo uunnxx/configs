@@ -58,8 +58,10 @@ bindsym $mod+$sh+c kill
 bindsym --whole-window $alt+button1 move scratchpad
 bindsym --whole-window $alt+button2 move position center
 bindsym --whole-window $alt+button3 kill
-bindsym --whole-window $alt+button4 resize grow width 25 px or 25 ppt
-bindsym --whole-window $alt+button5 resize grow height 25 px or 25 ppt
+# temp. comment `scroll up & down` because of `--whole-window`
+# get's focused when scrolling
+# bindsym --whole-window $alt+button4 resize grow width 25 px or 25 ppt
+# bindsym --whole-window $alt+button5 resize grow height 25 px or 25 ppt
 bindsym --whole-window $alt+button8 fullscreen toggle
 bindsym --whole-window $alt+button9 floating toggle
 
@@ -262,10 +264,10 @@ for_window [class="Lxappearance"] floating enable sticky enable border normal
 for_window [class="Pavucontrol"] floating enable
 
 for_window [class="URxvt" instance="translator"] floating enable resize set 880 400
-for_window [class="URxvt" instance="translator"] move position 1040 674
+for_window [class="URxvt" instance="translator"] move position 1040 658
 
 for_window [class="Alacritty" instance="translator"] floating enable resize set 880 400
-for_window [class="Alacritty" instance="translator"] move position 1040 674
+for_window [class="Alacritty" instance="translator"] move position 1040 658
 
 for_window [class="Alacritty" instance="ranger"] floating enable resize set 1240 690
 for_window [class="Alacritty" instance="ranger"] move position center
@@ -280,7 +282,6 @@ for_window [class="mpv"] floating enable resize set 1240 690
 for_window [class="mpv"] move position center
 for_window [class="mpv"] border normal 4
 
-for_window [class="Org.gnome.Nautilus"] border normal 4
 
 for_window [class="Eog"] floating enable resize set 1240 690
 for_window [class="Eog"] move position center
@@ -288,8 +289,9 @@ for_window [class="Zathura"] floating enable resize set 1340 780
 for_window [class="Zathura"] move position center
 # for_window [class="Zathura"] border normal 4
 
-for_window [class="Org.gnome.Nautilus"] floating enable resize set 1340 780
-for_window [class="Org.gnome.Nautilus"] move position center
+for_window [class="Org.gnome.Nautilus"] border normal 4
+# for_window [class="Org.gnome.Nautilus"] floating enable resize set 1340 780
+# for_window [class="Org.gnome.Nautilus"] move position center
 
 for_window [class="File-roller"] floating enable resize set 1340 780
 for_window [class="File-roller"] move position center
@@ -390,7 +392,7 @@ bar {
   tray_output $left
   i3bar_command i3bar --transparency
   # i3bar_command i3bar
-  status_command i3status --config ~/.config/i3/i3status-small.conf
+  # status_command i3status --config ~/.config/i3/i3status-small.conf
   position bottom
   separator_symbol " | "
   colors {
@@ -419,10 +421,11 @@ client.unfocused          $cla      $cla      $fff        $gruv1
 client.urgent             $clh      $clh      $fff        $gruv1
 
 focus_follows_mouse no
+focus_wrapping no
 # mouse_warping none
 
 # smart, ignore, leave_fullscreen
-popup_during_fullscreen ignore
+popup_during_fullscreen smart
 
 # Autostart applications
 exec --no-startup-id /usr/bin/fcitx5
@@ -505,13 +508,15 @@ bindsym $ctrl+$alt+Prior exec obs-cli --password "bakabakabaka" scene switch lef
 # MODES
 
 
-set $run [g]oogle, [f]irefox, [t]rans_en, [T]rans_ru
+set $run [g]oogle, [f]irefox, [t]rans_en, [T]rans_ru, V[paste]
 mode "$run" {
   bindsym g exec --no-startup-id google-chrome, mode "default"
   bindsym f exec --no-startup-id firefox, mode "default"
 
   bindsym t exec --no-startup-id $trans_en, mode "default"
   bindsym $sh+t exec --no-startup-id $trans_ru, mode "default"
+
+  bindsym $sh+v exec --no-startup-id diodon, mode "default"
 
   bindsym Return mode "default"
   bindsym Escape mode "default"
@@ -581,3 +586,4 @@ mode "resize" {
   bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
+

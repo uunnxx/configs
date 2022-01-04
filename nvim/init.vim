@@ -83,7 +83,7 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'https://github.com/neovimhaskell/haskell-vim.git', { 'for': 'hs' }
 
 " Rust
-Plug 'rust-lang/rust.vim', { 'for': 'rs' }
+Plug 'rust-lang/rust.vim', { 'for': ['rs', 'rlib']}
 
 
 Plug 'wellle/targets.vim'
