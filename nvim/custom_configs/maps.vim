@@ -5,6 +5,7 @@ inoremap <silent><nowait>eu <esc>
 nnoremap ; :
 xnoremap ; :
 nnoremap & %
+nmap & %
 
 " Quicker way to open command window
 nnoremap <silent> <leader>ww :update<cr>
@@ -65,12 +66,16 @@ inoremap <nowait><M-e><M-e> <esc>:edit
 
 " FZF open files: with preview 
 " Use <C-x> for horizontal split and <C-v> for vertical
-nmap <nowait> <leader>t :FZF<cr>
+" nmap <nowait> <leader>t :FZF<cr>
+nmap <nowait> tt :FZF<cr>
 " no preview
 nmap <C-cr> :Files<cr>
 imap <C-cr> <esc>:Files<cr>
-" Buffer
 nmap <silent> <nowait><S-cr> :Buffer<cr>
+
+nmap <silent> <nowait> FF :Filetypes<cr>
+nmap <silent> <leader>R :redo<cr>
+nmap <nowait> <leader>g :BLines<cr>
 
 " Tags
 nnoremap <nowait> <space>tg :Tags<cr>
@@ -85,8 +90,9 @@ nmap <silent> <nowait><leader>u :UndotreeToggle<cr>
 nmap <silent> <nowait><leader>n :Vista!!<cr>
 " nmap <silent> <nowait><space>tt :Vista finder<cr>
 
+map <silent> <space>nn :call NumberToggle()<cr>
 
-" Fkeys:
+" FUNCTION_KEYS:
 nmap <silent> <F1> :vert help normal-index<cr>
 imap <silent> <F1> <esc>:vert help insert-index<cr>
 
@@ -100,11 +106,7 @@ nnoremap <silent> <F11> :set spell!<cr>
 inoremap <silent> <F11> <C-O>:set spell!<cr>
 
 
-nmap <silent> FF :Filetypes<cr>
-nmap <silent> <leader>R :redo<cr>
-nmap <nowait> <leader>g :BLines<cr>
 
-map <silent> <space>nn :call NumberToggle()<cr>
 
 " Custom comma motion mapping
 " nmap di, f,dT,
@@ -256,8 +258,8 @@ nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 nnoremap <silent> 0 g0
 
 " Go to start or end of line easier
-nnoremap <nowait>H g^
-xnoremap <nowait>H g^
+nnoremap <nowait>H g0
+xnoremap <nowait>H g0
 nnoremap <nowait>L g_
 xnoremap <nowait>L g_
 
@@ -373,6 +375,7 @@ autocmd FileType cpp     nmap <buffer> <leader>rc :w\|:!g++ ./% -g -o %:r_temp &
 autocmd FileType c       nmap <buffer> <leader>rr :w\|:!gcc ./% -g -o %:r_temp && ./%:r_temp<cr>
 autocmd FileType c       nmap <buffer> <leader>rc :w\|:!gcc ./% -g -o %:r_temp && ./%:r_temp
 
+" Line autocompletion
 inoremap <leader><leader>l <C-x><C-l>
 
 " coc floating popup menu scroll

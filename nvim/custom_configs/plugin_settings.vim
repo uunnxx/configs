@@ -1,3 +1,6 @@
+autocmd BufWritePost $MYVIMRC source $MYVIMRC
+
+
 " Tagbar section:
 
 if executable('ripper-tags')

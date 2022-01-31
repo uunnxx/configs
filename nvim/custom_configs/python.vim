@@ -9,5 +9,6 @@ function PythonOptions()
   " nnoremap tL 0f#f}i
 
   inoremap TTT # => 
+  let &colorcolumn=join(range(80,999), ',')
 
 endfunction

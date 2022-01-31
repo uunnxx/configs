@@ -104,7 +104,7 @@ Plug 'easymotion/vim-easymotion'       " EasyMotion
 Plug 'tpope/vim-repeat'                " Vim Repeat
 " Plug 'tpope/vim-unimpaired'            " Pairs of handy bracket mappings
 Plug 'tpope/vim-commentary'
-Plug 'isa/vim-matchit'
+" Plug 'isa/vim-matchit'
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -112,6 +112,7 @@ Plug 'yegappan/mru'
 Plug 'mhinz/vim-startify'
 Plug 'jiangmiao/auto-pairs'
 " Plug 'itchyny/vim-cursorword'            " Underlines the word under the cursor
+" Plug 'https://github.com/xiyaowong/nvim-cursorword'
 Plug 'terryma/vim-multiple-cursors'    " True Sublime Text style multiple cursors
 " Plug 'rhysd/vim-textobj-anyblock'
 Plug 'kana/vim-textobj-user'
@@ -132,7 +133,8 @@ filetype plugin indent on 	" required
 
 " Built_in_packages:
 "
-packadd termdebug
+packadd! termdebug
+packadd! matchit
 
 " Source config files
 let g:nvim_config_root = expand('<sfile>:p:h')

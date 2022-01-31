@@ -40,9 +40,19 @@ set hidden
 " Persistent Undo
 " Keep undo history across sessions, by storing in file.
 " Only works all the time.
-set undodir=$HOME/tmp/vim_undo
 set undofile
+set undodir=$HOME/tmp/vim_undo
 set noswapfile
+
+" Turn backup off, since most stuff is in svn, git etc... anyway
+set nobackup
+set nowb
+set noswapfile
+" Turn backup off, since most stuff is in svn, git etc... anyway
+set nobackup
+set nowb
+set noswapfile
+
 
 " Search section
 " Case insensitive search
@@ -72,6 +82,8 @@ set mouse=a
 set diffopt+=vertical
 
 set completeopt=noinsert,menuone,noselect
+
+" set complete=.,w,b,u,t,i
 
 " Don't pass messages to |ins-completion-menu|
 set shortmess+=c
@@ -133,11 +145,6 @@ set novisualbell
 set t_vb=
 set tm=500
 
-" Turn backup off, since most stuff is in svn, git etc... anyway
-set nobackup
-set nowb
-set noswapfile
-
 " Be smart when using tabs :)
 set smarttab
 
@@ -159,7 +166,9 @@ set re=1
 syntax sync minlines=256
 set synmaxcol=300
 
-set wrap
+" set wrap
+
+" set virtualedit=all
 
 set cmdheight=1
 
