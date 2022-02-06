@@ -123,6 +123,7 @@ let g:ale_linters.scss = ['stylelint']
 let g:ale_linters.css = ['stylelint']
 let g:ale_linters.elixir = ['elixir-ls', 'credo']
 let g:ale_linters.ruby = ['rubocop', 'ruby', 'solargraph']
+let g:ale_linters.rust = ['analyzer']
 
 " Check Python files with flake8 and pylint.
 let b:ale_linters = ['flake8', 'pylint']
