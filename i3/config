@@ -124,8 +124,6 @@ bindsym $alt+$sh+space exec --no-startup-id "rofi -show windowcd"
 
 bindsym $mod+c move position center
 
-bindsym $mod+m bar mode toggle
-
 #navigate workspaces next / previous
 bindsym $alt+$sh+l workspace next
 bindsym $alt+$sh+h workspace prev
@@ -254,7 +252,7 @@ bindsym $alt+$sh+8 move container to workspace $left8
 bindsym $alt+$sh+9 move container to workspace $left9
 
 
-for_window [all] title_window_icon on
+# for_window [all] title_window_icon on
 for_window [all] border pixel 4
 
 title_align center
@@ -356,6 +354,7 @@ set $gruvE #8EC07C
 set $gruv7 #A89984
 set $gruvF #EBDBB2
 
+bindsym $mod+$sh+m bar mode toggle
 
 # right monitor
 bar {
@@ -511,19 +510,18 @@ bindsym $mod+Down exec mpvctl pause; exec dunstify -r 1111 -u low "PAUSE"
 bindsym $ctrl+$alt+Next exec obs-cli --password "bakabakabaka" scene switch right; exec dunstify -u low -r 7979 "OBS SCENE SWITCHED" "Active scene: <b>RIGHT</b>"
 bindsym $ctrl+$alt+Prior exec obs-cli --password "bakabakabaka" scene switch left; exec dunstify -u low -r 7979 "OBS SCENE SWITCHED" "Active scene: <b>LEFT</b>"
 
+bindsym $mod+$sh+v exec --no-startup-id diodon, mode "default"
 
 # MODES
 
 
-set $run [g]oogle, [f]irefox, [t]rans_en, [T]rans_ru, V[paste]
+set $run [g]oogle, [f]irefox, [t]rans_en, [T]rans_ru
 mode "$run" {
   bindsym g exec --no-startup-id google-chrome, mode "default"
   bindsym f exec --no-startup-id firefox, mode "default"
 
   bindsym t exec --no-startup-id $trans_en, mode "default"
   bindsym $sh+t exec --no-startup-id $trans_ru, mode "default"
-
-  bindsym $sh+v exec --no-startup-id diodon, mode "default"
 
   bindsym Return mode "default"
   bindsym Escape mode "default"

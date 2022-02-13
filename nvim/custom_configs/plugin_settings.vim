@@ -260,3 +260,9 @@ autocmd FileType c,cpp           setlocal path+=/usr/include include&
 autocmd FileType sh,zsh,csh,tcsh setlocal include=^\\s*\\%(\\.\\\|source\\)\\s
 
 let &path.="src/include,/usr/include/AL,"
+
+
+" VIM markdown
+let g:vim_markdown_conceal = 0
+let g:tex_conceal = ""
+let g:vim_markdown_conceal_code_blocks = 0
