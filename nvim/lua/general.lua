@@ -5,12 +5,19 @@ local wset  = vim.wo              -- Window-scoped
 local bset  = vim.bo              -- Buffer-scoped
 
 
+
+
+
 -- Only run these settings once
 if not packer_plugins then
   -- vim.api.nvim_set_keymap("", "<Space>", "<Nop>", { noremap = true, silent = true })
   set.background = "dark"
   set.termguicolors = true -- true colors
 end
+
+set.encoding = 'utf-8'
+-- Set how many lines of history Vim has to remember
+set.history = 1000
 
 -------------------------------------------------------------------------------
 -------------------- Tabs and spaces
@@ -35,7 +42,7 @@ set.cursorcolumn = false
 set.signcolumn = 'auto'             -- only when there is a sign to display.
 -- set.signcolumn = 'number'           -- Nvim can merge signcolumn and number column into one
 
--- Line numbers 
+-- Line numbers
 set.number = true                   -- Numberline
 set.relativenumber = true           -- Relative Numbers
 
@@ -51,12 +58,34 @@ set.showmode = false
 -- Shorter messages
 set.shortmess:append('c')
 
+-- Virtual Edit
+-- set.virtualedit = 'all'
+
+
+-- Specify the behavior when switching between buffers
+set.switchbuf = 'useopen,usetab,newtab'
+
+-- Tab
+set.showtabline = 2
+
+-- Always use vertical diffs
+-- set.diffopt+=vertical
+set.diffopt = {'internal', 'vertical', 'filler', 'closeoff'}
+
+
+
+-- Folding
+-- Disable folding
+-- set.nofoldenable
+
+
+
 
 
 -------------------------------------------------------------------------------
 -------------------- Spelling
 -------------------------------------------------------------------------------
-
+set.dictionary='/usr/share/dict/british-english'
 set.spelllang = { 'en_us', 'cjk', 'ru' }    -- Dictionary for spellcheck
 
 
@@ -65,14 +94,16 @@ set.spelllang = { 'en_us', 'cjk', 'ru' }    -- Dictionary for spellcheck
 -------------------------------------------------------------------------------
 -------------------- Completion
 -------------------------------------------------------------------------------
-set.completeopt = 'menu,menuone,noselect'
+set.completeopt = 'noinsert,menu,menuone,noselect'
+-- set.completeopt = '.,w,b,u,t,i'
 
 
 
 
 
 
-set.so=10
+
+set.so=15
 
 -------------------------------------------------------------------------------
 -------------------- Invisible Chars
@@ -100,6 +131,16 @@ set.fillchars = {
 }
 
 
+-- Matchpairs
+-- add vertical bar for Ruby
+set.matchpairs = {
+  '(:)',
+  '{:}',
+  '[:]',
+  '<:>'
+}
+
+
 -- Ignore files vim doesnt use
 set.wildignore = {
   '*.o', '*.a', '__pycache__', '.git', '.hg', '.svn', 'node_modules', '*.aux',
@@ -113,15 +154,14 @@ set.wildignore = {
 }
 
 
-
-
-
-
-
-
-
+-- Search, Find
 
 set.ignorecase = true               -- Case insensitive search
+set.incsearch = true
+
+set.inccommand = 'split'
+
+set.path = {'.','/usr/include', '**'}
 
 
 set.cindent = true                  -- Copy indent from previous line
@@ -144,6 +184,8 @@ set.shell = '/usr/bin/zsh'
 set.mouse = 'a'
 set.mousefocus = true
 
+-- use g for reverse
+set.gdefault = true
 
 
 
@@ -155,20 +197,3 @@ cmd([[
   filetype indent plugin on
   syntax enable
 ]])
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

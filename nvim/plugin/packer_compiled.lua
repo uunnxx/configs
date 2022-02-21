@@ -80,6 +80,11 @@ _G.packer_plugins = {
     path = "/home/baka/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
+  ["alchemist.vim"] = {
+    loaded = true,
+    path = "/home/baka/.local/share/nvim/site/pack/packer/start/alchemist.vim",
+    url = "https://github.com/slashmili/alchemist.vim"
+  },
   ale = {
     loaded = true,
     path = "/home/baka/.local/share/nvim/site/pack/packer/start/ale",
@@ -101,15 +106,35 @@ _G.packer_plugins = {
     path = "/home/baka/.local/share/nvim/site/pack/packer/start/cmp-buffer",
     url = "https://github.com/hrsh7th/cmp-buffer"
   },
+  ["cmp-cmdline"] = {
+    loaded = true,
+    path = "/home/baka/.local/share/nvim/site/pack/packer/start/cmp-cmdline",
+    url = "https://github.com/hrsh7th/cmp-cmdline"
+  },
   ["cmp-nvim-lsp"] = {
     loaded = true,
     path = "/home/baka/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
   },
+  ["cmp-nvim-lua"] = {
+    loaded = true,
+    path = "/home/baka/.local/share/nvim/site/pack/packer/start/cmp-nvim-lua",
+    url = "https://github.com/hrsh7th/cmp-nvim-lua"
+  },
+  ["cmp-omni"] = {
+    loaded = true,
+    path = "/home/baka/.local/share/nvim/site/pack/packer/start/cmp-omni",
+    url = "https://github.com/hrsh7th/cmp-omni"
+  },
   ["cmp-path"] = {
     loaded = true,
     path = "/home/baka/.local/share/nvim/site/pack/packer/start/cmp-path",
     url = "https://github.com/hrsh7th/cmp-path"
+  },
+  ["cmp-snippy"] = {
+    loaded = true,
+    path = "/home/baka/.local/share/nvim/site/pack/packer/start/cmp-snippy",
+    url = "https://github.com/dcampos/cmp-snippy"
   },
   cmp_luasnip = {
     loaded = true,
@@ -126,15 +151,20 @@ _G.packer_plugins = {
     path = "/home/baka/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
   },
-  gruvbox = {
+  ["gruvbox.nvim"] = {
     loaded = true,
-    path = "/home/baka/.local/share/nvim/site/pack/packer/start/gruvbox",
-    url = "https://github.com/morhetz/gruvbox"
+    path = "/home/baka/.local/share/nvim/site/pack/packer/start/gruvbox.nvim",
+    url = "https://github.com/uunnxx/gruvbox.nvim"
   },
   ["lexima.vim"] = {
     loaded = true,
     path = "/home/baka/.local/share/nvim/site/pack/packer/start/lexima.vim",
     url = "https://github.com/cohama/lexima.vim"
+  },
+  ["lspkind-nvim"] = {
+    loaded = true,
+    path = "/home/baka/.local/share/nvim/site/pack/packer/start/lspkind-nvim",
+    url = "https://github.com/hrsh7th/lspkind-nvim"
   },
   ["lualine.nvim"] = {
     loaded = true,
@@ -155,6 +185,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/baka/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
+  },
+  ["nvim-snippy"] = {
+    loaded = true,
+    path = "/home/baka/.local/share/nvim/site/pack/packer/start/nvim-snippy",
+    url = "https://github.com/dcampos/nvim-snippy"
   },
   ["nvim-tree.lua"] = {
     config = { "\27LJ\2\n;\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\14nvim-tree\frequire\0" },
@@ -193,7 +228,7 @@ _G.packer_plugins = {
     url = "https://github.com/majutsushi/tagbar"
   },
   ["telescope.nvim"] = {
-    config = { "\27LJ\2\n;\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\14telescope\frequire\0" },
+    config = { "\27LJ\2\nq\0\0\5\0\b\0\v6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\6\0005\3\4\0005\4\3\0=\4\5\3=\3\a\2B\0\2\1K\0\1\0\fpickers\1\0\0\15find_files\1\0\0\1\0\1\ntheme\bivy\nsetup\14telescope\frequire\0" },
     loaded = true,
     path = "/home/baka/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
@@ -208,20 +243,30 @@ _G.packer_plugins = {
     path = "/home/baka/.local/share/nvim/site/pack/packer/start/vim-closetag",
     url = "https://github.com/alvan/vim-closetag"
   },
+  ["vim-crystal"] = {
+    loaded = true,
+    path = "/home/baka/.local/share/nvim/site/pack/packer/start/vim-crystal",
+    url = "https://github.com/vim-crystal/vim-crystal"
+  },
   ["vim-css-color"] = {
     loaded = true,
     path = "/home/baka/.local/share/nvim/site/pack/packer/start/vim-css-color",
     url = "https://github.com/ap/vim-css-color"
+  },
+  ["vim-elixir"] = {
+    loaded = true,
+    path = "/home/baka/.local/share/nvim/site/pack/packer/start/vim-elixir",
+    url = "https://github.com/elixir-editors/vim-elixir"
   },
   ["vim-isort"] = {
     loaded = true,
     path = "/home/baka/.local/share/nvim/site/pack/packer/start/vim-isort",
     url = "https://github.com/fisadev/vim-isort"
   },
-  ["vim-jinja"] = {
+  ["vim-mix-format"] = {
     loaded = true,
-    path = "/home/baka/.local/share/nvim/site/pack/packer/start/vim-jinja",
-    url = "https://github.com/mitsuhiko/vim-jinja"
+    path = "/home/baka/.local/share/nvim/site/pack/packer/start/vim-mix-format",
+    url = "https://github.com/mhinz/vim-mix-format"
   },
   ["vim-repeat"] = {
     loaded = true,
@@ -251,6 +296,14 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: nvim-tree.lua
+time([[Config for nvim-tree.lua]], true)
+try_loadstring("\27LJ\2\n;\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\14nvim-tree\frequire\0", "config", "nvim-tree.lua")
+time([[Config for nvim-tree.lua]], false)
+-- Config for: telescope.nvim
+time([[Config for telescope.nvim]], true)
+try_loadstring("\27LJ\2\nq\0\0\5\0\b\0\v6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\6\0005\3\4\0005\4\3\0=\4\5\3=\3\a\2B\0\2\1K\0\1\0\fpickers\1\0\0\15find_files\1\0\0\1\0\1\ntheme\bivy\nsetup\14telescope\frequire\0", "config", "telescope.nvim")
+time([[Config for telescope.nvim]], false)
 -- Config for: Comment.nvim
 time([[Config for Comment.nvim]], true)
 try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
@@ -259,14 +312,6 @@ time([[Config for Comment.nvim]], false)
 time([[Config for bufferline.nvim]], true)
 try_loadstring("\27LJ\2\n<\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\15bufferline\frequire\0", "config", "bufferline.nvim")
 time([[Config for bufferline.nvim]], false)
--- Config for: nvim-tree.lua
-time([[Config for nvim-tree.lua]], true)
-try_loadstring("\27LJ\2\n;\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\14nvim-tree\frequire\0", "config", "nvim-tree.lua")
-time([[Config for nvim-tree.lua]], false)
--- Config for: telescope.nvim
-time([[Config for telescope.nvim]], true)
-try_loadstring("\27LJ\2\n;\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\14telescope\frequire\0", "config", "telescope.nvim")
-time([[Config for telescope.nvim]], false)
 if should_profile then save_profiles() end
 
 end)
