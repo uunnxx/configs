@@ -7,7 +7,6 @@ local bset  = vim.bo              -- Buffer-scoped
 
 
 
-
 -- Only run these settings once
 if not packer_plugins then
   -- vim.api.nvim_set_keymap("", "<Space>", "<Nop>", { noremap = true, silent = true })
@@ -31,6 +30,9 @@ set.smartindent = true    --
 set.softtabstop = 2       -- let backspace delete indent
 -- set.noexpandtab = true -- Tabs are tabs
 
+
+-- don't remove it
+set.hidden = true
 
 -------------------------------------------------------------------------------
 -------------------- UI
@@ -79,6 +81,8 @@ set.diffopt = {'internal', 'vertical', 'filler', 'closeoff'}
 -- set.nofoldenable
 
 
+-- Treat underscore as separator
+-- set iskeyword-=_
 
 
 
@@ -94,7 +98,8 @@ set.spelllang = { 'en_us', 'cjk', 'ru' }    -- Dictionary for spellcheck
 -------------------------------------------------------------------------------
 -------------------- Completion
 -------------------------------------------------------------------------------
-set.completeopt = 'noinsert,menu,menuone,noselect'
+set.completeopt = 'menu,menuone,noselect'
+-- set.completeopt = 'noinsert,menu,menuone,noselect'
 -- set.completeopt = '.,w,b,u,t,i'
 
 
@@ -103,7 +108,7 @@ set.completeopt = 'noinsert,menu,menuone,noselect'
 
 
 
-set.so=15
+set.scrolloff=15
 
 -------------------------------------------------------------------------------
 -------------------- Invisible Chars
@@ -156,6 +161,7 @@ set.wildignore = {
 
 -- Search, Find
 
+set.smartcase = true               -- Use smartcase everywhere
 set.ignorecase = true               -- Case insensitive search
 set.incsearch = true
 
@@ -177,6 +183,12 @@ set.ttimeoutlen = 5
 set.undofile = true
 set.undodir = fn.stdpath('data') .. 'undo'
 set.shell = '/usr/bin/zsh'
+
+-- No fucking swap files
+cmd[[
+set nobackup
+set noswapfile
+]]
 
 
 

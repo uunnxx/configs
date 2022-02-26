@@ -1,30 +1,23 @@
+vim.cmd [[packadd packer.nvim]]
+
 vim.cmd [[
-packadd packer.nvim
 packadd termdebug
 packadd matchit
 packadd shellmenu
-packadd cfilter
 ]]
+
 
 return require('packer').startup(function()
   -- Packer
   use 'wbthomason/packer.nvim'
   use 'nvim-lua/plenary.nvim'
-  use { 'nvim-telescope/telescope.nvim',
-    requires = { {'nvim-lua/plenary.nvim'} },
-    config = function() require'telescope'.setup {
-      pickers = {
-        find_files = {
-          theme = "ivy",
-        }
-      },
-    } end
-  }
+  use 'nvim-lua/popup.nvim'
+  use 'nvim-telescope/telescope.nvim'
+
 
   -----------------------------------------------------------
   -- UI
   -----------------------------------------------------------
-
   -- Colorscheme
   use 'uunnxx/gruvbox.nvim'
 
@@ -34,7 +27,6 @@ return require('packer').startup(function()
   }
 
   -- use { 'stevearc/dressing.nvim' }
-  use { 'stevearc/dressing.nvim' }
 
   -- Git
   use { 'lewis6991/gitsigns.nvim',
@@ -49,6 +41,26 @@ return require('packer').startup(function()
     }
 
 
+  -- Indent guides for Neovim
+  use "lukas-reineke/indent-blankline.nvim"
+
+
+
+---------- Comment
+  use { 'numToStr/Comment.nvim',
+    config = function()
+      require('Comment').setup()
+    end
+  }
+
+  -- Neovim plugin for aligning text
+  -- :Align
+  use 'RRethy/nvim-align'
+
+
+  -- switch and restore fcitx state
+  use 'h-hg/fcitx.nvim'
+
   -----------------------------------------------------------
   -- Navigation
   -----------------------------------------------------------
@@ -60,108 +72,179 @@ return require('packer').startup(function()
 
   -- Tagbra
   use 'majutsushi/tagbar'
-  -- Alternative for fzf & ack
+
+  use 'google/vim-searchindex'
+
+  -- Hop alternative for EasyMotion
+  -- use {
+  --   'phaazon/hop.nvim',
+  --   branch = 'v1', -- optional but strongly recommended
+  --   config = function()
+  --     -- you can configure Hop the way you like here; see :h hop-config
+  --     require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
+  --   end
+  -- }
 
 
   -----------------------------------------------------------
   -- LSP server and autocompletion
   -----------------------------------------------------------
-
-  -- Highlight, edit, and navigate code using a fast incremental parsing library
   use 'nvim-treesitter/nvim-treesitter'
-  -- Collection of configurations for built-in LSP client
   use 'neovim/nvim-lspconfig'
   use 'williamboman/nvim-lsp-installer'
 
 
-
-
+  -- LINTER
+  use 'dense-analysis/ale'
 
 
   -- Autocompletion
-  use {
-    'hrsh7th/nvim-cmp',
-    requires = {
-      use 'hrsh7th/cmp-buffer',
-      use 'hrsh7th/cmp-path',
-      use 'hrsh7th/cmp-nvim-lsp',
-      use 'hrsh7th/cmp-nvim-lua',
-      use 'hrsh7th/cmp-cmdline',
-      use 'hrsh7th/cmp-omni',
-      use 'hrsh7th/lspkind-nvim',
-      use 'saadparwaiz1/cmp_luasnip'
-    }
-  }
+  use 'hrsh7th/nvim-cmp'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/cmp-path'
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-nvim-lua'
+  use 'hrsh7th/cmp-cmdline'
+  use 'hrsh7th/cmp-omni'
+  use 'hrsh7th/lspkind-nvim'
+  use 'saadparwaiz1/cmp_luasnip'
 
   -- Snippets plugin
   ------- Configuration isn't complete
-  use 'L3MON4D3/LuaSnip'
-  use 'dcampos/cmp-snippy'
+  -- use 'L3MON4D3/LuaSnip'
   use 'dcampos/nvim-snippy'
+  use 'dcampos/cmp-snippy'
+  use 'honza/vim-snippets'
+
+
+
+
+  -----------------------------------------------------------
+  ----------------------FILETYPES----------------------------
+  -----------------------------------------------------------
+
+  -----------------------------------------------------------
+  -- RUBY
+  -----------------------------------------------------------
+
+  use {
+    'vim-ruby/vim-ruby',
+    ft = {'ruby', 'rb', 'erb'}
+  }
+  use {
+    'tpope/vim-rails',
+    ft = {'ruby', 'rb', 'erb'}
+  }
+  use {
+    'tpope/vim-rake',
+    ft = {'ruby', 'rb', 'Rakefile', 'rake'}
+  }
+  use {
+    'tpope/vim-bundler',
+    ft = {'ruby', 'rb', 'erb'}
+  }
+  use {
+    'slim-template/vim-slim',
+    ft = {'ruby', 'rb', 'erb'}
+  }
+  use {
+    'https://github.com/whatyouhide/vim-textobj-erb',
+    ft = {'ruby', 'rb', 'erb', 'erb'},
+  }
+  use {
+    'stjernstrom/vim-ruby-run',
+    ft = {'ruby', 'rb', 'erb'}
+  }
+  use {
+    'hallison/vim-ruby-sinatra',
+    ft = {'ruby', 'rb', 'erb'}
+  }
 
 
   -----------------------------------------------------------
   -- PYTHON
   -----------------------------------------------------------
-  --- Шапка с импортами приводим в порядок
-  use 'fisadev/vim-isort'
+  -- Vim plugin to sort python imports using
+  use {
+    'fisadev/vim-isort',
+    ft = {'py', 'python'}
+  }
+  use {
+    'hdima/python-syntax',
+    ft = {'python', 'py'}
+  }
 
-  -- LINTER
-  use 'dense-analysis/ale'
 
 
 
   -----------------------------------------------------------
   -- Elixir
   -----------------------------------------------------------
-  use 'slashmili/alchemist.vim'
-  use 'mhinz/vim-mix-format'
-  use 'elixir-editors/vim-elixir'
+  use {
+    'slashmili/alchemist.vim',
+    ft = { "elixir", "eelixir", "exs", "ex" }
+  }
+  use {
+    'mhinz/vim-mix-format',
+    ft = { "elixir", "eelixir", "exs", "ex" }
+  }
+  use {
+    'elixir-editors/vim-elixir',
+    ft = { "elixir", "eelixir", "exs", "ex" }
+  }
 
 
 
   -----------------------------------------------------------
   -- Crystal
   -----------------------------------------------------------
-  use 'vim-crystal/vim-crystal'
+  use {
+    'vim-crystal/vim-crystal',
+    ft = {'cr', 'crystal'}
+  }
 
 
 
   -----------------------------------------------------------
   -- HTML и CSS
   -----------------------------------------------------------
-  -- Подсвечивает закрывающий и откры. тэг. Если, где-то что-то не закрыто, то не подсвечивает.
-  use 'idanarye/breeze.vim'
-  -- Закрывает автоматом html и xml тэги. Пишешь <h1> и он автоматом закроется </h1>
-  use 'alvan/vim-closetag'
 
-  -- Подсвечивает #ffffff
-  use 'ap/vim-css-color'
+  use {
+    'mattn/emmet-vim',
+    ft = {'html', 'html5', 'css3', 'css', 'javascript', 'js'}
+  }
+  use 'cohama/lexima.vim'
+
+  -- The fastest Neovim colorizer
+  use 'norcalli/nvim-colorizer.lua'
+
+  -- Auto close (x)html tags
+  use {
+    'alvan/vim-closetag',
+    ft = {'html', 'html5', 'xhtml', 'xml'}
+  }
+
+-- 'AndrewRadev/tagalong.vim'
+-- 'turbio/bracey.vim'
+
+
+
+  use 'gabebw/vim-github-link-opener'
+
+--------------------------------------- REF |
 
 
   -- 'Автоформатирование' кода для всех языков
   use 'Chiel92/vim-autoformat'
   -- ]p - вставить на строку выше, [p - ниже
   use 'tpope/vim-unimpaired'
-  --- popup окошки
-  use 'nvim-lua/popup.nvim'
   -- Обрамляет или снимает обрамление. Выдели слово, нажми S и набери <h1>
   use 'tpope/vim-surround'
-  -- Считает кол-во совпадений при поиске
-  use 'google/vim-searchindex'
   -- Может повторять через . vimsurround
   use 'tpope/vim-repeat'
   -- Стартовая страница, если просто набрать vim в консоле
   use 'mhinz/vim-startify'
 
-  use { 'numToStr/Comment.nvim',
-    config = function() require('Comment').setup() end
-  }
-
-  -- Обрамляет строку в теги по ctrl- y + ,
-  use 'mattn/emmet-vim'
-  -- Закрывает автоматом скобки
-  use 'cohama/lexima.vim'
-  -- Линтер, работает для всех языков
-
+--------------------------------------- REF |
 end)
+

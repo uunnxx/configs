@@ -75,25 +75,18 @@ _G.packer_plugins = {
     path = "/home/baka/.local/share/nvim/site/pack/packer/start/Comment.nvim",
     url = "https://github.com/numToStr/Comment.nvim"
   },
-  LuaSnip = {
-    loaded = true,
-    path = "/home/baka/.local/share/nvim/site/pack/packer/start/LuaSnip",
-    url = "https://github.com/L3MON4D3/LuaSnip"
-  },
   ["alchemist.vim"] = {
-    loaded = true,
-    path = "/home/baka/.local/share/nvim/site/pack/packer/start/alchemist.vim",
+    after_files = { "/home/baka/.local/share/nvim/site/pack/packer/opt/alchemist.vim/after/plugin/alchemist.vim" },
+    loaded = false,
+    needs_bufread = true,
+    only_cond = false,
+    path = "/home/baka/.local/share/nvim/site/pack/packer/opt/alchemist.vim",
     url = "https://github.com/slashmili/alchemist.vim"
   },
   ale = {
     loaded = true,
     path = "/home/baka/.local/share/nvim/site/pack/packer/start/ale",
     url = "https://github.com/dense-analysis/ale"
-  },
-  ["breeze.vim"] = {
-    loaded = true,
-    path = "/home/baka/.local/share/nvim/site/pack/packer/start/breeze.vim",
-    url = "https://github.com/idanarye/breeze.vim"
   },
   ["bufferline.nvim"] = {
     config = { "\27LJ\2\n<\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\15bufferline\frequire\0" },
@@ -142,9 +135,16 @@ _G.packer_plugins = {
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
   ["emmet-vim"] = {
-    loaded = true,
-    path = "/home/baka/.local/share/nvim/site/pack/packer/start/emmet-vim",
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/home/baka/.local/share/nvim/site/pack/packer/opt/emmet-vim",
     url = "https://github.com/mattn/emmet-vim"
+  },
+  ["fcitx.nvim"] = {
+    loaded = true,
+    path = "/home/baka/.local/share/nvim/site/pack/packer/start/fcitx.nvim",
+    url = "https://github.com/h-hg/fcitx.nvim"
   },
   ["gitsigns.nvim"] = {
     loaded = true,
@@ -155,6 +155,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/baka/.local/share/nvim/site/pack/packer/start/gruvbox.nvim",
     url = "https://github.com/uunnxx/gruvbox.nvim"
+  },
+  ["indent-blankline.nvim"] = {
+    loaded = true,
+    path = "/home/baka/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
+    url = "https://github.com/lukas-reineke/indent-blankline.nvim"
   },
   ["lexima.vim"] = {
     loaded = true,
@@ -171,10 +176,20 @@ _G.packer_plugins = {
     path = "/home/baka/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
+  ["nvim-align"] = {
+    loaded = true,
+    path = "/home/baka/.local/share/nvim/site/pack/packer/start/nvim-align",
+    url = "https://github.com/RRethy/nvim-align"
+  },
   ["nvim-cmp"] = {
     loaded = true,
     path = "/home/baka/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
+  },
+  ["nvim-colorizer.lua"] = {
+    loaded = true,
+    path = "/home/baka/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua",
+    url = "https://github.com/norcalli/nvim-colorizer.lua"
   },
   ["nvim-lsp-installer"] = {
     loaded = true,
@@ -222,13 +237,19 @@ _G.packer_plugins = {
     path = "/home/baka/.local/share/nvim/site/pack/packer/start/popup.nvim",
     url = "https://github.com/nvim-lua/popup.nvim"
   },
+  ["python-syntax"] = {
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/home/baka/.local/share/nvim/site/pack/packer/opt/python-syntax",
+    url = "https://github.com/hdima/python-syntax"
+  },
   tagbar = {
     loaded = true,
     path = "/home/baka/.local/share/nvim/site/pack/packer/start/tagbar",
     url = "https://github.com/majutsushi/tagbar"
   },
   ["telescope.nvim"] = {
-    config = { "\27LJ\2\nq\0\0\5\0\b\0\v6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\6\0005\3\4\0005\4\3\0=\4\5\3=\3\a\2B\0\2\1K\0\1\0\fpickers\1\0\0\15find_files\1\0\0\1\0\1\ntheme\bivy\nsetup\14telescope\frequire\0" },
     loaded = true,
     path = "/home/baka/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
@@ -238,45 +259,109 @@ _G.packer_plugins = {
     path = "/home/baka/.local/share/nvim/site/pack/packer/start/vim-autoformat",
     url = "https://github.com/Chiel92/vim-autoformat"
   },
+  ["vim-bundler"] = {
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/home/baka/.local/share/nvim/site/pack/packer/opt/vim-bundler",
+    url = "https://github.com/tpope/vim-bundler"
+  },
   ["vim-closetag"] = {
-    loaded = true,
-    path = "/home/baka/.local/share/nvim/site/pack/packer/start/vim-closetag",
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/home/baka/.local/share/nvim/site/pack/packer/opt/vim-closetag",
     url = "https://github.com/alvan/vim-closetag"
   },
   ["vim-crystal"] = {
-    loaded = true,
-    path = "/home/baka/.local/share/nvim/site/pack/packer/start/vim-crystal",
+    loaded = false,
+    needs_bufread = true,
+    only_cond = false,
+    path = "/home/baka/.local/share/nvim/site/pack/packer/opt/vim-crystal",
     url = "https://github.com/vim-crystal/vim-crystal"
   },
-  ["vim-css-color"] = {
-    loaded = true,
-    path = "/home/baka/.local/share/nvim/site/pack/packer/start/vim-css-color",
-    url = "https://github.com/ap/vim-css-color"
-  },
   ["vim-elixir"] = {
-    loaded = true,
-    path = "/home/baka/.local/share/nvim/site/pack/packer/start/vim-elixir",
+    loaded = false,
+    needs_bufread = true,
+    only_cond = false,
+    path = "/home/baka/.local/share/nvim/site/pack/packer/opt/vim-elixir",
     url = "https://github.com/elixir-editors/vim-elixir"
   },
-  ["vim-isort"] = {
+  ["vim-github-link-opener"] = {
     loaded = true,
-    path = "/home/baka/.local/share/nvim/site/pack/packer/start/vim-isort",
+    path = "/home/baka/.local/share/nvim/site/pack/packer/start/vim-github-link-opener",
+    url = "https://github.com/gabebw/vim-github-link-opener"
+  },
+  ["vim-isort"] = {
+    loaded = false,
+    needs_bufread = true,
+    only_cond = false,
+    path = "/home/baka/.local/share/nvim/site/pack/packer/opt/vim-isort",
     url = "https://github.com/fisadev/vim-isort"
   },
   ["vim-mix-format"] = {
-    loaded = true,
-    path = "/home/baka/.local/share/nvim/site/pack/packer/start/vim-mix-format",
+    loaded = false,
+    needs_bufread = true,
+    only_cond = false,
+    path = "/home/baka/.local/share/nvim/site/pack/packer/opt/vim-mix-format",
     url = "https://github.com/mhinz/vim-mix-format"
+  },
+  ["vim-rails"] = {
+    loaded = false,
+    needs_bufread = true,
+    only_cond = false,
+    path = "/home/baka/.local/share/nvim/site/pack/packer/opt/vim-rails",
+    url = "https://github.com/tpope/vim-rails"
+  },
+  ["vim-rake"] = {
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/home/baka/.local/share/nvim/site/pack/packer/opt/vim-rake",
+    url = "https://github.com/tpope/vim-rake"
   },
   ["vim-repeat"] = {
     loaded = true,
     path = "/home/baka/.local/share/nvim/site/pack/packer/start/vim-repeat",
     url = "https://github.com/tpope/vim-repeat"
   },
+  ["vim-ruby"] = {
+    loaded = false,
+    needs_bufread = true,
+    only_cond = false,
+    path = "/home/baka/.local/share/nvim/site/pack/packer/opt/vim-ruby",
+    url = "https://github.com/vim-ruby/vim-ruby"
+  },
+  ["vim-ruby-run"] = {
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/home/baka/.local/share/nvim/site/pack/packer/opt/vim-ruby-run",
+    url = "https://github.com/stjernstrom/vim-ruby-run"
+  },
+  ["vim-ruby-sinatra"] = {
+    loaded = false,
+    needs_bufread = true,
+    only_cond = false,
+    path = "/home/baka/.local/share/nvim/site/pack/packer/opt/vim-ruby-sinatra",
+    url = "https://github.com/hallison/vim-ruby-sinatra"
+  },
   ["vim-searchindex"] = {
     loaded = true,
     path = "/home/baka/.local/share/nvim/site/pack/packer/start/vim-searchindex",
     url = "https://github.com/google/vim-searchindex"
+  },
+  ["vim-slim"] = {
+    loaded = false,
+    needs_bufread = true,
+    only_cond = false,
+    path = "/home/baka/.local/share/nvim/site/pack/packer/opt/vim-slim",
+    url = "https://github.com/slim-template/vim-slim"
+  },
+  ["vim-snippets"] = {
+    loaded = true,
+    path = "/home/baka/.local/share/nvim/site/pack/packer/start/vim-snippets",
+    url = "https://github.com/honza/vim-snippets"
   },
   ["vim-startify"] = {
     loaded = true,
@@ -287,6 +372,13 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/baka/.local/share/nvim/site/pack/packer/start/vim-surround",
     url = "https://github.com/tpope/vim-surround"
+  },
+  ["vim-textobj-erb"] = {
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/home/baka/.local/share/nvim/site/pack/packer/opt/vim-textobj-erb",
+    url = "https://github.com/whatyouhide/vim-textobj-erb"
   },
   ["vim-unimpaired"] = {
     loaded = true,
@@ -300,18 +392,64 @@ time([[Defining packer_plugins]], false)
 time([[Config for nvim-tree.lua]], true)
 try_loadstring("\27LJ\2\n;\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\14nvim-tree\frequire\0", "config", "nvim-tree.lua")
 time([[Config for nvim-tree.lua]], false)
--- Config for: telescope.nvim
-time([[Config for telescope.nvim]], true)
-try_loadstring("\27LJ\2\nq\0\0\5\0\b\0\v6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\6\0005\3\4\0005\4\3\0=\4\5\3=\3\a\2B\0\2\1K\0\1\0\fpickers\1\0\0\15find_files\1\0\0\1\0\1\ntheme\bivy\nsetup\14telescope\frequire\0", "config", "telescope.nvim")
-time([[Config for telescope.nvim]], false)
--- Config for: Comment.nvim
-time([[Config for Comment.nvim]], true)
-try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
-time([[Config for Comment.nvim]], false)
 -- Config for: bufferline.nvim
 time([[Config for bufferline.nvim]], true)
 try_loadstring("\27LJ\2\n<\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\15bufferline\frequire\0", "config", "bufferline.nvim")
 time([[Config for bufferline.nvim]], false)
+-- Config for: Comment.nvim
+time([[Config for Comment.nvim]], true)
+try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
+time([[Config for Comment.nvim]], false)
+vim.cmd [[augroup packer_load_aucmds]]
+vim.cmd [[au!]]
+  -- Filetype lazy-loads
+time([[Defining lazy-load filetype autocommands]], true)
+vim.cmd [[au FileType cr ++once lua require("packer.load")({'vim-crystal'}, { ft = "cr" }, _G.packer_plugins)]]
+vim.cmd [[au FileType crystal ++once lua require("packer.load")({'vim-crystal'}, { ft = "crystal" }, _G.packer_plugins)]]
+vim.cmd [[au FileType html ++once lua require("packer.load")({'emmet-vim', 'vim-closetag'}, { ft = "html" }, _G.packer_plugins)]]
+vim.cmd [[au FileType html5 ++once lua require("packer.load")({'emmet-vim', 'vim-closetag'}, { ft = "html5" }, _G.packer_plugins)]]
+vim.cmd [[au FileType css3 ++once lua require("packer.load")({'emmet-vim'}, { ft = "css3" }, _G.packer_plugins)]]
+vim.cmd [[au FileType javascript ++once lua require("packer.load")({'emmet-vim'}, { ft = "javascript" }, _G.packer_plugins)]]
+vim.cmd [[au FileType ruby ++once lua require("packer.load")({'vim-rake', 'vim-ruby', 'vim-ruby-run', 'vim-ruby-sinatra', 'vim-slim', 'vim-textobj-erb', 'vim-bundler', 'vim-rails'}, { ft = "ruby" }, _G.packer_plugins)]]
+vim.cmd [[au FileType js ++once lua require("packer.load")({'emmet-vim'}, { ft = "js" }, _G.packer_plugins)]]
+vim.cmd [[au FileType erb ++once lua require("packer.load")({'vim-ruby', 'vim-ruby-run', 'vim-ruby-sinatra', 'vim-slim', 'vim-textobj-erb', 'vim-textobj-erb', 'vim-bundler', 'vim-rails'}, { ft = "erb" }, _G.packer_plugins)]]
+vim.cmd [[au FileType css ++once lua require("packer.load")({'emmet-vim'}, { ft = "css" }, _G.packer_plugins)]]
+vim.cmd [[au FileType Rakefile ++once lua require("packer.load")({'vim-rake'}, { ft = "Rakefile" }, _G.packer_plugins)]]
+vim.cmd [[au FileType rake ++once lua require("packer.load")({'vim-rake'}, { ft = "rake" }, _G.packer_plugins)]]
+vim.cmd [[au FileType py ++once lua require("packer.load")({'python-syntax', 'vim-isort'}, { ft = "py" }, _G.packer_plugins)]]
+vim.cmd [[au FileType python ++once lua require("packer.load")({'python-syntax', 'vim-isort'}, { ft = "python" }, _G.packer_plugins)]]
+vim.cmd [[au FileType xml ++once lua require("packer.load")({'vim-closetag'}, { ft = "xml" }, _G.packer_plugins)]]
+vim.cmd [[au FileType xhtml ++once lua require("packer.load")({'vim-closetag'}, { ft = "xhtml" }, _G.packer_plugins)]]
+vim.cmd [[au FileType elixir ++once lua require("packer.load")({'vim-mix-format', 'vim-elixir', 'alchemist.vim'}, { ft = "elixir" }, _G.packer_plugins)]]
+vim.cmd [[au FileType eelixir ++once lua require("packer.load")({'vim-mix-format', 'vim-elixir', 'alchemist.vim'}, { ft = "eelixir" }, _G.packer_plugins)]]
+vim.cmd [[au FileType exs ++once lua require("packer.load")({'vim-mix-format', 'vim-elixir', 'alchemist.vim'}, { ft = "exs" }, _G.packer_plugins)]]
+vim.cmd [[au FileType ex ++once lua require("packer.load")({'vim-mix-format', 'vim-elixir', 'alchemist.vim'}, { ft = "ex" }, _G.packer_plugins)]]
+vim.cmd [[au FileType rb ++once lua require("packer.load")({'vim-rake', 'vim-ruby', 'vim-ruby-run', 'vim-ruby-sinatra', 'vim-slim', 'vim-textobj-erb', 'vim-bundler', 'vim-rails'}, { ft = "rb" }, _G.packer_plugins)]]
+time([[Defining lazy-load filetype autocommands]], false)
+vim.cmd("augroup END")
+vim.cmd [[augroup filetypedetect]]
+time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-ruby/ftdetect/ruby.vim]], true)
+vim.cmd [[source /home/baka/.local/share/nvim/site/pack/packer/opt/vim-ruby/ftdetect/ruby.vim]]
+time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-ruby/ftdetect/ruby.vim]], false)
+time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-ruby/ftdetect/ruby_extra.vim]], true)
+vim.cmd [[source /home/baka/.local/share/nvim/site/pack/packer/opt/vim-ruby/ftdetect/ruby_extra.vim]]
+time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-ruby/ftdetect/ruby_extra.vim]], false)
+time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-ruby-sinatra/ftdetect/ruby-sinatra.vim]], true)
+vim.cmd [[source /home/baka/.local/share/nvim/site/pack/packer/opt/vim-ruby-sinatra/ftdetect/ruby-sinatra.vim]]
+time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-ruby-sinatra/ftdetect/ruby-sinatra.vim]], false)
+time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-slim/ftdetect/slim.vim]], true)
+vim.cmd [[source /home/baka/.local/share/nvim/site/pack/packer/opt/vim-slim/ftdetect/slim.vim]]
+time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-slim/ftdetect/slim.vim]], false)
+time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-crystal/ftdetect/crystal.vim]], true)
+vim.cmd [[source /home/baka/.local/share/nvim/site/pack/packer/opt/vim-crystal/ftdetect/crystal.vim]]
+time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-crystal/ftdetect/crystal.vim]], false)
+time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-crystal/ftdetect/ecrystal.vim]], true)
+vim.cmd [[source /home/baka/.local/share/nvim/site/pack/packer/opt/vim-crystal/ftdetect/ecrystal.vim]]
+time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-crystal/ftdetect/ecrystal.vim]], false)
+time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-elixir/ftdetect/elixir.vim]], true)
+vim.cmd [[source /home/baka/.local/share/nvim/site/pack/packer/opt/vim-elixir/ftdetect/elixir.vim]]
+time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-elixir/ftdetect/elixir.vim]], false)
+vim.cmd("augroup END")
 if should_profile then save_profiles() end
 
 end)

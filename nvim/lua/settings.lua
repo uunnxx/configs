@@ -50,14 +50,6 @@ cmd'colorscheme gruvbox'
 
 
 
-
-
-
-
-
-
-
-
 -- don't auto commenting new lines
 cmd [[au BufEnter * set fo-=c fo-=r fo-=o]]
 
@@ -69,56 +61,23 @@ cmd [[
 autocmd FileType xml,html,xhtml,css,scss,javascript,lua,yaml,htmljinja setlocal shiftwidth=2 tabstop=2
 ]]
 
--- С этой строкой отлично форматирует html файл, который содержит jinja2
+-- Jinja2
 cmd[[ autocmd BufNewFile,BufRead *.html set filetype=htmldjango ]]
 
 
--- Запоминает где nvim последний раз редактировал файл
+-- Remember last edit position
 cmd [[
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 ]]
 
 
--- Подсвечивает на доли секунды скопированную часть текста
+-- highlight Yanks
 exec(
   [[
     augroup YankHighlight
     autocmd!
-    autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=500}
+    autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=300}
     augroup end
   ]],
   false
 )
-
-
-
-
-
--- nvim-cmp supports additional completion capabilities
-
--- local capabilities = vim.lsp.protocol.make_client_capabilities()
--- capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
--- vim.o.completeopt = 'menuone,noselect'
--- -- luasnip setup
--- local luasnip = require 'luasnip'
---
--- -- nvim-cmp setup
--- local cmp = require 'cmp'
--- cmp.setup {
---     snippet = {
---         expand = function(args)
---             luasnip.lsp_expand(args.body)
---         end,
---     },
---     sources = {
---         { name = 'nvim_lsp' },
---         { name = 'luasnip' },
---         { name = 'path' },
---         { name = 'buffer', options = {
---             get_bufnrs = function()
---                 return vim.api.nvim_list_bufs()
---             end
---         },
---     },
--- },
--- }
