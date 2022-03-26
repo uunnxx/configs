@@ -244,10 +244,20 @@ _G.packer_plugins = {
     path = "/home/baka/.local/share/nvim/site/pack/packer/opt/python-syntax",
     url = "https://github.com/hdima/python-syntax"
   },
+  ["run-code.nvim"] = {
+    loaded = true,
+    path = "/home/baka/.local/share/nvim/site/pack/packer/start/run-code.nvim",
+    url = "https://github.com/arjunmahishi/run-code.nvim"
+  },
   tagbar = {
     loaded = true,
     path = "/home/baka/.local/share/nvim/site/pack/packer/start/tagbar",
     url = "https://github.com/majutsushi/tagbar"
+  },
+  ["telescope-fzf-native.nvim"] = {
+    loaded = true,
+    path = "/home/baka/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim",
+    url = "https://github.com/nvim-telescope/telescope-fzf-native.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,
@@ -404,27 +414,27 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
+vim.cmd [[au FileType py ++once lua require("packer.load")({'python-syntax', 'vim-isort'}, { ft = "py" }, _G.packer_plugins)]]
+vim.cmd [[au FileType elixir ++once lua require("packer.load")({'vim-mix-format', 'alchemist.vim', 'vim-elixir'}, { ft = "elixir" }, _G.packer_plugins)]]
+vim.cmd [[au FileType eelixir ++once lua require("packer.load")({'vim-mix-format', 'alchemist.vim', 'vim-elixir'}, { ft = "eelixir" }, _G.packer_plugins)]]
+vim.cmd [[au FileType exs ++once lua require("packer.load")({'vim-mix-format', 'alchemist.vim', 'vim-elixir'}, { ft = "exs" }, _G.packer_plugins)]]
+vim.cmd [[au FileType js ++once lua require("packer.load")({'emmet-vim'}, { ft = "js" }, _G.packer_plugins)]]
 vim.cmd [[au FileType cr ++once lua require("packer.load")({'vim-crystal'}, { ft = "cr" }, _G.packer_plugins)]]
 vim.cmd [[au FileType crystal ++once lua require("packer.load")({'vim-crystal'}, { ft = "crystal" }, _G.packer_plugins)]]
 vim.cmd [[au FileType html ++once lua require("packer.load")({'emmet-vim', 'vim-closetag'}, { ft = "html" }, _G.packer_plugins)]]
 vim.cmd [[au FileType html5 ++once lua require("packer.load")({'emmet-vim', 'vim-closetag'}, { ft = "html5" }, _G.packer_plugins)]]
 vim.cmd [[au FileType css3 ++once lua require("packer.load")({'emmet-vim'}, { ft = "css3" }, _G.packer_plugins)]]
-vim.cmd [[au FileType javascript ++once lua require("packer.load")({'emmet-vim'}, { ft = "javascript" }, _G.packer_plugins)]]
-vim.cmd [[au FileType ruby ++once lua require("packer.load")({'vim-rake', 'vim-ruby', 'vim-ruby-run', 'vim-ruby-sinatra', 'vim-slim', 'vim-textobj-erb', 'vim-bundler', 'vim-rails'}, { ft = "ruby" }, _G.packer_plugins)]]
-vim.cmd [[au FileType js ++once lua require("packer.load")({'emmet-vim'}, { ft = "js" }, _G.packer_plugins)]]
-vim.cmd [[au FileType erb ++once lua require("packer.load")({'vim-ruby', 'vim-ruby-run', 'vim-ruby-sinatra', 'vim-slim', 'vim-textobj-erb', 'vim-textobj-erb', 'vim-bundler', 'vim-rails'}, { ft = "erb" }, _G.packer_plugins)]]
 vim.cmd [[au FileType css ++once lua require("packer.load")({'emmet-vim'}, { ft = "css" }, _G.packer_plugins)]]
-vim.cmd [[au FileType Rakefile ++once lua require("packer.load")({'vim-rake'}, { ft = "Rakefile" }, _G.packer_plugins)]]
-vim.cmd [[au FileType rake ++once lua require("packer.load")({'vim-rake'}, { ft = "rake" }, _G.packer_plugins)]]
-vim.cmd [[au FileType py ++once lua require("packer.load")({'python-syntax', 'vim-isort'}, { ft = "py" }, _G.packer_plugins)]]
 vim.cmd [[au FileType python ++once lua require("packer.load")({'python-syntax', 'vim-isort'}, { ft = "python" }, _G.packer_plugins)]]
-vim.cmd [[au FileType xml ++once lua require("packer.load")({'vim-closetag'}, { ft = "xml" }, _G.packer_plugins)]]
+vim.cmd [[au FileType ex ++once lua require("packer.load")({'vim-mix-format', 'alchemist.vim', 'vim-elixir'}, { ft = "ex" }, _G.packer_plugins)]]
+vim.cmd [[au FileType ruby ++once lua require("packer.load")({'vim-rails', 'vim-ruby', 'vim-slim', 'vim-textobj-erb', 'vim-rake', 'vim-ruby-sinatra', 'vim-bundler', 'vim-ruby-run'}, { ft = "ruby" }, _G.packer_plugins)]]
 vim.cmd [[au FileType xhtml ++once lua require("packer.load")({'vim-closetag'}, { ft = "xhtml" }, _G.packer_plugins)]]
-vim.cmd [[au FileType elixir ++once lua require("packer.load")({'vim-mix-format', 'vim-elixir', 'alchemist.vim'}, { ft = "elixir" }, _G.packer_plugins)]]
-vim.cmd [[au FileType eelixir ++once lua require("packer.load")({'vim-mix-format', 'vim-elixir', 'alchemist.vim'}, { ft = "eelixir" }, _G.packer_plugins)]]
-vim.cmd [[au FileType exs ++once lua require("packer.load")({'vim-mix-format', 'vim-elixir', 'alchemist.vim'}, { ft = "exs" }, _G.packer_plugins)]]
-vim.cmd [[au FileType ex ++once lua require("packer.load")({'vim-mix-format', 'vim-elixir', 'alchemist.vim'}, { ft = "ex" }, _G.packer_plugins)]]
-vim.cmd [[au FileType rb ++once lua require("packer.load")({'vim-rake', 'vim-ruby', 'vim-ruby-run', 'vim-ruby-sinatra', 'vim-slim', 'vim-textobj-erb', 'vim-bundler', 'vim-rails'}, { ft = "rb" }, _G.packer_plugins)]]
+vim.cmd [[au FileType rb ++once lua require("packer.load")({'vim-rails', 'vim-ruby', 'vim-slim', 'vim-textobj-erb', 'vim-rake', 'vim-ruby-sinatra', 'vim-bundler', 'vim-ruby-run'}, { ft = "rb" }, _G.packer_plugins)]]
+vim.cmd [[au FileType erb ++once lua require("packer.load")({'vim-rails', 'vim-ruby', 'vim-slim', 'vim-textobj-erb', 'vim-textobj-erb', 'vim-ruby-sinatra', 'vim-bundler', 'vim-ruby-run'}, { ft = "erb" }, _G.packer_plugins)]]
+vim.cmd [[au FileType xml ++once lua require("packer.load")({'vim-closetag'}, { ft = "xml" }, _G.packer_plugins)]]
+vim.cmd [[au FileType Rakefile ++once lua require("packer.load")({'vim-rake'}, { ft = "Rakefile" }, _G.packer_plugins)]]
+vim.cmd [[au FileType javascript ++once lua require("packer.load")({'emmet-vim'}, { ft = "javascript" }, _G.packer_plugins)]]
+vim.cmd [[au FileType rake ++once lua require("packer.load")({'vim-rake'}, { ft = "rake" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
 vim.cmd("augroup END")
 vim.cmd [[augroup filetypedetect]]
@@ -434,12 +444,12 @@ time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packe
 time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-ruby/ftdetect/ruby_extra.vim]], true)
 vim.cmd [[source /home/baka/.local/share/nvim/site/pack/packer/opt/vim-ruby/ftdetect/ruby_extra.vim]]
 time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-ruby/ftdetect/ruby_extra.vim]], false)
-time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-ruby-sinatra/ftdetect/ruby-sinatra.vim]], true)
-vim.cmd [[source /home/baka/.local/share/nvim/site/pack/packer/opt/vim-ruby-sinatra/ftdetect/ruby-sinatra.vim]]
-time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-ruby-sinatra/ftdetect/ruby-sinatra.vim]], false)
 time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-slim/ftdetect/slim.vim]], true)
 vim.cmd [[source /home/baka/.local/share/nvim/site/pack/packer/opt/vim-slim/ftdetect/slim.vim]]
 time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-slim/ftdetect/slim.vim]], false)
+time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-ruby-sinatra/ftdetect/ruby-sinatra.vim]], true)
+vim.cmd [[source /home/baka/.local/share/nvim/site/pack/packer/opt/vim-ruby-sinatra/ftdetect/ruby-sinatra.vim]]
+time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-ruby-sinatra/ftdetect/ruby-sinatra.vim]], false)
 time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-crystal/ftdetect/crystal.vim]], true)
 vim.cmd [[source /home/baka/.local/share/nvim/site/pack/packer/opt/vim-crystal/ftdetect/crystal.vim]]
 time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-crystal/ftdetect/crystal.vim]], false)

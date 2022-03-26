@@ -1,8 +1,8 @@
 local set   = vim.opt             -- global/buffer/windows-scoped options
 local cmd   = vim.cmd             -- execute Vim commands
-local fn    = vim.fn              -- 
+local fn    = vim.fn              --
 local wset  = vim.wo              -- Window-scoped
-local bset  = vim.bo              -- Buffer-scoped
+-- local bset  = vim.bo              -- Buffer-scoped
 
 
 
@@ -23,11 +23,11 @@ set.history = 1000
 -------------------------------------------------------------------------------
 
 set.expandtab = true      -- use spaces instead of tabs
-set.shiftwidth = 2        -- shift 2 spaces when tab
-set.tabstop = 2           -- 1 tab == 2 spaces
+set.shiftwidth = 4        -- shift 4 spaces when tab
+set.tabstop = 4           -- 1 tab == 4 spaces
 set.autoindent = true     -- autoindent new lines
 set.smartindent = true    --
-set.softtabstop = 2       -- let backspace delete indent
+set.softtabstop = 4       -- let backspace delete indent
 -- set.noexpandtab = true -- Tabs are tabs
 
 
@@ -38,7 +38,7 @@ set.hidden = true
 -------------------- UI
 -------------------------------------------------------------------------------
 
-set.colorcolumn = '80'              -- Edit 120
+set.colorcolumn = '120'              -- Edit 120
 set.cursorline = true
 set.cursorcolumn = false
 set.signcolumn = 'auto'             -- only when there is a sign to display.
@@ -114,7 +114,7 @@ set.scrolloff=15
 -------------------- Invisible Chars
 -------------------------------------------------------------------------------
 set.list = true
-set.listchars = { 
+set.listchars = {
   tab = '▸ ',
   trail = '·',
   eol = '¬',

@@ -8,11 +8,15 @@ packadd shellmenu
 
 
 return require('packer').startup(function()
-  -- Packer
   use 'wbthomason/packer.nvim'
   use 'nvim-lua/plenary.nvim'
   use 'nvim-lua/popup.nvim'
   use 'nvim-telescope/telescope.nvim'
+  use {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    run = 'make'
+  }
+
 
 
   -----------------------------------------------------------
@@ -42,9 +46,9 @@ return require('packer').startup(function()
 
 
   -- Indent guides for Neovim
-  use "lukas-reineke/indent-blankline.nvim"
+  use 'lukas-reineke/indent-blankline.nvim'
 
-
+  use 'arjunmahishi/run-code.nvim'
 
 ---------- Comment
   use { 'numToStr/Comment.nvim',

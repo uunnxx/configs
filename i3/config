@@ -504,7 +504,8 @@ bindsym $alt+Down exec $HOME/.local/bin/volume_down
 bindsym $mod+Left exec mpvctl previous; exec dunstify -r 1111 -u low "PREVIOUS TRACK"
 bindsym $mod+Right exec mpvctl next; exec dunstify -r 1111 -u low "NEXT TRACK"
 bindsym $mod+Up exec dunstify -r 9999 -u normal "NOW PLAYING:" "$(exec mpvctl play)"
-bindsym $mod+Down exec mpvctl pause; exec dunstify -r 1111 -u low "PAUSE"
+# bindsym $mod+Down exec mpvctl pause; exec dunstify -r 1111 -u low "PAUSE"
+bindsym $mod+Down exec mpvctl pause; exec dunstify -r 9999 -u low "PAUSE"
 
 # Next: PageDown, Prior: PageUp
 bindsym $ctrl+$alt+Next exec obs-cli --password "bakabakabaka" scene switch right; exec dunstify -u low -r 7979 "OBS SCENE SWITCHED" "Active scene: <b>RIGHT</b>"

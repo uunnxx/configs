@@ -4,6 +4,7 @@
 
 require('general')
 require('keymaps')
+require('lang_settings')
 require('plugin_settings')
 require('plugins')
 require('settings')

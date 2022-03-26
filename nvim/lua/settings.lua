@@ -18,35 +18,9 @@ g.ale_fix_on_save = 0
 g.ale_lint_on_text_changed = 'never'
 g.ale_lint_on_insert_leave = 0
 
-
-
-
-
------------------------------------------------------------
--- User Interface
------------------------------------------------------------
-
-g.gruvbox_contrast_dark = 'hard'
-g.gruvbox_invert_selection = 0
-g.gruvbox_italic = 1
-g.gruvbox_inverse = 1
-g.gruvbox_underline = 1
-g.gruvbox_undercurl = 1
--- g.gruvbox_transparent_bg = 1
-cmd'colorscheme gruvbox'
-
-
--- Transparency background
--- cmd [[
---   highlight! Normal ctermbg=none guibg=none
---   highlight! QuickFixLine ctermbg=none guibg=none
---   highlight! CursorLineSign ctermbg=none guibg=none
---   highlight! CursorLineNr ctermbg=none guibg=none
---   highlight! SignColumn ctermbg=none guibg=none
--- ]]
-
-
-
+-- g.ale_echo_msg_error_str = 'E'
+-- g.ale_echo_msg_warning_str = 'W'
+-- g.ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
 
 

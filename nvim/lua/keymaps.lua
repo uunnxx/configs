@@ -63,18 +63,10 @@ map('x', 'L', 'g_', silentnoremapnowait)
 
 
 -- Find and replace
-map('n', 'C-h', ":%s/\\C\\<<C-r><C-w>\\>//g<left><left>", silentnoremapnowait)
-map('x', 'C-h', ':s/', silentnoremapnowait)
-map('v', '<leader>*', '"hy:%s/\\V<C-r>h//g<left><left>', silentnoremapnowait)
--- nnoremap <nowait> <C-h> :%s/\C\<<C-r><C-w>\>//<left>
--- xnoremap <nowait> <C-h> :s/
--- vnoremap <leader>* "hy:%s/\V<C-r>h//<left>
+map('n', '<C-h>', ':%s/\\C\\<<C-r><C-w>\\>//g<left><left>', silentnoremapnowait)
+map('x', '<C-h>', ':s/', silentnoremapnowait)
+-- map('v', '<leader>*', '"hy:%s/\\V<C-r>h//g<left><left>', silentnoremapnowait)
 
-
-
--- System clipboard shift - y
-map('v', 'S-y', '"+y', silentnoremap)
--- map('n', 'C-c', ':%y+<CR>', {noremap = true})
 
 
 -- Treat long lines as break lines unless we had count
@@ -137,12 +129,12 @@ map('i', '<M-t>', '<ESC>:tabedit ', nowait)
 map('n', '<M-e>', ':edit ', nowait)
 map('i', '<M-e>', '<ESC>:edit ', nowait)
 
-map('n', 'tt', ':Telescope find_files<CR>', nowait)
+map('n', 'tt', ':Telescope find_files theme=ivy<CR>', nowait)
 -- map('n', '<C-CR>', ':Telescope find_files<CR>', nowait)
 map('n', '<S-CR>', ':Telescope buffers theme=ivy<CR>', silentnoremapnowait)
 
 -- Filetypes
-map('n', 'FF', ':Telescope filetypes theme=ivy<CR>', silentnoremapnowait)
+map('n', 'FF', ':Telescope filetypes <CR>', silentnoremapnowait)
 
 ------------------ General
 map('n', '<leader>R', ':redo<CR>', silentnoremap)
@@ -222,6 +214,9 @@ map('n', 'gV', '`[v`]', silentnoremap)
 
 
 ------------------------ Yank
+-- System clipboard shift - y
+-- map('v', '<S-y>', '"+y', silentnoremap)
+
 -- copy entire file
 map('n', '<C-c>', ':%y+<CR>', noremap)
 map('i', '<C-c>', '<C-o>:%y+<CR>', noremap)
@@ -246,6 +241,16 @@ map('n', 'Cu', 'cf_', silentnoremap)
 map('n', 'cU', 'df_ldea', silentnoremap)
 map('n', 'dU', 'bf_de', silentnoremap)
 
+
+
+-- PLUGIN SETTINGS
+-- Run Code
+
+map('n', '<leader>rr', ':RunCodeFile<CR>', noremap)
+map('v', '<leader>rr', ':RunCodeSelected<CR>', noremap)
+-- vim.cmd [[
+--   au filetype markdown nmap <leader>R :RunCodeBlock<CR>
+-- ]]
 
 
 
@@ -275,112 +280,111 @@ map('n', 'chD', '0f{f,lct}', noremap )
 -- " end
 
 
+-- WARNING
+-- CUSTOM MAPS
+-- CONCEPT by VIM core:
+--   cib => ci(
+--   cab => ca(
+--   ciB => ci{
+  --   caB => ca{
+    --
+    -- Additional:
+    --   Because of dvp keyboard layout I don't know the exact place of the
+    --   key [] and it's hard to press `
+    --
+    --     cid => ci[
+    --     cad => ca[
+    --     ciD => ci`
+    --     caD => ca`
+    --
+    --     did => di[
+    --     dad => da[
+    --     diD => di`
+    --     daD => da`
+    --
+    --     vid => vi[
+    --     vad => va[
+    --     viD => vi`
+    --     vaD => va`
+    --
+    --     yid => yi[
+    --     yad => ya[
+    --     yiD => yi`
+    --     yaD => ya`
 
--- Defaults:
---   By VIM core:
---
---     cib => ci(
---     cab => ca(
---     ciB => ci{
---     caB => ca{
---
--- Additional:
---   Because of dvp keyboard layout I don't know the exact place of the
---   key [] and it's hard to press `
---
---     cid => ci[
---     cad => ca[
---     ciD => ci`
---     caD => ca`
---
---     did => di[
---     dad => da[
---     diD => di`
---     daD => da`
---
---     vid => vi[
---     vad => va[
---     viD => vi`
---     vaD => va`
---
---     yid => yi[
---     yad => ya[
---     yiD => yi`
---     yaD => ya`
+    map('n', 'cid', 'ci[', noremap)
+    map('n', 'cad', 'ca[', noremap)
+    map('n', 'ciD', 'ci`', noremap)
+    map('n', 'caD', 'ca`', noremap)
 
-map('n', 'cid', 'ci[', noremap)
-map('n', 'cad', 'ca[', noremap)
-map('n', 'ciD', 'ci`', noremap)
-map('n', 'caD', 'ca`', noremap)
+    map('n', 'did', 'di[', noremap)
+    map('n', 'dad', 'da[', noremap)
+    map('n', 'diD', 'di`', noremap)
+    map('n', 'daD', 'da`', noremap)
 
-map('n', 'did', 'di[', noremap)
-map('n', 'dad', 'da[', noremap)
-map('n', 'diD', 'di`', noremap)
-map('n', 'daD', 'da`', noremap)
+    map('n', 'vid', 'vi[', noremap)
+    map('n', 'vad', 'va[', noremap)
+    map('n', 'viD', 'vi`', noremap)
+    map('n', 'vaD', 'va`', noremap)
 
-map('n', 'vid', 'vi[', noremap)
-map('n', 'vad', 'va[', noremap)
-map('n', 'viD', 'vi`', noremap)
-map('n', 'vaD', 'va`', noremap)
-
-map('n', 'yid', 'yi[', noremap)
-map('n', 'yad', 'ya[', noremap)
-map('n', 'yiD', 'yi`', noremap)
-map('n', 'yaD', 'ya`', noremap)
-
-
-
--- Change text _without putting the text into register,
--- see http://tinyurl.com/y2ap4h69
-map('n', 'c', '"_c', noremap)
-map('n', 'C', '"_C', noremap)
-map('n', 'cc', '"_cc', noremap)
-
-
--- Empty || Change current line
-map ('n', 'dD', 'I<ESC>D', silentnoremapnowait)
-map ('n', 'cC', 'I<ESC>C', silentnoremapnowait)
-
--- Auto-center
-map('n', 'G', 'Gzz', silentnoremap)
-map('n', 'n', 'nzz', silentnoremap)
-map('n', 'N', 'Nzz', silentnoremap)
-map('n', '}', '}zz', silentnoremapnowait)
-map('n', '{', '{zz', silentnoremapnowait)
-
-
--- map('n', '^', 'g^', silentnoremap)
-map('n', '0', 'g0', silentnoremap)
-
-
--- Close buffers
-map('n', '<leader><leader><space>', ':%bd <bar> e# <bar> bd#<cr>', silentnoremap)
-
-
--- Line autocompletion
-map('i', '<leader><leader>l', '<C-x><C-l>', silentnoremap) 
+    map('n', 'yid', 'yi[', noremap)
+    map('n', 'yad', 'ya[', noremap)
+    map('n', 'yiD', 'yi`', noremap)
+    map('n', 'yaD', 'ya`', noremap)
 
 
 
--- map <silent> <F2> :update $MYVIMRC <bar> source $MYVIMRC <cr>
--- map <silent> <F3> :tabnew $MYVIMRC <bar> tcd %:h<cr>
+    -- Change text _without putting the text into register,
+    -- see http://tinyurl.com/y2ap4h69
+    map('n', 'c', '"_c', noremap)
+    map('n', 'C', '"_C', noremap)
+    map('n', 'cc', '"_cc', noremap)
+
+
+    -- Empty || Change current line
+    map ('n', 'dD', 'I<ESC>D', silentnoremapnowait)
+    map ('n', 'cC', 'I<ESC>C', silentnoremapnowait)
+
+    -- Auto-center
+    map('n', 'G', 'Gzz', silentnoremap)
+    map('n', 'n', 'nzz', silentnoremap)
+    map('n', 'N', 'Nzz', silentnoremap)
+    map('n', '}', '}zz', silentnoremapnowait)
+    map('n', '{', '{zz', silentnoremapnowait)
+
+
+    -- map('n', '^', 'g^', silentnoremap)
+    map('n', '0', 'g0', silentnoremap)
+
+
+    -- Close buffers
+    map('n', '<leader><leader><space>', ':%bd <bar> e# <bar> bd#<cr>', silentnoremap)
+
+
+    -- Line autocompletion
+    map('i', '<leader><leader>l', '<C-x><C-l>', silentnoremap)
 
 
 
-
--------------------------------------------------------------------------------
+    -- map <silent> <F2> :update $MYVIMRC <bar> source $MYVIMRC <cr>
+    -- map <silent> <F3> :tabnew $MYVIMRC <bar> tcd %:h<cr>
 
 
 
 
--- map('n', '<Space>', '<PageDown> zz', silentnoremap)
--- map('n', '<C-Space>', '<PageUp> zz', silentnoremap)
+    -------------------------------------------------------------------------------
 
 
--- shift + F1 = delete empty lines
--- map('n', '<S-F1>', ':g/^$/d<CR>', silentnoremap)
 
--- under cursor
--- map('n', '*', [[<cmd>lua require('telescope.builtin').grep_string()<cr>]], silentnoremap)
 
--- map('n', '#', [[<cmd>lua require('telescope.builtin').live_grep()<cr>]], silentnoremap)
+    -- map('n', '<Space>', '<PageDown> zz', silentnoremap)
+    -- map('n', '<C-Space>', '<PageUp> zz', silentnoremap)
+
+
+    -- shift + F1 = delete empty lines
+    -- map('n', '<S-F1>', ':g/^$/d<CR>', silentnoremap)
+
+    -- under cursor
+    -- map('n', '*', [[<cmd>lua require('telescope.builtin').grep_string()<cr>]], silentnoremap)
+
+    -- map('n', '#', [[<cmd>lua require('telescope.builtin').live_grep()<cr>]], silentnoremap)
