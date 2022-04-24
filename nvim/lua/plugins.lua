@@ -16,6 +16,7 @@ return require('packer').startup(function()
     'nvim-telescope/telescope-fzf-native.nvim',
     run = 'make'
   }
+  use {'nvim-telescope/telescope-ui-select.nvim' }
 
 
 
@@ -24,6 +25,9 @@ return require('packer').startup(function()
   -----------------------------------------------------------
   -- Colorscheme
   use 'uunnxx/gruvbox.nvim'
+
+  use 'MunifTanjim/nui.nvim'
+
 
   -- Statusline
   use { 'nvim-lualine/lualine.nvim',

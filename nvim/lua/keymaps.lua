@@ -221,6 +221,8 @@ map('n', 'gV', '`[v`]', silentnoremap)
 map('n', '<C-c>', ':%y+<CR>', noremap)
 map('i', '<C-c>', '<C-o>:%y+<CR>', noremap)
 
+map('n', 'Y', 'yy', noremap)
+map('n', 'yy', 'y$', noremap)
 -- map('v', 'yy', '"+y', noremap)
 
 
@@ -246,8 +248,8 @@ map('n', 'dU', 'bf_de', silentnoremap)
 -- PLUGIN SETTINGS
 -- Run Code
 
-map('n', '<leader>rr', ':RunCodeFile<CR>', noremap)
-map('v', '<leader>rr', ':RunCodeSelected<CR>', noremap)
+-- map('n', '<leader>rr', ':RunCodeFile<CR>', noremap)
+-- map('v', '<leader>rr', ':RunCodeSelected<CR>', noremap)
 -- vim.cmd [[
 --   au filetype markdown nmap <leader>R :RunCodeBlock<CR>
 -- ]]
@@ -286,105 +288,123 @@ map('n', 'chD', '0f{f,lct}', noremap )
 --   cib => ci(
 --   cab => ca(
 --   ciB => ci{
-  --   caB => ca{
-    --
-    -- Additional:
-    --   Because of dvp keyboard layout I don't know the exact place of the
-    --   key [] and it's hard to press `
-    --
-    --     cid => ci[
-    --     cad => ca[
-    --     ciD => ci`
-    --     caD => ca`
-    --
-    --     did => di[
-    --     dad => da[
-    --     diD => di`
-    --     daD => da`
-    --
-    --     vid => vi[
-    --     vad => va[
-    --     viD => vi`
-    --     vaD => va`
-    --
-    --     yid => yi[
-    --     yad => ya[
-    --     yiD => yi`
-    --     yaD => ya`
+--   caB => ca{
+--
+-- Additional:
+--   Because of dvp keyboard layout I don't know the exact place of the
+--   key [] and it's hard to press `
+--
+--     cid => ci[
+--     cad => ca[
+--     ciD => ci`
+--     caD => ca`
+--
+--     did => di[
+--     dad => da[
+--     diD => di`
+--     daD => da`
+--
+--     vid => vi[
+--     vad => va[
+--     viD => vi`
+--     vaD => va`
+--
+--     yid => yi[
+--     yad => ya[
+--     yiD => yi`
+--     yaD => ya`
 
-    map('n', 'cid', 'ci[', noremap)
-    map('n', 'cad', 'ca[', noremap)
-    map('n', 'ciD', 'ci`', noremap)
-    map('n', 'caD', 'ca`', noremap)
+map('n', 'cid', 'ci[', noremap)
+map('n', 'cad', 'ca[', noremap)
+map('n', 'ciD', 'ci`', noremap)
+map('n', 'caD', 'ca`', noremap)
 
-    map('n', 'did', 'di[', noremap)
-    map('n', 'dad', 'da[', noremap)
-    map('n', 'diD', 'di`', noremap)
-    map('n', 'daD', 'da`', noremap)
+map('n', 'did', 'di[', noremap)
+map('n', 'dad', 'da[', noremap)
+map('n', 'diD', 'di`', noremap)
+map('n', 'daD', 'da`', noremap)
 
-    map('n', 'vid', 'vi[', noremap)
-    map('n', 'vad', 'va[', noremap)
-    map('n', 'viD', 'vi`', noremap)
-    map('n', 'vaD', 'va`', noremap)
+map('n', 'vid', 'vi[', noremap)
+map('n', 'vad', 'va[', noremap)
+map('n', 'viD', 'vi`', noremap)
+map('n', 'vaD', 'va`', noremap)
 
-    map('n', 'yid', 'yi[', noremap)
-    map('n', 'yad', 'ya[', noremap)
-    map('n', 'yiD', 'yi`', noremap)
-    map('n', 'yaD', 'ya`', noremap)
-
-
-
-    -- Change text _without putting the text into register,
-    -- see http://tinyurl.com/y2ap4h69
-    map('n', 'c', '"_c', noremap)
-    map('n', 'C', '"_C', noremap)
-    map('n', 'cc', '"_cc', noremap)
-
-
-    -- Empty || Change current line
-    map ('n', 'dD', 'I<ESC>D', silentnoremapnowait)
-    map ('n', 'cC', 'I<ESC>C', silentnoremapnowait)
-
-    -- Auto-center
-    map('n', 'G', 'Gzz', silentnoremap)
-    map('n', 'n', 'nzz', silentnoremap)
-    map('n', 'N', 'Nzz', silentnoremap)
-    map('n', '}', '}zz', silentnoremapnowait)
-    map('n', '{', '{zz', silentnoremapnowait)
-
-
-    -- map('n', '^', 'g^', silentnoremap)
-    map('n', '0', 'g0', silentnoremap)
-
-
-    -- Close buffers
-    map('n', '<leader><leader><space>', ':%bd <bar> e# <bar> bd#<cr>', silentnoremap)
-
-
-    -- Line autocompletion
-    map('i', '<leader><leader>l', '<C-x><C-l>', silentnoremap)
+map('n', 'yid', 'yi[', noremap)
+map('n', 'yad', 'ya[', noremap)
+map('n', 'yiD', 'yi`', noremap)
+map('n', 'yaD', 'ya`', noremap)
 
 
 
-    -- map <silent> <F2> :update $MYVIMRC <bar> source $MYVIMRC <cr>
-    -- map <silent> <F3> :tabnew $MYVIMRC <bar> tcd %:h<cr>
+-- Change text _without putting the text into register,
+-- see http://tinyurl.com/y2ap4h69
+map('n', 'c', '"_c', noremap)
+map('n', 'C', '"_C', noremap)
+map('n', 'cc', '"_cc', noremap)
+
+
+-- Empty || Change current line
+map ('n', 'dD', 'I<ESC>D', silentnoremapnowait)
+map ('n', 'cC', 'I<ESC>C', silentnoremapnowait)
+
+-- Auto-center
+map('n', 'G', 'Gzz', silentnoremap)
+map('n', 'n', 'nzz', silentnoremap)
+map('n', 'N', 'Nzz', silentnoremap)
+map('n', '}', '}zz', silentnoremapnowait)
+map('n', '{', '{zz', silentnoremapnowait)
+
+
+-- map('n', '^', 'g^', silentnoremap)
+map('n', '0', 'g0', silentnoremap)
+
+
+-- Close buffers
+map('n', '<leader><leader><space>', ':%bd <bar> e# <bar> bd#<cr>', silentnoremap)
+
+
+-- Line autocompletion
+map('i', '<leader><leader>l', '<C-x><C-l>', silentnoremap)
 
 
 
-
-    -------------------------------------------------------------------------------
+-- map <silent> <F2> :update $MYVIMRC <bar> source $MYVIMRC <cr>
+-- map <silent> <F3> :tabnew $MYVIMRC <bar> tcd %:h<cr>
 
 
 
 
-    -- map('n', '<Space>', '<PageDown> zz', silentnoremap)
-    -- map('n', '<C-Space>', '<PageUp> zz', silentnoremap)
+-------------------------------------------------------------------------------
 
 
-    -- shift + F1 = delete empty lines
-    -- map('n', '<S-F1>', ':g/^$/d<CR>', silentnoremap)
 
-    -- under cursor
-    -- map('n', '*', [[<cmd>lua require('telescope.builtin').grep_string()<cr>]], silentnoremap)
 
-    -- map('n', '#', [[<cmd>lua require('telescope.builtin').live_grep()<cr>]], silentnoremap)
+-- map('n', '<Space>', '<PageDown> zz', silentnoremap)
+-- map('n', '<C-Space>', '<PageUp> zz', silentnoremap)
+
+
+-- shift + F1 = delete empty lines
+-- map('n', '<S-F1>', ':g/^$/d<CR>', silentnoremap)
+
+-- under cursor
+-- map('n', '*', [[<cmd>lua require('telescope.builtin').grep_string()<cr>]], silentnoremap)
+
+-- map('n', '#', [[<cmd>lua require('telescope.builtin').live_grep()<cr>]], silentnoremap)
+
+
+vim.cmd[[
+  " Run code w/o arg  <leader>rr
+  " Run with argument <leader>rc
+  autocmd FileType ruby    nmap <buffer> <leader>rr :w\|:!ruby ./%<cr>
+  autocmd FileType ruby    nmap <buffer> <leader>rc :w\|:!ruby ./% 
+  autocmd FileType crystal nmap <buffer> <leader>rr :w\|:!crystal ./%<cr>
+  autocmd FileType crystal nmap <buffer> <leader>rc :w\|:!crystal ./% 
+  autocmd FileType python  nmap <buffer> <leader>rr :w\|:!python3 ./%<cr>
+  autocmd FileType python  nmap <buffer> <leader>rc :w\|:!python3 ./% 
+  autocmd FileType cpp     nmap <buffer> <leader>rr :w\|:!g++ ./% -g -o %:r_temp && ./%:r_temp<cr>
+  autocmd FileType cpp     nmap <buffer> <leader>rc :w\|:!g++ ./% -g -o %:r_temp && ./%:r_temp 
+  autocmd FileType c       nmap <buffer> <leader>rr :w\|:!gcc ./% -g -o %:r_temp && ./%:r_temp<cr>
+  autocmd FileType c       nmap <buffer> <leader>rc :w\|:!gcc ./% -g -o %:r_temp && ./%:r_temp 
+]]
+
+

@@ -9,7 +9,8 @@ set $ranger "alacritty --class ranger -e ranger"
 set $trans_ru "alacritty --class translator -e trans -t ru -I"
 set $trans_en "alacritty --class translator -e trans -t en -I"
 # set $trans "urxvt -name translator -e trans -t ru -I"
-set $fm "nautilus"
+# set $fm "nautilus"
+set $fm "thunar"
 set $menu "rofi -show drun"
 set $menu2 "rofi -show run"
 set $dmenu "dmenu_run"
@@ -516,9 +517,10 @@ bindsym $mod+$sh+v exec --no-startup-id diodon, mode "default"
 # MODES
 
 
-set $run [g]oogle, [f]irefox, [t]rans_en, [T]rans_ru
+set $run [b]rave, [f]irefox, [t]rans_en, [T]rans_ru
 mode "$run" {
-  bindsym g exec --no-startup-id google-chrome, mode "default"
+#  bindsym g exec --no-startup-id google-chrome, mode "default"
+  bindsym b exec --no-startup-id brave-browser, mode "default"
   bindsym f exec --no-startup-id firefox, mode "default"
 
   bindsym t exec --no-startup-id $trans_en, mode "default"

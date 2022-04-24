@@ -170,6 +170,15 @@ lspconfig.sumneko_lua.setup {
   }
 }
 
+-- Haskell
+lspconfig.hls.setup{
+  filetypes = { "haskell", "lhaskell"},
+  settings = {
+    formattingProvider = "ormolu",
+  },
+  cmd = { "haskell-language-server-wrapper", "--lsp" },
+  single_file_support = true
+}
 
 -- Don't use this shitty lsp! Crashes every fucking time when I open markdown file.
 -- -- Grammarly
