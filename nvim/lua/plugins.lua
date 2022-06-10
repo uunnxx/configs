@@ -25,6 +25,9 @@ return require('packer').startup(function()
   -----------------------------------------------------------
   -- Colorscheme
   use 'uunnxx/gruvbox.nvim'
+  use "rebelot/kanagawa.nvim"
+
+
 
   use 'MunifTanjim/nui.nvim'
 
@@ -51,6 +54,7 @@ return require('packer').startup(function()
 
   -- Indent guides for Neovim
   use 'lukas-reineke/indent-blankline.nvim'
+
 
   use 'arjunmahishi/run-code.nvim'
 
@@ -101,6 +105,10 @@ return require('packer').startup(function()
   use 'neovim/nvim-lspconfig'
   use 'williamboman/nvim-lsp-installer'
 
+-- Highlight arguments' definitions and usages, asynchronously, using Treesitter
+  use 'm-demare/hlargs.nvim'
+
+
 
   -- LINTER
   use 'dense-analysis/ale'
@@ -117,13 +125,17 @@ return require('packer').startup(function()
   use 'hrsh7th/lspkind-nvim'
   use 'saadparwaiz1/cmp_luasnip'
 
+
+  -- Performance
+  use 'lewis6991/impatient.nvim'
+
   -- Snippets plugin
-  ------- Configuration isn't complete
-  -- use 'L3MON4D3/LuaSnip'
   use 'dcampos/nvim-snippy'
   use 'dcampos/cmp-snippy'
   use 'honza/vim-snippets'
 
+  -- Shade is a Neovim plugin that dims your inactive windows, making it easier to see the active window at a glance.
+  -- use 'sunjon/shade.nvim'
 
 
 
@@ -221,7 +233,12 @@ return require('packer').startup(function()
     'mattn/emmet-vim',
     ft = {'html', 'html5', 'css3', 'css', 'javascript', 'js'}
   }
+
+  -- Autopair alternative
   use 'cohama/lexima.vim'
+  -- use 'windwp/nvim-autopairs'
+
+
 
   -- The fastest Neovim colorizer
   use 'norcalli/nvim-colorizer.lua'

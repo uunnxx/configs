@@ -31,12 +31,12 @@ require'colorizer'.setup()
 
 -- Indent blankline
 vim.opt.termguicolors = true
-vim.cmd [[highlight IndentBlanklineIndent1 guifg=#8EC07C gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent2 guifg=#FB4934 gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent3 guifg=#B8BB26 gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent4 guifg=#FABD2F gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent5 guifg=#83A598 gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent6 guifg=#D3869B gui=nocombine]]
+cmd [[highlight IndentBlanklineIndent1 guifg=#282828 gui=nocombine]]
+cmd [[highlight IndentBlanklineIndent2 guifg=#FB4934 gui=nocombine]]
+cmd [[highlight IndentBlanklineIndent3 guifg=#B8BB26 gui=nocombine]]
+cmd [[highlight IndentBlanklineIndent4 guifg=#FABD2F gui=nocombine]]
+cmd [[highlight IndentBlanklineIndent5 guifg=#83A598 gui=nocombine]]
+cmd [[highlight IndentBlanklineIndent6 guifg=#D3869B gui=nocombine]]
 
 
 
@@ -44,7 +44,7 @@ vim.cmd [[highlight IndentBlanklineIndent6 guifg=#D3869B gui=nocombine]]
 -- Colors located in ~/.nvim/plugged/gruvbox/colors/gruvbox.vim
 -- Line 576 to Line 579
 
-vim.cmd[[
+cmd[[
 
 autocmd Syntax * call matchadd('Todo', '\W\zs\(CONCEPT\|TODO\|FIXME\|CHANGED\|CHANGES\|HACK\)')
 autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\|README\|unx\|SYNTAX\)')
@@ -58,4 +58,6 @@ match Error /\s\+$/
 
 
 
+-- Disable number in terminal
+cmd[[autocmd TermOpen * setlocal nonumber norelativenumber]]
 

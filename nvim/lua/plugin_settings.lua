@@ -10,40 +10,6 @@ require("indent_blankline").setup {
     },
 }
 
-
--- Lspkind
-require('lspkind').init({
-  with_text = true,
-  preset = 'codicons',
-  symbol_map = {
-    Text = "",
-    Method = "",
-    Function = "",
-    Constructor = "",
-    Field = "ﰠ",
-    Variable = "",
-    Class = "ﴯ",
-    Interface = "",
-    Module = "",
-    Property = "ﰠ",
-    Unit = "塞",
-    Value = "",
-    Enum = "",
-    Keyword = "",
-    Snippet = "",
-    Color = "",
-    File = "",
-    Reference = "",
-    Folder = "",
-    EnumMember = "",
-    Constant = "",
-    Struct = "פּ",
-    Event = "",
-    Operator = "",
-    TypeParameter = ""
-  },
-})
-
 -- Run-code
 require('run-code').setup {
   output = {
@@ -51,3 +17,37 @@ require('run-code').setup {
     split_cmd = '20split',
   }
 }
+
+-- require('emmet-vim').setup()
+    -- setup = function () -- load stuff before the plugin is loaded
+    --   vim.g.user_emmet_leader_key = '<c-m>'
+    --   vim.g.user_emmet_settings = {
+    --   indent_blockelement = 1,
+    -- }
+    -- end,
+
+
+-- Treesitter
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+      enable = true
+  }
+}
+
+-- Highlight arguments' definitions and usages, asynchronously, using Treesitter
+require('hlargs').setup()
+
+
+-- Shade
+-- require'shade'.setup({
+--   overlay_opacity = 50,
+--   opacity_step = 1,
+--   keys = {
+--     brightness_up    = '<C-Up>',
+--     brightness_down  = '<C-Down>',
+--     toggle           = '<Leader>s',
+--   }
+-- })
+
+-- Performance related
+require('impatient').enable_profile()

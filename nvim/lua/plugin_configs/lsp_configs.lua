@@ -1,4 +1,7 @@
 local lsp_installer = require("nvim-lsp-installer")
+local lspconfig = require'lspconfig';
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
 
 lsp_installer.settings({
     ui = {
@@ -18,26 +21,12 @@ lsp_installer.settings({
     max_concurrent_installers = 6
 })
 
-local lspconfig = require'lspconfig';
-
-
----------------------------------------- BEGIN REF.
-
-require'nvim-treesitter.configs'.setup {
-  highlight = {
-      enable = true
-  },
-}
-
-
-
----------------------------------------- END REF.
-
 
 -- Ruby
 lspconfig.solargraph.setup{
   cmd = { 'solargraph', 'stdio' },
   filetypes = { 'ruby', 'rakefile' },
+  capabilities = capabilities,
   init_options = {
     formatting = true
   },
@@ -95,6 +84,12 @@ lspconfig.tsserver.setup{
   -- root_dir = root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")
 }
 
+-- CSS
+require'lspconfig'.cssmodules_ls.setup{
+  cmd = { "cssmodules-language-server" },
+  filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" }
+}
+
 -- C lang
 lspconfig.clangd.setup{
   on_attach = on_attach,
@@ -104,18 +99,22 @@ lspconfig.clangd.setup{
   root_dir = lspconfig.util.root_pattern("compile_commands.json", "compile_flags.txt"),
 }
 
+
 -- Crystal
 lspconfig.crystalline.setup{
   cmd = { "crystalline" },
   filetypes = { "crystal" },
-  single_file_support = true
+  single_file_support = true,
+  capabilities = capabilities
 }
+
 
 -- Python
 lspconfig.pylsp.setup{
   cmd = { "pylsp" },
   filetypes = { "python" },
-  single_file_support = true
+  single_file_support = true,
+  capabilities = capabilities
 }
 
 
@@ -127,7 +126,13 @@ lspconfig.elixirls.setup{
     suggestSpecs = true,
     signatureAfterComplete = true,
   },
-  cmd = { "/home/baka/apps/elixir-ls/release/language_server.sh" };
+  cmd = { "/home/baka/apps/elixir-ls/release/language_server.sh" },
+  capabilities = capabilities
+}
+
+
+require('lspconfig')['erlangls'].setup {
+  capabilities = capabilities
 }
 
 
@@ -136,7 +141,8 @@ lspconfig.erlangls.setup{
   cmd = { "erlang_ls" },
   filetypes = { "erlang" },
   -- root_dir = root_pattern('rebar.config', 'erlang.mk', '.git')
-  single_file_support = true
+  single_file_support = true,
+  capabilities = capabilities
 }
 
 
@@ -150,6 +156,7 @@ lspconfig.sumneko_lua.setup {
   filetypes = { "lua" },
   log_level = 2,
   single_file_support = true,
+  capabilities = capabilities,
   settings = {
     Lua = {
       runtime = {
@@ -170,6 +177,7 @@ lspconfig.sumneko_lua.setup {
   }
 }
 
+
 -- Haskell
 lspconfig.hls.setup{
   filetypes = { "haskell", "lhaskell"},
@@ -177,7 +185,8 @@ lspconfig.hls.setup{
     formattingProvider = "ormolu",
   },
   cmd = { "haskell-language-server-wrapper", "--lsp" },
-  single_file_support = true
+  single_file_support = true,
+  capabilities = capabilities
 }
 
 -- Don't use this shitty lsp! Crashes every fucking time when I open markdown file.
@@ -189,3 +198,57 @@ lspconfig.hls.setup{
 --   single_file_support = true
 -- }
 
+
+
+------------------------------------------------------------------------------------
+-- LSP kind for icons BUT IT IS NOT WORKING AS EXPECTED
+-- I DON'T KNOW WHY
+-- FUCK THIS SHIT
+
+
+
+-- require('lspkind').init({
+--     -- DEPRECATED (use mode instead): enables text annotations
+--     --
+--     -- default: true
+--     -- with_text = true,
+--
+--     -- defines how annotations are shown
+--     -- default: symbol
+--     -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
+--     mode = 'symbol_text',
+--
+--     -- default symbol map
+--     -- can be either 'default' (requires nerd-fonts font) or
+--     -- 'codicons' for codicon preset (requires vscode-codicons font)
+--     --
+--     -- default: 'default'
+--     preset = 'codicons',
+--     symbol_map = {
+--       Text = "",
+--       Method = "",
+--       Function = "",
+--       Constructor = "",
+--       Field = "ﰠ",
+--       Variable = "",
+--       Class = "ﴯ",
+--       Interface = "",
+--       Module = "",
+--       Property = "ﰠ",
+--       Unit = "塞",
+--       Value = "",
+--       Enum = "",
+--       Keyword = "",
+--       Snippet = "",
+--       Color = "",
+--       File = "",
+--       Reference = "",
+--       Folder = "",
+--       EnumMember = "",
+--       Constant = "",
+--       Struct = "פּ",
+--       Event = "",
+--       Operator = "",
+--       TypeParameter = ""
+--     },
+-- })

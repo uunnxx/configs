@@ -79,13 +79,6 @@ nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 
 -----------------------------------------------------------------------------
 
-
--- Arrow keys
---- map('', '<up>', ':echoe "Use k"<CR>', {noremap = true, silent = false})
---- map('', '<down>', ':echoe "Use j"<CR>', {noremap = true, silent = false})
---- map('', '<left>', ':echoe "Use h"<CR>', {noremap = true, silent = false})
---- map('', '<right>', ':echoe "Use l"<CR>', {noremap = true, silent = false})
-
 -- Autoformat + save as CTRL-s normal, and insert mode
 map('n', '<C-s>', ':Autoformat<CR>:w<CR>',  silentnoremap)
 map('i', '<C-s>', '<esc>:Autoformat<CR>:w<CR>', silentnoremap)
@@ -397,6 +390,8 @@ vim.cmd[[
   " Run with argument <leader>rc
   autocmd FileType ruby    nmap <buffer> <leader>rr :w\|:!ruby ./%<cr>
   autocmd FileType ruby    nmap <buffer> <leader>rc :w\|:!ruby ./% 
+  autocmd FileType javascript    nmap <buffer> <leader>rr :w\|:!node ./%<cr>
+  autocmd FileType javascript    nmap <buffer> <leader>rc :w\|:!node ./% 
   autocmd FileType crystal nmap <buffer> <leader>rr :w\|:!crystal ./%<cr>
   autocmd FileType crystal nmap <buffer> <leader>rc :w\|:!crystal ./% 
   autocmd FileType python  nmap <buffer> <leader>rr :w\|:!python3 ./%<cr>
@@ -408,3 +403,9 @@ vim.cmd[[
 ]]
 
 
+
+-- Emmet
+vim.cmd[[
+  let g:user_emmet_leader_key='<C-space>'
+  let g:user_emmet_install_global = 0
+]]

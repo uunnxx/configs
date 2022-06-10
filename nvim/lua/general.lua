@@ -57,6 +57,7 @@ wset.wrap = true
 set.cmdheight = 2
 -- Global statusline. set to 2 to get it default back
 set.laststatus = 3
+
 set.showmode = false
 
 -- Shorter messages

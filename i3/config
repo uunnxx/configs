@@ -130,8 +130,8 @@ bindsym $alt+$sh+l workspace next
 bindsym $alt+$sh+h workspace prev
 
 # Workspaces
-set $left DVI-D-0
-set $right HDMI-A-0
+set $left HDMI-A-0
+set $right DVI-D-0
 
 # bindsym $alt+$sh+Right focus output $left; workspace next; focus output $right; workspace next
 
@@ -443,9 +443,11 @@ exec --no-startup-id compton --config ~/.config/compton.conf -b
 
 exec_always --no-startup-id xset r rate 150 40
 # Set screentimeout to 600 sec
-exec_always --no-startup-id xset dpms 600
+exec_always --no-startup-id xset s 600
+exec --no-startup-id xscreensaver
 # Make displays work as expected
-exec --no-startup-id xrandr --output DVI-D-0 --auto --left-of HDMI-A-0
+exec --no-startup-id xrandr --output DVI-D-0 --auto --right-of HDMI-A-0
+exec --no-startup-id xrandr --output DVI-D-0 --mode 1920x1080 --rate 60.00
 # CapsLock is Mod4
 exec_always --no-startup-id setxkbmap -option caps:super
 exec_always --no-startup-id alttab -w 1 -fg "#fabd2f" -bg "#141c21" -frame "#fabd2f" -t 128x150 -i 127x64
@@ -517,11 +519,16 @@ bindsym $mod+$sh+v exec --no-startup-id diodon, mode "default"
 # MODES
 
 
-set $run [b]rave, [f]irefox, [t]rans_en, [T]rans_ru
+set $run [bB]rave, [fF]irefox, [p]omotroid, [tT]ranslate
 mode "$run" {
 #  bindsym g exec --no-startup-id google-chrome, mode "default"
   bindsym b exec --no-startup-id brave-browser, mode "default"
+  bindsym $sh+b exec --no-startup-id brave-browser --incognito, mode "default"
+
   bindsym f exec --no-startup-id firefox, mode "default"
+  bindsym $sh+f exec --no-startup-id firefox --private-window, mode "default"
+
+  bindsym p exec --no-startup-id pomotroid, mode "default"
 
   bindsym t exec --no-startup-id $trans_en, mode "default"
   bindsym $sh+t exec --no-startup-id $trans_ru, mode "default"
