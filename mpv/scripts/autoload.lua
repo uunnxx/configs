@@ -28,10 +28,10 @@ local utils = require 'mp.utils'
 
 o = {
     disabled = false,
-    images = true,
+    images = false,
     videos = true,
     audio = true,
-    ignore_hidden = true
+    ignore_hidden = false
 }
 options.read_options(o)
 

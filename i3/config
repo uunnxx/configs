@@ -446,8 +446,8 @@ exec_always --no-startup-id xset r rate 130 40
 exec_always --no-startup-id xset s 600
 exec --no-startup-id xscreensaver
 # Make displays work as expected
-exec --no-startup-id xrandr --output DVI-D-0 --auto --right-of HDMI-A-0
 exec --no-startup-id xrandr --output DVI-D-0 --primary --mode 1920x1080 --rate 60.00
+exec --no-startup-id xrandr --output DVI-D-0 --auto --right-of HDMI-A-0
 # CapsLock is Mod4
 exec_always --no-startup-id setxkbmap -option caps:super
 exec_always --no-startup-id alttab -w 1 -fg "#fabd2f" -bg "#141c21" -frame "#fabd2f" -t 128x150 -i 127x64

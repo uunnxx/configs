@@ -1,6 +1,5 @@
 configuration {
   modi: "window,drun,run,windowcd";
-  theme: "slate";
   combi-modi: "window,drun,ssh";
   cycle: true;
   lines: 10;
@@ -17,9 +16,10 @@ configuration {
   sorting-method: "fzf";
 }
 
+/* @theme "material" */
+@theme "slate"
 
-
-configuration {
+/* configuration { */
 /*	width: 50;*/
 /*	font: "mono 12";*/
 /*	bw: 1;*/
@@ -140,4 +140,4 @@ configuration {
 /*	me-select-entry: "MousePrimary";*/
 /*	me-accept-entry: "MouseDPrimary";*/
 /*	me-accept-custom: "Control+MouseDPrimary";*/
-}
+/* } */
