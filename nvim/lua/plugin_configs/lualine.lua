@@ -4,17 +4,21 @@ require('lualine').setup {
     icons_enabled = true,
     theme = 'gruvbox',
     component_separators = { left = '|', right = '|'},
-    section_separators = { left = '', right = ''},
-    disabled_filetypes = {},
+    section_separators = { left = ' ', right = ' '},
+    disabled_filetypes = {
+      statusline = {},
+      winbar = {},
+    },
     always_divide_middle = true,
     globalstatus = true
   },
   sections = {
     lualine_a = {'mode'},
     lualine_b = {'branch', 'diff'},
-    lualine_c = {'filename'},
+    lualine_c = { 'getcwd', 'filename'},
 
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    -- %B hex code
+    lualine_x = {'diagnostics', 'encoding', 'fileformat', 'filetype', '%B'},
     lualine_y = {'progress'},
     lualine_z = {'location'}
   },

@@ -314,7 +314,6 @@ bindsym $alt+m exec i3-input -F 'mark --toggle %s' -l 1 -P 'MARK: ' -f '-misc-fi
 bindsym $alt+g exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'GOTO: ' -f '-misc-fixed-*-*-*-*-20-*-*-*-*-*-iso10646-*'
 
 
-
 bindsym Pause exec --no-startup-id systemctl suspend
 
 
@@ -436,31 +435,30 @@ exec --no-startup-id /usr/bin/fcitx5
 exec --no-startup-id /usr/bin/diodon
 exec --no-startup-id xclip
 exec --no-startup-id flameshot
-exec --no-startup-id volumeicon
+# exec --no-startup-id volumeicon
 exec --no-startup-id nm-applet
 exec --no-startup-id compton --config ~/.config/compton.conf -b
 # exec --no-startup-id unagi
 
 exec_always --no-startup-id xset r rate 130 40
 # Set screentimeout to 600 sec
-exec_always --no-startup-id xset s 600
+# exec_always --no-startup-id xset s 600
+# xset is not working anymore for me, so, will use xscreensaver for now
 exec --no-startup-id xscreensaver
 # Make displays work as expected
-exec --no-startup-id xrandr --output DVI-D-0 --primary --mode 1920x1080 --rate 60.00
-exec --no-startup-id xrandr --output DVI-D-0 --auto --right-of HDMI-A-0
-# CapsLock is Mod4
-exec_always --no-startup-id setxkbmap -option caps:super
+exec --no-startup-id xrandr --output DVI-D-0 --auto --right-of HDMI-A-0 && xrandr --output DVI-D-0 --primary --mode 1920x1080 --rate 60.00
+# CapsLock is Mod4 & Mod4 is CapsLock
+exec_always --no-startup-id setxkbmap -option caps:super && xmodmap -e 'keycode 133 = Caps_Lock'
+
+# https://github.com/sagb/alttab
 exec_always --no-startup-id alttab -w 1 -fg "#fabd2f" -bg "#141c21" -frame "#fabd2f" -t 128x150 -i 127x64
 
 # To reset settings redshift -x
 exec_always --no-startup-id redshift -x; exec redshift -O 3500
 
 # Input method settings
-# Comment this lines out because we using fcitx right now
 # bindsym d exec --no-startup-id "setxkbmap -layout us,ru -variant dvp, -option grp:alt_space_toggle", mode "default"
 # bindsym q exec --no-startup-id "setxkbmap -layout us,ru -option grp:alt_space_toggle", mode "default"
-
-# exec_always --no-startup-id back4 0.07 $HOME/Pictures/lv/3.gif
 
 
 # Not used keys:
@@ -503,11 +501,9 @@ bindsym $alt+Up exec $HOME/.local/bin/volume_up
 bindsym $alt+Down exec $HOME/.local/bin/volume_down
 
 # mpvctl https://gist.github.com/dwgill/a66769e0edef69c04d3b
-
 bindsym $mod+Left exec mpvctl previous; exec dunstify -r 1111 -u low "PREVIOUS TRACK"
 bindsym $mod+Right exec mpvctl next; exec dunstify -r 1111 -u low "NEXT TRACK"
 bindsym $mod+Up exec dunstify -r 9999 -u normal "NOW PLAYING:" "$(exec mpvctl play)"
-# bindsym $mod+Down exec mpvctl pause; exec dunstify -r 1111 -u low "PAUSE"
 bindsym $mod+Down exec mpvctl pause; exec dunstify -r 9999 -u low "PAUSE"
 
 # Next: PageDown, Prior: PageUp
@@ -516,7 +512,8 @@ bindsym $ctrl+$alt+Prior exec obs-cli --password "bakabakabaka" scene switch lef
 
 bindsym $mod+$sh+v exec --no-startup-id diodon, mode "default"
 
-# MODES
+
+# MODES ---------------------------------------------------------------------------------------------------------------
 
 
 set $run [bB]rave, [fF]irefox, [p]omotroid, [tT]ranslate
@@ -602,3 +599,5 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+
+# END OF MODES SECTION ------------------------------------------------------------------------------------------------
