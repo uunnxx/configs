@@ -41,6 +41,5 @@ krita*
 fcitx/*
 !fcitx/skin
 
-dunst*
 .themes*
 
