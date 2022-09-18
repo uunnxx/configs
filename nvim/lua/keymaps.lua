@@ -125,6 +125,7 @@ map('i', '<M-e>', '<ESC>:edit ', nowait)
 map('n', 'tt', ':Telescope find_files theme=ivy<CR>', nowait)
 -- map('n', '<C-CR>', ':Telescope find_files<CR>', nowait)
 map('n', '<S-CR>', ':Telescope buffers theme=ivy<CR>', silentnoremapnowait)
+map('n', '<S-m>', ':Telescope man_pages sections=1,2,3<CR>', silentnoremapnowait)
 
 -- Filetypes
 map('n', 'FF', ':Telescope filetypes <CR>', silentnoremapnowait)
@@ -400,6 +401,20 @@ vim.cmd[[
   autocmd FileType cpp     nmap <buffer> <leader>rc :w\|:!g++ ./% -g -o %:r_temp && ./%:r_temp 
   autocmd FileType c       nmap <buffer> <leader>rr :w\|:!gcc ./% -g -o %:r_temp && ./%:r_temp<cr>
   autocmd FileType c       nmap <buffer> <leader>rc :w\|:!gcc ./% -g -o %:r_temp && ./%:r_temp 
+]]
+
+vim.cmd[[
+  " Table mode motion
+  " vim-table-mode
+  autocmd FileType markdown,md,rb call MarkdownOptions()
+
+  function! MarkdownOptions()
+    nmap Th [\|
+    nmap Tl ]\|
+    nmap Tj }\|
+    nmap Tk {\|
+
+  endfunction
 ]]
 
 

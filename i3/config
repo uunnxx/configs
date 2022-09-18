@@ -9,8 +9,8 @@ set $ranger "alacritty --class ranger -e ranger"
 set $trans_ru "alacritty --class translator -e trans -t ru -I"
 set $trans_en "alacritty --class translator -e trans -t en -I"
 # set $trans "urxvt -name translator -e trans -t ru -I"
-# set $fm "nautilus"
-set $fm "thunar"
+set $fm "nautilus"
+# set $fm "thunar"
 set $menu "rofi -show drun"
 set $menu2 "rofi -show run"
 set $dmenu "dmenu_run"
@@ -166,7 +166,7 @@ set $leftA "RUBY"
 set $leftB "PYTHON"
 set $leftC "ELIXIR"
 set $leftD "LINUX"
-set $leftE "SCIENCE"
+set $leftE "QURAN"
 set $leftF "LINGUISTICS"
 set $leftG "SECURITY"
 set $leftH "WEB"
@@ -547,7 +547,7 @@ mode "$screenshot" {
 bindsym Print mode "$screenshot"
 
 
-set $more_workspaces    a:RUBY   b:PYTHON   c:ELIXIR   d:LINUX   e:SCIENCE   f:LINGUISTICS   g:SECURITY   h:WEB   i:CS   j:RE   k:BOOKS
+set $more_workspaces    a:RUBY   b:PYTHON   c:ELIXIR   d:LINUX   e:QURAN   f:LINGUISTICS   g:SECURITY   h:WEB   i:CS   j:RE   k:BOOKS
 mode "$more_workspaces" {
   bindsym a workspace $leftA, mode "default"
   bindsym b workspace $leftB, mode "default"

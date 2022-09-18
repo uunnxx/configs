@@ -12,11 +12,11 @@ return require('packer').startup(function()
   use 'nvim-lua/plenary.nvim'
   use 'nvim-lua/popup.nvim'
   use 'nvim-telescope/telescope.nvim'
+  use {'nvim-telescope/telescope-ui-select.nvim' }
   use {
     'nvim-telescope/telescope-fzf-native.nvim',
     run = 'make'
   }
-  use {'nvim-telescope/telescope-ui-select.nvim' }
 
 
 
@@ -25,9 +25,6 @@ return require('packer').startup(function()
   -----------------------------------------------------------
   -- Colorscheme
   use 'uunnxx/gruvbox.nvim'
-  use "rebelot/kanagawa.nvim"
-
-
 
   use 'MunifTanjim/nui.nvim'
 
@@ -254,12 +251,16 @@ return require('packer').startup(function()
 -- 'turbio/bracey.vim'
 
 
+-- Vim Table Mode for Markdown
+  use {
+    'https://github.com/dhruvasagar/vim-table-mode',
+    -- ft = {'md', 'markdown', 'ruby', 'rb'}
+  }
 
   use 'gabebw/vim-github-link-opener'
 
+
 --------------------------------------- REF |
-
-
   -- 'Автоформатирование' кода для всех языков
   use 'Chiel92/vim-autoformat'
   -- ]p - вставить на строку выше, [p - ниже

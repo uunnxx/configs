@@ -90,6 +90,31 @@ require'lspconfig'.cssmodules_ls.setup{
   filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" }
 }
 
+require'lspconfig'.tailwindcss.setup{
+  cmd = { "tailwindcss-language-server", "--stdio" },
+  init_options = {
+    userLanguages = {
+      eelixir = "html-eex",
+      eruby = "erb"
+    }
+  },
+  settings = {
+    tailwindCSS = {
+      classAttributes = { "class", "className", "classList", "ngClass" },
+        lint = {
+          cssConflict = "warning",
+          invalidApply = "error",
+          invalidConfigPath = "error",
+          invalidScreen = "error",
+          invalidTailwindDirective = "error",
+          invalidVariant = "error",
+          recommendedVariantOrder = "warning"
+        },
+      validate = true
+    }
+  }
+}
+
 -- C lang
 lspconfig.clangd.setup{
   on_attach = on_attach,

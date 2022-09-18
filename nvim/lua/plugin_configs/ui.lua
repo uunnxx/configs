@@ -50,8 +50,8 @@ autocmd Syntax * call matchadd('Todo', '\W\zs\(CONCEPT\|TODO\|FIXME\|CHANGED\|CH
 autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\|README\|unx\|SYNTAX\)')
 autocmd Syntax * call matchadd('Error', '\W\zs\(ERROR\|WARNING\|BUG\)')
 
-" autocmd Filetype python,ruby,c,cpp match Error /\s\+$/
-match Error /\s\+$/
+autocmd Filetype python,ruby,c,cpp,elixir,rust match Error /\s\+$/
+" match Error /\s\+$/
 ]]
 
 
