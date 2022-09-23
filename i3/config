@@ -9,8 +9,8 @@ set $ranger "alacritty --class ranger -e ranger"
 set $trans_ru "alacritty --class translator -e trans -t ru -I"
 set $trans_en "alacritty --class translator -e trans -t en -I"
 # set $trans "urxvt -name translator -e trans -t ru -I"
-set $fm "nautilus"
-# set $fm "thunar"
+# set $fm "nautilus"
+set $fm "thunar"
 set $menu "rofi -show drun"
 set $menu2 "rofi -show run"
 set $dmenu "dmenu_run"
@@ -130,8 +130,8 @@ bindsym $alt+$sh+l workspace next
 bindsym $alt+$sh+h workspace prev
 
 # Workspaces
-set $left HDMI-A-0
-set $right DVI-D-0
+set $left HDMI-0
+set $right DP-1
 
 # bindsym $alt+$sh+Right focus output $left; workspace next; focus output $right; workspace next
 
@@ -446,7 +446,7 @@ exec_always --no-startup-id xset r rate 130 40
 # xset is not working anymore for me, so, will use xscreensaver for now
 exec --no-startup-id xscreensaver
 # Make displays work as expected
-exec --no-startup-id xrandr --output DVI-D-0 --auto --right-of HDMI-A-0 && xrandr --output DVI-D-0 --primary --mode 1920x1080 --rate 60.00
+# exec --no-startup-id xrandr --output DP-1 --auto --right-of HDMI-0 && xrandr --output DP-1 --primary --mode 1920x1080 --rate 60.00
 # CapsLock is Mod4 & Mod4 is CapsLock
 exec_always --no-startup-id setxkbmap -option caps:super && xmodmap -e 'keycode 133 = Caps_Lock'
 
@@ -516,7 +516,7 @@ bindsym $mod+$sh+v exec --no-startup-id diodon, mode "default"
 # MODES ---------------------------------------------------------------------------------------------------------------
 
 
-set $run [bB]rave, [fF]irefox, [p]omotroid, [tT]ranslate
+set $run [bB]rave, [fF]irefox, [tT]ranslate
 mode "$run" {
 #  bindsym g exec --no-startup-id google-chrome, mode "default"
   bindsym b exec --no-startup-id brave-browser, mode "default"
@@ -524,8 +524,6 @@ mode "$run" {
 
   bindsym f exec --no-startup-id firefox, mode "default"
   bindsym $sh+f exec --no-startup-id firefox --private-window, mode "default"
-
-  bindsym p exec --no-startup-id pomotroid, mode "default"
 
   bindsym t exec --no-startup-id $trans_en, mode "default"
   bindsym $sh+t exec --no-startup-id $trans_ru, mode "default"

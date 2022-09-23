@@ -135,12 +135,27 @@ lspconfig.crystalline.setup{
 
 
 -- Python
-lspconfig.pylsp.setup{
-  cmd = { "pylsp" },
-  filetypes = { "python" },
+-- lspconfig.pylsp.setup{
+--   cmd = { "pylsp" },
+--   filetypes = { "python" },
+--   single_file_support = true,
+--   capabilities = capabilities
+-- }
+
+lspconfig.pyright.setup{
   single_file_support = true,
-  capabilities = capabilities
+  settings = {
+    python = {
+      analysis = {
+        autoSearchPaths = true,
+        diagnosticMode = "workspace",
+        useLibraryCodeForTypes = true,
+        extraPaths = {"/usr/local/lib/python3.10/site-packages"}
+      }
+    }
+  }
 }
+
 
 
 -- Elixir
