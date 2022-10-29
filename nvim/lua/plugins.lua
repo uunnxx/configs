@@ -12,7 +12,7 @@ return require('packer').startup(function()
   use 'nvim-lua/plenary.nvim'
   use 'nvim-lua/popup.nvim'
   use 'nvim-telescope/telescope.nvim'
-  use {'nvim-telescope/telescope-ui-select.nvim' }
+  use 'nvim-telescope/telescope-ui-select.nvim'
   use {
     'nvim-telescope/telescope-fzf-native.nvim',
     run = 'make'
@@ -53,9 +53,6 @@ return require('packer').startup(function()
   -- Indent guides for Neovim
   use 'lukas-reineke/indent-blankline.nvim'
 
-
-  use 'arjunmahishi/run-code.nvim'
-
 ---------- Comment
   use { 'numToStr/Comment.nvim',
     config = function()
@@ -86,14 +83,14 @@ return require('packer').startup(function()
   use 'google/vim-searchindex'
 
   -- Hop alternative for EasyMotion
-  -- use {
-  --   'phaazon/hop.nvim',
-  --   branch = 'v1', -- optional but strongly recommended
-  --   config = function()
-  --     -- you can configure Hop the way you like here; see :h hop-config
-  --     require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
-  --   end
-  -- }
+  use {
+    'phaazon/hop.nvim',
+    branch = 'v2', -- optional but strongly recommended
+    config = function()
+      -- you can configure Hop the way you like here; see :h hop-config
+      require'hop'.setup { keys = 'etovxqpdygfblzhckisuranw' }
+    end
+  }
 
 
   -----------------------------------------------------------

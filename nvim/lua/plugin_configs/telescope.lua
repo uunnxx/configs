@@ -3,18 +3,16 @@ local actions = require('telescope.actions')
 local themes = require('telescope.themes')
 
 
-
-
 -- INFO @etrnal70
 
 local default_ivy = {
   theme = 'ivy',
-  layout_config = { heigth = 13 }
+  -- layout_config = { heigth = 13 }
 }
 
 tele.setup({
   defaults = {
-    layout_strategy = "flex",
+    -- layout_strategy = "flex",
     layout_config = {
       flex = {
         flip_columns = 130,
@@ -28,8 +26,8 @@ tele.setup({
       },
     },
     path_display = { "truncate" },
-    prompt_prefix = "➤  ",
-    selection_caret = "• ",
+    prompt_prefix = "::  ",
+    selection_caret = "- ",
     wrap_results = true,
     file_ignore_patterns = {
       "__pycache__/*",
@@ -50,21 +48,6 @@ tele.setup({
         ["<C-O>"] = actions.toggle_all,
       },
     },
-  },
-  extensions = {
-    ["fzf"] = {
-      fuzzy = true,
-      override_generic_sorter = false,
-      override_file_sorter = true,
-      case_mode = "smart_case",
-    },
-    ["ui-select"] = themes.get_dropdown({
-      initial_mode = "normal",
-      layout_config = {
-        height = 7,
-        width = 45,
-      },
-    }),
   },
   pickers = {
     commands = {
@@ -102,7 +85,28 @@ tele.setup({
   },
 })
 
+
+
+
+tele.setup {
+  extensions = {
+    fzf = {
+      fuzzy = true,
+      override_generic_sorter = false,
+      override_file_sorter = true,
+      case_mode = "smart_case",
+    },
+    ["ui-select"] = themes.get_dropdown {
+      initial_mode = "normal",
+      layout_config = {
+        height = 7,
+        width = 45,
+      },
+    },
+  },
+}
+
 -- To get fzf loaded and working with telescope, you need to call
 -- load_extension, somewhere after setup function:
-require('telescope').load_extension('fzf')
-require('telescope').load_extension('ui-select')
+tele.load_extension('fzf')
+tele.load_extension('ui-select')

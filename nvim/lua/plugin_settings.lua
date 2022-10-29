@@ -10,13 +10,6 @@ require("indent_blankline").setup {
     },
 }
 
--- Run-code
-require('run-code').setup {
-  output = {
-    buffer = true,
-    split_cmd = '20split',
-  }
-}
 
 -- require('emmet-vim').setup()
     -- setup = function () -- load stuff before the plugin is loaded
@@ -51,3 +44,30 @@ require('hlargs').setup()
 
 -- Performance related
 require('impatient').enable_profile()
+
+
+-- Hop.nvim
+-- place this in one of your configuration file(s)
+local hop = require('hop')
+local directions = require('hop.hint').HintDirection
+vim.keymap.set('', 'f', function()
+  hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false })
+end, {remap=true})
+vim.keymap.set('', 'F', function()
+  hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false })
+end, {remap=true})
+vim.keymap.set('', 't', function()
+  hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false, hint_offset = -1 })
+end, {remap=true})
+vim.keymap.set('', 'T', function()
+  hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })
+end, {remap=true})
+vim.keymap.set('', 'nn', function()
+  hop.hint_words({})
+end, {remap=true})
+
+
+
+vim.keymap.set('', 'N', function()
+  hop.hint_lines({ current_line_only = false})
+end, {remap=true})

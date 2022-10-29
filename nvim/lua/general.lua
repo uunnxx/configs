@@ -38,7 +38,10 @@ set.hidden = true
 -------------------- UI
 -------------------------------------------------------------------------------
 
-set.colorcolumn = '120'              -- Edit 120
+cmd[[
+    let &colorcolumn="80,100,".join(range(120,999),",")
+    hi! ColorColumn ctermbg=6
+]]
 set.cursorline = true
 set.cursorcolumn = false
 set.signcolumn = 'auto'             -- only when there is a sign to display.
@@ -92,7 +95,7 @@ set.diffopt = {'internal', 'vertical', 'filler', 'closeoff'}
 -------------------------------------------------------------------------------
 -------------------- Spelling
 -------------------------------------------------------------------------------
-set.dictionary='/usr/share/dict/british-english'
+set.dictionary='~/.config/nvim/spell/'
 set.spelllang = { 'en_us', 'cjk', 'ru' }    -- Dictionary for spellcheck
 
 

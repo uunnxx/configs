@@ -11,6 +11,7 @@ set $trans_en "alacritty --class translator -e trans -t en -I"
 # set $trans "urxvt -name translator -e trans -t ru -I"
 # set $fm "nautilus"
 set $fm "thunar"
+# set $fm "pcmanfm"
 set $menu "rofi -show drun"
 set $menu2 "rofi -show run"
 set $dmenu "dmenu_run"
@@ -316,6 +317,8 @@ bindsym $alt+g exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'GOTO: ' -f '-mi
 
 bindsym Pause exec --no-startup-id systemctl suspend
 
+# tiling_drag modifier titlebar
+
 
 #
 # Colors
@@ -362,8 +365,8 @@ bar {
   tray_padding 0
   output $right
   tray_output none
-  i3bar_command i3bar --transparency
-  # i3bar_command i3bar
+  # i3bar_command i3bar --transparency
+  i3bar_command i3bar
   status_command i3status --config ~/.config/i3/i3status.conf
   position bottom
   separator_symbol " | "
@@ -393,8 +396,8 @@ bar {
   tray_padding 0
   output $left
   tray_output $left
-  i3bar_command i3bar --transparency
-  # i3bar_command i3bar
+  # i3bar_command i3bar --transparency
+  i3bar_command i3bar
   status_command i3status --config ~/.config/i3/i3status-small.conf
   position bottom
   separator_symbol " | "
@@ -437,8 +440,10 @@ exec --no-startup-id xclip
 exec --no-startup-id flameshot
 # exec --no-startup-id volumeicon
 exec --no-startup-id nm-applet
-exec --no-startup-id compton --config ~/.config/compton.conf -b
-# exec --no-startup-id unagi
+# window compositor: compton, unagi, xcompmgr (unagi is crashing after bufferoverflow)
+# exec --no-startup-id compton --config ~/.config/compton.conf -b
+exec_always --no-startup-id /usr/bin/xcompmgr
+exec --no-startup-id $term
 
 exec_always --no-startup-id xset r rate 130 40
 # Set screentimeout to 600 sec
@@ -446,9 +451,11 @@ exec_always --no-startup-id xset r rate 130 40
 # xset is not working anymore for me, so, will use xscreensaver for now
 exec --no-startup-id xscreensaver
 # Make displays work as expected
-# exec --no-startup-id xrandr --output DP-1 --auto --right-of HDMI-0 && xrandr --output DP-1 --primary --mode 1920x1080 --rate 60.00
+exec --no-startup-id xrandr --output DP-1 --auto --right-of HDMI-0 && xrandr --output DP-1 --primary
+# CapsLock is Mod4
+exec_always --no-startup-id setxkbmap -option caps:super
 # CapsLock is Mod4 & Mod4 is CapsLock
-exec_always --no-startup-id setxkbmap -option caps:super && xmodmap -e 'keycode 133 = Caps_Lock'
+# exec_always --no-startup-id setxkbmap -option caps:super && xmodmap -e 'keycode 133 = Caps_Lock'
 
 # https://github.com/sagb/alttab
 exec_always --no-startup-id alttab -w 1 -fg "#fabd2f" -bg "#141c21" -frame "#fabd2f" -t 128x150 -i 127x64
@@ -513,7 +520,7 @@ bindsym $ctrl+$alt+Prior exec obs-cli --password "bakabakabaka" scene switch lef
 bindsym $mod+$sh+v exec --no-startup-id diodon, mode "default"
 
 
-# MODES ---------------------------------------------------------------------------------------------------------------
+# MODES -------------------------------------------------------------------------------------------
 
 
 set $run [bB]rave, [fF]irefox, [tT]ranslate
@@ -598,4 +605,4 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 
-# END OF MODES SECTION ------------------------------------------------------------------------------------------------
+# END OF MODES SECTION ----------------------------------------------------------------------------
