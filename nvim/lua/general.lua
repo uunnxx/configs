@@ -9,7 +9,6 @@ local wset  = vim.wo              -- Window-scoped
 
 -- Only run these settings once
 if not packer_plugins then
-  -- vim.api.nvim_set_keymap("", "<Space>", "<Nop>", { noremap = true, silent = true })
   set.background = "dark"
   set.termguicolors = true -- true colors
 end
@@ -38,8 +37,9 @@ set.hidden = true
 -------------------- UI
 -------------------------------------------------------------------------------
 
+-- let &colorcolumn="80,100,".join(range(120,999),",")
 cmd[[
-    let &colorcolumn="80,100,".join(range(120,999),",")
+    let &colorcolumn="80,100,120,140,160,180,200"
     hi! ColorColumn ctermbg=6
 ]]
 set.cursorline = true
@@ -57,7 +57,7 @@ set.splitbelow = true               -- bottom, which feels more natural
 
 wset.wrap = true
 
-set.cmdheight = 2
+set.cmdheight = 1
 -- Global statusline. set to 2 to get it default back
 set.laststatus = 3
 
@@ -80,6 +80,7 @@ set.showtabline = 2
 -- set.diffopt+=vertical
 set.diffopt = {'internal', 'vertical', 'filler', 'closeoff'}
 
+set.scrolloff=5
 
 
 -- Folding
@@ -100,7 +101,6 @@ set.spelllang = { 'en_us', 'cjk', 'ru' }    -- Dictionary for spellcheck
 
 
 
-
 -------------------------------------------------------------------------------
 -------------------- Completion
 -------------------------------------------------------------------------------
@@ -109,12 +109,6 @@ set.completeopt = 'menu,menuone,noselect'
 -- set.completeopt = '.,w,b,u,t,i'
 
 
-
-
-
-
-
-set.scrolloff=15
 
 -------------------------------------------------------------------------------
 -------------------- Invisible Chars
@@ -199,7 +193,7 @@ set noswapfile
 
 
 --------------------- Mouse
-set.mouse = 'a'
+set.mouse = ''
 set.mousefocus = true
 
 -- use g for reverse

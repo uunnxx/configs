@@ -18,6 +18,7 @@ return require('packer').startup(function()
     run = 'make'
   }
 
+  use 'RRethy/vim-illuminate'
 
 
   -----------------------------------------------------------
@@ -25,9 +26,11 @@ return require('packer').startup(function()
   -----------------------------------------------------------
   -- Colorscheme
   use 'uunnxx/gruvbox.nvim'
+  -- use "ellisonleao/gruvbox.nvim"
 
   use 'MunifTanjim/nui.nvim'
 
+  use 'kyazdani42/nvim-web-devicons'
 
   -- Statusline
   use { 'nvim-lualine/lualine.nvim',
@@ -88,7 +91,7 @@ return require('packer').startup(function()
     branch = 'v2', -- optional but strongly recommended
     config = function()
       -- you can configure Hop the way you like here; see :h hop-config
-      require'hop'.setup { keys = 'etovxqpdygfblzhckisuranw' }
+      require'hop'.setup { keys = 'twvxeoqpdygfblzhckisuran' }
     end
   }
 
@@ -96,17 +99,29 @@ return require('packer').startup(function()
   -----------------------------------------------------------
   -- LSP server and autocompletion
   -----------------------------------------------------------
-  use 'nvim-treesitter/nvim-treesitter'
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate'
+  }
   use 'neovim/nvim-lspconfig'
-  use 'williamboman/nvim-lsp-installer'
+  -- lsp installer
+  use { "williamboman/mason.nvim" }
 
 -- Highlight arguments' definitions and usages, asynchronously, using Treesitter
   use 'm-demare/hlargs.nvim'
 
+  use {
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("trouble").setup {}
+    end
+  }
+
 
 
   -- LINTER
-  use 'dense-analysis/ale'
+  -- use 'dense-analysis/ale'
 
 
   -- Autocompletion
@@ -163,16 +178,32 @@ return require('packer').startup(function()
     ft = {'ruby', 'rb', 'erb'}
   }
   use {
-    'https://github.com/whatyouhide/vim-textobj-erb',
-    ft = {'ruby', 'rb', 'erb', 'erb'},
-  }
-  use {
     'stjernstrom/vim-ruby-run',
     ft = {'ruby', 'rb', 'erb'}
   }
   use {
     'hallison/vim-ruby-sinatra',
     ft = {'ruby', 'rb', 'erb'}
+  }
+
+
+  -- Text Objects
+  use "kana/vim-textobj-user"
+  use {
+    'whatyouhide/vim-textobj-erb',
+    ft = {'ruby', 'rb', 'erb'},
+  }
+  use {
+    "tek/vim-textobj-ruby",
+    ft = {'ruby', 'rb', 'erb'}
+  }
+  use {
+    "nelstrom/vim-textobj-rubyblock",
+    ft = {'ruby', 'rb', 'erb'}
+  }
+  use {
+    "bps/vim-textobj-python",
+    ft = {'python', 'py'}
   }
 
 
@@ -224,16 +255,9 @@ return require('packer').startup(function()
   -- HTML и CSS
   -----------------------------------------------------------
 
-  use {
-    'mattn/emmet-vim',
-    ft = {'html', 'html5', 'css3', 'css', 'javascript', 'js'}
-  }
-
   -- Autopair alternative
   use 'cohama/lexima.vim'
   -- use 'windwp/nvim-autopairs'
-
-
 
   -- The fastest Neovim colorizer
   use 'norcalli/nvim-colorizer.lua'
@@ -251,24 +275,19 @@ return require('packer').startup(function()
 -- Vim Table Mode for Markdown
   use {
     'https://github.com/dhruvasagar/vim-table-mode',
-    -- ft = {'md', 'markdown', 'ruby', 'rb'}
+    ft = {'md', 'markdown', 'text'}
   }
 
+  -- Use gx to open github related links as "user/git_repo"
   use 'gabebw/vim-github-link-opener'
 
 
---------------------------------------- REF |
-  -- 'Автоформатирование' кода для всех языков
+-- Basic
   use 'Chiel92/vim-autoformat'
-  -- ]p - вставить на строку выше, [p - ниже
   use 'tpope/vim-unimpaired'
-  -- Обрамляет или снимает обрамление. Выдели слово, нажми S и набери <h1>
   use 'tpope/vim-surround'
-  -- Может повторять через . vimsurround
   use 'tpope/vim-repeat'
-  -- Стартовая страница, если просто набрать vim в консоле
   use 'mhinz/vim-startify'
 
---------------------------------------- REF |
 end)
 

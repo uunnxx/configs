@@ -1,24 +1,16 @@
-local lsp_installer = require("nvim-lsp-installer")
 local lspconfig = require'lspconfig';
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+local mason = require'mason'
 
 
-lsp_installer.settings({
+mason.setup({
     ui = {
         icons = {
-            server_installed = "✓",
-            server_pending = "➜",
-            server_uninstalled = "✗"
-        },
-        keymaps = {
-          toggle_server_expand = "<CR>",
-          install_server = 'i',
-          update_server = 'u',
-          update_all_servers = 'U',
-          uninstall_server = 'X'
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗"
         }
-    },
-    max_concurrent_installers = 6
+    }
 })
 
 
@@ -55,7 +47,7 @@ lspconfig.typeprof.setup{
 
 -- Rust
 lspconfig.rust_analyzer.setup{
-  on_attach = on_attach,
+  -- on_attach = on_attach,
   capabilities = capabilities,
   cmd = { "rust-analyzer" },
   filetypes = { "rust" },
@@ -67,7 +59,7 @@ lspconfig.rust_analyzer.setup{
 
 -- JavaScript, TypeScript
 lspconfig.tsserver.setup{
-  on_attach = on_attach,
+  -- on_attach = on_attach,
   capabilities = capabilities,
   cmd = { "typescript-language-server", "--stdio" },
   filetypes = {
@@ -117,7 +109,7 @@ require'lspconfig'.tailwindcss.setup{
 
 -- C lang
 lspconfig.clangd.setup{
-  on_attach = on_attach,
+  -- on_attach = on_attach,
   capabilities = capabilities,
   cmd = { "clangd", "--background-index" },
   filetypes = { "c", "cpp", "objc", "objcpp" },
@@ -142,21 +134,45 @@ lspconfig.crystalline.setup{
 --   capabilities = capabilities
 -- }
 
-lspconfig.pyright.setup{
-  single_file_support = true,
+-------------------------------------
+-- lspconfig.pyright.setup{
+--   single_file_support = true,
+--   settings = {
+--     python = {
+--       analysis = {
+--         autoSearchPaths = true,
+--         diagnosticMode = "workspace",
+--         useLibraryCodeForTypes = true,
+--         extraPaths = {"/usr/local/lib/python3.10/site-packages"}
+--       }
+--     }
+--   }
+-- }
+
+lspconfig.pylsp.setup{
   settings = {
-    python = {
-      analysis = {
-        autoSearchPaths = true,
-        diagnosticMode = "workspace",
-        useLibraryCodeForTypes = true,
-        extraPaths = {"/usr/local/lib/python3.10/site-packages"}
+    pylsp = {
+      plugins = {
+        pycodestyle = {
+          ignore = {'W391'},
+          maxLineLength = 79
+        },
+        mypy = {
+          enabled = true,
+          live_mode = true,
+          strict = false,
+        },
+        black = {
+          enabled = true,
+          line_length = 79,
+          preview = true
+        }
       }
     }
   }
 }
 
-
+require'lspconfig'.pyre.setup{}
 
 -- Elixir
 lspconfig.elixirls.setup{
@@ -223,12 +239,3 @@ lspconfig.hls.setup{
   single_file_support = true,
   capabilities = capabilities
 }
-
--- Don't use this shitty lsp! Crashes every fucking time when I open markdown file.
--- -- Grammarly
--- lspconfig.grammarly.setup{
---   cmd = { "unofficial-grammarly-language-server", "--stdio" },
---   filetypes = { "markdown", "text", "txt" },
---   -- root_dir = util.find_git_ancestor,
---   single_file_support = true
--- }

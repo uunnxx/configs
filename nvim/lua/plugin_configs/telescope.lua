@@ -1,6 +1,7 @@
 local tele = require('telescope')
 local actions = require('telescope.actions')
 local themes = require('telescope.themes')
+local trouble = require("trouble.providers.telescope")
 
 
 -- INFO @etrnal70
@@ -46,7 +47,9 @@ tele.setup({
         ["<esc>"] = actions.close,
         ["<C-o>"] = actions.toggle_selection,
         ["<C-O>"] = actions.toggle_all,
+        ["<c-T>"] = trouble.open_with_trouble 
       },
+      n = { ["<c-T>"] = trouble.open_with_trouble },
     },
   },
   pickers = {

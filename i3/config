@@ -4,17 +4,17 @@ set $alt Mod1
 set $mod3 Mod3
 set $sh Shift
 set $term "alacritty"
-set $term_float "alacritty --class float"
-set $ranger "alacritty --class ranger -e ranger"
-set $trans_ru "alacritty --class translator -e trans -t ru -I"
-set $trans_en "alacritty --class translator -e trans -t en -I"
-# set $trans "urxvt -name translator -e trans -t ru -I"
-# set $fm "nautilus"
+set $term_float "alacritty --class=alacrittyFloat"
+set $trans_ru "alacritty --class=alacrittyTranslator -e trans -t ru -I"
+set $trans_en "alacritty --class=alacrittyTranslator -e trans -t en -I"
+# set $ranger "alacritty --class=alacrittyRanger -e ranger"
 set $fm "thunar"
-# set $fm "pcmanfm"
-set $menu "rofi -show drun"
-set $menu2 "rofi -show run"
-set $dmenu "dmenu_run"
+
+set $menu_drun "rofi -show drun"
+set $menu_run "rofi -show run"
+set $menu_window "rofi -show window"
+set $menu_window_cd "rofi -show windowcd"
+
 set $barcmd i3status
 set $calc "qalculate-gtk"
 
@@ -34,10 +34,6 @@ default_floating_border pixel 4
 bindsym $mod+u border none
 bindsym $mod+y border pixel 4
 bindsym $mod+$sh+u border normal 4
-
-# focus next/previous visible window
-# bindsym $mod+n exec --no-startup-id ~/.config/i3/scripts/focus_next_visible.py
-# bindsym $mod+$sh+n exec --no-startup-id ~/.config/i3/scripts/focus_next_visible.py reverse
 
 bindsym $mod+Return exec $term
 bindsym $mod+$sh+Return exec $term_float
@@ -70,10 +66,11 @@ bindsym --whole-window $alt+button9 floating toggle
 # bindsym --whole-window $alt+button4 focus left
 # bindsym --whole-window $alt+button5 focus down
 
-bindsym $mod+d exec --no-startup-id $menu
-bindsym $mod+$sh+d exec --no-startup-id $menu2
+bindsym $mod+d exec --no-startup-id $menu_drun
+bindsym $mod+$sh+d exec --no-startup-id $menu_run
 
 bindsym $mod+n exec --no-startup-id rofi_books
+bindsym $mod+$sh+n exec --no-startup-id ~/.local/bin/dmenu_books
 
 bindsym $mod+g exec --no-startup-id $HOME/.config/i3/scripts/wmfocus.sh
 # bindsym $mod+$sh+g exec --no-startup-id
@@ -121,8 +118,12 @@ bindsym $mod+$sh+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 
-bindsym $alt+space exec --no-startup-id "rofi -show window"
-bindsym $alt+$sh+space exec --no-startup-id "rofi -show windowcd"
+
+bindsym $alt+space exec $menu_window_cd
+bindsym $alt+$sh+space exec $menu_window
+
+# bindsym $mod+$sh+slash exec
+# bindsym $mod+slash exec
 
 bindsym $mod+c move position center
 
@@ -270,13 +271,14 @@ for_window [class="Pavucontrol"] floating enable
 for_window [class="URxvt" instance="translator"] floating enable resize set 880 400
 for_window [class="URxvt" instance="translator"] move position 1040 658
 
-for_window [class="Alacritty" instance="translator"] floating enable resize set 880 400
-for_window [class="Alacritty" instance="translator"] move position 1040 658
+for_window [class="alacrittyTranslator"] floating enable resize set 880 400
+for_window [class="alacrittyTranslator"] move position 1040 658
 
-for_window [class="Alacritty" instance="ranger"] floating enable resize set 1240 690
-for_window [class="Alacritty" instance="ranger"] move position center
-for_window [class="Alacritty" instance="float"] floating enable resize set 900 450
-for_window [class="Alacritty" instance="float"] move position center
+for_window [class="alacrittyRanger"] floating enable resize set 1240 690
+for_window [class="alacrittyRanger"] move position center
+
+for_window [class="alacrittyFloat"] floating enable resize set 900 450
+for_window [class="alacrittyFloat"] move position center
 
 for_window [class="Qalculate-gtk"] floating enable resize set 900 450
 for_window [class="Qalculate-gtk"] move position center
@@ -284,14 +286,13 @@ for_window [class="Qalculate-gtk"] move position center
 for_window [class="Picture-in-picture"] floating enable border none
 for_window [class="mpv"] floating enable resize set 1240 690
 for_window [class="mpv"] move position center
-for_window [class="mpv"] border normal 4
 
 
 for_window [class="Eog"] floating enable resize set 1240 690
 for_window [class="Eog"] move position center
+
 for_window [class="Zathura"] floating enable resize set 1340 780
 for_window [class="Zathura"] move position center
-# for_window [class="Zathura"] border normal 4
 
 for_window [class="Org.gnome.Nautilus"] border normal 4
 # for_window [class="Org.gnome.Nautilus"] floating enable resize set 1340 780
@@ -299,18 +300,18 @@ for_window [class="Org.gnome.Nautilus"] border normal 4
 
 for_window [class="File-roller"] floating enable resize set 1340 780
 for_window [class="File-roller"] move position center
-for_window [class="File-roller"] border normal 4
+
 for_window [class="Evince"] floating enable resize set 1340 780
 for_window [class="Evince"] move position center
+
 for_window [class="Zeal"] floating enable resize set 1340 780
 for_window [class="Zeal"] move position center
+
 # for_window [urgent=latest] focus
-for_window [class="komorebi"] border none floating disable
 
 
 # read 1 character and mark the current window with this character
 bindsym $alt+m exec i3-input -F 'mark --toggle %s' -l 1 -P 'MARK: ' -f '-misc-fixed-*-*-*-*-20-*-*-*-*-*-iso10646-*'
-
 # read 1 character and go to the window with the character
 bindsym $alt+g exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'GOTO: ' -f '-misc-fixed-*-*-*-*-20-*-*-*-*-*-iso10646-*'
 
@@ -433,74 +434,84 @@ focus_wrapping no
 # smart, ignore, leave_fullscreen
 popup_during_fullscreen smart
 
-# Autostart applications
+#########################
+## Autostart applications
+#########################
 exec --no-startup-id /usr/bin/fcitx5
 exec --no-startup-id /usr/bin/diodon
 exec --no-startup-id xclip
 exec --no-startup-id flameshot
-# exec --no-startup-id volumeicon
 exec --no-startup-id nm-applet
 # window compositor: compton, unagi, xcompmgr (unagi is crashing after bufferoverflow)
 # exec --no-startup-id compton --config ~/.config/compton.conf -b
 exec_always --no-startup-id /usr/bin/xcompmgr
+
+# Launch Terminal
 exec --no-startup-id $term
 
 exec_always --no-startup-id xset r rate 130 40
-# Set screentimeout to 600 sec
-# exec_always --no-startup-id xset s 600
-# xset is not working anymore for me, so, will use xscreensaver for now
-exec --no-startup-id xscreensaver
-# Make displays work as expected
-exec --no-startup-id xrandr --output DP-1 --auto --right-of HDMI-0 && xrandr --output DP-1 --primary
 # CapsLock is Mod4
 exec_always --no-startup-id setxkbmap -option caps:super
 # CapsLock is Mod4 & Mod4 is CapsLock
 # exec_always --no-startup-id setxkbmap -option caps:super && xmodmap -e 'keycode 133 = Caps_Lock'
+# Set screentimeout to 600 sec
+# exec_always --no-startup-id xset s 600
+# xset is not working anymore for me, so, will use xscreensaver for now
+
+exec --no-startup-id xscreensaver
+# Make displays work as expected
+exec --no-startup-id xrandr --output DP-1 --auto --right-of HDMI-0 && xrandr --output DP-1 --primary
 
 # https://github.com/sagb/alttab
 exec_always --no-startup-id alttab -w 1 -fg "#fabd2f" -bg "#141c21" -frame "#fabd2f" -t 128x150 -i 127x64
 
-# To reset settings redshift -x
+# Redshift, reset settings, and set 3500
 exec_always --no-startup-id redshift -x; exec redshift -O 3500
+
 
 # Input method settings
 # bindsym d exec --no-startup-id "setxkbmap -layout us,ru -variant dvp, -option grp:alt_space_toggle", mode "default"
 # bindsym q exec --no-startup-id "setxkbmap -layout us,ru -option grp:alt_space_toggle", mode "default"
 
 
-# Not used keys:
-# 0..9 num_lock: off
+###################
+## Num_Lock Section
+###################
 
-# bindsym KP_End exec $fm
-# bindsym KP_Down exec $fm
-# bindsym KP_Next exec mpvctl next
+## Num_Lock off:
+# | 1         | 2         | 3           | 4           |
+# |-----------|-----------|-------------|-------------|
+# | Num_Lock  | KP_Divide | KP_Multiply | KP_Subtract |
+# | KP_Home   | KP_Up     | KP_Prior    | KP_Add      |
+# | KP_Left   | KP_Begin  | KP_Right    |             |
+# | KP_End    | KP_Down   | KP_Next     | KP_Enter    |
+# | KP_Insert | KP_Insert | KP_Delete   |             |
+
+
+## Num_Lock on:
+# | 1        | 2         | 3           | 4           |
+# |----------|-----------|-------------|-------------|
+# | Num_Lock | KP_Divide | KP_Multiply | KP_Subtract |
+# | KP_7     | KP_8      | KP_9        | KP_Add      |
+# | KP_4     | KP_5      | KP_6        |             |
+# | KP_1     | KP_2      | KP_3        | KP_Enter    |
+# | KP_0     | KP_0      | KP_Decimal  |             |
+
 
 bindsym KP_Left move container to output left; focus output left
 bindsym $mod+KP_Left move workspace to output left
 
-# bindsym KP_Begin exec
-
 bindsym KP_Right move container to output right; focus output right
 bindsym $mod+KP_Right move workspace to output right
 
-# bindsym KP_Home exec $fm
-# bindsym KP_Up exec $fm
-# bindsym KP_Prior exec mpvctl previous
-
-# Right side:
-# bindsym KP_Insert exec $fm
-# bindsym KP_Delete exec chromium
-# bindsym KP_Enter exec alacritty -e irb
 bindsym $mod+KP_Enter exec $fm
 bindsym $mod+KP_Add exec $calc
 
-# bindsym KP_Multiply exec $fm
-# bindsym --release KP_Divide exec xkill
 bindsym --release $mod+KP_Subtract exec xkill
 
 
+
 # bindsym $alt+Up exec "pactl set-sink-volume @DEFAULT_SINK@ +1000"; exec dunstify -r 2222 -u low "Volume: $(pactl list sinks | tr ' ' '\n' | grep -m1 '%' | tr -d '%')"
-# which current_volume: .local/bin/current_volume
 # bindsym $alt+Up exec "pactl set-sink-volume @DEFAULT_SINK@ +1000"; exec dunstify -r 2222 -u low "Volume: $(current_volume)"
 # bindsym $alt+Down exec "pactl set-sink-volume @DEFAULT_SINK@ -1000"; exec dunstify -r 2222 -u low "Volume: $(current_volume)"
 
@@ -512,20 +523,22 @@ bindsym $mod+Left exec mpvctl previous; exec dunstify -r 1111 -u low "PREVIOUS T
 bindsym $mod+Right exec mpvctl next; exec dunstify -r 1111 -u low "NEXT TRACK"
 bindsym $mod+Up exec dunstify -r 9999 -u normal "NOW PLAYING:" "$(exec mpvctl play)"
 bindsym $mod+Down exec mpvctl pause; exec dunstify -r 9999 -u low "PAUSE"
-
+ 
+# OBS related
+# https://github.com/muesli/obs-cli
 # Next: PageDown, Prior: PageUp
-bindsym $ctrl+$alt+Next exec obs-cli --password "bakabakabaka" scene switch right; exec dunstify -u low -r 7979 "OBS SCENE SWITCHED" "Active scene: <b>RIGHT</b>"
-bindsym $ctrl+$alt+Prior exec obs-cli --password "bakabakabaka" scene switch left; exec dunstify -u low -r 7979 "OBS SCENE SWITCHED" "Active scene: <b>LEFT</b>"
+bindsym $ctrl+$alt+Next exec /home/baka/.asdf/shims/obs-cli --password "bakabakabaka" scene switch right; exec dunstify -u low -r 7979 "OBS SCENE SWITCHED" "Active scene: <b>RIGHT</b>"
+bindsym $ctrl+$alt+Prior exec /home/baka/.asdf/shims/obs-cli --password "bakabakabaka" scene switch left; exec dunstify -u low -r 7979 "OBS SCENE SWITCHED" "Active scene: <b>LEFT</b>"
 
+# Diodon
 bindsym $mod+$sh+v exec --no-startup-id diodon, mode "default"
 
 
-# MODES -------------------------------------------------------------------------------------------
-
-
+###############
+## MODE SECTION
+###############
 set $run [bB]rave, [fF]irefox, [tT]ranslate
 mode "$run" {
-#  bindsym g exec --no-startup-id google-chrome, mode "default"
   bindsym b exec --no-startup-id brave-browser, mode "default"
   bindsym $sh+b exec --no-startup-id brave-browser --incognito, mode "default"
 
@@ -572,15 +585,15 @@ mode "$more_workspaces" {
 bindsym $mod+p mode "$more_workspaces"
 
 
-set $mode_system (e)xit, (S-r)eboot, (S-s)hutdown, I3:(r)estart, re(l)oad, (c)aps2mod, (w)allpapers
+set $mode_system [e]xit, [S-r]eboot, [S-s]hutdown, I3:[r]estart, re[l]oad, [c]aps2mod, [w]allpapers
 mode "$mode_system" {
   bindsym e exec --no-startup-id i3-msg exit, mode "default"
-  bindsym $sh+r exec --no-startup-id reboot, mode "default"
   bindsym r exec --no-startup-id i3-msg restart, "default"
   bindsym l exec --no-startup-id i3-msg reload, "default"
-  bindsym $sh+s exec --no-startup-id shutdown, mode "default"
   bindsym c exec --no-startup-id "setxkbmap -option caps:super", mode "default"
   bindsym w exec --no-startup-id feh --bg-scale --randomize ~/Pictures/wallpapers/*
+  bindsym $sh+r exec --no-startup-id reboot, mode "default"
+  bindsym $sh+s exec --no-startup-id shutdown, mode "default"
 
   bindsym Return mode "default"
   bindsym Escape mode "default"
@@ -603,6 +616,3 @@ mode "resize" {
   bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
-
-
-# END OF MODES SECTION ----------------------------------------------------------------------------

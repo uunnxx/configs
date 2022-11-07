@@ -382,19 +382,8 @@ map('i', '<leader><leader>l', '<C-x><C-l>', silentnoremap)
 -------------------------------------------------------------------------------
 
 
-
-
--- map('n', '<Space>', '<PageDown> zz', silentnoremap)
--- map('n', '<C-Space>', '<PageUp> zz', silentnoremap)
-
-
 -- shift + F1 = delete empty lines
 -- map('n', '<S-F1>', ':g/^$/d<CR>', silentnoremap)
-
--- under cursor
--- map('n', '*', [[<cmd>lua require('telescope.builtin').grep_string()<cr>]], silentnoremap)
-
--- map('n', '#', [[<cmd>lua require('telescope.builtin').live_grep()<cr>]], silentnoremap)
 
 
 vim.cmd[[
@@ -413,6 +402,7 @@ vim.cmd[[
   autocmd FileType c       nmap <buffer> <leader>rr :w\|:!gcc ./% -g -o %:r_temp && ./%:r_temp<cr>
   autocmd FileType c       nmap <buffer> <leader>rc :w\|:!gcc ./% -g -o %:r_temp && ./%:r_temp 
 ]]
+
 
 -- Table mode custom keymaps
 vim.cmd[[
@@ -434,13 +424,5 @@ vim.cmd[[
 
   function! PythonOptions()
     imap ttL print()<left>
-
   endfunction
-]]
-
-
--- Emmet
-vim.cmd[[
-  let g:user_emmet_leader_key='<C-space>'
-  let g:user_emmet_install_global = 0
 ]]

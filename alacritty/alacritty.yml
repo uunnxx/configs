@@ -26,10 +26,23 @@ colors:
     magenta: '#d3869b'
     cyan: '#8ec07c'
     white: '#ebdbb2'
+  cursor:
+    text: CellBackground
+    cursor: CellForeground
+  # Allowed values are CellForeground/CellBackground, which reference the
+  # affected cell, or hexadecimal colors like #ff00ff.
+  vi_mode_cursor:
+   text: CellBackground
+   cursor: CellForeground
+  selection:
+   text: CellBackground
+   background: CellForeground
+
 
 env:
   TERM: screen-256color
   WINIT_X11_SCALE_FACTOR: "1.0"
+
 
 window:
   # dimensions:
@@ -40,10 +53,25 @@ window:
     y: 0
   dynamic_padding: true
   decorations: full
-  scrolling: null
-  history: 10000
-  # multiplier: 3
   opacity: 0.90
+
+  # Window title
+  title: Alacritty
+  # Allow terminal applications to change Alacritty's window title.
+  dynamic_title: true
+
+  # Window class (Linux/BSD only):
+  class:
+    # Application instance name
+    instance: Alacritty
+    # General application class
+    general: Alacritty
+
+
+scrolling:
+  history: 10000
+  multiplier: 5
+
 
 font:
   normal:
@@ -71,25 +99,42 @@ draw_bold_text_with_bright_colors: true
 
 
 bell:
-  animation: EaseOutExpo
-  duration: 1
+  # Visual Bell Animation
+  #
+  # Animation effect for flashing the screen when the visual bell is rung.
+  #
+  # Values for `animation`:
+  #   - Ease
+  #   - EaseOut
+  #   - EaseOutSine
+  #   - EaseOutQuad
+  #   - EaseOutCubic
+  #   - EaseOutQuart
+  #   - EaseOutQuint
+  #   - EaseOutExpo
+  #   - EaseOutCirc
+  #   - Linear
+  animation: EaseOut
+  duration: 0
   color: "0xfabd2f"
 
-mouse_bindings:
-  - { mouse: Middle, action: PasteSelection }
+
+
 
 mouse:
   double_click: { threshold: 300 }
   triple_click: { threshold: 300 }
 
   hide_when_typing: true
-  #url:
-  #  launcher: ungoogled
+  hints:
+   launcher: brave-browser
   #  # launcher: xdg-open
   #  modifiers: None
 
+
 selection:
-  semantic_escape_chars: ',│`|:"'' ()[]{}<>'
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
+  # semantic_escape_chars: ',│`|:"'' ()[]{}<>'
   save_to_clipboard: true
 
 cursor:
@@ -97,7 +142,10 @@ cursor:
   #   - ▇ Block
   #   - _ Underline
   #   - | Beam
-  style: Underline
+  style:
+    shape: Block
+    blinking: Always
+  blink_interval: 350
   unfocused_hollow: true
 
 # Live config reload (changes require restart)
@@ -109,6 +157,17 @@ live_config_reload: true
 #     - --login
 # Send ESC (\x1b) before characters when alt is pressed.
 alt_send_esc: true
+
+
+
+
+# Offer IPC using `alacritty msg` (unix only)
+ipc_socket: true
+
+
+mouse_bindings:
+  - { mouse: Middle, action: PasteSelection }
+
 
 key_bindings:
   - { key: V, mods: Control|Shift, action: Paste }
@@ -178,7 +237,7 @@ key_bindings:
   #- { key: N,      mods: Shift,         mode: Vi|~Search, action: SearchPrevious          }
 
   # Search Mode
-  #- { key: Return,                mode: Search|Vi,  action: SearchConfirm         }
+  - { key: Return,                mode: Search|Vi,  action: SearchConfirm         }
   - { key: Escape,                mode: Search,     action: SearchCancel          }
   - { key: C,      mods: Control, mode: Search,     action: SearchCancel          }
   - { key: U,      mods: Control, mode: Search,     action: SearchClear           }
@@ -203,28 +262,3 @@ key_bindings:
   #- { key: NumpadAdd,      mods: Control,                         action: IncreaseFontSize }
   #- { key: Minus,          mods: Control,                         action: DecreaseFontSize }
   #- { key: NumpadSubtract, mods: Control,                         action: DecreaseFontSize }
-
-
-#debug:
-  # Display the time it takes to redraw each frame.
-  #render_timer: false
-
-  # Keep the log file after quitting Alacritty.
-  #persistent_logging: false
-
-  # Log level
-  #
-  # Values for `log_level`:
-  #   - Off
-  #   - Error
-  #   - Warn
-  #   - Info
-  #   - Debug
-  #   - Trace
-  #log_level: Warn
-
-  # Print all received window events.
-  #print_events: false
-
-  # Highlight window damage information.
-  #highlight_damage: false
