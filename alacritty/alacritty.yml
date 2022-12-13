@@ -54,6 +54,7 @@ window:
   dynamic_padding: true
   decorations: full
   opacity: 0.90
+  # opacity: 1
 
   # Window title
   title: Alacritty
@@ -151,9 +152,9 @@ cursor:
 # Live config reload (changes require restart)
 live_config_reload: true
 
-# shell:
-#   program: /usr/bin/zsh
-#   args:
+shell:
+  program: /usr/bin/zsh
+  # args:
 #     - --login
 # Send ESC (\x1b) before characters when alt is pressed.
 alt_send_esc: true

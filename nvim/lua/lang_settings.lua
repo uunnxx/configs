@@ -10,6 +10,11 @@ cmd[[
 autocmd FileType c,cpp,java setlocal noet ci pi sts=0 sw=4 ts=4
 ]]
 
+-- set lsp_markdown filetype for '*.md' files
+cmd[[
+  autocmd BufNew,BufNewFile,BufRead *.txt,*.text,*.md,*.markdown setlocal ft=lsp_markdown
+]]
+
 -- don't auto comment new lines
 -- cmd [[au BufEnter * set fo-=c fo-=r fo-=o]]
 

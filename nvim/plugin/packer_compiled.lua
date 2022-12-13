@@ -221,7 +221,6 @@ _G.packer_plugins = {
     url = "https://github.com/dcampos/nvim-snippy"
   },
   ["nvim-tree.lua"] = {
-    config = { "\27LJ\2\n;\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\14nvim-tree\frequire\0" },
     loaded = true,
     path = "/home/baka/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",
     url = "https://github.com/kyazdani42/nvim-tree.lua"
@@ -456,65 +455,58 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: trouble.nvim
-time([[Config for trouble.nvim]], true)
-try_loadstring("\27LJ\2\n9\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\ftrouble\frequire\0", "config", "trouble.nvim")
-time([[Config for trouble.nvim]], false)
--- Config for: Comment.nvim
-time([[Config for Comment.nvim]], true)
-try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
-time([[Config for Comment.nvim]], false)
--- Config for: bufferline.nvim
-time([[Config for bufferline.nvim]], true)
-try_loadstring("\27LJ\2\n<\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\15bufferline\frequire\0", "config", "bufferline.nvim")
-time([[Config for bufferline.nvim]], false)
 -- Config for: hop.nvim
 time([[Config for hop.nvim]], true)
 try_loadstring("\27LJ\2\nV\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\tkeys\29twvxeoqpdygfblzhckisuran\nsetup\bhop\frequire\0", "config", "hop.nvim")
 time([[Config for hop.nvim]], false)
--- Config for: nvim-tree.lua
-time([[Config for nvim-tree.lua]], true)
-try_loadstring("\27LJ\2\n;\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\14nvim-tree\frequire\0", "config", "nvim-tree.lua")
-time([[Config for nvim-tree.lua]], false)
+-- Config for: trouble.nvim
+time([[Config for trouble.nvim]], true)
+try_loadstring("\27LJ\2\n9\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\ftrouble\frequire\0", "config", "trouble.nvim")
+time([[Config for trouble.nvim]], false)
+-- Config for: bufferline.nvim
+time([[Config for bufferline.nvim]], true)
+try_loadstring("\27LJ\2\n<\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\15bufferline\frequire\0", "config", "bufferline.nvim")
+time([[Config for bufferline.nvim]], false)
+-- Config for: Comment.nvim
+time([[Config for Comment.nvim]], true)
+try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
+time([[Config for Comment.nvim]], false)
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
-vim.cmd [[au FileType rake ++once lua require("packer.load")({'vim-rake'}, { ft = "rake" }, _G.packer_plugins)]]
-vim.cmd [[au FileType md ++once lua require("packer.load")({'vim-table-mode'}, { ft = "md" }, _G.packer_plugins)]]
+vim.cmd [[au FileType rb ++once lua require("packer.load")({'vim-ruby', 'vim-rails', 'vim-textobj-rubyblock', 'vim-ruby-run', 'vim-textobj-ruby', 'vim-textobj-erb', 'vim-rake', 'vim-ruby-sinatra', 'vim-bundler', 'vim-slim'}, { ft = "rb" }, _G.packer_plugins)]]
 vim.cmd [[au FileType html5 ++once lua require("packer.load")({'vim-closetag'}, { ft = "html5" }, _G.packer_plugins)]]
 vim.cmd [[au FileType xhtml ++once lua require("packer.load")({'vim-closetag'}, { ft = "xhtml" }, _G.packer_plugins)]]
-vim.cmd [[au FileType xml ++once lua require("packer.load")({'vim-closetag'}, { ft = "xml" }, _G.packer_plugins)]]
-vim.cmd [[au FileType cr ++once lua require("packer.load")({'vim-crystal'}, { ft = "cr" }, _G.packer_plugins)]]
-vim.cmd [[au FileType crystal ++once lua require("packer.load")({'vim-crystal'}, { ft = "crystal" }, _G.packer_plugins)]]
 vim.cmd [[au FileType text ++once lua require("packer.load")({'vim-table-mode'}, { ft = "text" }, _G.packer_plugins)]]
-vim.cmd [[au FileType exs ++once lua require("packer.load")({'alchemist.vim', 'vim-mix-format', 'vim-elixir'}, { ft = "exs" }, _G.packer_plugins)]]
-vim.cmd [[au FileType py ++once lua require("packer.load")({'vim-textobj-python', 'vim-isort', 'python-syntax'}, { ft = "py" }, _G.packer_plugins)]]
-vim.cmd [[au FileType erb ++once lua require("packer.load")({'vim-textobj-rubyblock', 'vim-textobj-ruby', 'vim-slim', 'vim-ruby-sinatra', 'vim-ruby-run', 'vim-ruby', 'vim-rails', 'vim-bundler', 'vim-textobj-erb'}, { ft = "erb" }, _G.packer_plugins)]]
-vim.cmd [[au FileType rb ++once lua require("packer.load")({'vim-textobj-rubyblock', 'vim-textobj-ruby', 'vim-slim', 'vim-ruby-sinatra', 'vim-ruby-run', 'vim-ruby', 'vim-rake', 'vim-rails', 'vim-bundler', 'vim-textobj-erb'}, { ft = "rb" }, _G.packer_plugins)]]
-vim.cmd [[au FileType elixir ++once lua require("packer.load")({'alchemist.vim', 'vim-mix-format', 'vim-elixir'}, { ft = "elixir" }, _G.packer_plugins)]]
-vim.cmd [[au FileType python ++once lua require("packer.load")({'vim-textobj-python', 'vim-isort', 'python-syntax'}, { ft = "python" }, _G.packer_plugins)]]
-vim.cmd [[au FileType ruby ++once lua require("packer.load")({'vim-textobj-rubyblock', 'vim-textobj-ruby', 'vim-slim', 'vim-ruby-sinatra', 'vim-ruby-run', 'vim-ruby', 'vim-rake', 'vim-rails', 'vim-bundler', 'vim-textobj-erb'}, { ft = "ruby" }, _G.packer_plugins)]]
-vim.cmd [[au FileType html ++once lua require("packer.load")({'vim-closetag'}, { ft = "html" }, _G.packer_plugins)]]
-vim.cmd [[au FileType eelixir ++once lua require("packer.load")({'alchemist.vim', 'vim-mix-format', 'vim-elixir'}, { ft = "eelixir" }, _G.packer_plugins)]]
-vim.cmd [[au FileType markdown ++once lua require("packer.load")({'vim-table-mode'}, { ft = "markdown" }, _G.packer_plugins)]]
+vim.cmd [[au FileType xml ++once lua require("packer.load")({'vim-closetag'}, { ft = "xml" }, _G.packer_plugins)]]
+vim.cmd [[au FileType crystal ++once lua require("packer.load")({'vim-crystal'}, { ft = "crystal" }, _G.packer_plugins)]]
+vim.cmd [[au FileType erb ++once lua require("packer.load")({'vim-ruby', 'vim-rails', 'vim-textobj-rubyblock', 'vim-ruby-run', 'vim-textobj-ruby', 'vim-textobj-erb', 'vim-ruby-sinatra', 'vim-bundler', 'vim-slim'}, { ft = "erb" }, _G.packer_plugins)]]
+vim.cmd [[au FileType cr ++once lua require("packer.load")({'vim-crystal'}, { ft = "cr" }, _G.packer_plugins)]]
 vim.cmd [[au FileType ex ++once lua require("packer.load")({'alchemist.vim', 'vim-mix-format', 'vim-elixir'}, { ft = "ex" }, _G.packer_plugins)]]
 vim.cmd [[au FileType Rakefile ++once lua require("packer.load")({'vim-rake'}, { ft = "Rakefile" }, _G.packer_plugins)]]
+vim.cmd [[au FileType rake ++once lua require("packer.load")({'vim-rake'}, { ft = "rake" }, _G.packer_plugins)]]
+vim.cmd [[au FileType markdown ++once lua require("packer.load")({'vim-table-mode'}, { ft = "markdown" }, _G.packer_plugins)]]
+vim.cmd [[au FileType python ++once lua require("packer.load")({'python-syntax', 'vim-isort', 'vim-textobj-python'}, { ft = "python" }, _G.packer_plugins)]]
+vim.cmd [[au FileType ruby ++once lua require("packer.load")({'vim-ruby', 'vim-rails', 'vim-textobj-rubyblock', 'vim-ruby-run', 'vim-textobj-ruby', 'vim-textobj-erb', 'vim-rake', 'vim-ruby-sinatra', 'vim-bundler', 'vim-slim'}, { ft = "ruby" }, _G.packer_plugins)]]
+vim.cmd [[au FileType exs ++once lua require("packer.load")({'alchemist.vim', 'vim-mix-format', 'vim-elixir'}, { ft = "exs" }, _G.packer_plugins)]]
+vim.cmd [[au FileType elixir ++once lua require("packer.load")({'alchemist.vim', 'vim-mix-format', 'vim-elixir'}, { ft = "elixir" }, _G.packer_plugins)]]
+vim.cmd [[au FileType html ++once lua require("packer.load")({'vim-closetag'}, { ft = "html" }, _G.packer_plugins)]]
+vim.cmd [[au FileType py ++once lua require("packer.load")({'python-syntax', 'vim-isort', 'vim-textobj-python'}, { ft = "py" }, _G.packer_plugins)]]
+vim.cmd [[au FileType eelixir ++once lua require("packer.load")({'alchemist.vim', 'vim-mix-format', 'vim-elixir'}, { ft = "eelixir" }, _G.packer_plugins)]]
+vim.cmd [[au FileType md ++once lua require("packer.load")({'vim-table-mode'}, { ft = "md" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
 vim.cmd("augroup END")
 vim.cmd [[augroup filetypedetect]]
-time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-slim/ftdetect/slim.vim]], true)
-vim.cmd [[source /home/baka/.local/share/nvim/site/pack/packer/opt/vim-slim/ftdetect/slim.vim]]
-time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-slim/ftdetect/slim.vim]], false)
-time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-ruby-sinatra/ftdetect/ruby-sinatra.vim]], true)
-vim.cmd [[source /home/baka/.local/share/nvim/site/pack/packer/opt/vim-ruby-sinatra/ftdetect/ruby-sinatra.vim]]
-time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-ruby-sinatra/ftdetect/ruby-sinatra.vim]], false)
 time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-ruby/ftdetect/ruby.vim]], true)
 vim.cmd [[source /home/baka/.local/share/nvim/site/pack/packer/opt/vim-ruby/ftdetect/ruby.vim]]
 time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-ruby/ftdetect/ruby.vim]], false)
 time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-ruby/ftdetect/ruby_extra.vim]], true)
 vim.cmd [[source /home/baka/.local/share/nvim/site/pack/packer/opt/vim-ruby/ftdetect/ruby_extra.vim]]
 time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-ruby/ftdetect/ruby_extra.vim]], false)
+time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-ruby-sinatra/ftdetect/ruby-sinatra.vim]], true)
+vim.cmd [[source /home/baka/.local/share/nvim/site/pack/packer/opt/vim-ruby-sinatra/ftdetect/ruby-sinatra.vim]]
+time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-ruby-sinatra/ftdetect/ruby-sinatra.vim]], false)
 time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-elixir/ftdetect/elixir.vim]], true)
 vim.cmd [[source /home/baka/.local/share/nvim/site/pack/packer/opt/vim-elixir/ftdetect/elixir.vim]]
 time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-elixir/ftdetect/elixir.vim]], false)
@@ -524,6 +516,9 @@ time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packe
 time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-crystal/ftdetect/ecrystal.vim]], true)
 vim.cmd [[source /home/baka/.local/share/nvim/site/pack/packer/opt/vim-crystal/ftdetect/ecrystal.vim]]
 time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-crystal/ftdetect/ecrystal.vim]], false)
+time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-slim/ftdetect/slim.vim]], true)
+vim.cmd [[source /home/baka/.local/share/nvim/site/pack/packer/opt/vim-slim/ftdetect/slim.vim]]
+time([[Sourcing ftdetect script at: /home/baka/.local/share/nvim/site/pack/packer/opt/vim-slim/ftdetect/slim.vim]], false)
 vim.cmd("augroup END")
 
 _G._packer.inside_compile = false

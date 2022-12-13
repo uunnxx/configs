@@ -5,15 +5,12 @@ set $mod3 Mod3
 set $sh Shift
 set $term "alacritty"
 set $term_float "alacritty --class=alacrittyFloat"
-set $trans_ru "alacritty --class=alacrittyTranslator -e trans -t ru -I"
-set $trans_en "alacritty --class=alacrittyTranslator -e trans -t en -I"
+set $trans_ru "alacritty --class=alacrittyTransRight -e trans -t ru -I"
+set $trans_en "alacritty --class=alacrittyTransRight -e trans -t en -I"
+set $trans_ru_left "alacritty --class=alacrittyTransLeft -e trans -t ru -I"
+set $trans_en_left "alacritty --class=alacrittyTransLeft -e trans -t en -I"
 # set $ranger "alacritty --class=alacrittyRanger -e ranger"
 set $fm "thunar"
-
-set $menu_drun "rofi -show drun"
-set $menu_run "rofi -show run"
-set $menu_window "rofi -show window"
-set $menu_window_cd "rofi -show windowcd"
 
 set $barcmd i3status
 set $calc "qalculate-gtk"
@@ -38,11 +35,13 @@ bindsym $mod+$sh+u border normal 4
 bindsym $mod+Return exec $term
 bindsym $mod+$sh+Return exec $term_float
 
-# Kill
-# bindsym $mod+$sh+a kill
 bindsym $mod+$sh+c kill
 
-# get mouse keys: `xev | grep button`
+###############################################################################
+# MOUSE BUTTONS
+#
+# GET KEY CODES: `xev | grep button`
+#
 # button 1 left primary
 # button 2 middle
 # button 3 right
@@ -56,18 +55,13 @@ bindsym $mod+$sh+c kill
 bindsym --whole-window $alt+button1 move scratchpad
 bindsym --whole-window $alt+button2 move position center
 bindsym --whole-window $alt+button3 kill
-# temp. comment `scroll up & down` because of `--whole-window`
-# get's focused when scrolling
-# bindsym --whole-window $alt+button4 resize grow width 25 px or 25 ppt
-# bindsym --whole-window $alt+button5 resize grow height 25 px or 25 ppt
 bindsym --whole-window $alt+button8 fullscreen toggle
 bindsym --whole-window $alt+button9 floating toggle
 
-# bindsym --whole-window $alt+button4 focus left
-# bindsym --whole-window $alt+button5 focus down
 
-bindsym $mod+d exec --no-startup-id $menu_drun
-bindsym $mod+$sh+d exec --no-startup-id $menu_run
+###############################################################################
+bindsym $mod+d exec --no-startup-id rofi -show drun
+bindsym $mod+$sh+d exec --no-startup-id rofi -show run
 
 bindsym $mod+n exec --no-startup-id rofi_books
 bindsym $mod+$sh+n exec --no-startup-id ~/.local/bin/dmenu_books
@@ -87,6 +81,10 @@ bindsym $mod+$sh+h move left
 bindsym $mod+$sh+j move down
 bindsym $mod+$sh+k move up
 bindsym $mod+$sh+l move right
+bindsym $mod+$sh+Left move left 50 px
+bindsym $mod+$sh+Down move down 50 px
+bindsym $mod+$sh+Up move up 50 px
+bindsym $mod+$sh+Right move right 50 px
 
 # workspace back and forth (with/without active container)
 workspace_auto_back_and_forth yes
@@ -118,14 +116,13 @@ bindsym $mod+$sh+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 
-
-bindsym $alt+space exec $menu_window_cd
-bindsym $alt+$sh+space exec $menu_window
+bindsym $alt+space exec --no-startup-id rofi -show window
+bindsym $alt+$sh+space exec --no-startup-id rofi -show windowcd
 
 # bindsym $mod+$sh+slash exec
 # bindsym $mod+slash exec
 
-bindsym $mod+c move position center
+bindsym $mod+c floating enable resize set 1340 780; move position center
 
 #navigate workspaces next / previous
 bindsym $alt+$sh+l workspace next
@@ -271,8 +268,10 @@ for_window [class="Pavucontrol"] floating enable
 for_window [class="URxvt" instance="translator"] floating enable resize set 880 400
 for_window [class="URxvt" instance="translator"] move position 1040 658
 
-for_window [class="alacrittyTranslator"] floating enable resize set 880 400
-for_window [class="alacrittyTranslator"] move position 1040 658
+for_window [class="alacrittyTransRight"] floating enable resize set 880 400
+for_window [class="alacrittyTransRight"] move position 1040 658
+for_window [class="alacrittyTransLeft"] floating enable resize set 880 400
+for_window [class="alacrittyTransLeft"] move position 2960 658
 
 for_window [class="alacrittyRanger"] floating enable resize set 1240 690
 for_window [class="alacrittyRanger"] move position center
@@ -287,7 +286,6 @@ for_window [class="Picture-in-picture"] floating enable border none
 for_window [class="mpv"] floating enable resize set 1240 690
 for_window [class="mpv"] move position center
 
-
 for_window [class="Eog"] floating enable resize set 1240 690
 for_window [class="Eog"] move position center
 
@@ -295,8 +293,6 @@ for_window [class="Zathura"] floating enable resize set 1340 780
 for_window [class="Zathura"] move position center
 
 for_window [class="Org.gnome.Nautilus"] border normal 4
-# for_window [class="Org.gnome.Nautilus"] floating enable resize set 1340 780
-# for_window [class="Org.gnome.Nautilus"] move position center
 
 for_window [class="File-roller"] floating enable resize set 1340 780
 for_window [class="File-roller"] move position center
@@ -325,38 +321,38 @@ bindsym Pause exec --no-startup-id systemctl suspend
 # Colors
 #
 set $fff #FFFFFF
-set $aaa #FF7043
-set $ttt #141C21
+# set $aaa #FF7043
+# set $ttt #141C21
 
 set $cla #39375B
 set $clb #745C97
-set $clc #443850
-set $cld #2D1E2F
-set $cle #9C89B8
+# set $clc #443850
+# set $cld #2D1E2F
+# set $cle #9C89B8
 set $clf #EBA6A9
-set $clg #25044B
+# set $clg #25044B
 set $clh #F0544F
-set $cli #462A67
+# set $cli #462A67
 set $clj #5B3758
 
 
 # Gruvbox
 set $gruv0 #1d2021
-set $gruv8 #928374
+# set $gruv8 #928374
 set $gruv1 #CC241D
 set $gruv9 #FB4934
-set $gruv2 #98971A
-set $gruvA #B8BB26
-set $gruv3 #D79921
+# set $gruv2 #98971A
+# set $gruvA #B8BB26
+# set $gruv3 #D79921
 set $gruvB #FABD2F
-set $gruv4 #458588
-set $gruvC #83A598
-set $gruv5 #B16286
-set $gruvD #D3869B
-set $gruv6 #689D6A
-set $gruvE #8EC07C
-set $gruv7 #A89984
-set $gruvF #EBDBB2
+# set $gruv4 #458588
+# set $gruvC #83A598
+# set $gruv5 #B16286
+# set $gruvD #D3869B
+# set $gruv6 #689D6A
+# set $gruvE #8EC07C
+# set $gruv7 #A89984
+# set $gruvF #EBDBB2
 
 bindsym $mod+$sh+m bar mode toggle
 
@@ -366,11 +362,16 @@ bar {
   tray_padding 0
   output $right
   tray_output none
-  # i3bar_command i3bar --transparency
-  i3bar_command i3bar
+  i3bar_command i3bar --transparency
   status_command i3status --config ~/.config/i3/i3status.conf
   position bottom
   separator_symbol " | "
+  workspace_min_width 80
+  workspace_buttons yes
+  hidden_state hide
+  binding_mode_indicator yes
+  # mode hide
+  modifier none
   colors {
     background $gruv044
     statusline $gruvB
@@ -382,12 +383,6 @@ bar {
     urgent_workspace   $gruv9     $gruv9     $fff
     binding_mode       $gruvB     $gruvB     $gruv0
   }
-  workspace_min_width 80
-  workspace_buttons yes
-  hidden_state hide
-  binding_mode_indicator yes
-  # mode hide
-  modifier none
 }
 
 
@@ -397,11 +392,16 @@ bar {
   tray_padding 0
   output $left
   tray_output $left
-  # i3bar_command i3bar --transparency
-  i3bar_command i3bar
+  i3bar_command i3bar --transparency
   status_command i3status --config ~/.config/i3/i3status-small.conf
   position bottom
   separator_symbol " | "
+  workspace_min_width 80
+  workspace_buttons yes
+  hidden_state hide
+  binding_mode_indicator yes
+  # mode hide
+  modifier none
   colors {
     background $gruv044
     statusline $gruvB
@@ -413,12 +413,6 @@ bar {
     urgent_workspace   $gruv9     $gruv9     $fff
     binding_mode       $gruvB     $gruvB     $gruv0
   }
-  workspace_min_width 80
-  workspace_buttons yes
-  hidden_state hide
-  binding_mode_indicator yes
-  # mode hide
-  modifier none
 }
 
 # class                   border    backgr.   text        indic.   child_border
@@ -434,9 +428,9 @@ focus_wrapping no
 # smart, ignore, leave_fullscreen
 popup_during_fullscreen smart
 
-#########################
-## Autostart applications
-#########################
+###############################################################################
+# AUTOSTART APPLICATIONS
+#
 exec --no-startup-id /usr/bin/fcitx5
 exec --no-startup-id /usr/bin/diodon
 exec --no-startup-id xclip
@@ -474,11 +468,10 @@ exec_always --no-startup-id redshift -x; exec redshift -O 3500
 # bindsym q exec --no-startup-id "setxkbmap -layout us,ru -option grp:alt_space_toggle", mode "default"
 
 
-###################
-## Num_Lock Section
-###################
-
-## Num_Lock off:
+###############################################################################
+# Num_Lock Section
+#
+# Num_Lock off:
 # | 1         | 2         | 3           | 4           |
 # |-----------|-----------|-------------|-------------|
 # | Num_Lock  | KP_Divide | KP_Multiply | KP_Subtract |
@@ -486,9 +479,8 @@ exec_always --no-startup-id redshift -x; exec redshift -O 3500
 # | KP_Left   | KP_Begin  | KP_Right    |             |
 # | KP_End    | KP_Down   | KP_Next     | KP_Enter    |
 # | KP_Insert | KP_Insert | KP_Delete   |             |
-
-
-## Num_Lock on:
+#
+# Num_Lock on:
 # | 1        | 2         | 3           | 4           |
 # |----------|-----------|-------------|-------------|
 # | Num_Lock | KP_Divide | KP_Multiply | KP_Subtract |
@@ -511,10 +503,6 @@ bindsym --release $mod+KP_Subtract exec xkill
 
 
 
-# bindsym $alt+Up exec "pactl set-sink-volume @DEFAULT_SINK@ +1000"; exec dunstify -r 2222 -u low "Volume: $(pactl list sinks | tr ' ' '\n' | grep -m1 '%' | tr -d '%')"
-# bindsym $alt+Up exec "pactl set-sink-volume @DEFAULT_SINK@ +1000"; exec dunstify -r 2222 -u low "Volume: $(current_volume)"
-# bindsym $alt+Down exec "pactl set-sink-volume @DEFAULT_SINK@ -1000"; exec dunstify -r 2222 -u low "Volume: $(current_volume)"
-
 bindsym $alt+Up exec $HOME/.local/bin/volume_up
 bindsym $alt+Down exec $HOME/.local/bin/volume_down
 
@@ -523,21 +511,22 @@ bindsym $mod+Left exec mpvctl previous; exec dunstify -r 1111 -u low "PREVIOUS T
 bindsym $mod+Right exec mpvctl next; exec dunstify -r 1111 -u low "NEXT TRACK"
 bindsym $mod+Up exec dunstify -r 9999 -u normal "NOW PLAYING:" "$(exec mpvctl play)"
 bindsym $mod+Down exec mpvctl pause; exec dunstify -r 9999 -u low "PAUSE"
+
+# Diodon
+bindsym $mod+$sh+v exec --no-startup-id diodon, mode "default"
  
+###############################################################################
 # OBS related
 # https://github.com/muesli/obs-cli
 # Next: PageDown, Prior: PageUp
 bindsym $ctrl+$alt+Next exec /home/baka/.asdf/shims/obs-cli --password "bakabakabaka" scene switch right; exec dunstify -u low -r 7979 "OBS SCENE SWITCHED" "Active scene: <b>RIGHT</b>"
 bindsym $ctrl+$alt+Prior exec /home/baka/.asdf/shims/obs-cli --password "bakabakabaka" scene switch left; exec dunstify -u low -r 7979 "OBS SCENE SWITCHED" "Active scene: <b>LEFT</b>"
 
-# Diodon
-bindsym $mod+$sh+v exec --no-startup-id diodon, mode "default"
 
-
-###############
-## MODE SECTION
-###############
-set $run [bB]rave, [fF]irefox, [tT]ranslate
+###############################################################################
+# MODE SECTION
+#
+set $run [bB]rave, [fF]irefox, [lL - tT]ranslate
 mode "$run" {
   bindsym b exec --no-startup-id brave-browser, mode "default"
   bindsym $sh+b exec --no-startup-id brave-browser --incognito, mode "default"
@@ -547,6 +536,9 @@ mode "$run" {
 
   bindsym t exec --no-startup-id $trans_en, mode "default"
   bindsym $sh+t exec --no-startup-id $trans_ru, mode "default"
+
+  bindsym l exec --no-startup-id $trans_en_left, mode "default"
+  bindsym $sh+l exec --no-startup-id $trans_ru_left, mode "default"
 
   bindsym Return mode "default"
   bindsym Escape mode "default"
@@ -559,8 +551,8 @@ mode "$screenshot" {
   bindsym --release Return exec --no-startup-id ~/.config/i3/scripts/scrot.sh
   bindsym --release space exec --no-startup-id ~/.config/i3/scripts/scrot_focused.sh
   bindsym --release $ctrl+space exec --no-startup-id ~/.config/i3/scripts/scrot_select.sh
-  bindsym Escape mode "default"
 
+  bindsym Escape mode "default"
 }
 bindsym Print mode "$screenshot"
 
@@ -607,10 +599,10 @@ mode "resize" {
   bindsym k resize shrink height 5 px or 5 ppt
   bindsym l resize grow width 5 px or 5 ppt
 
-  bindsym Left resize shrink width 50 px or 50 ppt
-  bindsym Down resize grow height 50 px or 50 ppt
-  bindsym Up resize shrink height 50 px or 50 ppt
-  bindsym Right resize grow width 50 px or 50 ppt
+  bindsym $sh+h resize shrink width 50 px or 50 ppt
+  bindsym $sh+j resize grow height 50 px or 50 ppt
+  bindsym $sh+k resize shrink height 50 px or 50 ppt
+  bindsym $sh+l resize grow width 50 px or 50 ppt
 
   bindsym Return mode "default"
   bindsym Escape mode "default"

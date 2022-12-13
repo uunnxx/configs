@@ -39,7 +39,7 @@ set.hidden = true
 
 -- let &colorcolumn="80,100,".join(range(120,999),",")
 cmd[[
-    let &colorcolumn="80,100,120,140,160,180,200"
+    let &colorcolumn="80,100,120"
     hi! ColorColumn ctermbg=6
 ]]
 set.cursorline = true
@@ -113,7 +113,7 @@ set.completeopt = 'menu,menuone,noselect'
 -------------------------------------------------------------------------------
 -------------------- Invisible Chars
 -------------------------------------------------------------------------------
-set.list = true
+-- set.list = true
 set.listchars = {
   tab = '▸ ',
   trail = '·',
@@ -172,7 +172,7 @@ set.path = {'.','/usr/include', '**'}
 
 set.cindent = true                  -- Copy indent from previous line
 
-set.updatetime = 100
+set.updatetime = 200
 set.timeoutlen = 500
 set.ttimeoutlen = 5
 

@@ -18,6 +18,10 @@ return require('packer').startup(function()
     run = 'make'
   }
 
+
+  -- (Neo)Vim plugin for automatically highlighting other uses of the word
+  -- under the cursor using either LSP, Tree-sitter, or regex matching.
+  -- Default keymaps: <a-n> and <a-p> as keymaps to move between references.
   use 'RRethy/vim-illuminate'
 
 
@@ -77,7 +81,8 @@ return require('packer').startup(function()
   -- File Explorer
   use { 'kyazdani42/nvim-tree.lua',
     requires = 'kyazdani42/nvim-web-devicons',
-    config = function() require'nvim-tree'.setup {} end
+    tag = 'nightly'
+    -- config = function() require'nvim-tree'.setup {} end
   }
 
   -- Tagbra

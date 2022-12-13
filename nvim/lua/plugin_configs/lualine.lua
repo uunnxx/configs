@@ -2,7 +2,8 @@
 
 -- Custom components
 local function wordCount()
-  if vim.bo.filetype == "md" or vim.bo.filetype == "txt" or vim.bo.filetype == "markdown" then
+  local filetype = vim.bo.filetype
+  if filetype == "md" or filetype == "txt" or filetype == "markdown" or filetype == "lsp_markdown" then
     if vim.fn.wordcount().visual_words == 1 then
       return tostring(vim.fn.wordcount().visual_words) .. " word"
     elseif not (vim.fn.wordcount().visual_words == nil) then
@@ -15,9 +16,9 @@ local function wordCount()
   end
 end
 
-local function getCwd()
-  return vim.fn.getcwd()
-end
+-- local function getCwd()
+--   return vim.fn.getcwd()
+-- end
 
 require('lualine').setup {
   options = {

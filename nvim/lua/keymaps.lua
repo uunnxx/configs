@@ -1,3 +1,6 @@
+-------------------------------------------------------------------------------
+-- map('mode', 'map', 'action', {nowait = true, noremap = true, silent = true})
+
 local function map(kind, lhs, rhs, opts)
   vim.api.nvim_set_keymap(kind, lhs, rhs, opts)
 end
@@ -8,30 +11,31 @@ local silentnoremap = { noremap = true, silent = true }
 local silentnoremapnowait = { nowait = true, noremap = true, silent = true }
 
 
--- map('mode', 'map', 'action', {nowait = true, noremap = true, silent = true})
 
 -- Leader
 vim.g.mapleader = ","
 vim.g.maplocalleader = ","
 
 
--- Default remaps
+-------------------------------------------------------------------------------
+-- DEFAULT REMAPS
+--
 map('i', 'eu', '<Esc>', silentnoremap)
-map('n', ';', ':', silentnoremap)
-map('x', ';', ':', silentnoremap)
-map('n', '&', '%', silentnoremap)
-map('x', '&', '%', silentnoremap)
-map('n', "'", '`', silentnoremap)
-map('n', '`', "'", silentnoremap)
+map('n', ';', ':', noremap)
+map('x', ';', ':', noremap)
+map('n', '&', '%', noremap)
+map('x', '&', '%', noremap)
+map('n', "'", '`', noremap)
+map('n', '`', "'", noremap)
 
--- Quicker way to open & close commands
 
 map('n', '<leader>ww', ':update<CR>', silentnoremap)
-map('n', '<space>qq', ':x<CR>', silentnoremap) -- <space> or <Space>
+map('n', '<space>qq', ':x<CR>', silentnoremap)
 map('n', 'QQ', ':q<CR>', silentnoremap)
 map('n', 'Qt', ':q!<CR>', silentnoremap)
 map('n', 'Qa', ':qall<CR>', silentnoremap)
 map('n', 'QA', ':qall!<CR>', silentnoremap)
+
 
 -- Join lines and restore cursor location
 map('n', 'J', 'mjJ`j', silentnoremap)
@@ -39,24 +43,6 @@ map('n', 'J', 'mjJ`j', silentnoremap)
 
 map('n', 'U', '<C-r>', silentnoremap)
 map('n', '<leader>R', ':redo<CR>', silentnoremap)
-
-
-
---------------------
--- TERMINAL SECTION:
---------------------
-map('n', '<space><space>t', ':split term://zsh<cr>a', silentnoremap)
-map('n', '<space><space>v', ':vsplit term://zsh<cr>a', silentnoremap)
-
-
--- Use esc or ',,' to quit builtin terminal
--- tnoremap <esc>   <C-\><C-n>
-map('t', '<leader><leader>', '<C-\\><C-n>', silentnoremap)
-map('t', '<Esc><Esc>', '<C-\\><C-n>:q!<CR>', silentnoremapnowait)
-
---------------------------
--- END OF TERMINAL SECTION
---------------------------
 
 
 -- Go to start or end of line easier
@@ -270,6 +256,8 @@ map('n', 'cU', 'df_ldea', silentnoremap)
 map('n', 'dU', 'bf_de', silentnoremap)
 
 
+-------------------------------------------------------------------------------
+-- CUSTOM KEYMAPS
 -- FOR_EDU:
 --   Ruby:
 --     test_array = ['text', 'hereb', 'text', 'hereb', 'text', 'hereb', 'text', 'hereb']
@@ -380,6 +368,20 @@ map('i', '<leader><leader>l', '<C-x><C-l>', silentnoremap)
 
 
 -------------------------------------------------------------------------------
+-- TERMINAL SECTION:
+--
+map('n', '<space><space>t', ':split term://zsh<cr>a', silentnoremap)
+map('n', '<space><space>v', ':vsplit term://zsh<cr>a', silentnoremap)
+
+
+-- Use esc or ',,' to quit builtin terminal
+-- tnoremap <esc>   <C-\><C-n>
+map('t', '<leader><leader>', '<C-\\><C-n>', silentnoremap)
+map('t', '<Esc><Esc>', '<C-\\><C-n>:q!<CR>', silentnoremapnowait)
+
+
+
+-------------------------------------------------------------------------------
 
 
 -- shift + F1 = delete empty lines
@@ -387,24 +389,29 @@ map('i', '<leader><leader>l', '<C-x><C-l>', silentnoremap)
 
 
 vim.cmd[[
-  " Run code w/o arg  <leader>rr
-  " Run with argument <leader>rc
-  autocmd FileType ruby    nmap <buffer> <leader>rr :w\|:!ruby ./%<cr>
-  autocmd FileType ruby    nmap <buffer> <leader>rc :w\|:!ruby ./% 
-  autocmd FileType javascript    nmap <buffer> <leader>rr :w\|:!node ./%<cr>
-  autocmd FileType javascript    nmap <buffer> <leader>rc :w\|:!node ./% 
-  autocmd FileType crystal nmap <buffer> <leader>rr :w\|:!crystal ./%<cr>
-  autocmd FileType crystal nmap <buffer> <leader>rc :w\|:!crystal ./% 
-  autocmd FileType python  nmap <buffer> <leader>rr :w\|:!python3 ./%<cr>
-  autocmd FileType python  nmap <buffer> <leader>rc :w\|:!python3 ./% 
+  autocmd FileType ruby    nmap <buffer> <leader>rr :w\|:!ruby %<cr>
+  autocmd FileType ruby    nmap <buffer> <leader>rc :w\|:!ruby % 
+
+  autocmd FileType javascript    nmap <buffer> <leader>rr :w\|:!node %<cr>
+  autocmd FileType javascript    nmap <buffer> <leader>rc :w\|:!node % 
+
+  autocmd FileType crystal nmap <buffer> <leader>rr :w\|:!crystal %<cr>
+  autocmd FileType crystal nmap <buffer> <leader>rc :w\|:!crystal % 
+
+  autocmd FileType python  nmap <buffer> <leader>rr :w\|:!python3 %<cr>
+  autocmd FileType python  nmap <buffer> <leader>rc :w\|:!python3 % 
+
   autocmd FileType cpp     nmap <buffer> <leader>rr :w\|:!g++ ./% -g -o %:r_temp && ./%:r_temp<cr>
   autocmd FileType cpp     nmap <buffer> <leader>rc :w\|:!g++ ./% -g -o %:r_temp && ./%:r_temp 
+
   autocmd FileType c       nmap <buffer> <leader>rr :w\|:!gcc ./% -g -o %:r_temp && ./%:r_temp<cr>
   autocmd FileType c       nmap <buffer> <leader>rc :w\|:!gcc ./% -g -o %:r_temp && ./%:r_temp 
 ]]
 
 
 -- Table mode custom keymaps
+-- set keywordprg=trans\ :jp
+-- <S-k> to trans current word under cursor
 vim.cmd[[
   autocmd FileType markdown,md,rb call MarkdownOptions()
 

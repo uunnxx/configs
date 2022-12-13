@@ -91,7 +91,7 @@
     dmenu = /usr/bin/dmenu -p dunst:
 
     # Browser for opening urls in context menu.
-    browser = /usr/bin/chromium
+    browser = /usr/bin/brave-browser
 
     always_run_script = true
 
@@ -153,5 +153,3 @@ timeout = 0
 background = "#F0544F"
 foreground = "#ffffff"
 frame_color = "#F0544F"
-
-# background = "#141c21"
