@@ -79,16 +79,25 @@ cmd [[
 -- Tabs
 require'colorizer'.setup()
 
+
+
 -- Indent blankline
 vim.opt.termguicolors = true
 
+require("indent_blankline").setup {
+  space_char_blankline = " ",
+  show_end_of_line = true,
+  show_current_context = true,
+  -- show_current_context_start = true,
+}
+
 cmd [[
-  highlight IndentBlanklineIndent1 guifg=#282828 gui=nocombine
-  highlight IndentBlanklineIndent2 guifg=#FB4934 gui=nocombine
-  highlight IndentBlanklineIndent3 guifg=#B8BB26 gui=nocombine
-  highlight IndentBlanklineIndent4 guifg=#FABD2F gui=nocombine
-  highlight IndentBlanklineIndent5 guifg=#83A598 gui=nocombine
-  highlight IndentBlanklineIndent6 guifg=#D3869B gui=nocombine
+  highlight IndentBlanklineIndent1 guifg=#444444 gui=nocombine
+  highlight IndentBlanklineIndent2 guifg=#444444 gui=nocombine
+  highlight IndentBlanklineIndent3 guifg=#444444 gui=nocombine
+  highlight IndentBlanklineIndent4 guifg=#444444 gui=nocombine
+  highlight IndentBlanklineIndent5 guifg=#444444 gui=nocombine
+  highlight IndentBlanklineIndent6 guifg=#444444 gui=nocombine
 ]]
 
 

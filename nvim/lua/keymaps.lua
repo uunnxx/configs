@@ -46,8 +46,8 @@ map('n', '<leader>R', ':redo<CR>', silentnoremap)
 
 
 -- Go to start or end of line easier
-map('n', 'H', 'g0', silentnoremapnowait)
-map('x', 'H', 'g0', silentnoremapnowait)
+map('n', 'H', 'g^', silentnoremapnowait)
+map('x', 'H', 'g^', silentnoremapnowait)
 map('n', 'L', 'g_', silentnoremapnowait)
 map('x', 'L', 'g_', silentnoremapnowait)
 

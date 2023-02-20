@@ -1,5 +1,3 @@
--- Lualine
-
 -- Custom components
 local function wordCount()
   local filetype = vim.bo.filetype

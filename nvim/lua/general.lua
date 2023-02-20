@@ -97,6 +97,7 @@ set.scrolloff=5
 -------------------- Spelling
 -------------------------------------------------------------------------------
 set.dictionary='~/.config/nvim/spell/'
+set.spell = false
 set.spelllang = { 'en_us', 'cjk', 'ru' }    -- Dictionary for spellcheck
 
 

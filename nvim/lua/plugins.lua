@@ -7,7 +7,7 @@ packadd shellmenu
 ]]
 
 
-return require('packer').startup(function()
+return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'nvim-lua/plenary.nvim'
   use 'nvim-lua/popup.nvim'
@@ -31,6 +31,7 @@ return require('packer').startup(function()
   -- Colorscheme
   use 'uunnxx/gruvbox.nvim'
   -- use "ellisonleao/gruvbox.nvim"
+  use 'folke/lsp-colors.nvim'
 
   use 'MunifTanjim/nui.nvim'
 
@@ -124,11 +125,6 @@ return require('packer').startup(function()
   }
 
 
-
-  -- LINTER
-  -- use 'dense-analysis/ale'
-
-
   -- Autocompletion
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-buffer'
@@ -148,10 +144,6 @@ return require('packer').startup(function()
   use 'dcampos/nvim-snippy'
   use 'dcampos/cmp-snippy'
   use 'honza/vim-snippets'
-
-  -- Shade is a Neovim plugin that dims your inactive windows, making it easier to see the active window at a glance.
-  -- use 'sunjon/shade.nvim'
-
 
 
   -----------------------------------------------------------
@@ -215,11 +207,6 @@ return require('packer').startup(function()
   -----------------------------------------------------------
   -- PYTHON
   -----------------------------------------------------------
-  -- Vim plugin to sort python imports using
-  use {
-    'fisadev/vim-isort',
-    ft = {'py', 'python'}
-  }
   use {
     'hdima/python-syntax',
     ft = {'python', 'py'}

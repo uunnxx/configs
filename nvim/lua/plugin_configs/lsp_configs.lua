@@ -10,7 +10,7 @@ vim.diagnostic.config({
 
 
 
-vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+-- vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -61,6 +61,7 @@ lspconfig.solargraph.setup{
     }
   }
 }
+
 
 lspconfig.typeprof.setup{
   cmd = { 'typeprof', '--lsp', '--stdio' },
@@ -131,6 +132,7 @@ require'lspconfig'.tailwindcss.setup{
   }
 }
 
+
 -- C lang
 lspconfig.clangd.setup{
   -- on_attach = on_attach,
@@ -150,53 +152,49 @@ lspconfig.crystalline.setup{
 }
 
 
--- Python
--- lspconfig.pylsp.setup{
---   cmd = { "pylsp" },
---   filetypes = { "python" },
---   single_file_support = true,
---   capabilities = capabilities
--- }
-
 -------------------------------------
--- lspconfig.pyright.setup{
+-- Python
+lspconfig.pylsp.setup{}
+-- lspconfig.pylsp.setup{
 --   single_file_support = true,
+--   capabilities = capabilities,
 --   settings = {
---     python = {
---       analysis = {
---         autoSearchPaths = true,
---         diagnosticMode = "workspace",
---         useLibraryCodeForTypes = true,
---         extraPaths = {"/usr/local/lib/python3.10/site-packages"}
---       }
---     }
+    -- pylsp = {
+      -- plugins = {
+      --   pycodestyle = {
+      --     ignore = {'W391'},
+      --     maxLineLength = 79
+      --   },
+      --   mypy = {
+      --     enabled = true,
+      --     live_mode = true,
+      --     strict = false,
+      --   },
+      --   black = {
+      --     enabled = true,
+      --     line_length = 79,
+      --     preview = true
+      --   },
+      --   autopep8 = {
+      --     enabled = true
+      --   },
+      --   flake8 = {
+      --     enabled = true
+      --   },
+      --   jedi = {
+      --     completion = true
+      --   },
+      --   pylint = {
+      --     enabled = true
+      --   },
+      --   yapf = {
+      --     enabled = true
+      --   }
+      -- }
+    -- }
 --   }
 -- }
 
-lspconfig.pylsp.setup{
-  settings = {
-    pylsp = {
-      plugins = {
-        pycodestyle = {
-          ignore = {'W391'},
-          maxLineLength = 79
-        },
-        mypy = {
-          enabled = true,
-          live_mode = true,
-          strict = false,
-        },
-        black = {
-          enabled = true,
-          line_length = 79,
-          preview = true
-        }
-      }
-    }
-  }
-}
-
-require'lspconfig'.pyre.setup{}
 
 -- Elixir
 lspconfig.elixirls.setup{
@@ -226,30 +224,28 @@ local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
-lspconfig.sumneko_lua.setup {
-  cmd = { "lua-language-server" },
-  filetypes = { "lua" },
-  log_level = 2,
+require'lspconfig'.lua_ls.setup {
   single_file_support = true,
-  capabilities = capabilities,
   settings = {
     Lua = {
       runtime = {
+        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
         version = 'LuaJIT',
-        path = runtime_path,
       },
       diagnostics = {
+        -- Get the language server to recognize the `vim` global
         globals = {'vim'},
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
         library = vim.api.nvim_get_runtime_file("", true),
       },
+      -- Do not send telemetry data containing a randomized but unique identifier
       telemetry = {
         enable = false,
-      }
-    }
-  }
+      },
+    },
+  },
 }
 
 

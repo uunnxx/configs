@@ -47,7 +47,7 @@ tele.setup({
         ["<esc>"] = actions.close,
         ["<C-o>"] = actions.toggle_selection,
         ["<C-O>"] = actions.toggle_all,
-        ["<c-T>"] = trouble.open_with_trouble 
+        ["<c-T>"] = trouble.open_with_trouble
       },
       n = { ["<c-T>"] = trouble.open_with_trouble },
     },

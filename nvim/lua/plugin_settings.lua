@@ -11,23 +11,14 @@ require("indent_blankline").setup {
 }
 
 
--- require('emmet-vim').setup()
-    -- setup = function () -- load stuff before the plugin is loaded
-    --   vim.g.user_emmet_leader_key = '<c-m>'
-    --   vim.g.user_emmet_settings = {
-    --   indent_blockelement = 1,
-    -- }
-    -- end,
-
-
 -- Treesitter
 require'nvim-treesitter.configs'.setup {
   ensure_installed = { "c", "python", "ruby" },
-  sync_install = false,
+  sync_install = true,
   auto_install = true,
   highlight = {
     enable = true,
-    additional_vim_regex_highlighting = false,
+    additional_vim_regex_highlighting = true,
   },
 }
 
@@ -39,17 +30,6 @@ require'nvim-treesitter.configs'.setup {
 -- Highlight arguments' definitions and usages, asynchronously, using Treesitter
 require('hlargs').setup()
 
-
--- Shade
--- require'shade'.setup({
---   overlay_opacity = 50,
---   opacity_step = 1,
---   keys = {
---     brightness_up    = '<C-Up>',
---     brightness_down  = '<C-Down>',
---     toggle           = '<Leader>s',
---   }
--- })
 
 -- Performance related
 require('impatient').enable_profile()
