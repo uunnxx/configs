@@ -138,7 +138,7 @@ map('n', '<S-m>', ':Telescope man_pages sections=1,2,3<CR>', silentnoremapnowait
 
 -- Split windows
 map('n', '<leader><leader>v', '<C-W>v:Telescope find_files theme=ivy<CR>', silentnoremapnowait)
-map('n', '<leader><leader>s', '<C-W>s:Telescope find_files theme=ivy<CR>', silentnoremapnowait)
+map('n', '<leader><leader>h', '<C-W>s:Telescope find_files theme=ivy<CR>', silentnoremapnowait)
 
 -- Live Grep
 map('n', '<M-f>', ':Telescope live_grep theme=ivy<CR>', silentnoremap)

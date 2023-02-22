@@ -31,59 +31,60 @@ return require('packer').startup(function(use)
   -- Colorscheme
   use 'uunnxx/gruvbox.nvim'
   -- use "ellisonleao/gruvbox.nvim"
+
   use 'folke/lsp-colors.nvim'
 
   use 'MunifTanjim/nui.nvim'
 
-  use 'kyazdani42/nvim-web-devicons'
+  use 'nvim-tree/nvim-web-devicons'
 
   -- Statusline
   use { 'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-  }
+  requires = { 'nvim-tree/nvim-web-devicons', opt = true },
+}
 
-  -- use { 'stevearc/dressing.nvim' }
+-- use { 'stevearc/dressing.nvim' }
 
-  -- Git
-  use { 'lewis6991/gitsigns.nvim',
-    requires = 'nvim-lua/plenary.nvim'
+-- Git
+use { 'lewis6991/gitsigns.nvim',
+requires = 'nvim-lua/plenary.nvim'
   }
   -- use {'kdheepak/lazygit.nvim'}
 
   -- Bufferline
   use { 'akinsho/bufferline.nvim',
-    requires = 'kyazdani42/nvim-web-devicons',
-    config = function()
-      require("bufferline").setup{} end
-    }
+  requires = 'kyazdani42/nvim-web-devicons',
+  config = function()
+    require("bufferline").setup{} end
+  }
 
 
   -- Indent guides for Neovim
   use 'lukas-reineke/indent-blankline.nvim'
 
----------- Comment
+  -- Comment
   use { 'numToStr/Comment.nvim',
-    config = function()
-      require('Comment').setup()
-    end
-  }
+  config = function()
+    require('Comment').setup()
+  end
+}
 
-  -- Neovim plugin for aligning text
-  -- :Align
-  use 'RRethy/nvim-align'
+-- Neovim plugin for aligning text
+-- :Align
+use 'RRethy/nvim-align'
 
 
-  -- switch and restore fcitx state
-  use 'h-hg/fcitx.nvim'
+-- switch and restore fcitx state
+use 'h-hg/fcitx.nvim'
 
-  -----------------------------------------------------------
-  -- Navigation
-  -----------------------------------------------------------
-  -- File Explorer
-  use { 'kyazdani42/nvim-tree.lua',
-    requires = 'kyazdani42/nvim-web-devicons',
-    tag = 'nightly'
-    -- config = function() require'nvim-tree'.setup {} end
+-----------------------------------------------------------
+-- Navigation
+-----------------------------------------------------------
+-- File Explorer
+use { 'kyazdani42/nvim-tree.lua',
+requires = 'kyazdani42/nvim-web-devicons',
+tag = 'nightly'
+-- config = function() require'nvim-tree'.setup {} end
   }
 
   -- Tagbra
@@ -113,7 +114,7 @@ return require('packer').startup(function(use)
   -- lsp installer
   use { "williamboman/mason.nvim" }
 
--- Highlight arguments' definitions and usages, asynchronously, using Treesitter
+  -- Highlight arguments' definitions and usages, asynchronously, using Treesitter
   use 'm-demare/hlargs.nvim'
 
   use {
@@ -133,7 +134,7 @@ return require('packer').startup(function(use)
   use 'hrsh7th/cmp-nvim-lua'
   use 'hrsh7th/cmp-cmdline'
   use 'hrsh7th/cmp-omni'
-  use 'hrsh7th/lspkind-nvim'
+  use 'onsails/lspkind.nvim'
   use 'saadparwaiz1/cmp_luasnip'
 
 
@@ -260,21 +261,20 @@ return require('packer').startup(function(use)
     ft = {'html', 'html5', 'xhtml', 'xml'}
   }
 
--- 'AndrewRadev/tagalong.vim'
--- 'turbio/bracey.vim'
+  -- 'AndrewRadev/tagalong.vim'
 
 
--- Vim Table Mode for Markdown
+  -- Vim Table Mode for Markdown
   use {
     'https://github.com/dhruvasagar/vim-table-mode',
     ft = {'md', 'markdown', 'text'}
   }
 
-  -- Use gx to open github related links as "user/git_repo"
+  -- Use `gx` to open github related links as "user/git_repo"
   use 'gabebw/vim-github-link-opener'
 
 
--- Basic
+  -- Basic
   use 'Chiel92/vim-autoformat'
   use 'tpope/vim-unimpaired'
   use 'tpope/vim-surround'

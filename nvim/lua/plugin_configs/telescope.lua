@@ -1,4 +1,4 @@
-local tele = require('telescope')
+local telescope = require('telescope')
 local actions = require('telescope.actions')
 local themes = require('telescope.themes')
 local trouble = require("trouble.providers.telescope")
@@ -11,7 +11,7 @@ local default_ivy = {
   -- layout_config = { heigth = 13 }
 }
 
-tele.setup({
+telescope.setup({
   defaults = {
     -- layout_strategy = "flex",
     layout_config = {
@@ -91,7 +91,7 @@ tele.setup({
 
 
 
-tele.setup {
+telescope.setup {
   extensions = {
     fzf = {
       fuzzy = true,
@@ -111,5 +111,5 @@ tele.setup {
 
 -- To get fzf loaded and working with telescope, you need to call
 -- load_extension, somewhere after setup function:
-tele.load_extension('fzf')
-tele.load_extension('ui-select')
+telescope.load_extension('fzf')
+telescope.load_extension('ui-select')

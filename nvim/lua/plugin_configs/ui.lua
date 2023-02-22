@@ -116,9 +116,40 @@ autocmd Filetype python,ruby,c,cpp,elixir,rust match Error /\s\+$/
 ]]
 
 
-
-
-
 -- Disable number in terminal
 cmd[[autocmd TermOpen * setlocal nonumber norelativenumber]]
 
+-- cmp.nvim
+vim.cmd[[
+  highlight! PmenuSel guibg=#1d2021 guifg=NONE
+  highlight! Pmenu guifg=#C5CDD9 guibg=#22252A
+  highlight! CmpItemAbbrDeprecated guifg=#7E8294 guibg=NONE
+  highlight! CmpItemAbbrMatch guifg=#82AAFF guibg=NONE
+  highlight! CmpItemAbbrMatchFuzzy guifg=#82AAFF guibg=NONE
+  highlight! CmpItemMenu guifg=#d3869b guibg=NONE
+  highlight! CmpItemKindField guifg=#EED8DA guibg=#B5585F
+  highlight! CmpItemKindProperty guifg=#EED8DA guibg=#B5585F
+  highlight! CmpItemKindEvent guifg=#EED8DA guibg=#B5585F
+  highlight! CmpItemKindText guifg=#ffffff guibg=#b8bb26
+  highlight! CmpItemKindEnum guifg=#ffffff guibg=#b8bb26
+  highlight! CmpItemKindKeyword guifg=#ffffff guibg=#b8bb26
+  highlight! CmpItemKindConstant guifg=#FFE082 guibg=#D4BB6C
+  highlight! CmpItemKindConstructor guifg=#FFE082 guibg=#D4BB6C
+  highlight! CmpItemKindReference guifg=#FFE082 guibg=#D4BB6C
+  highlight! CmpItemKindFunction guifg=#ffffff guibg=#d3869b
+  highlight! CmpItemKindStruct guifg=#ffffff guibg=#d3869b
+  highlight! CmpItemKindClass guifg=#ffffff guibg=#d3869b
+  highlight! CmpItemKindModule guifg=#ffffff guibg=#d3869b
+  highlight! CmpItemKindOperator guifg=#ffffff guibg=#d3869b
+  highlight! CmpItemKindVariable guifg=#C5CDD9 guibg=#7E8294
+  highlight! CmpItemKindFile guifg=#C5CDD9 guibg=#7E8294
+  highlight! CmpItemKindUnit guifg=#F5EBD9 guibg=#D4A959
+  highlight! CmpItemKindSnippet guifg=#F5EBD9 guibg=#D4A959
+  highlight! CmpItemKindFolder guifg=#F5EBD9 guibg=#D4A959
+  highlight! CmpItemKindMethod guifg=#DDE5F5 guibg=#6C8ED4
+  highlight! CmpItemKindValue guifg=#DDE5F5 guibg=#6C8ED4
+  highlight! CmpItemKindEnumMember guifg=#DDE5F5 guibg=#6C8ED4
+  highlight! CmpItemKindInterface guifg=#D8EEEB guibg=#58B5A8
+  highlight! CmpItemKindColor guifg=#D8EEEB guibg=#58B5A8
+  highlight! CmpItemKindTypeParameter guifg=#D8EEEB guibg=#58B5A8
+]]
