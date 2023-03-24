@@ -22,3 +22,6 @@ cmd [[ autocmd FileType xml,html,xhtml,css,scss,javascript,lua,yaml,htmljinja se
 
 -- Jinja2
 cmd[[ autocmd BufNewFile,BufRead *.html set filetype=htmldjango ]]
+
+-- Call `Autoformat` python files on save
+cmd[[autocmd BufWritePost,FileWritePost *.py Autoformat]]

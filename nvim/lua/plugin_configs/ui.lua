@@ -108,8 +108,8 @@ cmd [[
 cmd[[
 
 autocmd Syntax * call matchadd('Todo', '\W\zs\(CONCEPT\|TODO\|FIXME\|CHANGED\|CHANGES\|HACK\)')
-autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\|README\|unx\|SYNTAX\)')
-autocmd Syntax * call matchadd('Error', '\W\zs\(ERROR\|WARNING\|BUG\)')
+autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\|README\|SYNTAX\)')
+autocmd Syntax * call matchadd('Error', '\W\zs\(ERROR\|WARNING\|BUG\|SECURITY WARNING\)')
 
 autocmd Filetype python,ruby,c,cpp,elixir,rust match Error /\s\+$/
 " match Error /\s\+$/

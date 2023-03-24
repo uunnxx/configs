@@ -34,7 +34,7 @@ require('lualine').setup {
   sections = {
     lualine_a = {'mode'},
     lualine_b = {'branch', 'diff', 'searchcount'},
-    lualine_c = { 'getcwd', 'filename', 'filesize'},
+    lualine_c = {'getcwd', 'filename', 'filesize'},
 
     -- %B hex code
     lualine_x = {'diagnostics', 'encoding', 'fileformat', 'filetype', '%B', wordCount},

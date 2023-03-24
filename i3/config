@@ -15,7 +15,7 @@ set $fm "thunar"
 set $barcmd i3status
 set $calc "qalculate-gtk"
 
-font pango:Iosevka Nerd Font Bold 10
+font pango:mononoki Bold 10
 
 floating_modifier $mod
 
@@ -303,6 +303,7 @@ for_window [class="Evince"] move position center
 for_window [class="Zeal"] floating enable resize set 1340 780
 for_window [class="Zeal"] move position center
 
+for_window [class="Thunar" title="File Operation Progress"] floating enable
 # for_window [urgent=latest] focus
 
 
@@ -509,8 +510,9 @@ bindsym $alt+Down exec $HOME/.local/bin/volume_down
 # mpvctl https://gist.github.com/dwgill/a66769e0edef69c04d3b
 bindsym $mod+Left exec mpvctl previous; exec dunstify -r 1111 -u low "PREVIOUS TRACK"
 bindsym $mod+Right exec mpvctl next; exec dunstify -r 1111 -u low "NEXT TRACK"
-bindsym $mod+Up exec dunstify -r 9999 -u normal "NOW PLAYING:" "$(exec mpvctl play)"
-bindsym $mod+Down exec mpvctl pause; exec dunstify -r 9999 -u low "PAUSE"
+# bindsym $mod+Up exec dunstify -r 9999 -u normal "NOW PLAYING:" "$(exec mpvctl play)"
+bindsym $mod+Up exec mpvctl play; exec dunstify -r 9999 -u normal "PLAY"
+bindsym $mod+Down exec mpvctl pause; exec dunstify -r 1111 -u low "PAUSE"
 
 # Diodon
 bindsym $mod+$sh+v exec --no-startup-id diodon, mode "default"

@@ -34,13 +34,13 @@ set.softtabstop = 4       -- let backspace delete indent
 set.hidden = true
 
 -------------------------------------------------------------------------------
--------------------- UI
+-- UI
 -------------------------------------------------------------------------------
 
 -- let &colorcolumn="80,100,".join(range(120,999),",")
 cmd[[
-    let &colorcolumn="80,100,120"
-    hi! ColorColumn ctermbg=6
+  let &colorcolumn="80,100,120"
+  hi! ColorColumn ctermbg=6
 ]]
 set.cursorline = true
 set.cursorcolumn = false
@@ -55,7 +55,7 @@ set.relativenumber = true           -- Relative Numbers
 set.splitright = true               -- Open new split panes to right and
 set.splitbelow = true               -- bottom, which feels more natural
 
-wset.wrap = true
+wset.wrap = false
 
 set.cmdheight = 1
 -- Global statusline. set to 2 to get it default back
@@ -68,6 +68,8 @@ set.shortmess:append('c')
 
 -- Virtual Edit
 -- set.virtualedit = 'all'
+
+set.winbar = "    %{%v:lua.require'nvim-navic'.get_location()%}"
 
 
 -- Specify the behavior when switching between buffers
@@ -114,7 +116,7 @@ set.completeopt = 'menu,menuone,noselect'
 -------------------------------------------------------------------------------
 -------------------- Invisible Chars
 -------------------------------------------------------------------------------
--- set.list = true
+set.list = true
 set.listchars = {
   tab = '▸ ',
   trail = '·',

@@ -1,10 +1,12 @@
 local lspconfig = require'lspconfig';
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local mason = require'mason'
+local navic = require'nvim-navic'
+
 
 
 vim.diagnostic.config({
-  virtual_text = false,
+  virtual_text = true,
   update_in_insert = false,
 })
 
@@ -15,18 +17,22 @@ vim.diagnostic.config({
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
+  if client.server_capabilities.documentSymbolProvider then
+    navic.attach(client, bufnr)
+  end
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   local bufopts = { noremap=true, silent=true, buffer=bufnr }
-  -- vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
 end
 
 
+-------------------------------------------------------------------------------
 -- Mason
 mason.setup({
   ui = {
@@ -42,17 +48,18 @@ mason.setup({
     update_server = "u",
     check_server_version = "c",
     update_all_servers = "U",
-    check_outdated_servers = "C",
+    heck_outdated_servers = "C",
     uninstall_server = "X",
     cancel_installation = "<C-c>",
   },
   max_concurrent_installers = 10
 })
--- End Mason
 
 
+-------------------------------------------------------------------------------
 -- Ruby
 lspconfig.solargraph.setup{
+  on_attach = on_attach,
   cmd = { 'solargraph', 'stdio' },
   filetypes = { 'ruby', 'rakefile' },
   capabilities = capabilities,
@@ -62,42 +69,61 @@ lspconfig.solargraph.setup{
   -- root_dir = root_pattern("Gemfile", ".git"),
   settings = {
     solargraph = {
-      definition = true,
+    --   definition = true,
       diagnostics = true,
-      completion = true,
-      autoformat = true,
-      folding = true,
-      references = true,
-      rename = true,
-      symbols = true,
-      hover = true
+    --   completion = true,
+    --   autoformat = true,
+    --   folding = true,
+    --   references = true,
+    --   rename = true,
+    --   symbols = true,
+    --   hover = true
     }
   }
 }
 
 
 lspconfig.typeprof.setup{
+  on_attach = on_attach,
   cmd = { 'typeprof', '--lsp', '--stdio' },
   filetypes = { 'ruby', 'eruby', 'rakefile' },
   -- root_dir = root_pattern("Gemfile", ".git")
 }
 
 
+-------------------------------------------------------------------------------
 -- Rust
 lspconfig.rust_analyzer.setup{
-  -- on_attach = on_attach,
+  on_attach = on_attach,
   capabilities = capabilities,
   cmd = { "rust-analyzer" },
   filetypes = { "rust" },
-  -- root_dir = root_pattern("Cargo.toml", "rust-project.json"),
+  root_dir = lspconfig.util.root_pattern("Cargo.toml", "rust-project.json"),
   settings = {
-    ["rust-analyzer"] = {}
+    ["rust-analyzer"] = {
+      imports = {
+        granularity = {
+          group = "module",
+        },
+        prefix = "self",
+      },
+      cargo = {
+        buildScripts = {
+          enable = true,
+        },
+      },
+      procMacro = {
+        enable = true
+      },
+    }
   }
 }
 
+
+-------------------------------------------------------------------------------
 -- JavaScript, TypeScript
 lspconfig.tsserver.setup{
-  -- on_attach = on_attach,
+  on_attach = on_attach,
   capabilities = capabilities,
   cmd = { "typescript-language-server", "--stdio" },
   filetypes = {
@@ -114,13 +140,17 @@ lspconfig.tsserver.setup{
   -- root_dir = root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")
 }
 
+
+-------------------------------------------------------------------------------
 -- CSS
 require'lspconfig'.cssmodules_ls.setup{
+  on_attach = on_attach,
   cmd = { "cssmodules-language-server" },
   filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" }
 }
 
 require'lspconfig'.tailwindcss.setup{
+  on_attach = on_attach,
   cmd = { "tailwindcss-language-server", "--stdio" },
   init_options = {
     userLanguages = {
@@ -146,9 +176,10 @@ require'lspconfig'.tailwindcss.setup{
 }
 
 
+-------------------------------------------------------------------------------
 -- C lang
 lspconfig.clangd.setup{
-  -- on_attach = on_attach,
+  on_attach = on_attach,
   capabilities = capabilities,
   cmd = { "clangd", "--background-index" },
   filetypes = { "c", "cpp", "objc", "objcpp" },
@@ -156,8 +187,10 @@ lspconfig.clangd.setup{
 }
 
 
+-------------------------------------------------------------------------------
 -- Crystal
 lspconfig.crystalline.setup{
+  on_attach = on_attach,
   cmd = { "crystalline" },
   filetypes = { "crystal" },
   single_file_support = true,
@@ -165,53 +198,58 @@ lspconfig.crystalline.setup{
 }
 
 
--------------------------------------
+-------------------------------------------------------------------------------
 -- Python
-lspconfig.pyright.setup{}
-lspconfig.pylsp.setup{}
--- lspconfig.pylsp.setup{
---   single_file_support = true,
---   capabilities = capabilities,
---   settings = {
-    -- pylsp = {
-      -- plugins = {
-      --   pycodestyle = {
-      --     ignore = {'W391'},
-      --     maxLineLength = 79
-      --   },
-      --   mypy = {
-      --     enabled = true,
-      --     live_mode = true,
-      --     strict = false,
-      --   },
-      --   black = {
-      --     enabled = true,
-      --     line_length = 79,
-      --     preview = true
-      --   },
-      --   autopep8 = {
-      --     enabled = true
-      --   },
-      --   flake8 = {
-      --     enabled = true
-      --   },
-      --   jedi = {
-      --     completion = true
-      --   },
-      --   pylint = {
-      --     enabled = true
-      --   },
-      --   yapf = {
-      --     enabled = true
-      --   }
-      -- }
-    -- }
---   }
--- }
+lspconfig.pyright.setup{
+  -- on_attach = on_attach,
+}
+lspconfig.pylsp.setup{
+  on_attach = on_attach,
+  single_file_support = true,
+  capabilities = capabilities,
+  settings = {
+    pylsp = {
+      plugins = {
+        pycodestyle = {
+          ignore = {
+            'F401',
+            'E501',
+            'W391',
+            'C0103', 'C0114', 'C0116',
+          },
+          -- maxLineLength = 79
+        },
+        mypy = {
+          enabled = true,
+          live_mode = true,
+          strict = false,
+        },
+        black = {
+          enabled = true,
+          preview = true
+        },
+        autopep8 = {
+          enabled = true
+        },
+        flake8 = {
+          enabled = true
+        },
+        jedi = {
+          completion = true
+        },
+        yapf = {
+          enabled = true
+        }
+      }
+    }
+  }
+}
 
 
+-------------------------------------------------------------------------------
 -- Elixir
 lspconfig.elixirls.setup{
+  on_attach = on_attach,
   filetypes = { "elixir", "eelixir", "exs", "ex" },
   settings = {
     dialyzerEnabled = true,
@@ -223,8 +261,10 @@ lspconfig.elixirls.setup{
 }
 
 
+-------------------------------------------------------------------------------
 -- Erlang
 lspconfig.erlangls.setup{
+  on_attach = on_attach,
   cmd = { "erlang_ls" },
   filetypes = { "erlang" },
   -- root_dir = root_pattern('rebar.config', 'erlang.mk', '.git')
@@ -233,6 +273,7 @@ lspconfig.erlangls.setup{
 }
 
 
+-------------------------------------------------------------------------------
 -- Lua
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
@@ -260,8 +301,11 @@ lspconfig.lua_ls.setup {
   },
 }
 
+
+-------------------------------------------------------------------------------
 -- Haskell
 lspconfig.hls.setup{
+  on_attach = on_attach,
   filetypes = { "haskell", "lhaskell"},
   settings = {
     formattingProvider = "ormolu",

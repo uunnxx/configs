@@ -1,5 +1,6 @@
 -------------------------------------------------------------------------------
--- map('mode', 'map', 'action', {nowait = true, noremap = true, silent = true})
+-- map('mode', 'map', 'action', {nowait = bool, noremap = bool, silent = true})
+--
 
 local function map(kind, lhs, rhs, opts)
   vim.api.nvim_set_keymap(kind, lhs, rhs, opts)
@@ -67,11 +68,11 @@ nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 ]]
 
 
------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
 -- Autoformat + save as CTRL-s normal, and insert mode
-map('n', '<C-s>', ':Autoformat<CR>:w<CR>',  silentnoremap)
-map('i', '<C-s>', '<esc>:Autoformat<CR>:w<CR>', silentnoremap)
+map('n', '<C-s>', ':Autoformat<CR>',  silentnoremap)
+map('i', '<C-s>', '<esc>:Autoformat<CR>', silentnoremap)
 
 
 map('n', '<space>;', 'q:', noremap)
@@ -89,6 +90,7 @@ map('n', '<space>j', '<C-W>j', silentnoremapnowait)
 map('n', '<space>k', '<C-W>k', silentnoremapnowait)
 map('n', '<space>h', '<C-W>h', silentnoremapnowait)
 map('n', '<space>l', '<C-W>l', silentnoremapnowait)
+map('t', '\\', '<C-\\><C-n><C-W>w', silentnoremap)
 
 -- Move Window
 map('n', '<space><space>j', '<C-W>J', silentnoremapnowait)
@@ -108,9 +110,11 @@ map('i', '<M-t>', '<ESC>:tabedit ', nowait)
 map('n', '<M-e>', ':edit ', nowait)
 map('i', '<M-e>', '<ESC>:edit ', nowait)
 
---------------------------
------------------- GENERAL
---------------------------
+
+-------------------------------------------------------------------------------
+-- GENERAL
+--
+
 -- LSP
 -- map('n', 'G', 'Gzz', silentnoremap)
 map('n', 'gtd', ':Telescope lsp_definitions<CR>', silentnoremap)
@@ -119,21 +123,22 @@ map('n', 'gtr', ':Telescope lsp_references<CR>', silentnoremap)
 map('n', 'gti', ':Telescope lsp_implementations<CR>', silentnoremap)
 
 
+-- Trouble
+map('n', 'gT', ':TroubleToggle<CR>', silentnoremap)
+
+
 -- Telescope
 map('n', 'TT', ':Telescope ', noremap)
-map('n', 'gD', ':Telescope diagnostics<CR>', silentnoremap)
+map('n', '<leader>gd', ':Telescope diagnostics<CR>', silentnoremap)
 map('n', 'gst', ':Telescope git_status<CR>', silentnoremap)
-
 map('n', '<leader>s', ':Telescope spell_suggest<CR>', silentnoremap)
 
 -- Find Files
 -- without preview
 map('n', 'tt', ':Telescope find_files theme=ivy<CR>', nowait)
 -- preview
-map('n', '<C-CR>', ':Telescope fd theme=dropdown<CR>', nowait)
--- Buffers
+map('n', '<C-CR>', ':Telescope fd theme=ivy<CR>', nowait)
 map('n', '<S-CR>', ':Telescope buffers theme=ivy<CR>', silentnoremapnowait)
-
 map('n', '<S-m>', ':Telescope man_pages sections=1,2,3<CR>', silentnoremapnowait)
 
 -- Split windows
@@ -148,12 +153,10 @@ map('i', '<M-f>', '<C-o>:Telescope live_grep theme=ivy<CR>', silentnoremap)
 map('n', 'FF', ':Telescope filetypes <CR>', silentnoremapnowait)
 
 
+-------------------------------------------------------------------------------
 
-
-
-
------------------- F-keys
-map('n', '<F2>', ':source /home/baka/.config/nvim/source_me.lua<CR>', silentnoremap)
+-- F-keys
+-- map('n', '<F2>', ':source /home/baka/.config/nvim/source_me.lua<CR>', silentnoremap)
 
 map('n', '<F4>', ':set wrap!<CR>', noremap)
 map('i', '<F4>', '<C-o>:set wrap!<CR>', noremap)
@@ -174,6 +177,8 @@ map('n', '<F11>', ':set spell!<CR>', silentnoremap)
 map('i', '<F11>', '<C-o>:set spell!<CR>', silentnoremap)
 
 
+-------------------------------------------------------------------------------
+
 -- TAGS
 map('n', '<space>tg', ':Telescope tags theme=ivy<CR>', silentnoremap)
 
@@ -182,12 +187,9 @@ map('n', '<space>tg', ':Telescope tags theme=ivy<CR>', silentnoremap)
 map('n', '<C-n>', ':NvimTreeRefresh<CR>:NvimTreeToggle<CR>', silentnoremapnowait)
 map('i', '<C-n>', '<C-o>:NvimTreeRefresh<CR><C-o>:NvimTreeToggle<CR>', silentnoremapnowait)
 
-
-
 -- Move current line
 map('i', '<down>', '<ESC>ddpi', silentnoremap)
 map('i', '<up>', '<ESC>ddkPi', silentnoremap)
-
 
 -- Go to file under cursor (vim default)
 map('n', 'gf', '<C-]>', silentnoremap)
@@ -197,7 +199,6 @@ map('n', '<BS>', '<C-o>', silentnoremap)
 
 -- Switch between the last two files
 map('n', '|', '<C-^>', silentnoremap)
-
 
 
 --------- Bufferline
@@ -215,6 +216,7 @@ map('n', '+', '<C-a>', silentnoremapnowait)
 map('n', '-', '<C-x>', silentnoremapnowait)
 map('v', '+', 'g<C-a>gv', silentnoremapnowait)
 map('v', '-', 'g<C-x>gv', silentnoremapnowait)
+
 
 -- Go to the starting position after visual modes
 map('v', '<ESC>', 'o<ESC>', silentnoremap)
@@ -258,26 +260,25 @@ map('n', 'dU', 'bf_de', silentnoremap)
 
 -------------------------------------------------------------------------------
 -- CUSTOM KEYMAPS
--- FOR_EDU:
 --   Ruby:
 --     test_array = ['text', 'hereb', 'text', 'hereb', 'text', 'hereb', 'text', 'hereb']
 --     test_hash = {:foo => 'text', :bar => 2}
 --     test_cmd = `command to execute`
---
+
 -- Delete array|hash's first key/value
 map('n', 'dcd', '0f[ldW', noremap )
 map('n', 'dhd', '0f{ldf,x', noremap )
 -- Delete array|hash's key/values but first
 map('n', 'dcD', '0f[f,dt]', noremap )
 map('n', 'dhD', '0f{f,dt}', noremap )
---
+
 -- Change array|hash's first key/value
 map('n', 'ccd', '0f[lcW', noremap )
 map('n', 'chd', '0f{lct,', noremap )
 -- Change array|hash's key/values but first
 map('n', 'ccD', '0f[f,lct]', noremap )
 map('n', 'chD', '0f{f,lct}', noremap )
---
+
 -- " def main(arg, arg2)
 -- "   do_something
 -- " end
@@ -288,6 +289,22 @@ map('n', 'chD', '0f{f,lct}', noremap )
 --   cab => ca(
 --   ciB => ci{
 --   caB => ca{
+--
+--   dib => di(
+--   dab => da(
+--   diB => di{
+--   daB => da{
+--
+--   vib => vi(
+--   vab => va(
+--   viB => vi{
+--   vaB => va{
+
+--   yib => yi(
+--   yab => ya(
+--   yiB => yi{
+--   yaB => ya{
+
 
 -- CUSTOM MAPS:
 --   Because of dvp keyboard layout I don't know the exact place of the
@@ -336,7 +353,6 @@ map('n', 'yaD', 'ya`', noremap)
 
 
 -- Change text _without putting the text into register,
--- see http://tinyurl.com/y2ap4h69
 map('n', 'c', '"_c', noremap)
 map('n', 'C', '"_C', noremap)
 map('n', 'cc', '"_cc', noremap)
@@ -359,26 +375,28 @@ map('n', '0', 'g0', silentnoremap)
 
 
 -- Close buffers
-map('n', '<leader><leader><space>', ':%bd <bar> e# <bar> bd#<cr>', silentnoremap)
+map('n', '<leader><leader><space>', ':%bd <bar> e# <bar> bd#<CR>', silentnoremap)
 
 
 -- Line autocompletion
 map('i', '<leader><leader>l', '<C-x><C-l>', silentnoremap)
 
 
+-- HOP
+map('n', '<leader>m', ':HopWord<CR>', noremap)
+map('n', '<leader>gg', ':HopLine<CR>', noremap)
 
 -------------------------------------------------------------------------------
 -- TERMINAL SECTION:
 --
-map('n', '<space><space>t', ':split term://zsh<cr>a', silentnoremap)
-map('n', '<space><space>v', ':vsplit term://zsh<cr>a', silentnoremap)
+map('n', '<space><space>t', ':split term://zsh<CR>a', silentnoremap)
+map('n', '<space><space>v', ':vsplit term://zsh<CR>a', silentnoremap)
 
 
 -- Use esc or ',,' to quit builtin terminal
 -- tnoremap <esc>   <C-\><C-n>
 map('t', '<leader><leader>', '<C-\\><C-n>', silentnoremap)
 map('t', '<Esc><Esc>', '<C-\\><C-n>:q!<CR>', silentnoremapnowait)
-
 
 
 -------------------------------------------------------------------------------
@@ -389,22 +407,22 @@ map('t', '<Esc><Esc>', '<C-\\><C-n>:q!<CR>', silentnoremapnowait)
 
 
 vim.cmd[[
-  autocmd FileType ruby    nmap <buffer> <leader>rr :w\|:!ruby %<cr>
+  autocmd FileType ruby    nmap <buffer> <leader>rr :w\|:!ruby %<CR>
   autocmd FileType ruby    nmap <buffer> <leader>rc :w\|:!ruby % 
 
-  autocmd FileType javascript    nmap <buffer> <leader>rr :w\|:!node %<cr>
+  autocmd FileType javascript    nmap <buffer> <leader>rr :w\|:!node %<CR>
   autocmd FileType javascript    nmap <buffer> <leader>rc :w\|:!node % 
 
-  autocmd FileType crystal nmap <buffer> <leader>rr :w\|:!crystal %<cr>
+  autocmd FileType crystal nmap <buffer> <leader>rr :w\|:!crystal %<CR>
   autocmd FileType crystal nmap <buffer> <leader>rc :w\|:!crystal % 
 
-  autocmd FileType python  nmap <buffer> <leader>rr :w\|:!python3 %<cr>
+  autocmd FileType python  nmap <buffer> <leader>rr :w\|:!python3 %<CR>
   autocmd FileType python  nmap <buffer> <leader>rc :w\|:!python3 % 
 
-  autocmd FileType cpp     nmap <buffer> <leader>rr :w\|:!g++ ./% -g -o %:r_temp && ./%:r_temp<cr>
+  autocmd FileType cpp     nmap <buffer> <leader>rr :w\|:!g++ ./% -g -o %:r_temp && ./%:r_temp<CR>
   autocmd FileType cpp     nmap <buffer> <leader>rc :w\|:!g++ ./% -g -o %:r_temp && ./%:r_temp 
 
-  autocmd FileType c       nmap <buffer> <leader>rr :w\|:!gcc ./% -g -o %:r_temp && ./%:r_temp<cr>
+  autocmd FileType c       nmap <buffer> <leader>rr :w\|:!gcc ./% -g -o %:r_temp && ./%:r_temp<CR>
   autocmd FileType c       nmap <buffer> <leader>rc :w\|:!gcc ./% -g -o %:r_temp && ./%:r_temp 
 ]]
 
