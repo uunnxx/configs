@@ -289,6 +289,9 @@ for_window [class="mpv"] move position center
 for_window [class="Eog"] floating enable resize set 1240 690
 for_window [class="Eog"] move position center
 
+for_window [class="imv"] floating enable resize set 1240 690
+for_window [class="imv"] move position center
+
 for_window [class="Zathura"] floating enable resize set 1340 780
 for_window [class="Zathura"] move position center
 

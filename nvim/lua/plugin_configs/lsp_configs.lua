@@ -200,9 +200,9 @@ lspconfig.crystalline.setup{
 
 -------------------------------------------------------------------------------
 -- Python
-lspconfig.pyright.setup{
+-- lspconfig.pyright.setup{
   -- on_attach = on_attach,
-}
+-- }
 lspconfig.pylsp.setup{
   on_attach = on_attach,
   single_file_support = true,
