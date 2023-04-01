@@ -7,11 +7,8 @@ local wset  = vim.wo              -- Window-scoped
 
 
 
--- Only run these settings once
-if not packer_plugins then
-  set.background = "dark"
-  set.termguicolors = true -- true colors
-end
+set.background = "dark"
+set.termguicolors = true -- true colors
 
 set.encoding = 'utf-8'
 -- Set how many lines of history Vim has to remember

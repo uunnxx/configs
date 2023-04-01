@@ -75,15 +75,8 @@ cmd [[
 ]]
 
 
--- Colorizer
--- Tabs
-require'colorizer'.setup()
-
-
 
 -- Indent blankline
-vim.opt.termguicolors = true
-
 require("indent_blankline").setup {
   space_char_blankline = " ",
   show_end_of_line = true,

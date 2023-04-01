@@ -2,9 +2,9 @@
 -- Import files
 ------------------------------------------------------------------
 
+require('general')
 require('plugins')
 require('plugin_settings')
-require('general')
 require('keymaps')
 require('lang_settings')
 require('settings')

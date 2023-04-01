@@ -13,13 +13,40 @@ require("indent_blankline").setup {
 
 -- Treesitter
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = { "c", "python", "ruby" },
-  sync_install = true,
-  auto_install = true,
-  highlight = {
-    enable = true,
-    additional_vim_regex_highlighting = true,
-  },
+    ensure_installed = {
+        "bash",
+        "c",
+        "cpp",
+        "css",
+        "elixir",
+        "fish",
+        "graphql",
+        "html",
+        "javascript",
+        "json",
+        "lua",
+        "markdown",
+        "markdown_inline",
+        "php",
+        "python",
+        "regex",
+        "ruby",
+        "rust",
+        "scss",
+        "sql",
+        "toml",
+        "tsx",
+        "typescript",
+        "vim",
+        "yaml",
+    },
+    sync_install = true,
+    auto_install = true,
+    highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = true,
+    },
+    indent = { enable = true }
 }
 
 -- require "nvim-treesitter.highlight"
@@ -41,7 +68,7 @@ local directions = require('hop.hint').HintDirection
 
 -- Find forward
 vim.keymap.set('', 'f', function()
-  hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false })
+    hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false })
 end, {remap=true})
 -- vim.keymap.set('', '<C-f>', function()
 --   hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false })
@@ -49,7 +76,7 @@ end, {remap=true})
 
 -- Find backward
 vim.keymap.set('', 'F', function()
-  hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false })
+    hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false })
 end, {remap=true})
 -- vim.keymap.set('', '<C-F>', function()
 --   hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false })
@@ -57,7 +84,7 @@ end, {remap=true})
 
 -- Till forward
 vim.keymap.set('', 't', function()
-  hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false, hint_offset = -1 })
+    hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false, hint_offset = -1 })
 end, {remap=true})
 -- vim.keymap.set('', '<leader>t', function()
 --   hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false, hint_offset = -1 })
@@ -65,7 +92,7 @@ end, {remap=true})
 
 -- Till backward
 vim.keymap.set('', 'T', function()
-  hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false, hint_offset = 1 })
+    hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false, hint_offset = 1 })
 end, {remap=true})
 -- vim.keymap.set('', '<leader>T', function()
 --   hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false, hint_offset = 1 })
@@ -129,19 +156,65 @@ vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", {silent = tru
 
 
 require("nvim-tree").setup({
-  sort_by = "case_sensitive",
-  view = {
-    adaptive_size = true,
-    mappings = {
-      list = {
-        { key = "u", action = "dir_up" },
-      },
+    sort_by = "case_sensitive",
+    view = {
+        adaptive_size = true,
+        mappings = {
+            list = {
+                { key = "u", action = "dir_up" },
+            },
+        },
     },
-  },
-  renderer = {
-    group_empty = true,
-  },
-  filters = {
-    dotfiles = true,
-  },
+    renderer = {
+        group_empty = true,
+    },
+    filters = {
+        dotfiles = true,
+    },
 })
+
+
+
+-- Surround
+-- Sv or S{ for a variable
+-- Sb       for a block
+-- Si       for an if statement
+-- Sw       for a with statement
+-- Sc       for a comment
+-- Sf       for a for statement
+-- S%       for other template tags
+
+vim.cmd[[
+    let b:surround_{char2nr("v")} = "{{ \r }}"
+    let b:surround_{char2nr("{")} = "{{ \r }}"
+    let b:surround_{char2nr("%")} = "{% \r %}"
+    let b:surround_{char2nr("b")} = "{% block \1block name: \1 %}\r{% endblock \1\1 %}"
+    let b:surround_{char2nr("i")} = "{% if \1condition: \1 %}\r{% endif %}"
+    let b:surround_{char2nr("w")} = "{% with \1with: \1 %}\r{% endwith %}"
+    let b:surround_{char2nr("f")} = "{% for \1for loop: \1 %}\r{% endfor %}"
+    let b:surround_{char2nr("c")} = "{% comment %}\r{% endcomment %}"
+]]
+
+
+
+-- Colorizer
+-- Tabs
+require'colorizer'.setup()
+
+
+
+-- Autopairs
+require("nvim-autopairs").setup({
+    disable_filetype = { "TelescopePrompt" },
+    fast_wrap = {}
+})
+
+
+
+-- Emmet
+vim.cmd[[
+    let g:user_emmet_mode='i'
+    let g:user_emmet_leader_key='<space><space>'
+    let g:user_emmet_install_global = 0
+    autocmd FileType html,css,htmldjango,erb EmmetInstall
+]]

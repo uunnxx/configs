@@ -1,18 +1,20 @@
 local lspconfig = require'lspconfig';
+local configs = require'lspconfig/configs';
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local mason = require'mason'
 local navic = require'nvim-navic'
 
 
-
 vim.diagnostic.config({
-  virtual_text = true,
-  update_in_insert = false,
+    float = { source = "always" },
+    virtual_text = false,
+    update_in_insert = false,
+    signs = true
 })
 
 
 
--- vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -141,6 +143,19 @@ lspconfig.tsserver.setup{
 }
 
 
+lspconfig.emmet_ls.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less' },
+    init_options = {
+        html = {
+            -- options = {
+            -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
+            -- ["bem.enabled"] = true,
+        },
+    },
+})
+
 -------------------------------------------------------------------------------
 -- CSS
 require'lspconfig'.cssmodules_ls.setup{
@@ -200,9 +215,9 @@ lspconfig.crystalline.setup{
 
 -------------------------------------------------------------------------------
 -- Python
--- lspconfig.pyright.setup{
+lspconfig.pyright.setup{
   -- on_attach = on_attach,
--- }
+}
 lspconfig.pylsp.setup{
   on_attach = on_attach,
   single_file_support = true,

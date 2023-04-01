@@ -32,7 +32,6 @@ telescope.setup({
     wrap_results = true,
     file_ignore_patterns = {
       "__pycache__/*",
-      "__init__.py",
       "%.env",
       "node_modules/*",
       "scratch/.*",
@@ -85,13 +84,6 @@ telescope.setup({
     lsp_implementations = default_ivy,
     lsp_references = default_ivy,
     lsp_type_definitions = default_ivy,
-  },
-})
-
-
-
-
-telescope.setup {
   extensions = {
     fzf = {
       fuzzy = true,
@@ -107,8 +99,8 @@ telescope.setup {
       },
     },
   },
-}
-
+  },
+})
 -- To get fzf loaded and working with telescope, you need to call
 -- load_extension, somewhere after setup function:
 telescope.load_extension('fzf')

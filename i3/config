@@ -1,3 +1,7 @@
+###############################################################################
+# GENERAL SETTINGS
+#
+
 set $mod Mod4
 set $ctrl Control
 set $alt Mod1
@@ -9,9 +13,7 @@ set $trans_ru "alacritty --class=alacrittyTransRight -e trans -t ru -I"
 set $trans_en "alacritty --class=alacrittyTransRight -e trans -t en -I"
 set $trans_ru_left "alacritty --class=alacrittyTransLeft -e trans -t ru -I"
 set $trans_en_left "alacritty --class=alacrittyTransLeft -e trans -t en -I"
-# set $ranger "alacritty --class=alacrittyRanger -e ranger"
 set $fm "thunar"
-
 set $barcmd i3status
 set $calc "qalculate-gtk"
 
@@ -19,58 +21,74 @@ font pango:mononoki Bold 10
 
 floating_modifier $mod
 
-# Hide borders
-hide_edge_borders smart
-# hide_edge_borders both
-# hide_edge_borders horizontal
+focus_follows_mouse no
+focus_wrapping no
+# mouse_warping none
 
-# `new_window pixel 4` will be deprecated soon
-# use `default_border`, and  `default_floating_border` instead
+# [smart, ignore, leave_fullscreen]
+popup_during_fullscreen smart
+
+# Hide borders [none | vertical | horizontal | both | smart | smart_no_gaps]
+hide_edge_borders smart
+
 default_border pixel 4
 default_floating_border pixel 4
-bindsym $mod+u border none
-bindsym $mod+y border pixel 4
-bindsym $mod+$sh+u border normal 4
+
+# gaps
+# smart_gaps [on | off | inverse_outer]
+smart_gaps on
+gaps inner 8
+gaps outer 4
+
+# tiling_drag modifier titlebar
+
+
+
+###############################################################################
+# BINDKEYS
+#
 
 bindsym $mod+Return exec $term
 bindsym $mod+$sh+Return exec $term_float
 
 bindsym $mod+$sh+c kill
 
-###############################################################################
-# MOUSE BUTTONS
-#
-# GET KEY CODES: `xev | grep button`
-#
-# button 1 left primary
-# button 2 middle
-# button 3 right
-# button 4 scroll up
-# button 5 scroll down
-# button 6 scroll left
-# button 7 scroll right
-# button 8 left side 1st button
-# button 9 left side 2nd button
+bindsym $mod+u border none
+bindsym $mod+y border pixel 4
+bindsym $mod+$sh+u border normal 4
 
-bindsym --whole-window $alt+button1 move scratchpad
-bindsym --whole-window $alt+button2 move position center
-bindsym --whole-window $alt+button3 kill
-bindsym --whole-window $alt+button8 fullscreen toggle
-bindsym --whole-window $alt+button9 floating toggle
+bindsym $alt+Up exec $HOME/.local/bin/volume_up
+bindsym $alt+Down exec $HOME/.local/bin/volume_down
 
+# mpvctl https://gist.github.com/dwgill/a66769e0edef69c04d3b
+bindsym $mod+Left exec mpvctl previous; exec dunstify -r 1111 -u low "PREVIOUS TRACK"
+bindsym $mod+Right exec mpvctl next; exec dunstify -r 1111 -u low "NEXT TRACK"
+# bindsym $mod+Up exec dunstify -r 9999 -u normal "NOW PLAYING:" "$(exec mpvctl play)"
+bindsym $mod+Up exec mpvctl play; exec dunstify -r 9999 -u normal "PLAY"
+bindsym $mod+Down exec mpvctl pause; exec dunstify -r 1111 -u low "PAUSE"
 
-###############################################################################
+# Diodon
+bindsym $mod+$sh+v exec --no-startup-id diodon, mode "default"
+ 
+# Input method settings
+# bindsym d exec --no-startup-id "setxkbmap -layout us,ru -variant dvp, -option grp:alt_space_toggle", mode "default"
+# bindsym q exec --no-startup-id "setxkbmap -layout us,ru -option grp:alt_space_toggle", mode "default"
+
 bindsym $mod+d exec --no-startup-id rofi -show drun
 bindsym $mod+$sh+d exec --no-startup-id rofi -show run
 
 bindsym $mod+n exec --no-startup-id rofi_books
-bindsym $mod+$sh+n exec --no-startup-id ~/.local/bin/dmenu_books
+# bindsym $mod+$sh+n exec --no-startup-id ~/.local/bin/dmenu_books
 
 bindsym $mod+g exec --no-startup-id $HOME/.config/i3/scripts/wmfocus.sh
 # bindsym $mod+$sh+g exec --no-startup-id
 
 bindsym $ctrl+Print exec "flameshot gui"
 
+# read 1 character and mark the current window with this character
+bindsym $alt+m exec i3-input -F 'mark --toggle %s' -l 1 -P 'MARK: ' -f '-misc-fixed-*-*-*-*-20-*-*-*-*-*-iso10646-*'
+# read 1 character and go to the window with the character
+bindsym $alt+g exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'GOTO: ' -f '-misc-fixed-*-*-*-*-20-*-*-*-*-*-iso10646-*'
 
 # change and move focus
 bindsym $mod+h focus left
@@ -98,45 +116,71 @@ bindsym $alt+s split toggle
 bindsym $mod+f fullscreen toggle
 bindsym $mod+$sh+f fullscreen toggle global
 
+# default layout [default | stacking | tabbed]
+workspace_layout tabbed
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle all
 
+# focus the parent container
+bindsym $mod+$sh+w focus parent
 # toggle tiling / floating
 bindsym $mod+$sh+space floating toggle
 bindsym $mod+space focus mode_toggle
 bindsym $mod+$sh+s sticky toggle
 
-# focus the parent container
-bindsym $mod+$sh+w focus parent
-
 # move the currently focused window to the scratchpad
 bindsym $mod+$sh+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
+bindsym $mod+c floating enable resize set 1340 780; move position center
 
 bindsym $alt+space exec --no-startup-id rofi -show window
 bindsym $alt+$sh+space exec --no-startup-id rofi -show windowcd
 
-# bindsym $mod+$sh+slash exec
-# bindsym $mod+slash exec
+# OBS related
+# https://github.com/muesli/obs-cli
+# Next: PageDown, Prior: PageUp
+bindsym $ctrl+$alt+Next exec /home/baka/.asdf/shims/obs-cli --password "bakabakabaka" scene switch right; exec dunstify -u low -r 7979 "OBS SCENE SWITCHED" "Active scene: <b>RIGHT</b>"
+bindsym $ctrl+$alt+Prior exec /home/baka/.asdf/shims/obs-cli --password "bakabakabaka" scene switch left; exec dunstify -u low -r 7979 "OBS SCENE SWITCHED" "Active scene: <b>LEFT</b>"
 
-bindsym $mod+c floating enable resize set 1340 780; move position center
 
-#navigate workspaces next / previous
-bindsym $alt+$sh+l workspace next
-bindsym $alt+$sh+h workspace prev
 
-# Workspaces
+###############################################################################
+# MOUSE BUTTONS
+#
+# GET KEY CODES: `xev | grep button`
+#
+# button 1 left primary
+# button 2 middle
+# button 3 right
+# button 4 scroll up
+# button 5 scroll down
+# button 6 scroll left
+# button 7 scroll right
+# button 8 left side 1st button
+# button 9 left side 2nd button
+
+bindsym --whole-window $alt+button1 move scratchpad
+bindsym --whole-window $alt+button2 move position center
+bindsym --whole-window $alt+button3 kill
+bindsym --whole-window $alt+button8 fullscreen toggle
+bindsym --whole-window $alt+button9 floating toggle
+
+
+
+###############################################################################
+# WORKSPACES
+#
+
 set $left HDMI-0
 set $right DP-1
 
-# bindsym $alt+$sh+Right focus output $left; workspace next; focus output $right; workspace next
-
-# switch between outputs
 bindsym $alt+l focus output right
 bindsym $alt+h focus output left
+bindsym $alt+$sh+l workspace next
+bindsym $alt+$sh+h workspace prev
 
 set $right0 "右 零"
 set $right1 "右 一"
@@ -160,7 +204,6 @@ set $left7 "左 七"
 set $left8 "左 八"
 set $left9 "左 九"
 
-# more workspaces
 set $leftA "RUBY"
 set $leftB "PYTHON"
 set $leftC "ELIXIR"
@@ -228,7 +271,6 @@ bindsym $alt+7 workspace $left7
 bindsym $alt+8 workspace $left8
 bindsym $alt+9 workspace $left9
 
-# bindsym $mod+$sh+0 move container to workspace $ws0; workspace $ws0
 bindsym $mod+$sh+0 move container to workspace $right0
 bindsym $mod+$sh+1 move container to workspace $right1
 bindsym $mod+$sh+2 move container to workspace $right2
@@ -292,8 +334,8 @@ for_window [class="Eog"] move position center
 for_window [class="imv"] floating enable resize set 1240 690
 for_window [class="imv"] move position center
 
-for_window [class="Zathura"] floating enable resize set 1340 780
-for_window [class="Zathura"] move position center
+# for_window [class="Zathura"] floating enable resize set 1340 780
+# for_window [class="Zathura"] move position center
 
 for_window [class="Org.gnome.Nautilus"] border normal 4
 
@@ -310,166 +352,119 @@ for_window [class="Thunar" title="File Operation Progress"] floating enable
 # for_window [urgent=latest] focus
 
 
-# read 1 character and mark the current window with this character
-bindsym $alt+m exec i3-input -F 'mark --toggle %s' -l 1 -P 'MARK: ' -f '-misc-fixed-*-*-*-*-20-*-*-*-*-*-iso10646-*'
-# read 1 character and go to the window with the character
-bindsym $alt+g exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'GOTO: ' -f '-misc-fixed-*-*-*-*-20-*-*-*-*-*-iso10646-*'
 
-
-bindsym Pause exec --no-startup-id systemctl suspend
-
-# tiling_drag modifier titlebar
-
-
+###############################################################################
+# STATUSBAR
 #
-# Colors
-#
+
+# Colours
 set $fff #FFFFFF
-# set $aaa #FF7043
-# set $ttt #141C21
-
 set $cla #39375B
 set $clb #745C97
-# set $clc #443850
-# set $cld #2D1E2F
-# set $cle #9C89B8
 set $clf #EBA6A9
-# set $clg #25044B
 set $clh #F0544F
-# set $cli #462A67
 set $clj #5B3758
-
-
-# Gruvbox
 set $gruv0 #1d2021
-# set $gruv8 #928374
 set $gruv1 #CC241D
 set $gruv9 #FB4934
-# set $gruv2 #98971A
-# set $gruvA #B8BB26
-# set $gruv3 #D79921
 set $gruvB #FABD2F
-# set $gruv4 #458588
-# set $gruvC #83A598
-# set $gruv5 #B16286
-# set $gruvD #D3869B
-# set $gruv6 #689D6A
-# set $gruvE #8EC07C
-# set $gruv7 #A89984
-# set $gruvF #EBDBB2
 
+
+# Bar
 bindsym $mod+$sh+m bar mode toggle
 
-# right monitor
+# Right Monitor
 bar {
-  font pango:Iosevka Nerd Font Bold 10
-  tray_padding 0
-  output $right
-  tray_output none
-  i3bar_command i3bar --transparency
-  status_command i3status --config ~/.config/i3/i3status.conf
-  position bottom
-  separator_symbol " | "
-  workspace_min_width 80
-  workspace_buttons yes
-  hidden_state hide
-  binding_mode_indicator yes
-  # mode hide
-  modifier none
-  colors {
-    background $gruv044
-    statusline $gruvB
-    separator  $clh
-    #                  border     backgr.    text
-    focused_workspace  $gruvB     $gruvB     $gruv0
-    active_workspace   $clf       $clf       $gruv0
-    inactive_workspace $clj       $clj       $fff
-    urgent_workspace   $gruv9     $gruv9     $fff
-    binding_mode       $gruvB     $gruvB     $gruv0
-  }
+    font pango:Iosevka Nerd Font Bold 10
+    tray_padding 0
+    output $right
+    tray_output none
+    i3bar_command i3bar --transparency
+    status_command i3status --config ~/.config/i3/i3status.conf
+    position bottom
+    separator_symbol " | "
+    workspace_min_width 80
+    workspace_buttons yes
+    hidden_state hide
+    binding_mode_indicator yes
+    # mode hide
+    modifier none
+    colors {
+        background #1D2021DF
+        statusline $gruvB
+        separator  $clh
+        #                  border     backgr.    text
+        focused_workspace  $gruvB     $gruvB     $gruv0
+        active_workspace   $clf       $clf       $gruv0
+        inactive_workspace $clj       $clj       $fff
+        urgent_workspace   $gruv9     $gruv9     $fff
+        binding_mode       $gruvB     $gruvB     $gruv0
+    }
 }
 
-
-# left monitor
+# Left Monitor
 bar {
-  font pango:Iosevka Nerd Font Bold 10
-  tray_padding 0
-  output $left
-  tray_output $left
-  i3bar_command i3bar --transparency
-  status_command i3status --config ~/.config/i3/i3status-small.conf
-  position bottom
-  separator_symbol " | "
-  workspace_min_width 80
-  workspace_buttons yes
-  hidden_state hide
-  binding_mode_indicator yes
-  # mode hide
-  modifier none
-  colors {
-    background $gruv044
-    statusline $gruvB
-    separator  $clh
-    #                  border     backgr.    text
-    focused_workspace  $gruvB     $gruvB     $gruv0
-    active_workspace   $clf       $clf       $gruv0
-    inactive_workspace $clj       $clj       $fff
-    urgent_workspace   $gruv9     $gruv9     $fff
-    binding_mode       $gruvB     $gruvB     $gruv0
-  }
+    font pango:Iosevka Nerd Font Bold 10
+    tray_padding 0
+    output $left
+    tray_output $left
+    i3bar_command i3bar --transparency
+    status_command i3status --config ~/.config/i3/i3status-small.conf
+    position bottom
+    separator_symbol " | "
+    workspace_min_width 80
+    workspace_buttons yes
+    hidden_state hide
+    binding_mode_indicator yes
+    # mode hide
+    modifier none
+    colors {
+        background #1D2021DF
+        statusline $gruvB
+        separator  $clh
+        #                  border     backgr.    text
+        focused_workspace  $gruvB     $gruvB     $gruv0
+        active_workspace   $clf       $clf       $gruv0
+        inactive_workspace $clj       $clj       $fff
+        urgent_workspace   $gruv9     $gruv9     $fff
+        binding_mode       $gruvB     $gruvB     $gruv0
+    }
 }
 
+# Clients
 # class                   border    backgr.   text        indic.   child_border
 client.focused            $clj      $clj      $fff        $gruv1
 client.focused_inactive   $clb      $clb      $fff        $gruv1
 client.unfocused          $cla      $cla      $fff        $gruv1
 client.urgent             $clh      $clh      $fff        $gruv1
 
-focus_follows_mouse no
-focus_wrapping no
-# mouse_warping none
 
-# smart, ignore, leave_fullscreen
-popup_during_fullscreen smart
 
 ###############################################################################
 # AUTOSTART APPLICATIONS
 #
+exec --no-startup-id $term
 exec --no-startup-id /usr/bin/fcitx5
 exec --no-startup-id /usr/bin/diodon
 exec --no-startup-id xclip
 exec --no-startup-id flameshot
 exec --no-startup-id nm-applet
-# window compositor: compton, unagi, xcompmgr (unagi is crashing after bufferoverflow)
-# exec --no-startup-id compton --config ~/.config/compton.conf -b
+exec --no-startup-id xscreensaver
+exec --no-startup-id xrandr --output DP-1 --auto --right-of HDMI-0 && xrandr --output DP-1 --primary
+
 exec_always --no-startup-id /usr/bin/xcompmgr
-
-# Launch Terminal
-exec --no-startup-id $term
-
 exec_always --no-startup-id xset r rate 130 40
-# CapsLock is Mod4
 exec_always --no-startup-id setxkbmap -option caps:super
+# https://github.com/sagb/alttab
+exec_always --no-startup-id alttab -w 1 -fg "#fabd2f" -bg "#141c21" -frame "#fabd2f" -t 128x150 -i 127x64
+# Redshift, reset settings, and set 3500
+exec_always --no-startup-id redshift -x; exec redshift -O 3500
+
 # CapsLock is Mod4 & Mod4 is CapsLock
 # exec_always --no-startup-id setxkbmap -option caps:super && xmodmap -e 'keycode 133 = Caps_Lock'
 # Set screentimeout to 600 sec
 # exec_always --no-startup-id xset s 600
-# xset is not working anymore for me, so, will use xscreensaver for now
 
-exec --no-startup-id xscreensaver
-# Make displays work as expected
-exec --no-startup-id xrandr --output DP-1 --auto --right-of HDMI-0 && xrandr --output DP-1 --primary
-
-# https://github.com/sagb/alttab
-exec_always --no-startup-id alttab -w 1 -fg "#fabd2f" -bg "#141c21" -frame "#fabd2f" -t 128x150 -i 127x64
-
-# Redshift, reset settings, and set 3500
-exec_always --no-startup-id redshift -x; exec redshift -O 3500
-
-
-# Input method settings
-# bindsym d exec --no-startup-id "setxkbmap -layout us,ru -variant dvp, -option grp:alt_space_toggle", mode "default"
-# bindsym q exec --no-startup-id "setxkbmap -layout us,ru -option grp:alt_space_toggle", mode "default"
 
 
 ###############################################################################
@@ -507,31 +502,15 @@ bindsym --release $mod+KP_Subtract exec xkill
 
 
 
-bindsym $alt+Up exec $HOME/.local/bin/volume_up
-bindsym $alt+Down exec $HOME/.local/bin/volume_down
-
-# mpvctl https://gist.github.com/dwgill/a66769e0edef69c04d3b
-bindsym $mod+Left exec mpvctl previous; exec dunstify -r 1111 -u low "PREVIOUS TRACK"
-bindsym $mod+Right exec mpvctl next; exec dunstify -r 1111 -u low "NEXT TRACK"
-# bindsym $mod+Up exec dunstify -r 9999 -u normal "NOW PLAYING:" "$(exec mpvctl play)"
-bindsym $mod+Up exec mpvctl play; exec dunstify -r 9999 -u normal "PLAY"
-bindsym $mod+Down exec mpvctl pause; exec dunstify -r 1111 -u low "PAUSE"
-
-# Diodon
-bindsym $mod+$sh+v exec --no-startup-id diodon, mode "default"
- 
-###############################################################################
-# OBS related
-# https://github.com/muesli/obs-cli
-# Next: PageDown, Prior: PageUp
-bindsym $ctrl+$alt+Next exec /home/baka/.asdf/shims/obs-cli --password "bakabakabaka" scene switch right; exec dunstify -u low -r 7979 "OBS SCENE SWITCHED" "Active scene: <b>RIGHT</b>"
-bindsym $ctrl+$alt+Prior exec /home/baka/.asdf/shims/obs-cli --password "bakabakabaka" scene switch left; exec dunstify -u low -r 7979 "OBS SCENE SWITCHED" "Active scene: <b>LEFT</b>"
-
-
 ###############################################################################
 # MODE SECTION
-#
-set $run [bB]rave, [fF]irefox, [lL - tT]ranslate
+# $run
+# $screenshot
+# $more_workspaces
+# $mode_system
+# $resize
+# $notify
+set $run [bB]rave, [fF]irefox, [lL - tT]ranslate | [Uppercase: incognito]
 mode "$run" {
   bindsym b exec --no-startup-id brave-browser, mode "default"
   bindsym $sh+b exec --no-startup-id brave-browser --incognito, mode "default"
@@ -582,7 +561,7 @@ mode "$more_workspaces" {
 bindsym $mod+p mode "$more_workspaces"
 
 
-set $mode_system [e]xit, [S-r]eboot, [S-s]hutdown, I3:[r]estart, re[l]oad, [c]aps2mod, [w]allpapers
+set $mode_system [P]ause, [R]eboot, [S]hutdown, | I3:[e]xit, [r]estart, re[l]oad, [c]aps2mod | [w]allpapers
 mode "$mode_system" {
   bindsym e exec --no-startup-id i3-msg exit, mode "default"
   bindsym r exec --no-startup-id i3-msg restart, "default"
@@ -591,6 +570,7 @@ mode "$mode_system" {
   bindsym w exec --no-startup-id feh --bg-scale --randomize ~/Pictures/wallpapers/*
   bindsym $sh+r exec --no-startup-id reboot, mode "default"
   bindsym $sh+s exec --no-startup-id shutdown, mode "default"
+  bindsym $sh+p exec --no-startup-id systemctl suspend, mode "default"
 
   bindsym Return mode "default"
   bindsym Escape mode "default"
@@ -613,3 +593,19 @@ mode "resize" {
   bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
+
+
+set $notify [a]ction, [C]lose-all, [c]lose, con[t]ext, [h]istory-pop
+mode "$notify" {
+  bindsym a exec --no-startup-id dunstctl action, mode "default"
+  bindsym $sh+c exec --no-startup-id dunstctl close-all, mode "default"
+  bindsym c exec --no-startup-id dunstctl close, mode "default"
+
+  bindsym t exec --no-startup-id dunstctl context, mode "default"
+  bindsym h exec --no-startup-id dunstctl history-pop, mode "default"
+
+
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+bindsym $mod+$sh+n mode "$notify"
