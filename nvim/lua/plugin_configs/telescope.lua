@@ -105,3 +105,4 @@ telescope.setup({
 -- load_extension, somewhere after setup function:
 telescope.load_extension('fzf')
 telescope.load_extension('ui-select')
+-- telescope.load_extension('dap')

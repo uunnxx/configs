@@ -1,33 +1,23 @@
-require("indent_blankline").setup {
-    space_char_blankline = " ",
-    char_highlight_list = {
-        "IndentBlanklineIndent1",
-        "IndentBlanklineIndent2",
-        "IndentBlanklineIndent3",
-        "IndentBlanklineIndent4",
-        "IndentBlanklineIndent5",
-        "IndentBlanklineIndent6",
-    },
-}
+local map = vim.keymap.set
 
 
+
+-------------------------------------------------------------------------------
 -- Treesitter
 require'nvim-treesitter.configs'.setup {
     ensure_installed = {
         "bash",
         "c",
         "cpp",
-        "css",
         "elixir",
-        "fish",
         "graphql",
         "html",
+        "css",
         "javascript",
         "json",
         "lua",
         "markdown",
         "markdown_inline",
-        "php",
         "python",
         "regex",
         "ruby",
@@ -49,56 +39,34 @@ require'nvim-treesitter.configs'.setup {
     indent = { enable = true }
 }
 
--- require "nvim-treesitter.highlight"
--- local hlmap = vim.treesitter.TSHighlighter.hl_map
---
--- hlmap.error = nil
 
+
+-------------------------------------------------------------------------------
 -- Highlight arguments' definitions and usages, asynchronously, using Treesitter
 require('hlargs').setup()
 
 
+
+-------------------------------------------------------------------------------
 -- Performance related
 require('impatient').enable_profile()
 
 
+
+-------------------------------------------------------------------------------
 -- Hop.nvim
 local hop = require('hop')
 local directions = require('hop.hint').HintDirection
 
--- Find forward
-vim.keymap.set('', 'f', function()
-    hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false })
-end, {remap=true})
--- vim.keymap.set('', '<C-f>', function()
---   hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false })
--- end, {remap=true})
-
--- Find backward
-vim.keymap.set('', 'F', function()
-    hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false })
-end, {remap=true})
--- vim.keymap.set('', '<C-F>', function()
---   hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false })
--- end, {remap=true})
-
--- Till forward
-vim.keymap.set('', 't', function()
-    hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false, hint_offset = -1 })
-end, {remap=true})
--- vim.keymap.set('', '<leader>t', function()
---   hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false, hint_offset = -1 })
--- end, {remap=true})
-
--- Till backward
-vim.keymap.set('', 'T', function()
-    hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false, hint_offset = 1 })
-end, {remap=true})
--- vim.keymap.set('', '<leader>T', function()
---   hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false, hint_offset = 1 })
--- end, {remap=true})
+map('', 'f', function() hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true }) end, {remap=true})
+map('', 'F', function() hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true }) end, {remap=true})
+map('', 't', function() hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true, hint_offset = -1 }) end, {remap=true})
+map('', 'T', function() hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 }) end, {remap=true})
 
 
+
+-------------------------------------------------------------------------------
+-- Trouble
 require("trouble").setup {
     position = "bottom", -- position of the list can be: bottom, top, left, right
     height = 10, -- height of the trouble list when position is top or bottom
@@ -147,14 +115,17 @@ require("trouble").setup {
     use_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
 }
 
-vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>", {silent = true, noremap = true})
-vim.keymap.set("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", {silent = true, noremap = true})
-vim.keymap.set("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", {silent = true, noremap = true})
-vim.keymap.set("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>", {silent = true, noremap = true})
-vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", {silent = true, noremap = true})
-vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", {silent = true, noremap = true})
+map("n", "<leader>xx", "<cmd>TroubleToggle<cr>", {silent = true, noremap = true})
+map("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", {silent = true, noremap = true})
+map("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", {silent = true, noremap = true})
+map("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>", {silent = true, noremap = true})
+map("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", {silent = true, noremap = true})
+map("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", {silent = true, noremap = true})
 
 
+
+-------------------------------------------------------------------------------
+-- Nvim-Tree
 require("nvim-tree").setup({
     sort_by = "case_sensitive",
     view = {
@@ -175,6 +146,23 @@ require("nvim-tree").setup({
 
 
 
+-------------------------------------------------------------------------------
+-- Indent Blankline
+require("indent_blankline").setup {
+    space_char_blankline = " ",
+    char_highlight_list = {
+        "IndentBlanklineIndent1",
+        "IndentBlanklineIndent2",
+        "IndentBlanklineIndent3",
+        "IndentBlanklineIndent4",
+        "IndentBlanklineIndent5",
+        "IndentBlanklineIndent6",
+    },
+}
+
+
+
+-------------------------------------------------------------------------------
 -- Surround
 -- Sv or S{ for a variable
 -- Sb       for a block
@@ -197,21 +185,35 @@ vim.cmd[[
 
 
 
+-------------------------------------------------------------------------------
 -- Colorizer
--- Tabs
 require'colorizer'.setup()
 
 
 
+-------------------------------------------------------------------------------
 -- Autopairs
-require("nvim-autopairs").setup({
-    disable_filetype = { "TelescopePrompt" },
-    fast_wrap = {}
+require("nvim-autopairs").setup({})
+
+
+
+-------------------------------------------------------------------------------
+-- Neodev
+require("neodev").setup({
+    library = { plugins = { "nvim-dap-ui" }, types = true },
 })
 
 
 
+-------------------------------------------------------------------------------
+-- Debugging
+-- require('dapui').setup({})
+-- require('dap-python').setup()
+
+
+-------------------------------------------------------------------------------
 -- Emmet
+-- leader key + ,
 vim.cmd[[
     let g:user_emmet_mode='i'
     let g:user_emmet_leader_key='<space><space>'

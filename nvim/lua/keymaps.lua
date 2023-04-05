@@ -359,8 +359,8 @@ map('n', 'cc', '"_cc', noremap)
 
 
 -- Empty || Change current line
-map ('n', 'dD', 'I<ESC>D', silentnoremapnowait)
-map ('n', 'cC', 'I<ESC>C', silentnoremapnowait)
+map ('n', 'dD', '0<ESC>D', silentnoremapnowait)
+map ('n', 'cC', '0<ESC>C', silentnoremapnowait)
 
 -- Auto-center
 map('n', 'G', 'Gzz', silentnoremap)
@@ -397,6 +397,14 @@ map('n', '<space><space>v', ':vsplit term://zsh<CR>a', silentnoremap)
 -- tnoremap <esc>   <C-\><C-n>
 map('t', '<leader><leader>', '<C-\\><C-n>', silentnoremap)
 map('t', '<Esc><Esc>', '<C-\\><C-n>:q!<CR>', silentnoremapnowait)
+
+
+-------------------------------------------------------------------------------
+-- Debugging
+-- map('n', '<leader>db', ':lua require("dapui").toggle()<CR>', silentnoremap)
+-- map('n', '<leader>df', ':lua require("dapui").float_element()<CR>', silentnoremap)
+-- map('v', '<M-k>', ':lua require("dapui").eval()<CR>', silentnoremap)
+
 
 
 -------------------------------------------------------------------------------
@@ -449,5 +457,7 @@ vim.cmd[[
 
   function! PythonOptions()
     imap ttL print()<left>
+    imap ttD print(f"{=}")<left><left><left><left>
+    imap ttF print(f"{}")<left><left><left>
   endfunction
 ]]

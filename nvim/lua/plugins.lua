@@ -24,7 +24,7 @@ return require('packer').startup(function(use)
     use 'RRethy/vim-illuminate'
 
 
-    -----------------------------------------------------------------------------
+    ---------------------------------------------------------------------------
     -- UI
 
     -- Colorscheme
@@ -84,7 +84,7 @@ return require('packer').startup(function(use)
     use 'h-hg/fcitx.nvim'
 
 
-    -------------------------------------------------------------------------------
+    ---------------------------------------------------------------------------
     -- Navigation
 
     -- File Explorer
@@ -111,7 +111,7 @@ return require('packer').startup(function(use)
     }
 
 
-    -----------------------------------------------------------------------------
+    ---------------------------------------------------------------------------
     -- LSP server and autocompletion
 
     use {
@@ -134,7 +134,7 @@ return require('packer').startup(function(use)
     }
 
 
-    -----------------------------------------------------------------------------
+    ---------------------------------------------------------------------------
     -- Autocompletion
     use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/cmp-buffer'
@@ -156,10 +156,10 @@ return require('packer').startup(function(use)
     use 'honza/vim-snippets'
 
 
-    -----------------------------------------------------------------------------
+    ---------------------------------------------------------------------------
     -- FILETYPES
     --
-    -----------------------------------------------------------------------------
+    ---------------------------------------------------------------------------
     -- RUBY
 
     use { 'vim-ruby/vim-ruby', ft = {'ruby', 'rb', 'erb'} }
@@ -173,62 +173,42 @@ return require('packer').startup(function(use)
 
     -- Text Objects
     use "kana/vim-textobj-user"
-    use {
-        'whatyouhide/vim-textobj-erb',
-        ft = {'ruby', 'rb', 'erb'},
-    }
-    use {
-        "tek/vim-textobj-ruby",
-        ft = {'ruby', 'rb', 'erb'}
-    }
-    use {
-        "nelstrom/vim-textobj-rubyblock",
-        ft = {'ruby', 'rb', 'erb'}
-    }
-    use {
-        "bps/vim-textobj-python",
-        ft = {'python', 'py'}
-    }
+    use { 'whatyouhide/vim-textobj-erb', ft = {'ruby', 'rb', 'erb'}, }
+    use { "tek/vim-textobj-ruby", ft = {'ruby', 'rb', 'erb'} }
+    use { "nelstrom/vim-textobj-rubyblock", ft = {'ruby', 'rb', 'erb'} }
+    use { "bps/vim-textobj-python", ft = {'python', 'py'} }
 
 
-    -----------------------------------------------------------------------------
+    ---------------------------------------------------------------------------
     -- PYTHON
-
-    use {
-        'hdima/python-syntax',
-        ft = {'python', 'py'}
-    }
+    use { 'hdima/python-syntax', ft = {'python', 'py'} }
 
 
-    -----------------------------------------------------------------------------
+    ---------------------------------------------------------------------------
     -- Elixir
-
-    use {
-        'slashmili/alchemist.vim',
-        ft = { "elixir", "eelixir", "exs", "ex" }
-    }
-    use {
-        'mhinz/vim-mix-format',
-        ft = { "elixir", "eelixir", "exs", "ex" }
-    }
-    use {
-        'elixir-editors/vim-elixir',
-        ft = { "elixir", "eelixir", "exs", "ex" }
-    }
+    use { 'slashmili/alchemist.vim', ft = { "elixir", "eelixir", "exs", "ex" } }
+    use { 'mhinz/vim-mix-format', ft = { "elixir", "eelixir", "exs", "ex" } }
+    use { 'elixir-editors/vim-elixir', ft = { "elixir", "eelixir", "exs", "ex" } }
 
 
 
-    -----------------------------------------------------------------------------
+    ---------------------------------------------------------------------------
     -- Crystal
+    use { 'vim-crystal/vim-crystal', ft = {'cr', 'crystal'} }
 
-    use {
-        'vim-crystal/vim-crystal',
-        ft = {'cr', 'crystal'}
-    }
+    ---------------------------------------------------------------------------
+    -- Debugging
+    -- use 'mfussenegger/nvim-dap'
+    -- use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+    -- use 'mfussenegger/nvim-dap-python'
 
+
+
+    -- lua-ls for neovim config
+    use "folke/neodev.nvim"
 
     -- Autopair alternative
-    -- use 'cohama/lexima.vim'
+    use 'cohama/lexima.vim'
     use 'windwp/nvim-autopairs'
 
     -- The fastest Neovim colorizer

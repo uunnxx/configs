@@ -1,5 +1,4 @@
 local lspconfig = require'lspconfig';
-local configs = require'lspconfig/configs';
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local mason = require'mason'
 local navic = require'nvim-navic'
@@ -9,138 +8,149 @@ vim.diagnostic.config({
     float = { source = "always" },
     virtual_text = false,
     update_in_insert = false,
-    signs = true
+    signs = true,
+    underline = true
 })
 
 
-
-vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+-- vim.cmd[[autocmd InsertEnter * lua vim.diagnostic.enable()]]
+-- vim.cmd[[autocmd InsertLeave * lua vim.diagnostic.enable()]]
+-- vim.cmd[[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+vim.cmd[[autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focus=false})]]
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-  if client.server_capabilities.documentSymbolProvider then
-    navic.attach(client, bufnr)
-  end
-  -- Enable completion triggered by <c-x><c-o>
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+    if client.server_capabilities.documentSymbolProvider then
+        navic.attach(client, bufnr)
+    end
+    -- Enable completion triggered by <c-x><c-o>
+    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+    -- Mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local bufopts = { noremap=true, silent=true, buffer=bufnr }
+    vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, bufopts)
+    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+    vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
 end
+
 
 
 -------------------------------------------------------------------------------
 -- Mason
 mason.setup({
-  ui = {
-    icons = {
-      package_pending = " ",
-      package_installed = " ",
-      package_uninstalled = " ﮊ",
+    ui = {
+        icons = {
+            package_pending = " ",
+            package_installed = " ",
+            package_uninstalled = " ﮊ",
+        },
     },
-  },
-  keymaps = {
-    toggle_server_expand = "<CR>",
-    install_server = "i",
-    update_server = "u",
-    check_server_version = "c",
-    update_all_servers = "U",
-    heck_outdated_servers = "C",
-    uninstall_server = "X",
-    cancel_installation = "<C-c>",
-  },
-  max_concurrent_installers = 10
+    keymaps = {
+        toggle_server_expand = "<CR>",
+        install_server = "i",
+        update_server = "u",
+        check_server_version = "c",
+        update_all_servers = "U",
+        heck_outdated_servers = "C",
+        uninstall_server = "X",
+        cancel_installation = "<C-c>",
+    },
+    max_concurrent_installers = 10
 })
+
 
 
 -------------------------------------------------------------------------------
 -- Ruby
 lspconfig.solargraph.setup{
-  on_attach = on_attach,
-  cmd = { 'solargraph', 'stdio' },
-  filetypes = { 'ruby', 'rakefile' },
-  capabilities = capabilities,
-  init_options = {
-    formatting = true
-  },
-  -- root_dir = root_pattern("Gemfile", ".git"),
-  settings = {
-    solargraph = {
-    --   definition = true,
-      diagnostics = true,
-    --   completion = true,
-    --   autoformat = true,
-    --   folding = true,
-    --   references = true,
-    --   rename = true,
-    --   symbols = true,
-    --   hover = true
+    on_attach = on_attach,
+    cmd = { 'solargraph', 'stdio' },
+    filetypes = { 'ruby', 'rakefile' },
+    capabilities = capabilities,
+    init_options = {
+        formatting = true
+    },
+    -- root_dir = root_pattern("Gemfile", ".git"),
+    settings = {
+        solargraph = {
+            definition = true,
+            diagnostics = true,
+            completion = true,
+            autoformat = true,
+            folding = true,
+            references = true,
+            rename = true,
+            symbols = true,
+            --   hover = true
+        }
     }
-  }
 }
 
 
 lspconfig.typeprof.setup{
-  on_attach = on_attach,
-  cmd = { 'typeprof', '--lsp', '--stdio' },
-  filetypes = { 'ruby', 'eruby', 'rakefile' },
-  -- root_dir = root_pattern("Gemfile", ".git")
+    on_attach = on_attach,
+    cmd = { 'typeprof', '--lsp', '--stdio' },
+    filetypes = { 'ruby', 'eruby', 'rakefile' },
+    -- root_dir = root_pattern("Gemfile", ".git")
 }
+
 
 
 -------------------------------------------------------------------------------
 -- Rust
 lspconfig.rust_analyzer.setup{
-  on_attach = on_attach,
-  capabilities = capabilities,
-  cmd = { "rust-analyzer" },
-  filetypes = { "rust" },
-  root_dir = lspconfig.util.root_pattern("Cargo.toml", "rust-project.json"),
-  settings = {
-    ["rust-analyzer"] = {
-      imports = {
-        granularity = {
-          group = "module",
-        },
-        prefix = "self",
-      },
-      cargo = {
-        buildScripts = {
-          enable = true,
-        },
-      },
-      procMacro = {
-        enable = true
-      },
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = { "rust-analyzer" },
+    filetypes = { "rust" },
+    root_dir = lspconfig.util.root_pattern("Cargo.toml", "rust-project.json"),
+    settings = {
+        ["rust-analyzer"] = {
+            imports = {
+                granularity = {
+                    group = "module",
+                },
+                prefix = "self",
+            },
+            cargo = {
+                buildScripts = {
+                    enable = true,
+                },
+            },
+            procMacro = {
+                enable = true
+            },
+        }
     }
-  }
 }
+
 
 
 -------------------------------------------------------------------------------
 -- JavaScript, TypeScript
 lspconfig.tsserver.setup{
-  on_attach = on_attach,
-  capabilities = capabilities,
-  cmd = { "typescript-language-server", "--stdio" },
-  filetypes = {
-    "javascript",
-    "javascriptreact",
-    "javascript.jsx",
-    "typescript",
-    "typescriptreact",
-    "typescript.tsx"
-  },
-  init_options = {
-    hostInfo = "neovim"
-  },
-  -- root_dir = root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = { "typescript-language-server", "--stdio" },
+    filetypes = {
+        "javascript",
+        "javascriptreact",
+        "javascript.jsx",
+        "typescript",
+        "typescriptreact",
+        "typescript.tsx"
+    },
+    init_options = {
+        hostInfo = "neovim"
+    },
+    -- root_dir = root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")
 }
+
 
 
 lspconfig.emmet_ls.setup({
@@ -156,136 +166,144 @@ lspconfig.emmet_ls.setup({
     },
 })
 
+
+
 -------------------------------------------------------------------------------
 -- CSS
 require'lspconfig'.cssmodules_ls.setup{
-  on_attach = on_attach,
-  cmd = { "cssmodules-language-server" },
-  filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" }
+    on_attach = on_attach,
+    cmd = { "cssmodules-language-server" },
+    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" }
 }
 
 require'lspconfig'.tailwindcss.setup{
-  on_attach = on_attach,
-  cmd = { "tailwindcss-language-server", "--stdio" },
-  init_options = {
-    userLanguages = {
-      eelixir = "html-eex",
-      eruby = "erb"
+    on_attach = on_attach,
+    cmd = { "tailwindcss-language-server", "--stdio" },
+    init_options = {
+        userLanguages = {
+            eelixir = "html-eex",
+            eruby = "erb"
+        }
+    },
+    settings = {
+        tailwindCSS = {
+            classAttributes = { "class", "className", "classList", "ngClass" },
+            lint = {
+                cssConflict = "warning",
+                invalidApply = "error",
+                invalidConfigPath = "error",
+                invalidScreen = "error",
+                invalidTailwindDirective = "error",
+                invalidVariant = "error",
+                recommendedVariantOrder = "warning"
+            },
+            validate = true
+        }
     }
-  },
-  settings = {
-    tailwindCSS = {
-      classAttributes = { "class", "className", "classList", "ngClass" },
-        lint = {
-          cssConflict = "warning",
-          invalidApply = "error",
-          invalidConfigPath = "error",
-          invalidScreen = "error",
-          invalidTailwindDirective = "error",
-          invalidVariant = "error",
-          recommendedVariantOrder = "warning"
-        },
-      validate = true
-    }
-  }
 }
+
 
 
 -------------------------------------------------------------------------------
 -- C lang
 lspconfig.clangd.setup{
-  on_attach = on_attach,
-  capabilities = capabilities,
-  cmd = { "clangd", "--background-index" },
-  filetypes = { "c", "cpp", "objc", "objcpp" },
-  root_dir = lspconfig.util.root_pattern("compile_commands.json", "compile_flags.txt"),
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = { "clangd", "--background-index" },
+    filetypes = { "c", "cpp", "objc", "objcpp" },
+    root_dir = lspconfig.util.root_pattern("compile_commands.json", "compile_flags.txt"),
 }
+
 
 
 -------------------------------------------------------------------------------
 -- Crystal
 lspconfig.crystalline.setup{
-  on_attach = on_attach,
-  cmd = { "crystalline" },
-  filetypes = { "crystal" },
-  single_file_support = true,
-  capabilities = capabilities
+    on_attach = on_attach,
+    cmd = { "crystalline" },
+    filetypes = { "crystal" },
+    single_file_support = true,
+    capabilities = capabilities
 }
+
 
 
 -------------------------------------------------------------------------------
 -- Python
 lspconfig.pyright.setup{
-  -- on_attach = on_attach,
+    -- on_attach = on_attach,
 }
 lspconfig.pylsp.setup{
-  on_attach = on_attach,
-  single_file_support = true,
-  capabilities = capabilities,
-  settings = {
-    pylsp = {
-      plugins = {
-        pycodestyle = {
-          ignore = {
-            'F401',
-            'E501',
-            'W391',
-            'C0103', 'C0114', 'C0116',
-          },
-          -- maxLineLength = 79
-        },
-        mypy = {
-          enabled = true,
-          live_mode = true,
-          strict = false,
-        },
-        black = {
-          enabled = true,
-          preview = true
-        },
-        autopep8 = {
-          enabled = true
-        },
-        flake8 = {
-          enabled = true
-        },
-        jedi = {
-          completion = true
-        },
-        yapf = {
-          enabled = true
+    on_attach = on_attach,
+    single_file_support = true,
+    capabilities = capabilities,
+    settings = {
+        pylsp = {
+            plugins = {
+                pycodestyle = {
+                    ignore = {
+                        'F401',
+                        'E501',
+                        'W391',
+                        'C0103', 'C0114', 'C0116',
+                    },
+                    -- maxLineLength = 79
+                },
+                mypy = {
+                    enabled = true,
+                    live_mode = true,
+                    strict = false,
+                },
+                black = {
+                    enabled = true,
+                    preview = true
+                },
+                autopep8 = {
+                    enabled = true
+                },
+                flake8 = {
+                    enabled = true
+                },
+                jedi = {
+                    completion = true
+                },
+                yapf = {
+                    enabled = true
+                }
+            }
         }
-      }
     }
-  }
 }
+
 
 
 -------------------------------------------------------------------------------
 -- Elixir
 lspconfig.elixirls.setup{
-  on_attach = on_attach,
-  filetypes = { "elixir", "eelixir", "exs", "ex" },
-  settings = {
-    dialyzerEnabled = true,
-    suggestSpecs = true,
-    signatureAfterComplete = true,
-  },
-  cmd = { "/home/baka/apps/elixir-ls/release/language_server.sh" },
-  capabilities = capabilities
+    on_attach = on_attach,
+    filetypes = { "elixir", "eelixir", "exs", "ex" },
+    settings = {
+        dialyzerEnabled = true,
+        suggestSpecs = true,
+        signatureAfterComplete = true,
+    },
+    cmd = { "/home/baka/apps/elixir-ls/release/language_server.sh" },
+    capabilities = capabilities
 }
+
 
 
 -------------------------------------------------------------------------------
 -- Erlang
 lspconfig.erlangls.setup{
-  on_attach = on_attach,
-  cmd = { "erlang_ls" },
-  filetypes = { "erlang" },
-  -- root_dir = root_pattern('rebar.config', 'erlang.mk', '.git')
-  single_file_support = true,
-  capabilities = capabilities
+    on_attach = on_attach,
+    cmd = { "erlang_ls" },
+    filetypes = { "erlang" },
+    -- root_dir = root_pattern('rebar.config', 'erlang.mk', '.git')
+    single_file_support = true,
+    capabilities = capabilities
 }
+
 
 
 -------------------------------------------------------------------------------
@@ -296,36 +314,37 @@ table.insert(runtime_path, "lua/?/init.lua")
 
 
 lspconfig.lua_ls.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
+    on_attach = on_attach,
+    capabilities = capabilities,
 
-  settings = {
-    Lua = {
-      diagnostics = {
-        globals = { "vim" },
-      },
-      workspace = {
-        library = {
-          [vim.fn.expand "$VIMRUNTIME/lua"] = true,
-          [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { "vim" },
+            },
+            workspace = {
+                library = {
+                    [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+                    [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
+                },
+                maxPreload = 100000,
+                preloadFileSize = 10000,
+            },
         },
-        maxPreload = 100000,
-        preloadFileSize = 10000,
-      },
     },
-  },
 }
+
 
 
 -------------------------------------------------------------------------------
 -- Haskell
 lspconfig.hls.setup{
-  on_attach = on_attach,
-  filetypes = { "haskell", "lhaskell"},
-  settings = {
-    formattingProvider = "ormolu",
-  },
-  cmd = { "haskell-language-server-wrapper", "--lsp" },
-  single_file_support = true,
-  capabilities = capabilities
+    on_attach = on_attach,
+    filetypes = { "haskell", "lhaskell"},
+    settings = {
+        formattingProvider = "ormolu",
+    },
+    cmd = { "haskell-language-server-wrapper", "--lsp" },
+    single_file_support = true,
+    capabilities = capabilities
 }

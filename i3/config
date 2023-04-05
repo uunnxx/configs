@@ -325,8 +325,9 @@ for_window [class="Qalculate-gtk"] floating enable resize set 900 450
 for_window [class="Qalculate-gtk"] move position center
 
 for_window [class="Picture-in-picture"] floating enable border none
-for_window [class="mpv"] floating enable resize set 1240 690
-for_window [class="mpv"] move position center
+
+# for_window [class="mpv"] floating enable resize set 1240 690
+# for_window [class="mpv"] move position center
 
 for_window [class="Eog"] floating enable resize set 1240 690
 for_window [class="Eog"] move position center
