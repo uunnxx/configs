@@ -390,6 +390,7 @@ bar {
     binding_mode_indicator yes
     # mode hide
     modifier none
+    # padding 2px
     colors {
         background #1D2021DF
         statusline $gruvB

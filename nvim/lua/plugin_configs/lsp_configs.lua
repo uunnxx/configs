@@ -69,9 +69,9 @@ mason.setup({
 -- Ruby
 lspconfig.solargraph.setup{
     on_attach = on_attach,
+    capabilities = capabilities,
     cmd = { 'solargraph', 'stdio' },
     filetypes = { 'ruby', 'rakefile' },
-    capabilities = capabilities,
     init_options = {
         formatting = true
     },
@@ -94,6 +94,7 @@ lspconfig.solargraph.setup{
 
 lspconfig.typeprof.setup{
     on_attach = on_attach,
+    capabilities = capabilities,
     cmd = { 'typeprof', '--lsp', '--stdio' },
     filetypes = { 'ruby', 'eruby', 'rakefile' },
     -- root_dir = root_pattern("Gemfile", ".git")
@@ -112,19 +113,11 @@ lspconfig.rust_analyzer.setup{
     settings = {
         ["rust-analyzer"] = {
             imports = {
-                granularity = {
-                    group = "module",
-                },
+                granularity = { group = "module", },
                 prefix = "self",
             },
-            cargo = {
-                buildScripts = {
-                    enable = true,
-                },
-            },
-            procMacro = {
-                enable = true
-            },
+            cargo = { buildScripts = { enable = true, }, },
+            procMacro = { enable = true },
         }
     }
 }
@@ -145,9 +138,7 @@ lspconfig.tsserver.setup{
         "typescriptreact",
         "typescript.tsx"
     },
-    init_options = {
-        hostInfo = "neovim"
-    },
+    init_options = { hostInfo = "neovim" },
     -- root_dir = root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")
 }
 
@@ -172,19 +163,16 @@ lspconfig.emmet_ls.setup({
 -- CSS
 require'lspconfig'.cssmodules_ls.setup{
     on_attach = on_attach,
+    capabilities = capabilities,
     cmd = { "cssmodules-language-server" },
     filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" }
 }
 
 require'lspconfig'.tailwindcss.setup{
     on_attach = on_attach,
+    capabilities = capabilities,
     cmd = { "tailwindcss-language-server", "--stdio" },
-    init_options = {
-        userLanguages = {
-            eelixir = "html-eex",
-            eruby = "erb"
-        }
-    },
+    init_options = { userLanguages = { eelixir = "html-eex", eruby = "erb" } },
     settings = {
         tailwindCSS = {
             classAttributes = { "class", "className", "classList", "ngClass" },
@@ -220,23 +208,21 @@ lspconfig.clangd.setup{
 -- Crystal
 lspconfig.crystalline.setup{
     on_attach = on_attach,
+    capabilities = capabilities,
     cmd = { "crystalline" },
     filetypes = { "crystal" },
-    single_file_support = true,
-    capabilities = capabilities
+    single_file_support = true
 }
 
 
 
 -------------------------------------------------------------------------------
 -- Python
-lspconfig.pyright.setup{
-    -- on_attach = on_attach,
-}
+lspconfig.pyright.setup{} -- on_attach = on_attach
 lspconfig.pylsp.setup{
     on_attach = on_attach,
-    single_file_support = true,
     capabilities = capabilities,
+    single_file_support = true,
     settings = {
         pylsp = {
             plugins = {
@@ -247,29 +233,13 @@ lspconfig.pylsp.setup{
                         'W391',
                         'C0103', 'C0114', 'C0116',
                     },
-                    -- maxLineLength = 79
                 },
-                mypy = {
-                    enabled = true,
-                    live_mode = true,
-                    strict = false,
-                },
-                black = {
-                    enabled = true,
-                    preview = true
-                },
-                autopep8 = {
-                    enabled = true
-                },
-                flake8 = {
-                    enabled = true
-                },
-                jedi = {
-                    completion = true
-                },
-                yapf = {
-                    enabled = true
-                }
+                mypy = { enabled = true, live_mode = true, strict = false },
+                black = { enabled = true, preview = true },
+                autopep8 = { enabled = true },
+                flake8 = { enabled = false },
+                jedi = { completion = true },
+                yapf = { enabled = true }
             }
         }
     }
@@ -281,14 +251,14 @@ lspconfig.pylsp.setup{
 -- Elixir
 lspconfig.elixirls.setup{
     on_attach = on_attach,
+    capabilities = capabilities,
     filetypes = { "elixir", "eelixir", "exs", "ex" },
     settings = {
         dialyzerEnabled = true,
         suggestSpecs = true,
         signatureAfterComplete = true,
     },
-    cmd = { "/home/baka/apps/elixir-ls/release/language_server.sh" },
-    capabilities = capabilities
+    cmd = { "/home/baka/apps/elixir-ls/release/language_server.sh" }
 }
 
 
@@ -297,11 +267,11 @@ lspconfig.elixirls.setup{
 -- Erlang
 lspconfig.erlangls.setup{
     on_attach = on_attach,
+    capabilities = capabilities,
     cmd = { "erlang_ls" },
     filetypes = { "erlang" },
     -- root_dir = root_pattern('rebar.config', 'erlang.mk', '.git')
-    single_file_support = true,
-    capabilities = capabilities
+    single_file_support = true
 }
 
 
@@ -319,9 +289,7 @@ lspconfig.lua_ls.setup {
 
     settings = {
         Lua = {
-            diagnostics = {
-                globals = { "vim" },
-            },
+            diagnostics = { globals = { "vim" }, },
             workspace = {
                 library = {
                     [vim.fn.expand "$VIMRUNTIME/lua"] = true,
@@ -340,11 +308,9 @@ lspconfig.lua_ls.setup {
 -- Haskell
 lspconfig.hls.setup{
     on_attach = on_attach,
-    filetypes = { "haskell", "lhaskell"},
-    settings = {
-        formattingProvider = "ormolu",
-    },
+    capabilities = capabilities,
+    filetypes = { "haskell", "lhaskell" },
+    settings = { formattingProvider = "ormolu" },
     cmd = { "haskell-language-server-wrapper", "--lsp" },
-    single_file_support = true,
-    capabilities = capabilities
+    single_file_support = true
 }

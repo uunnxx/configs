@@ -1,6 +1,7 @@
 nvim/undo/*
 nvim/spell/*
 nvim/tags
+nvim/plugin/packer_compiled.lua
 ./tags
 tags
 obs-studio/*
