@@ -1,0 +1,29 @@
+[Groups/0]
+# Group Name
+Name=Default
+# Layout
+Default Layout=us-dvp
+# Default Input Method
+DefaultIM=keyboard-ru
+
+[Groups/0/Items/0]
+# Name
+Name=keyboard-us-dvp
+# Layout
+Layout=
+
+[Groups/0/Items/1]
+# Name
+Name=mozc
+# Layout
+Layout=
+
+[Groups/0/Items/2]
+# Name
+Name=keyboard-ru
+# Layout
+Layout=
+
+[GroupOrder]
+0=Default
+
