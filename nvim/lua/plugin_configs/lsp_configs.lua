@@ -144,23 +144,8 @@ lspconfig.tsserver.setup{
 
 
 
-lspconfig.emmet_ls.setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-    filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less' },
-    init_options = {
-        html = {
-            -- options = {
-            -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
-            -- ["bem.enabled"] = true,
-        },
-    },
-})
-
-
-
 -------------------------------------------------------------------------------
--- CSS
+-- FRONT
 require'lspconfig'.cssmodules_ls.setup{
     on_attach = on_attach,
     capabilities = capabilities,
@@ -189,6 +174,29 @@ require'lspconfig'.tailwindcss.setup{
         }
     }
 }
+
+require'lspconfig'.html.setup{
+    capabilities = capabilities,
+    filetypes = { "javascript", "html", "htmldjango", "css" },
+    embeddedLanguages = {
+        css = true,
+        javascript = true,
+    },
+    provideFormatter = true
+}
+
+lspconfig.emmet_ls.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less' },
+    init_options = {
+        html = {
+            -- options = {
+            -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
+            -- ["bem.enabled"] = true,
+        },
+    },
+})
 
 
 
