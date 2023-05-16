@@ -23,3 +23,7 @@ exec(
   ]],
   false
 )
+
+
+-- Python
+g.python3_host_prog = '/home/baka/venvs/neovim/bin/python'
