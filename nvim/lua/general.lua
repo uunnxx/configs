@@ -36,8 +36,8 @@ set.hidden = true
 
 -- let &colorcolumn="80,100,".join(range(120,999),",")
 cmd[[
-  let &colorcolumn="80,100,120"
-  hi! ColorColumn ctermbg=6
+    let &colorcolumn="80,100,120"
+    hi! ColorColumn ctermbg=6
 ]]
 set.cursorline = true
 set.cursorcolumn = false
@@ -115,47 +115,47 @@ set.completeopt = 'menu,menuone,noselect'
 -------------------------------------------------------------------------------
 set.list = true
 set.listchars = {
-  tab = '▸ ',
-  trail = '·',
-  eol = '¬',
-  extends = '»',
-  precedes = '«',
-  nbsp = '░',
-  space = '·'
+    tab = '▸ ',
+    trail = '·',
+    eol = '¬',
+    extends = '»',
+    precedes = '«',
+    nbsp = '░',
+    space = '·'
 }
 
 set.fillchars = {
-  vert = "│",
-  fold = "⠀",
-  eob = " ", -- suppress ~ at EndOfBuffer
-  diff = "⣿", -- alternatives = ⣿ ░ ─ ╱
-  msgsep = "‾",
-  foldopen = "▾",
-  foldsep = "│",
-  foldclose = "▸",
+    vert = "│",
+    fold = "⠀",
+    eob = " ", -- suppress ~ at EndOfBuffer
+    diff = "⣿", -- alternatives = ⣿ ░ ─ ╱
+    msgsep = "‾",
+    foldopen = "▾",
+    foldsep = "│",
+    foldclose = "▸",
 }
 
 
 -- Matchpairs
 -- add vertical bar for Ruby
 set.matchpairs = {
-  '(:)',
-  '{:}',
-  '[:]',
-  '<:>'
+    '(:)',
+    '{:}',
+    '[:]',
+    '<:>'
 }
 
 
 -- Ignore files vim doesnt use
 set.wildignore = {
-  '*.o', '*.a', '__pycache__', '.git', '.hg', '.svn', 'node_modules', '*.aux',
-  '*.out', '*.toc', '*.o', '*.obj', '*.exe', '*.dll', '*.manifest', '*.rbc',
-  '*.class', '*.ai', '*.bmp', '*.gif', '*.ico', '*.jpg', '*.jpeg', '*.png',
-  '*.psd', '*.webp', '*.avi', '*.divx', '*.mp4', '*.webm', '*.mov', '*.m2ts',
-  '*.mkv', '*.vob', '*.mpg', '*.mpeg', '*.mp3', '*.oga', '*.ogg', '*.wav',
-  '*.flac', '*.eot', '*.otf', '*.ttf', '*.woff', '*.doc', '*.pdf', '*.cbr',
-  '*.cbz', '*.zip', '*.tar.gz', '*.tar.bz2', '*.tar.xz', '*.rar',
-  '*.kgb', '*.swp', '.lock', '.DS_Store', '._*'
+    '*.o', '*.a', '__pycache__', '.git', '.hg', '.svn', 'node_modules', '*.aux',
+    '*.out', '*.toc', '*.o', '*.obj', '*.exe', '*.dll', '*.manifest', '*.rbc',
+    '*.class', '*.ai', '*.bmp', '*.gif', '*.ico', '*.jpg', '*.jpeg', '*.png',
+    '*.psd', '*.webp', '*.avi', '*.divx', '*.mp4', '*.webm', '*.mov', '*.m2ts',
+    '*.mkv', '*.vob', '*.mpg', '*.mpeg', '*.mp3', '*.oga', '*.ogg', '*.wav',
+    '*.flac', '*.eot', '*.otf', '*.ttf', '*.woff', '*.doc', '*.pdf', '*.cbr',
+    '*.cbz', '*.zip', '*.tar.gz', '*.tar.bz2', '*.tar.xz', '*.rar',
+    '*.kgb', '*.swp', '.lock', '.DS_Store', '._*'
 }
 
 
@@ -206,6 +206,6 @@ set.clipboard = 'unnamedplus'
 
 
 cmd([[
-  filetype indent plugin on
-  syntax enable
+    filetype indent plugin on
+    syntax enable
 ]])

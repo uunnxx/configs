@@ -9,19 +9,19 @@ g.tagbar_sort = 0
 
 -- Remember last edit position
 cmd [[
-autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+    autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 ]]
 
 
 -- highlight Yanks
 exec(
-  [[
-    augroup YankHighlight
-    autocmd!
-    autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=400}
-    augroup end
-  ]],
-  false
+    [[
+        augroup YankHighlight
+        autocmd!
+        autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=400}
+        augroup end
+    ]],
+    false
 )
 
 

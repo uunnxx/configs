@@ -3,7 +3,7 @@
 --
 
 local function map(kind, lhs, rhs, opts)
-  vim.api.nvim_set_keymap(kind, lhs, rhs, opts)
+    vim.api.nvim_set_keymap(kind, lhs, rhs, opts)
 end
 
 local noremap = { noremap = true }
@@ -135,15 +135,15 @@ map('n', '<leader>s', ':Telescope spell_suggest<CR>', silentnoremap)
 
 -- Find Files
 -- without preview
-map('n', 'tt', ':Telescope find_files theme=ivy<CR>', nowait)
+map('n', 'tt', ':Telescope find_files hidden=true<CR>', nowait)
 -- preview
-map('n', '<C-CR>', ':Telescope fd theme=ivy<CR>', nowait)
-map('n', '<S-CR>', ':Telescope buffers theme=ivy<CR>', silentnoremapnowait)
+map('n', '<C-CR>', ':Telescope fd hidden=true<CR>', nowait)
+map('n', '<S-CR>', ':Telescope buffers<CR>', silentnoremapnowait)
 map('n', '<S-m>', ':Telescope man_pages sections=1,2,3<CR>', silentnoremapnowait)
 
 -- Split windows
-map('n', '<leader><leader>v', '<C-W>v:Telescope find_files theme=ivy<CR>', silentnoremapnowait)
-map('n', '<leader><leader>h', '<C-W>s:Telescope find_files theme=ivy<CR>', silentnoremapnowait)
+map('n', '<leader><leader>v', '<C-W>v:Telescope find_files<CR>', silentnoremapnowait)
+map('n', '<leader><leader>h', '<C-W>s:Telescope find_files<CR>', silentnoremapnowait)
 
 -- Live Grep
 map('n', '<M-f>', ':Telescope live_grep theme=ivy<CR>', silentnoremap)
@@ -180,7 +180,7 @@ map('i', '<F11>', '<C-o>:set spell!<CR>', silentnoremap)
 -------------------------------------------------------------------------------
 
 -- TAGS
-map('n', '<space>tg', ':Telescope tags theme=ivy<CR>', silentnoremap)
+map('n', '<space>tg', ':Telescope tags<CR>', silentnoremap)
 
 -- NvimTree
 -- map('n', '<leader>nn', ':NvimTreeRefresh<CR>:NvimTreeToggle<CR>', silentnoremap)
@@ -415,23 +415,23 @@ map('t', '<Esc><Esc>', '<C-\\><C-n>:q!<CR>', silentnoremapnowait)
 
 
 vim.cmd[[
-  autocmd FileType ruby    nmap <buffer> <leader>rr :w\|:!ruby %<CR>
-  autocmd FileType ruby    nmap <buffer> <leader>rc :w\|:!ruby % 
+    autocmd FileType ruby    nmap <buffer> <leader>rr :w\|:!ruby %<CR>
+    autocmd FileType ruby    nmap <buffer> <leader>rc :w\|:!ruby %
 
-  autocmd FileType javascript    nmap <buffer> <leader>rr :w\|:!node %<CR>
-  autocmd FileType javascript    nmap <buffer> <leader>rc :w\|:!node % 
+    autocmd FileType javascript    nmap <buffer> <leader>rr :w\|:!node %<CR>
+    autocmd FileType javascript    nmap <buffer> <leader>rc :w\|:!node %
 
-  autocmd FileType crystal nmap <buffer> <leader>rr :w\|:!crystal %<CR>
-  autocmd FileType crystal nmap <buffer> <leader>rc :w\|:!crystal % 
+    autocmd FileType crystal nmap <buffer> <leader>rr :w\|:!crystal %<CR>
+    autocmd FileType crystal nmap <buffer> <leader>rc :w\|:!crystal %
 
-  autocmd FileType python  nmap <buffer> <leader>rr :w\|:!python3 %<CR>
-  autocmd FileType python  nmap <buffer> <leader>rc :w\|:!python3 % 
+    autocmd FileType python  nmap <buffer> <leader>rr :w\|:!python3 %<CR>
+    autocmd FileType python  nmap <buffer> <leader>rc :w\|:!python3 %
 
-  autocmd FileType cpp     nmap <buffer> <leader>rr :w\|:!g++ ./% -g -o %:r_temp && ./%:r_temp<CR>
-  autocmd FileType cpp     nmap <buffer> <leader>rc :w\|:!g++ ./% -g -o %:r_temp && ./%:r_temp 
+    autocmd FileType cpp     nmap <buffer> <leader>rr :w\|:!g++ ./% -g -o %:r_temp && ./%:r_temp<CR>
+    autocmd FileType cpp     nmap <buffer> <leader>rc :w\|:!g++ ./% -g -o %:r_temp && ./%:r_temp
 
-  autocmd FileType c       nmap <buffer> <leader>rr :w\|:!gcc ./% -g -o %:r_temp && ./%:r_temp<CR>
-  autocmd FileType c       nmap <buffer> <leader>rc :w\|:!gcc ./% -g -o %:r_temp && ./%:r_temp 
+    autocmd FileType c       nmap <buffer> <leader>rr :w\|:!gcc ./% -g -o %:r_temp && ./%:r_temp<CR>
+    autocmd FileType c       nmap <buffer> <leader>rc :w\|:!gcc ./% -g -o %:r_temp && ./%:r_temp
 ]]
 
 
@@ -439,25 +439,25 @@ vim.cmd[[
 -- set keywordprg=trans\ :jp
 -- <S-k> to trans current word under cursor
 vim.cmd[[
-  autocmd FileType markdown,md,rb call MarkdownOptions()
+    autocmd FileType markdown,md,rb call MarkdownOptions()
 
-  function! MarkdownOptions()
+    function! MarkdownOptions()
     nmap Th [\|
     nmap Tl ]\|
     nmap Tj }\|
     nmap Tk {\|
 
-  endfunction
+    endfunction
 ]]
 
 
 -- Python custom keymaps
 vim.cmd[[
-  autocmd FileType python,py call PythonOptions()
+    autocmd FileType python,py call PythonOptions()
 
-  function! PythonOptions()
+    function! PythonOptions()
     imap ttL print()<left>
     imap ttD print(f"{=}")<left><left><left><left>
     imap ttF print(f"{}")<left><left><left>
-  endfunction
+    endfunction
 ]]
