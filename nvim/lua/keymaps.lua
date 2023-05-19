@@ -135,15 +135,15 @@ map('n', '<leader>s', ':Telescope spell_suggest<CR>', silentnoremap)
 
 -- Find Files
 -- without preview
-map('n', 'tt', ':Telescope find_files hidden=true<CR>', nowait)
+map('n', 'tt', ':Telescope find_files hidden=true no_ignore=true<CR>', nowait)
 -- preview
-map('n', '<C-CR>', ':Telescope fd hidden=true<CR>', nowait)
+map('n', '<C-CR>', ':Telescope fd hidden=true no_ignore=true<CR>', nowait)
 map('n', '<S-CR>', ':Telescope buffers<CR>', silentnoremapnowait)
 map('n', '<S-m>', ':Telescope man_pages sections=1,2,3<CR>', silentnoremapnowait)
 
 -- Split windows
-map('n', '<leader><leader>v', '<C-W>v:Telescope find_files<CR>', silentnoremapnowait)
-map('n', '<leader><leader>h', '<C-W>s:Telescope find_files<CR>', silentnoremapnowait)
+map('n', '<leader><leader>v', '<C-W>v:Telescope find_files hidden=true no_ignore=true<CR>', silentnoremapnowait)
+map('n', '<leader><leader>h', '<C-W>s:Telescope find_files hidden=true no_ignore=true<CR>', silentnoremapnowait)
 
 -- Live Grep
 map('n', '<M-f>', ':Telescope live_grep theme=ivy<CR>', silentnoremap)
@@ -442,11 +442,10 @@ vim.cmd[[
     autocmd FileType markdown,md,rb call MarkdownOptions()
 
     function! MarkdownOptions()
-    nmap Th [\|
-    nmap Tl ]\|
-    nmap Tj }\|
-    nmap Tk {\|
-
+        nmap Th [\|
+        nmap Tl ]\|
+        nmap Tj }\|
+        nmap Tk {\|
     endfunction
 ]]
 
@@ -456,8 +455,78 @@ vim.cmd[[
     autocmd FileType python,py call PythonOptions()
 
     function! PythonOptions()
-    imap ttL print()<left>
-    imap ttD print(f"{=}")<left><left><left><left>
-    imap ttF print(f"{}")<left><left><left>
+        imap ttL print()<left>
+        imap ttD print(f"{=}")<left><left><left><left>
+        imap ttF print(f"{}")<left><left><left>
+    endfunction
+]]
+
+
+-- Ruby custom keymaps
+vim.cmd[[
+    autocmd BufRead,BufNewFile Rakefile,Capfile,Gemfile,.autotest,.irbrc,*.treetop,*.tt set ft=ruby syntax=ruby
+    autocmd FileType ruby,eruby call RubyOptions()
+
+    function! RubyOptions()
+        imap ttH "#{}"<left><left>
+        imap ttL #{}<left>
+        imap ttP puts "#{}"<left><left>
+        imap ppI puts %Q{  }<left><left>
+        imap ppL puts %q{  }<left><left>
+
+        nmap tH 0f#f{a
+        nmap tL 0f#f}i
+
+        imap TTT # => 
+
+
+        " nnoremap ttL $F}i
+        " nnoremap ttH 0f{a
+
+        set iskeyword=@,!,?,_,48-57,192-255
+
+        set tags+=./tags
+
+
+        " eRuby
+        " Evaluate and print out: _erbout << something.to_s
+        imap eHH <%=  %><left><left><left>
+        " Evaluate without printing out: something_else
+        imap eLL <%  %><left><left><left>
+        " Comment
+        imap eCC <%#  %><left><left><left>
+    endfunction
+]]
+
+
+-- C++ & C custom keymaps
+vim.cmd[[
+    " Quickly jump to header or source file
+    " This technique can probably be applied to many filetypes.
+    " It sets file marks (see :h marks) when leaving a source or header file,
+    " so you can quickly jump back to the last accessed one
+    " by using 'C or 'H (see :h 'A).
+
+
+    " NOTE: The info is saved in the viminfo file, so make sure that
+    " :set viminfo? includes :h viminfo-'.
+
+    autocmd FileType *.{cpp,c} mark C
+    autocmd FileType *.h mark H
+    autocmd FileType cpp,c call CppCOptions()
+
+    function! CppCOptions()
+
+        inoremap <buffer> iinc #include <><left>
+        inoremap <buffer> innc #include ""<left>
+        inoremap TTT # => 
+
+        " inoremap ttP print('')<left><left>
+        " inoremap ttL print()<left>
+
+        " nnoremap tH 0f#f{a
+        " nnoremap tL 0f#f}i
+
+
     endfunction
 ]]
