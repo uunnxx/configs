@@ -111,6 +111,9 @@ return require('packer').startup(function(use)
         end
     }
 
+    -- CamelCaseMotion alternative
+    use 'chaoren/vim-wordmotion'
+
 
     ---------------------------------------------------------------------------
     -- LSP server and autocompletion
