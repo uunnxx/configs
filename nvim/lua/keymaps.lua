@@ -24,6 +24,13 @@ vim.g.maplocalleader = ","
 map('i', 'eu', '<Esc>', silentnoremap)
 map('n', ';', ':', noremap)
 map('x', ';', ':', noremap)
+
+-- For the sake of
+-- Repeat latest f, t, F or T [count] times. See |cpo-;|
+-- Opposite to this is ,
+map('n', ':', ';', noremap)
+map('x', ':', ';', noremap)
+
 map('n', '&', '%', noremap)
 map('x', '&', '%', noremap)
 map('n', "'", '`', noremap)
