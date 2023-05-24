@@ -310,6 +310,9 @@ for_window [class="Pavucontrol"] floating enable
 for_window [class="URxvt" instance="translator"] floating enable resize set 880 400
 for_window [class="URxvt" instance="translator"] move position 1040 658
 
+for_window [class="feh"] floating enable
+for_window [class="feh"] border none
+
 for_window [class="alacrittyTransRight"] floating enable resize set 880 400
 for_window [class="alacrittyTransRight"] move position 1040 658
 for_window [class="alacrittyTransLeft"] floating enable resize set 880 400
