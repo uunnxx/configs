@@ -3,6 +3,7 @@ Configuration example for ``ptpython``.
 
 Copy this file to $XDG_CONFIG_HOME/ptpython/config.py
 On Linux, this is: ~/.config/ptpython/config.py
+On macOS, this is: ~/Library/Application Support/ptpython/config.py
 """
 from prompt_toolkit.filters import ViInsertMode
 from prompt_toolkit.key_binding.key_processor import KeyPress
@@ -38,18 +39,18 @@ def configure(repl):
     repl.completion_menu_scroll_offset = 0
 
     # Show line numbers (when the input contains multiple lines.)
-    repl.show_line_numbers = False
+    repl.show_line_numbers = True
 
     # Show status bar.
-    repl.show_status_bar = True
+    repl.show_status_bar = False
 
     # When the sidebar is visible, also show the help text.
     repl.show_sidebar_help = True
 
     # Swap light/dark colors on or off
-    repl.swap_light_and_dark = False
+    repl.swap_light_and_dark = True
 
-    # Highlight matching parethesis.
+    # Highlight matching parentheses.
     repl.highlight_matching_parenthesis = True
 
     # Line wrapping. (Instead of horizontal scrolling.)
@@ -106,8 +107,13 @@ def configure(repl):
     repl.enable_input_validation = True
 
     # Use this colorscheme for the code.
-    repl.use_code_colorscheme("gruvbox-dark")
-    # repl.use_code_colorscheme("pastie")
+    # Ptpython uses Pygments for code styling, so you can choose from Pygments'
+    # color schemes. See:
+    # https://pygments.org/docs/styles/
+    # https://pygments.org/demo/
+    repl.use_code_colorscheme("gruvbox-light")
+    # A colorscheme that looks good on dark backgrounds is 'native':
+    # repl.use_code_colorscheme("native")
 
     # Set color depth (keep in mind that not all terminals support true color).
 
@@ -153,10 +159,12 @@ def configure(repl):
 
     # Typing 'jj' in Vi Insert mode, should send escape. (Go back to navigation
     # mode.)
-    @repl.add_key_binding("e", "u", filter=ViInsertMode())
+    """
+    @repl.add_key_binding("j", "j", filter=ViInsertMode())
     def _(event):
-        " Map 'eu' to Escape. "
+        " Map 'jj' to Escape. "
         event.cli.key_processor.feed(KeyPress(Keys("escape")))
+    """
 
     # Custom key binding for some simple autocorrection while typing.
     """
