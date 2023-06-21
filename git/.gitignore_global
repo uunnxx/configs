@@ -1,0 +1,5 @@
+.mix_tasks
+.rake_tasks
+tags
+tags.lock
+.venv
