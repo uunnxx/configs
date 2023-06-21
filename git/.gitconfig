@@ -1,7 +1,7 @@
 [user]
 	signingkey = /home/baka/.ssh/for_github.pub
     name = バカです
-	email = naimjonn.nn@live.ru
+	email = unxnpx@gmail.com
 [core]
     editor = nvim
     excludesfile = /home/baka/.gitignore_global
