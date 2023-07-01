@@ -422,23 +422,26 @@ map('t', '<Esc><Esc>', '<C-\\><C-n>:q!<CR>', silentnoremapnowait)
 
 
 vim.cmd[[
-    autocmd FileType ruby    nmap <buffer> <leader>rr :w\|:!ruby %<CR>
-    autocmd FileType ruby    nmap <buffer> <leader>rc :w\|:!ruby %
+    autocmd FileType ruby          nmap <buffer> <leader>rr :w\|:!ruby %<CR>
+    autocmd FileType ruby          nmap <buffer> <leader>rc :w\|:!ruby %
 
     autocmd FileType javascript    nmap <buffer> <leader>rr :w\|:!node %<CR>
     autocmd FileType javascript    nmap <buffer> <leader>rc :w\|:!node %
 
-    autocmd FileType crystal nmap <buffer> <leader>rr :w\|:!crystal %<CR>
-    autocmd FileType crystal nmap <buffer> <leader>rc :w\|:!crystal %
+    autocmd FileType crystal       nmap <buffer> <leader>rr :w\|:!crystal %<CR>
+    autocmd FileType crystal       nmap <buffer> <leader>rc :w\|:!crystal %
 
-    autocmd FileType python  nmap <buffer> <leader>rr :w\|:!python3 %<CR>
-    autocmd FileType python  nmap <buffer> <leader>rc :w\|:!python3 %
+    autocmd FileType python        nmap <buffer> <leader>rr :w\|:!python3 %<CR>
+    autocmd FileType python        nmap <buffer> <leader>rc :w\|:!python3 %
 
-    autocmd FileType cpp     nmap <buffer> <leader>rr :w\|:!g++ ./% -g -o %:r_temp && ./%:r_temp<CR>
-    autocmd FileType cpp     nmap <buffer> <leader>rc :w\|:!g++ ./% -g -o %:r_temp && ./%:r_temp
+    autocmd FileType cpp           nmap <buffer> <leader>rr :w\|:!g++ ./% -g -o %:r_temp && ./%:r_temp<CR>
+    autocmd FileType cpp           nmap <buffer> <leader>rc :w\|:!g++ ./% -g -o %:r_temp && ./%:r_temp
 
-    autocmd FileType c       nmap <buffer> <leader>rr :w\|:!gcc ./% -g -o %:r_temp && ./%:r_temp<CR>
-    autocmd FileType c       nmap <buffer> <leader>rc :w\|:!gcc ./% -g -o %:r_temp && ./%:r_temp
+    autocmd FileType c             nmap <buffer> <leader>rr :w\|:!gcc ./% -g -o %:r_temp && ./%:r_temp<CR>
+    autocmd FileType c             nmap <buffer> <leader>rc :w\|:!gcc ./% -g -o %:r_temp && ./%:r_temp
+
+    autocmd FileType sh            nmap <buffer> <leader>rr :w\|:!./%<CR>
+    autocmd FileType sh            nmap <buffer> <leader>rc :w\|:!./%
 ]]
 
 
