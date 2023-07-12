@@ -527,8 +527,8 @@ vim.cmd[[
 
     function! CppCOptions()
 
-        inoremap <buffer> iinc #include <><left>
-        inoremap <buffer> innc #include ""<left>
+        " inoremap <buffer> iinc #include <><left>
+        " inoremap <buffer> innc #include ""<left>
         inoremap TTT # => 
 
         " inoremap ttP print('')<left><left>
