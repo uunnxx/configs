@@ -1,0 +1,44 @@
+[user]
+	signingkey = /home/baka/.ssh/for_github.pub
+    name = バカです
+	email = unxnpx@gmail.com
+[core]
+    editor = nvim
+    excludesfile = /home/baka/.gitignore_global
+    pager = delta
+[init]
+    defaultBranch = main
+[merge]
+    conflictstyle = diff3
+[diff]
+    colorMoved = default
+[difftool]
+    prompt = false
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigation = true
+    side-by-side = true
+    light = false
+    line-numbers = true
+[delta "interactive"]
+    keep-plus-minus-markers = false
+[delta "decorations"]
+    commit-decoration-style = blue ol
+    commit-style = raw
+    file-style = omit
+    hunk-header-decoration-style = blue box
+    hunk-header-file-style = red
+    hunk-header-line-number-style = "#067a00"
+    hunk-header-style = file line-number syntax
+[alias]
+    c = checkout
+    b = branch
+    co = commit
+    d = diff
+[commit]
+	gpgsign = true
+[gpg]
+	format = ssh
+[pull]
+	rebase = false
