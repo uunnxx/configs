@@ -37,7 +37,8 @@ map('n', "'", '`', noremap)
 map('n', '`', "'", noremap)
 
 
-map('n', '<leader>ww', ':update<CR>', silentnoremap)
+map('n', '<leader>ww', ':update<CR>', noremap)
+map('i', '<leader>ww', '<C-o>:update<CR>', noremap)
 map('n', '<space>qq', ':x<CR>', silentnoremap)
 map('n', 'QQ', ':q<CR>', silentnoremap)
 map('n', 'Qt', ':q!<CR>', silentnoremap)
