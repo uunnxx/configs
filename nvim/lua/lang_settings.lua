@@ -25,3 +25,5 @@ cmd[[ autocmd BufNewFile,BufRead *.html set filetype=htmldjango ]]
 
 -- Call `Autoformat` python files on save
 -- cmd[[autocmd BufWritePost,FileWritePost *.py Autoformat]]
+
+cmd[[let g:v_warnings = 1]]

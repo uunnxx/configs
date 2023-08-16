@@ -192,6 +192,11 @@ return require('packer').startup(function(use)
 
 
     ---------------------------------------------------------------------------
+    -- Vlang
+    use { 'cheap-glitch/vim-v', ft = {'vlang', 'v'} }
+
+
+    ---------------------------------------------------------------------------
     -- Elixir
     use { 'slashmili/alchemist.vim', ft = { "elixir", "eelixir", "exs", "ex" } }
     use { 'mhinz/vim-mix-format', ft = { "elixir", "eelixir", "exs", "ex" } }
