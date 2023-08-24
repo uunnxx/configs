@@ -407,6 +407,11 @@ map('t', '<leader><leader>', '<C-\\><C-n>', silentnoremap)
 map('t', '<Esc><Esc>', '<C-\\><C-n>:q!<CR>', silentnoremapnowait)
 
 
+-- Toggle relative line number
+map('n', '<C-l><C-l>', ':set invrelativenumber<CR>', silentnoremap)
+map('i', '<C-l><C-l>', '<C-o>:set invrelativenumber<CR>', silentnoremap)
+
+
 -------------------------------------------------------------------------------
 -- Debugging
 -- map('n', '<leader>db', ':lua require("dapui").toggle()<CR>', silentnoremap)
