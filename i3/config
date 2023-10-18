@@ -134,7 +134,8 @@ bindsym $mod+$sh+s sticky toggle
 bindsym $mod+$sh+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
-bindsym $mod+c floating enable resize set 1340 780; move position center
+bindsym $mod+$sh+t floating enable resize set 1340 780; move position center
+bindsym $mod+c move position center
 
 bindsym $alt+space exec --no-startup-id rofi -show window
 bindsym $alt+$sh+space exec --no-startup-id rofi -show windowcd

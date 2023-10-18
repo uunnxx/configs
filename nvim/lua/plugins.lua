@@ -118,6 +118,19 @@ return require('packer').startup(function(use)
     use 'chaoren/vim-wordmotion'
 
 
+    --- LeetCode
+    -- use {
+    --     'Dhanus3133/LeetBuddy.nvim',
+    --     requires = {"nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim"},
+    --     config = function()
+    --         require("leetbuddy").setup({
+    --             domain = 'com',
+    --             language = 'py'
+    --         })
+    --     end
+    -- }
+
+
     ---------------------------------------------------------------------------
     -- LSP server and autocompletion
 
