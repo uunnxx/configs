@@ -2,10 +2,15 @@ local set   = vim.opt             -- global/buffer/windows-scoped options
 local cmd   = vim.cmd             -- execute Vim commands
 local fn    = vim.fn              --
 local wset  = vim.wo              -- Window-scoped
+local g     = vim.g               -- Global
 -- local bset  = vim.bo              -- Buffer-scoped
 
 
 
+
+-- disable netrw at the very start of your init.lua
+g.loaded_netrw =  1
+g.loaded_netrwPlugin = 1
 
 set.background = "dark"
 set.termguicolors = true -- true colors

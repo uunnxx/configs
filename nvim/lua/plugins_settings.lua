@@ -30,8 +30,8 @@ require'nvim-treesitter.configs'.setup {
         "vim",
         "yaml",
     },
-    sync_install = true,
-    auto_install = true,
+    sync_install = false,
+    -- auto_install = true,
     highlight = {
         enable = true,
         additional_vim_regex_highlighting = true,
@@ -128,14 +128,9 @@ map("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", {silent = true, noremap 
 -- Nvim-Tree
 require("nvim-tree").setup({
     sort_by = "case_sensitive",
-    view = {
-        adaptive_size = true,
-        mappings = {
-            list = {
-                { key = "u", action = "dir_up" },
-            },
-        },
-    },
+    -- view = {
+        -- adaptive_size = true,
+    -- },
     renderer = {
         group_empty = true,
     },
@@ -146,22 +141,6 @@ require("nvim-tree").setup({
         ignore = false,
     }
 })
-
-
-
--------------------------------------------------------------------------------
--- Indent Blankline
-require("indent_blankline").setup {
-    space_char_blankline = " ",
-    char_highlight_list = {
-        "IndentBlanklineIndent1",
-        "IndentBlanklineIndent2",
-        "IndentBlanklineIndent3",
-        "IndentBlanklineIndent4",
-        "IndentBlanklineIndent5",
-        "IndentBlanklineIndent6",
-    },
-}
 
 
 

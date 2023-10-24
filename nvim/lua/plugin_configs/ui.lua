@@ -75,23 +75,50 @@ cmd [[
 ]]
 
 
-
--- Indent blankline
-require("indent_blankline").setup {
-    space_char_blankline = " ",
-    show_end_of_line = true,
-    show_current_context = true,
-    -- show_current_context_start = true,
-}
+-------------------------------------------------------------------------------
+-- Indent Blankline
+--
 
 cmd [[
-    highlight IndentBlanklineIndent1 guifg=#444444 gui=nocombine
-    highlight IndentBlanklineIndent2 guifg=#444444 gui=nocombine
-    highlight IndentBlanklineIndent3 guifg=#444444 gui=nocombine
-    highlight IndentBlanklineIndent4 guifg=#444444 gui=nocombine
-    highlight IndentBlanklineIndent5 guifg=#444444 gui=nocombine
-    highlight IndentBlanklineIndent6 guifg=#444444 gui=nocombine
+    highlight ibl1 guifg=#444444 gui=nocombine
+    highlight ibl2 guifg=#444444 gui=nocombine
+    highlight ibl3 guifg=#444444 gui=nocombine
+    highlight ibl4 guifg=#444444 gui=nocombine
+    highlight ibl5 guifg=#444444 gui=nocombine
+    highlight ibl6 guifg=#444444 gui=nocombine
 ]]
+
+local highlight = {
+    "ibl1",
+    "ibl2",
+    "ibl3",
+    "ibl4",
+    "ibl5",
+    "ibl6",
+}
+
+
+require("ibl").setup {
+    indent = { highlight = highlight, char = " " },
+    whitespace = {
+        highlight = highlight,
+        remove_blankline_trail = false,
+    },
+    scope = { enabled = true },
+
+}
+
+
+
+
+-- Indent blankline
+-- require("indent_blankline").setup {
+    -- space_char_blankline = " ",
+    -- show_end_of_line = true,
+    -- show_current_context = true,
+    -- show_current_context_start = true,
+-- }
+
 
 
 -- Highlight ERROR NOTE BUG INFO HACK CHANGED CHANGES WARNING FIXME README TODO IDEA CONCEPT
