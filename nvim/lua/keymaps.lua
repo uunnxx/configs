@@ -7,7 +7,7 @@ local function map(kind, lhs, rhs, opts)
 end
 
 local noremap = { noremap = true }
-local nowait = { nowait = true }
+local noremapnowait = { noremap = true, nowait = true }
 local silentnoremap = { noremap = true, silent = true }
 local silentnoremapnowait = { nowait = true, noremap = true, silent = true }
 
@@ -22,14 +22,14 @@ vim.g.maplocalleader = ","
 -- DEFAULT REMAPS
 --
 map('i', 'eu', '<Esc>', silentnoremap)
--- map('n', ';', ':', noremap)
--- map('x', ';', ':', noremap)
 
 -- For the sake of in case ; mapped to :
 -- Repeat latest f, t, F or T [count] times. See |cpo-;|
 -- Opposite to this is ,
--- map('n', ':', ';', noremap)
--- map('x', ':', ';', noremap)
+map('n', ';', ':', noremap)
+map('x', ';', ':', noremap)
+map('n', ':', ';', noremap)
+map('x', ':', ';', noremap)
 
 map('n', '&', '%', noremap)
 map('x', '&', '%', noremap)
@@ -62,8 +62,8 @@ map('x', 'L', 'g_', silentnoremapnowait)
 
 
 -- Find and replace
-map('n', '<C-h>', ':%s/\\C\\<<C-r><C-w>\\>//g<left><left>', silentnoremapnowait)
-map('x', '<C-h>', ':s/', silentnoremapnowait)
+map('n', '<C-h>', ':%s/\\C\\<<C-r><C-w>\\>//g<left><left>', noremapnowait)
+map('x', '<C-h>', ':s/', noremapnowait)
 -- map('v', '<leader>*', '"hy:%s/\\V<C-r>h//g<left><left>', silentnoremapnowait)
 
 
@@ -71,8 +71,8 @@ map('x', '<C-h>', ':s/', silentnoremapnowait)
 -- Treat long lines as break lines unless we had count
 -- I don't know how to get this effect in Lua
 vim.cmd[[
-nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
-nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
+    nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
+    nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 ]]
 
 
@@ -80,7 +80,7 @@ nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 
 -- Autoformat + save as CTRL-s normal, and insert mode
 map('n', '<C-s>', ':Autoformat<CR>',  silentnoremap)
-map('i', '<C-s>', '<esc>:Autoformat<CR>', silentnoremap)
+map('i', '<C-s>', '<C-o>:Autoformat<CR>', silentnoremap)
 
 
 map('n', '<space>;', 'q:', noremap)
@@ -113,10 +113,10 @@ map('n', '<M-left>', ':vertical resize -1<CR>', silentnoremap)
 map('n', '<M-right>', ':vertical resize +1<CR>', silentnoremap)
 
 -- Open files [ref. this]
-map('n', '<M-t>', ':tabedit ', nowait)
-map('i', '<M-t>', '<ESC>:tabedit ', nowait)
-map('n', '<M-e>', ':edit ', nowait)
-map('i', '<M-e>', '<ESC>:edit ', nowait)
+map('n', '<M-t>', ':tabedit ', noremapnowait)
+map('i', '<M-t>', '<ESC>:tabedit ', noremapnowait)
+map('n', '<M-e>', ':edit ', noremapnowait)
+map('i', '<M-e>', '<ESC>:edit ', noremapnowait)
 
 
 -------------------------------------------------------------------------------
@@ -143,22 +143,22 @@ map('n', '<leader>s', ':Telescope spell_suggest<CR>', silentnoremap)
 
 -- Find Files
 -- without preview
-map('n', 'tt', ':Telescope find_files hidden=true<CR>', nowait)
+map('n', 'tt', ':Telescope find_files hidden=true<CR>', noremap)
 -- preview
-map('n', '<C-CR>', ':Telescope fd hidden=true<CR>', nowait)
+map('n', '<C-CR>', ':Telescope fd hidden=true<CR>', noremapnowait)
 map('n', '<S-CR>', ':Telescope buffers<CR>', silentnoremapnowait)
-map('n', '<S-m>', ':Telescope man_pages sections=1,2,3<CR>', silentnoremapnowait)
+map('n', '<S-m>', ':Telescope man_pages sections=1,2,3<CR>', noremapnowait)
 
 -- Split windows
 map('n', '<leader><leader>v', '<C-W>v:Telescope find_files hidden=true<CR>', silentnoremapnowait)
 map('n', '<leader><leader>h', '<C-W>s:Telescope find_files hidden=true<CR>', silentnoremapnowait)
 
 -- Live Grep
-map('n', '<M-f>', ':Telescope live_grep theme=ivy<CR>', silentnoremap)
-map('i', '<M-f>', '<C-o>:Telescope live_grep theme=ivy<CR>', silentnoremap)
+map('n', '<M-f>', ':Telescope live_grep theme=ivy<CR>', noremapnowait)
+map('i', '<M-f>', '<C-o>:Telescope live_grep theme=ivy<CR>', noremapnowait)
 
 -- Filetypes
-map('n', 'FF', ':Telescope filetypes <CR>', silentnoremapnowait)
+map('n', 'FF', ':Telescope filetypes <CR>', noremapnowait)
 
 
 -------------------------------------------------------------------------------
@@ -257,13 +257,13 @@ map('n', 'gP', 'P', silentnoremap)
 
 -- Delete || change word separated by underscores or alternatively
 
-map('n', 'du', 'dt_', silentnoremap)
-map('n', 'Du', 'df_', silentnoremap)
-map('n', 'cu', 'ct_', silentnoremap)
-map('n', 'Cu', 'cf_', silentnoremap)
+map('n', 'du', 'dt_', noremap)
+map('n', 'Du', 'df_', noremap)
+map('n', 'cu', 'ct_', noremap)
+map('n', 'Cu', 'cf_', noremap)
 
-map('n', 'cU', 'df_ldea', silentnoremap)
-map('n', 'dU', 'bf_de', silentnoremap)
+map('n', 'cU', 'df_ldea', noremap)
+map('n', 'dU', 'bf_de', noremap)
 
 
 -------------------------------------------------------------------------------
@@ -367,8 +367,8 @@ map('n', 'cc', '"_cc', noremap)
 
 
 -- Empty || Change current line
-map ('n', 'dD', '0<ESC>D', silentnoremapnowait)
-map ('n', 'cC', '0<ESC>C', silentnoremapnowait)
+map ('n', 'dD', '0D', noremapnowait)
+map ('n', 'cC', '0C', noremapnowait)
 
 -- Auto-center
 map('n', 'G', 'Gzz', silentnoremap)
@@ -387,7 +387,7 @@ map('n', '<leader><leader><space>', ':%bd <bar> e# <bar> bd#<CR>', silentnoremap
 
 
 -- Line autocompletion
-map('i', '<leader><leader>l', '<C-x><C-l>', silentnoremap)
+map('i', '<leader><leader>l', '<C-x><C-l>', noremapnowait)
 
 
 -- HOP
@@ -403,13 +403,13 @@ map('n', '<space><space>v', ':vsplit term://zsh<CR>a', silentnoremap)
 
 -- Use esc or ',,' to quit builtin terminal
 -- tnoremap <esc>   <C-\><C-n>
-map('t', '<leader><leader>', '<C-\\><C-n>', silentnoremap)
-map('t', '<Esc><Esc>', '<C-\\><C-n>:q!<CR>', silentnoremapnowait)
+map('t', '<leader><leader>', '<C-\\><C-n>', noremapnowait)
+map('t', '<Esc><Esc>', '<C-\\><C-n>:q!<CR>', noremapnowait)
 
 
 -- Toggle relative line number
-map('n', '<C-l><C-l>', ':set invrelativenumber<CR>', silentnoremap)
-map('i', '<C-l><C-l>', '<C-o>:set invrelativenumber<CR>', silentnoremap)
+-- map('n', '<C-l><C-l>', ':set invrelativenumber<CR>', silentnoremap)
+-- map('i', '<C-l><C-l>', '<C-o>:set invrelativenumber<CR>', silentnoremap)
 
 
 -------------------------------------------------------------------------------
@@ -419,15 +419,9 @@ map('i', '<C-l><C-l>', '<C-o>:set invrelativenumber<CR>', silentnoremap)
 -- map('v', '<M-k>', ':lua require("dapui").eval()<CR>', silentnoremap)
 
 
-
-
-
 -------------------------------------------------------------------------------
 -- LeetCode
 -- map('n', '<leader>lq', ':LBQuestions<CR>', silentnoremap)
-
-
-
 
 
 -------------------------------------------------------------------------------

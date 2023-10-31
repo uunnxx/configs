@@ -92,14 +92,40 @@ lspconfig.solargraph.setup{
 }
 
 
-lspconfig.typeprof.setup{
+-- lspconfig.typeprof.setup{
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--     cmd = { 'typeprof', '--lsp', '--stdio' },
+--     filetypes = { 'ruby', 'eruby', 'rakefile' },
+--     -- root_dir = root_pattern("Gemfile", ".git")
+-- }
+
+
+-- lspconfig.sorbet.setup{
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--     cmd = { 'srb', 'tc', '--lsp' },
+--     filetypes = { 'ruby', 'eruby', 'rakefile' },
+--     -- root_dir = root_pattern("Gemfile", ".git")
+-- }
+
+
+lspconfig.standardrb.setup{
     on_attach = on_attach,
     capabilities = capabilities,
-    cmd = { 'typeprof', '--lsp', '--stdio' },
+    cmd = { 'standardrb', '--lsp' },
     filetypes = { 'ruby', 'eruby', 'rakefile' },
     -- root_dir = root_pattern("Gemfile", ".git")
 }
 
+
+-- lspconfig.rubocop.setup{
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--     cmd = { 'rubocop', '--lsp' },
+--     filetypes = { 'ruby', 'eruby', 'rakefile' },
+--     -- root_dir = root_pattern("Gemfile", ".git")
+-- }
 
 
 -------------------------------------------------------------------------------

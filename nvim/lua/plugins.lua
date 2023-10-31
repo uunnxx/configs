@@ -6,9 +6,11 @@ packadd shellmenu
 
 
 return require('lazy').setup({
-    'nvim-lua/plenary.nvim',
     'nvim-lua/popup.nvim',
-    'nvim-telescope/telescope.nvim',
+    {
+        'nvim-telescope/telescope.nvim',
+        dependencies = { 'nvim-lua/plenary.nvim' }
+    },
     'nvim-telescope/telescope-ui-select.nvim',
     {
         'nvim-telescope/telescope-fzf-native.nvim',
@@ -87,6 +89,7 @@ return require('lazy').setup({
 
     ---------------------------------------------------------------------------
     -- Navigation
+    ---------------------------------------------------------------------------
 
     -- File Explorer
     {
@@ -131,6 +134,7 @@ return require('lazy').setup({
 
     ---------------------------------------------------------------------------
     -- LSP server and autocompletion
+    ---------------------------------------------------------------------------
 
     { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
     'neovim/nvim-lspconfig',
@@ -151,6 +155,8 @@ return require('lazy').setup({
 
     ---------------------------------------------------------------------------
     -- Autocompletion
+    ---------------------------------------------------------------------------
+
     'hrsh7th/nvim-cmp',
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
@@ -171,9 +177,18 @@ return require('lazy').setup({
     'honza/vim-snippets',
 
 
+    -- Text Objects
+    "kana/vim-textobj-user",
+    { 'whatyouhide/vim-textobj-erb', ft = {'ruby', 'rb', 'erb'}, },
+    { "tek/vim-textobj-ruby", ft = {'ruby', 'rb', 'erb'} },
+    { "nelstrom/vim-textobj-rubyblock", ft = {'ruby', 'rb', 'erb'} },
+    { "bps/vim-textobj-python", ft = {'python', 'py'} },
+
+
     ---------------------------------------------------------------------------
     -- FILETYPES
-    --
+    ---------------------------------------------------------------------------
+
     ---------------------------------------------------------------------------
     -- RUBY
 
@@ -184,14 +199,6 @@ return require('lazy').setup({
     { 'slim-template/vim-slim', ft = {'ruby', 'rb', 'erb'} },
     { 'stjernstrom/vim-ruby-run', ft = {'ruby', 'rb', 'erb'} },
     { 'hallison/vim-ruby-sinatra', ft = {'ruby', 'rb', 'erb'} },
-
-
-    -- Text Objects
-    "kana/vim-textobj-user",
-    { 'whatyouhide/vim-textobj-erb', ft = {'ruby', 'rb', 'erb'}, },
-    { "tek/vim-textobj-ruby", ft = {'ruby', 'rb', 'erb'} },
-    { "nelstrom/vim-textobj-rubyblock", ft = {'ruby', 'rb', 'erb'} },
-    { "bps/vim-textobj-python", ft = {'python', 'py'} },
 
 
     ---------------------------------------------------------------------------
@@ -211,13 +218,15 @@ return require('lazy').setup({
     { 'elixir-editors/vim-elixir', ft = { "elixir", "eelixir", "exs", "ex" } },
 
 
-
     ---------------------------------------------------------------------------
     -- Crystal
     { 'vim-crystal/vim-crystal', ft = {'cr', 'crystal'} },
 
+
     ---------------------------------------------------------------------------
-    -- Debugging
+    -- DEBUGGING
+    ---------------------------------------------------------------------------
+
     -- use 'mfussenegger/nvim-dap'
     -- use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
     -- use 'mfussenegger/nvim-dap-python'
