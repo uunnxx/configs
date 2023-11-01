@@ -79,34 +79,39 @@ cmd [[
 -- Indent Blankline
 --
 
-cmd [[
-    highlight ibl1 guifg=#444444 gui=nocombine
-    highlight ibl2 guifg=#444444 gui=nocombine
-    highlight ibl3 guifg=#444444 gui=nocombine
-    highlight ibl4 guifg=#444444 gui=nocombine
-    highlight ibl5 guifg=#444444 gui=nocombine
-    highlight ibl6 guifg=#444444 gui=nocombine
-]]
 
-local highlight = {
-    "ibl1",
-    "ibl2",
-    "ibl3",
-    "ibl4",
-    "ibl5",
-    "ibl6",
-}
+-- local highlight = {
+--     "ibl1",
+--     "ibl2",
+--     "ibl3",
+--     "ibl4",
+--     "ibl5",
+--     "ibl6",
+--     'CursorColumn',
+--     'Whitespace'
+-- }
+--
+--
+-- local hooks = require('ibl.hooks')
+--
+-- hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+--     vim.api.nvim_set_hl(0, 'ibl1', { fg = '#444444' })
+--     vim.api.nvim_set_hl(0, 'ibl2', { fg = '#444444' })
+--     vim.api.nvim_set_hl(0, 'ibl3', { fg = '#444444' })
+--     vim.api.nvim_set_hl(0, 'ibl4', { fg = '#444444' })
+--     vim.api.nvim_set_hl(0, 'ibl5', { fg = '#444444' })
+--     vim.api.nvim_set_hl(0, 'ibl6', { fg = '#444444' })
+-- end)
 
-
-require("ibl").setup {
-    indent = { highlight = highlight, char = " " },
-    whitespace = {
-        highlight = highlight,
-        remove_blankline_trail = false,
-    },
+require("ibl").setup() -- {
+--     indent = { highlight = highlight, char = "" },
+--     whitespace = {
+--         highlight = highlight,
+--         remove_blankline_trail = false,
+--     },
     scope = { enabled = true },
-
-}
+--
+-- }
 
 
 
@@ -139,7 +144,7 @@ cmd[[
 cmd[[autocmd TermOpen * setlocal nonumber norelativenumber]]
 
 -- cmp.nvim
-vim.cmd[[
+cmd[[
     highlight! PmenuSel guibg=#1d2021 guifg=NONE
     highlight! Pmenu guifg=#C5CDD9 guibg=#22252A
     highlight! CmpItemAbbrDeprecated guifg=#7E8294 guibg=NONE
