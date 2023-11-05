@@ -109,8 +109,7 @@ require("ibl").setup() -- {
 --         highlight = highlight,
 --         remove_blankline_trail = false,
 --     },
-    scope = { enabled = true },
---
+--     scope = { enabled = true },
 -- }
 
 
