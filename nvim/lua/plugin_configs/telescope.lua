@@ -45,11 +45,11 @@ telescope.setup({
                 ["<S-Tab>"] = actions.move_selection_previous,
                 ["<Tab>"] = actions.move_selection_next,
                 ["<ESC>"] = actions.close,
-                ["<C-o>"] = actions.toggle_selection,
-                ["<C-O>"] = actions.toggle_all,
-                ["<C-T>"] = trouble.open_with_trouble
+                ["<c-o>"] = actions.toggle_selection,
+                ["<c-O>"] = actions.toggle_all,
+                ["<c-s-t>"] = trouble.open_with_trouble
             },
-            n = { ["<C-T>"] = trouble.open_with_trouble },
+            n = { ["<c-s-t>"] = trouble.open_with_trouble },
         },
     },
     pickers = {

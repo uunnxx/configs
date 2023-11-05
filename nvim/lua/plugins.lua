@@ -48,6 +48,13 @@ return require('lazy').setup({
         dependencies = "neovim/nvim-lspconfig"
     },
 
+    {
+        "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+        config = function()
+        require("lsp_lines").setup()
+        end,
+    },
+
     -- use { 'stevearc/dressing.nvim' }
 
     -- Git

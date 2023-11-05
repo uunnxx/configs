@@ -133,6 +133,11 @@ map('n', 'gti', ':Telescope lsp_implementations<CR>', silentnoremap)
 
 -- Trouble
 map('n', 'gT', ':TroubleToggle<CR>', silentnoremap)
+map("n", 'gR', ":TroubleToggle lsp_references<cr>", {silent = true, noremap = true})
+map("n", '<space>xw', ':TroubleToggle workspace_diagnostics<cr>', silentnoremap)
+map("n", '<space>xd', ':TroubleToggle document_diagnostics<cr>', silentnoremap)
+map("n", '<space>xl', ':TroubleToggle loclist<cr>', silentnoremap)
+map("n", '<space>xq', ':TroubleToggle quickfix<cr>', silentnoremap)
 
 
 -- Telescope

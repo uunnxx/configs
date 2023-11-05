@@ -9,14 +9,22 @@ vim.diagnostic.config({
     virtual_text = false,
     update_in_insert = false,
     signs = true,
-    underline = true
+    underline = true,
+
+    virtual_lines = {
+        -- To show virtual lines only for the current line's diagnostics:
+        only_current_line = true,
+        -- If you don't want to highlight the entire diagnostic line, use:
+        highlight_whole_line = false
+    }
 })
 
 
 -- vim.cmd[[autocmd InsertEnter * lua vim.diagnostic.enable()]]
 -- vim.cmd[[autocmd InsertLeave * lua vim.diagnostic.enable()]]
 -- vim.cmd[[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
-vim.cmd[[autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focus=false})]]
+
+-- vim.cmd[[autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focus=false})]]
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -348,3 +356,14 @@ lspconfig.hls.setup{
     cmd = { "haskell-language-server-wrapper", "--lsp" },
     single_file_support = true
 }
+
+
+
+-------------------------------------------------------------------------------
+-- LSP Lines
+vim.keymap.set(
+  "",
+  "<leader>l",
+  require("lsp_lines").toggle,
+  { desc = "Toggle lsp_lines" }
+)
