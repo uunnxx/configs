@@ -24,6 +24,7 @@ vim.diagnostic.config({
 -- vim.cmd[[autocmd InsertLeave * lua vim.diagnostic.enable()]]
 -- vim.cmd[[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 
+-- Uncomment the line below
 -- vim.cmd[[autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focus=false})]]
 
 -- Use an on_attach function to only map the following keys
