@@ -34,11 +34,14 @@ hide_edge_borders smart
 default_border pixel 4
 default_floating_border pixel 4
 
-# gaps
+###############################################################################
+# GAPS
+#
+
 # smart_gaps [on | off | inverse_outer]
-smart_gaps on
-gaps inner 8
-gaps outer 4
+# smart_gaps on
+# gaps inner 8
+# gaps outer 4
 
 # tiling_drag modifier titlebar
 
