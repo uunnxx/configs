@@ -435,28 +435,39 @@ map('t', '<Esc><Esc>', '<C-\\><C-n>:q!<CR>', noremapnowait)
 -- shift + F1 = delete empty lines
 -- map('n', '<S-F1>', ':g/^$/d<CR>', silentnoremap)
 
+-- local autocmd = vim.api.nvim_create_autocmd   -- Create autocommand
+
+-- autocmd(
+--     "Filetype", {
+--         pattern = { 'python', 'py' },
+--         command = [[nnoremap <buffer> ,rr :w<CR>:python %<CR>]]
+--     }
+-- )
+
 
 vim.cmd[[
-    autocmd FileType ruby          nmap <buffer> <leader>rr :w\|:!ruby %<CR>
-    autocmd FileType ruby          nmap <buffer> <leader>rc :w\|:!ruby %
+    " ; -> :
+    " because of the map('n', ';', ':', noremap)
+    autocmd FileType ruby          nmap <buffer> ,rr ;w\|:!ruby %:p<CR>
+    autocmd FileType ruby          nmap <buffer> ,rc ;w\|:!ruby %:p
 
-    autocmd FileType javascript    nmap <buffer> <leader>rr :w\|:!node %<CR>
-    autocmd FileType javascript    nmap <buffer> <leader>rc :w\|:!node %
+    autocmd FileType javascript    nmap <buffer> ,rr ;w\|:!node %:p<CR>
+    autocmd FileType javascript    nmap <buffer> ,rc ;w\|:!node %:p
 
-    autocmd FileType crystal       nmap <buffer> <leader>rr :w\|:!crystal %<CR>
-    autocmd FileType crystal       nmap <buffer> <leader>rc :w\|:!crystal %
+    autocmd FileType crystal       nmap <buffer> ,rr ;w\|:!crystal %:p<CR>
+    autocmd FileType crystal       nmap <buffer> ,rc ;w\|:!crystal %:p
 
-    autocmd FileType python        nmap <buffer> <leader>rr :w\|:!python3 %<CR>
-    autocmd FileType python        nmap <buffer> <leader>rc :w\|:!python3 %
+    autocmd FileType python        nmap <buffer> ,rr ;w\|:!python %:p<CR>
+    autocmd FileType python        nmap <buffer> ,rc ;w\|:!python %:p
 
-    autocmd FileType cpp           nmap <buffer> <leader>rr :w\|:!g++ ./% -g -o %:r_temp && ./%:r_temp<CR>
-    autocmd FileType cpp           nmap <buffer> <leader>rc :w\|:!g++ ./% -g -o %:r_temp && ./%:r_temp
+    autocmd FileType cpp           nmap <buffer> ,rr ;w\|:!g++ %:p -g -o %:p:r_temp && %:p:r_temp<CR>
+    autocmd FileType cpp           nmap <buffer> ,rc ;w\|:!g++ %:p -g -o %:p:r_temp && %:p:r_temp
 
-    autocmd FileType c             nmap <buffer> <leader>rr :w\|:!gcc ./% -g -o %:r_temp && ./%:r_temp<CR>
-    autocmd FileType c             nmap <buffer> <leader>rc :w\|:!gcc ./% -g -o %:r_temp && ./%:r_temp
+    autocmd FileType c             nmap <buffer> ,rr ;w\|:!gcc %:p -g -o %:p:r_temp && %:p:r_temp<CR>
+    autocmd FileType c             nmap <buffer> ,rc ;w\|:!gcc %:p -g -o %:p:r_temp && %:p:r_temp
 
-    autocmd FileType sh            nmap <buffer> <leader>rr :w\|:!./%<CR>
-    autocmd FileType sh            nmap <buffer> <leader>rc :w\|:!./%
+    autocmd FileType sh            nmap <buffer> ,rr ;w\|:!%:p<CR>
+    autocmd FileType sh            nmap <buffer> ,rc ;w\|:!%:p
 ]]
 
 
