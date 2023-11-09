@@ -64,6 +64,9 @@ return require('lazy').setup({
     },
     -- use {'kdheepak/lazygit.nvim'}
 
+    -- Glow (markdown viewer)
+    {"ellisonleao/glow.nvim", config = true, cmd = "Glow"},
+
     -- Bufferline
     {
         'akinsho/bufferline.nvim',
@@ -144,6 +147,11 @@ return require('lazy').setup({
     ---------------------------------------------------------------------------
 
     { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+    -- {
+    --     'nvim-treesitter/nvim-treesitter-textobjects',
+    --     dependencies = "nvim-treesitter/nvim-treesitter",
+    -- },
+
     'neovim/nvim-lspconfig',
     -- lsp installer
     "williamboman/mason.nvim",
@@ -229,6 +237,17 @@ return require('lazy').setup({
     -- Crystal
     { 'vim-crystal/vim-crystal', ft = {'cr', 'crystal'} },
 
+
+    ---------------------------------------------------------------------------
+    -- YAML
+    {
+        "cuducos/yaml.nvim",
+        ft = { "yaml" }, -- optional
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+            "nvim-telescope/telescope.nvim", -- optional
+        }
+    },
 
     ---------------------------------------------------------------------------
     -- DEBUGGING
