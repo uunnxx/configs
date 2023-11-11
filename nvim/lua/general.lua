@@ -154,7 +154,7 @@ set.matchpairs = {
 -- Ignore files vim doesnt use
 set.wildignore = {
     '*.o', '*.a', '__pycache__', '.git', '.hg', '.svn', 'node_modules', '*.aux',
-    '*.out', '*.toc', '*.o', '*.obj', '*.exe', '*.dll', '*.manifest', '*.rbc',
+    '*.out', '*.toc', '*.obj', '*.exe', '*.dll', '*.manifest', '*.rbc',
     '*.class', '*.ai', '*.bmp', '*.gif', '*.ico', '*.jpg', '*.jpeg', '*.png',
     '*.psd', '*.webp', '*.avi', '*.divx', '*.mp4', '*.webm', '*.mov', '*.m2ts',
     '*.mkv', '*.vob', '*.mpg', '*.mpeg', '*.mp3', '*.oga', '*.ogg', '*.wav',

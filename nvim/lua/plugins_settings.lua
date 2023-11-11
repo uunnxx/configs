@@ -151,6 +151,51 @@ vim.cmd[[
 
 
 -------------------------------------------------------------------------------
+-- Indent Blankline
+
+
+local highlight = {
+    "ibl1",
+    "ibl2",
+    "ibl3",
+    "ibl4",
+    "ibl5",
+    "ibl6",
+    "ibl7",
+    'CursorColumn',
+    'Whitespace'
+}
+
+
+local hooks = require('ibl.hooks')
+
+hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+    vim.api.nvim_set_hl(0, 'ibl1', { fg = '#444444' })
+    vim.api.nvim_set_hl(0, 'ibl2', { fg = '#444444' })
+    vim.api.nvim_set_hl(0, 'ibl3', { fg = '#444444' })
+    vim.api.nvim_set_hl(0, 'ibl4', { fg = '#444444' })
+    vim.api.nvim_set_hl(0, 'ibl5', { fg = '#444444' })
+    vim.api.nvim_set_hl(0, 'ibl6', { fg = '#444444' })
+    vim.api.nvim_set_hl(0, 'ibl7', { fg = '#444444' })
+end)
+
+
+require'ibl'.setup {
+    indent = {
+        highlight = highlight,
+        char = "░",
+        tab_char = "░"
+    },
+    whitespace = {
+        highlight = highlight,
+        remove_blankline_trail = true,
+    },
+    scope = { enabled = true },
+}
+
+
+
+-------------------------------------------------------------------------------
 -- Colorizer
 require'colorizer'.setup()
 
@@ -174,6 +219,7 @@ require("neodev").setup({
 -- Debugging
 -- require('dapui').setup({})
 -- require('dap-python').setup()
+
 
 
 -------------------------------------------------------------------------------
