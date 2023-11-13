@@ -8,9 +8,9 @@ local g     = vim.g               -- Global
 
 
 
--- disable netrw at the very start of your init.lua
-g.loaded_netrw =  1
-g.loaded_netrwPlugin = 1
+-- disable netrw [disabling it will block some plugins, like open in Browser]
+-- g.loaded_netrw =  1
+-- g.loaded_netrwPlugin = 1
 
 set.background = "dark"
 set.termguicolors = true -- true colors
