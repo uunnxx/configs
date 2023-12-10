@@ -17,7 +17,7 @@ set $fm "thunar"
 set $barcmd i3status
 set $calc "qalculate-gtk"
 
-font pango:mononoki Bold 10
+font pango:Iosevka Nerd Font Bold 10
 
 floating_modifier $mod
 
