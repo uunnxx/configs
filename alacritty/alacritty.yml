@@ -100,7 +100,8 @@ bell:
   #   - EaseOutExpo
   #   - EaseOutCirc
   #   - Linear
-  animation: EaseOut
+  # animation: EaseOut
+  animation: EaseOutSine
   # duration: 100
   duration: 0
   color: "0xfabd2f"
