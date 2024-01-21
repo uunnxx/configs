@@ -262,31 +262,32 @@ lspconfig.crystalline.setup{
 -------------------------------------------------------------------------------
 -- Python
 lspconfig.pyright.setup{} -- on_attach = on_attach
-lspconfig.pylsp.setup{
-    on_attach = on_attach,
-    capabilities = capabilities,
-    single_file_support = true,
-    settings = {
-        pylsp = {
-            plugins = {
-                -- pycodestyle = {
-                --     ignore = {
-                --         'F401',
-                --         'E501',
-                --         'W391',
-                --         'C0103', 'C0114', 'C0116',
-                --     },
-                -- },
-                mypy = { enabled = true, live_mode = true, strict = false },
-                black = { enabled = true, preview = true },
-                -- autopep8 = { enabled = true },
-                -- flake8 = { enabled = false },
-                -- jedi = { completion = true },
-                yapf = { enabled = true }
-            }
-        }
-    }
-}
+-- pylsp is TOOOO SLOW
+-- lspconfig.pylsp.setup{
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--     single_file_support = true,
+--     settings = {
+--         pylsp = {
+--             plugins = {
+--                 -- pycodestyle = {
+--                 --     ignore = {
+--                 --         'F401',
+--                 --         'E501',
+--                 --         'W391',
+--                 --         'C0103', 'C0114', 'C0116',
+--                 --     },
+--                 -- },
+--                 mypy = { enabled = true, live_mode = true, strict = false },
+--                 black = { enabled = true, preview = true },
+--                 -- autopep8 = { enabled = true },
+--                 -- flake8 = { enabled = false },
+--                 -- jedi = { completion = true },
+--                 yapf = { enabled = true }
+--             }
+--         }
+--     }
+-- }
 
 
 
