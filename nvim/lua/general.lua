@@ -133,7 +133,8 @@ set.fillchars = {
     vert = "│",
     fold = "⠀",
     eob = " ", -- suppress ~ at EndOfBuffer
-    diff = "⣿", -- alternatives = ⣿ ░ ─ ╱
+    -- diff = "⣿", -- alternatives = ⣿ ░ ─ ╱
+    diff = "░", -- alternatives = ⣿ ░ ─ ╱
     msgsep = "‾",
     foldopen = "▾",
     foldsep = "│",
@@ -165,7 +166,6 @@ set.wildignore = {
 
 
 -- Search, Find
-
 set.smartcase = true               -- Use smartcase everywhere
 set.ignorecase = true               -- Case insensitive search
 set.incsearch = true
@@ -184,7 +184,6 @@ set.ttimeoutlen = 5
 
 
 -- Undo
-
 set.undofile = true
 set.undodir = fn.stdpath('data') .. 'undo'
 set.shell = '/usr/bin/zsh'
