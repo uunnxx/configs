@@ -19,7 +19,8 @@ return require('lazy').setup({
     -- :Telescope env
     "LinArcX/telescope-env.nvim",
 
-
+    -- Diffview
+    "sindrets/diffview.nvim",
 
 
     -- (Neo)Vim plugin for automatically highlighting other uses of the word
