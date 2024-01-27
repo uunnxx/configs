@@ -60,7 +60,7 @@ set.splitbelow = true               -- bottom, which feels more natural
 wset.wrap = false
 
 set.cmdheight = 1
--- Global statusline. set to 2 to get it default back
+-- Global statusline. Default 2
 set.laststatus = 3
 
 set.showmode = false
@@ -130,7 +130,7 @@ set.listchars = {
 }
 
 set.fillchars = {
-    vert = "│",
+    vert = "┃",
     fold = "⠀",
     eob = " ", -- suppress ~ at EndOfBuffer
     -- diff = "⣿", -- alternatives = ⣿ ░ ─ ╱

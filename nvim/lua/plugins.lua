@@ -35,6 +35,7 @@ return require('lazy').setup({
     -- Colorscheme
     'uunnxx/gruvbox.nvim',
     -- use "ellisonleao/gruvbox.nvim",
+    'rebelot/kanagawa.nvim',
     'folke/lsp-colors.nvim',
     'MunifTanjim/nui.nvim',
 
