@@ -1,0 +1,252 @@
+colors:
+  primary:
+    background: '0x1f1f28'
+    foreground: '0xdcd7ba'
+
+  normal:
+    black:   '0x090618'
+    red:     '0xc34043'
+    green:   '0x76946a'
+    yellow:  '0xc0a36e'
+    blue:    '0x7e9cd8'
+    magenta: '0x957fb8'
+    cyan:    '0x6a9589'
+    white:   '0xc8c093'
+
+  bright:
+    black:   '0x727169'
+    red:     '0xe82424'
+    green:   '0x98bb6c'
+    yellow:  '0xe6c384'
+    blue:    '0x7fb4ca'
+    magenta: '0x938aa9'
+    cyan:    '0x7aa89f'
+    white:   '0xdcd7ba'
+
+  selection:
+    background: '0x2d4f67'
+    foreground: '0xc8c093'
+
+  indexed_colors:
+    - { index: 16, color: '0xffa066' }
+    - { index: 17, color: '0xff5d62' }
+
+
+  cursor:
+    text: CellBackground
+    cursor: CellForeground
+  # Allowed values are CellForeground/CellBackground, which reference the
+  # affected cell, or hexadecimal colors like #aaaaaa.
+  vi_mode_cursor:
+   text: CellBackground
+   cursor: CellForeground
+
+
+env:
+  TERM: screen-256color
+  WINIT_X11_SCALE_FACTOR: "1.0"
+
+
+window:
+  padding:
+    x: 2
+    y: 0
+  dynamic_padding: true
+  decorations: full
+  # opacity: 0.85
+  title: Alacritty
+  # Allow terminal applications to change Alacritty's window title.
+  dynamic_title: true
+
+  # Window class (Linux/BSD only):
+  class:
+    # Application instance name
+    instance: Alacritty
+    # General application class
+    general: Alacritty
+
+
+scrolling:
+  history: 10000
+  multiplier: 5
+
+
+font:
+  normal:
+    # family: Iosevka NF
+    family: mononoki
+    style: Regular
+  bold:
+    # family: Iosevka NF
+    family: mononoki
+    style: Bold
+  italic:
+    # family: Iosevka NF
+    family: mononoki
+    style: Italic
+  size: 11
+
+draw_bold_text_with_bright_colors: true
+
+
+bell:
+  # Visual Bell Animation
+  #
+  # Animation effect for flashing the screen when the visual bell is rung.
+  #
+  # Values for `animation`:
+  #   - Ease
+  #   - EaseOut
+  #   - EaseOutSine
+  #   - EaseOutQuad
+  #   - EaseOutCubic
+  #   - EaseOutQuart
+  #   - EaseOutQuint
+  #   - EaseOutExpo
+  #   - EaseOutCirc
+  #   - Linear
+  # animation: EaseOut
+  animation: EaseOutSine
+  # duration: 100
+  duration: 0
+  color: "0xfabd2f"
+
+
+mouse:
+  double_click: { threshold: 300 }
+  triple_click: { threshold: 300 }
+
+  hide_when_typing: true
+  hints:
+   launcher: brave-browser
+   # launcher: xdg-open
+   # modifiers: None
+
+
+selection:
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
+  # semantic_escape_chars: ',│`|:"'' ()[]{}<>'
+  save_to_clipboard: true
+
+cursor:
+  # Values for `style`:
+  #   - ▇ Block
+  #   - _ Underline
+  #   - | Beam
+  style:
+    shape: Block
+    blinking: Always
+  blink_interval: 350
+  unfocused_hollow: true
+
+# Live config reload (changes require restart)
+live_config_reload: true
+
+shell:
+  program: /usr/bin/zsh
+  # args:
+#     - --login
+# Send ESC (\x1b) before characters when alt is pressed.
+# alt_send_esc: true
+# It's now always set to 'true' so we can just remove it.
+
+# Offer IPC using `alacritty msg` (unix only)
+ipc_socket: true
+
+mouse_bindings:
+  - { mouse: Middle, action: PasteSelection }
+
+
+key_bindings:
+  - { key: V, mods: Control|Shift, action: Paste }
+  - { key: C, mods: Control|Shift, action: Copy }
+  - { key: Return, mods: Control|Shift, action: SpawnNewInstance }
+  - { key: Return, mods: Alt, action: ToggleFullscreen }
+  - { key: Return, mods: Shift, chars: "\e[13;2u" }
+  - { key: Return, mods: Control, chars: "\e[13;5u" }
+  - { key: Space, mods: Shift, chars: "\x5c\x08 " }
+  - { key: Space, mods: Control, chars: "\x00" }
+  # - { key: Paste,                                       action: Paste          }
+  # - { key: Copy,                                        action: Copy           }
+  # - { key: L,         mods: Control,                    action: ClearLogNotice }
+  # - { key: L,         mods: Control, mode: ~Vi|~Search, chars: "\x0c"          }
+  - { key: PageUp,    mods: Shift,   mode: ~Alt,        action: ScrollPageUp,  }
+  - { key: PageDown,  mods: Shift,   mode: ~Alt,        action: ScrollPageDown }
+  - { key: Home,      mods: Shift,   mode: ~Alt,        action: ScrollToTop,   }
+  - { key: End,       mods: Shift,   mode: ~Alt,        action: ScrollToBottom }
+
+  # Vi Mode
+  - { key: Space,  mods: Control|Alt, mode: ~Search,    action: ToggleViMode            }
+  # - { key: Space,  mods: Shift|Control, mode: Vi|~Search, action: ScrollToBottom          }
+  # - { key: Escape,                      mode: Vi|~Search, action: ClearSelection          }
+  # - { key: I,                           mode: Vi|~Search, action: ToggleViMode            }
+  # - { key: I,                           mode: Vi|~Search, action: ScrollToBottom          }
+  # - { key: C,      mods: Control,       mode: Vi|~Search, action: ToggleViMode            }
+  # - { key: Y,      mods: Control,       mode: Vi|~Search, action: ScrollLineUp            }
+  # - { key: E,      mods: Control,       mode: Vi|~Search, action: ScrollLineDown          }
+  # - { key: G,                           mode: Vi|~Search, action: ScrollToTop             }
+  # - { key: G,      mods: Shift,         mode: Vi|~Search, action: ScrollToBottom          }
+  # - { key: B,      mods: Control,       mode: Vi|~Search, action: ScrollPageUp            }
+  # - { key: F,      mods: Control,       mode: Vi|~Search, action: ScrollPageDown          }
+  # - { key: U,      mods: Control,       mode: Vi|~Search, action: ScrollHalfPageUp        }
+  # - { key: D,      mods: Control,       mode: Vi|~Search, action: ScrollHalfPageDown      }
+  # - { key: Y,                           mode: Vi|~Search, action: Copy                    }
+  # - { key: Y,                           mode: Vi|~Search, action: ClearSelection          }
+  # - { key: Copy,                        mode: Vi|~Search, action: ClearSelection          }
+  # - { key: V,                           mode: Vi|~Search, action: ToggleNormalSelection   }
+  # - { key: V,      mods: Shift,         mode: Vi|~Search, action: ToggleLineSelection     }
+  # - { key: V,      mods: Control,       mode: Vi|~Search, action: ToggleBlockSelection    }
+  # - { key: V,      mods: Alt,           mode: Vi|~Search, action: ToggleSemanticSelection }
+  # - { key: Return,                      mode: Vi|~Search, action: Open                    }
+  # - { key: K,                           mode: Vi|~Search, action: Up                      }
+  # - { key: J,                           mode: Vi|~Search, action: Down                    }
+  # - { key: H,                           mode: Vi|~Search, action: Left                    }
+  # - { key: L,                           mode: Vi|~Search, action: Right                   }
+  # - { key: Up,                          mode: Vi|~Search, action: Up                      }
+  # - { key: Down,                        mode: Vi|~Search, action: Down                    }
+  # - { key: Left,                        mode: Vi|~Search, action: Left                    }
+  # - { key: Right,                       mode: Vi|~Search, action: Right                   }
+  # - { key: Key0,                        mode: Vi|~Search, action: First                   }
+  # - { key: Key4,   mods: Shift,         mode: Vi|~Search, action: Last                    }
+  # - { key: Key6,   mods: Shift,         mode: Vi|~Search, action: FirstOccupied           }
+  # - { key: H,      mods: Shift,         mode: Vi|~Search, action: High                    }
+  # - { key: M,      mods: Shift,         mode: Vi|~Search, action: Middle                  }
+  # - { key: L,      mods: Shift,         mode: Vi|~Search, action: Low                     }
+  # - { key: B,                           mode: Vi|~Search, action: SemanticLeft            }
+  # - { key: W,                           mode: Vi|~Search, action: SemanticRight           }
+  # - { key: E,                           mode: Vi|~Search, action: SemanticRightEnd        }
+  # - { key: B,      mods: Shift,         mode: Vi|~Search, action: WordLeft                }
+  # - { key: W,      mods: Shift,         mode: Vi|~Search, action: WordRight               }
+  # - { key: E,      mods: Shift,         mode: Vi|~Search, action: WordRightEnd            }
+  # - { key: Key5,   mods: Shift,         mode: Vi|~Search, action: Bracket                 }
+  # - { key: Slash,                       mode: Vi|~Search, action: SearchForward           }
+  # - { key: Slash,  mods: Shift,         mode: Vi|~Search, action: SearchBackward          }
+  # - { key: N,                           mode: Vi|~Search, action: SearchNext              }
+  # - { key: N,      mods: Shift,         mode: Vi|~Search, action: SearchPrevious          }
+
+  # Search Mode
+  - { key: Return,                mode: Search|Vi,  action: SearchConfirm         }
+  - { key: Escape,                mode: Search,     action: SearchCancel          }
+  - { key: C,      mods: Control, mode: Search,     action: SearchCancel          }
+  - { key: U,      mods: Control, mode: Search,     action: SearchClear           }
+  # - { key: W,      mods: Control, mode: Search,     action: SearchDeleteWord      }
+  # - { key: P,      mods: Control, mode: Search,     action: SearchHistoryPrevious }
+  # - { key: N,      mods: Control, mode: Search,     action: SearchHistoryNext     }
+  # - { key: Up,                    mode: Search,     action: SearchHistoryPrevious }
+  # - { key: Down,                  mode: Search,     action: SearchHistoryNext     }
+  # - { key: Return,                mode: Search|~Vi, action: SearchFocusNext       }
+  # - { key: Return, mods: Shift,   mode: Search|~Vi, action: SearchFocusPrevious   }
+
+  # (Windows, Linux, and BSD only)
+  #- { key: V,              mods: Control|Shift, mode: ~Vi,        action: Paste            }
+  #- { key: C,              mods: Control|Shift,                   action: Copy             }
+  #- { key: F,              mods: Control|Shift, mode: ~Search,    action: SearchForward    }
+  #- { key: B,              mods: Control|Shift, mode: ~Search,    action: SearchBackward   }
+  #- { key: C,              mods: Control|Shift, mode: Vi|~Search, action: ClearSelection   }
+  #- { key: Insert,         mods: Shift,                           action: PasteSelection   }
+  #- { key: Key0,           mods: Control,                         action: ResetFontSize    }
+  #- { key: Equals,         mods: Control,                         action: IncreaseFontSize }
+  #- { key: Plus,           mods: Control,                         action: IncreaseFontSize }
+  #- { key: NumpadAdd,      mods: Control,                         action: IncreaseFontSize }
+  #- { key: Minus,          mods: Control,                         action: DecreaseFontSize }
+  #- { key: NumpadSubtract, mods: Control,                         action: DecreaseFontSize }
