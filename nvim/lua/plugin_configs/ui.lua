@@ -152,14 +152,13 @@ cmd'colorscheme catppuccin'
 --     highlight! SignColumn ctermbg=none guibg=none
 -- ]]
 
-cmd [[
-    highlight! NonText guifg=#ccc guibg=none
-    highlight! WhiteSpace guifg=#ccc ctermfg=none
-]]
 
 -- cmd [[
 --     highlight! SpecialKey guifg=#ccc ctermfg=none
+--     highlight! NonText guifg=#aaa guibg=none
+--     highlight! WhiteSpace guifg=#ccc ctermfg=none
 -- ]]
+
 
 -- Highlight ERROR NOTE BUG INFO HACK CHANGED CHANGES WARNING FIXME README TODO IDEA CONCEPT
 -- Colors located in ~/.nvim/plugged/gruvbox/colors/gruvbox.vim
