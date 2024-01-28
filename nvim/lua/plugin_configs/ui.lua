@@ -76,9 +76,9 @@ require('kanagawa').setup({
         palette = {},
         theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
     },
-    overrides = function(colors) -- add/modify highlights
-        return {}
-    end,
+    -- overrides = function(colors) -- add/modify highlights
+    --     return {}
+    -- end,
     theme = "wave",              -- Load "wave" theme when 'background' option is not set
     background = {               -- map the value of 'background' option to a theme
         dark = "wave",           -- try "dragon" !
@@ -87,26 +87,79 @@ require('kanagawa').setup({
 })
 
 
+-- Catppuccin
+require("catppuccin").setup({
+    flavour = "macchiato", -- latte, frappe, macchiato, mocha
+    background = { -- :h background
+        light = "latte",
+        dark = "macchiato",
+    },
+    transparent_background = false, -- disables setting the background color.
+    show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
+    term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
+    dim_inactive = {
+        enabled = false, -- dims the background color of inactive window
+        shade = "dark",
+        percentage = 0.15, -- percentage of the shade to apply to the inactive window
+    },
+    no_italic = false, -- Force no italic
+    no_bold = false, -- Force no bold
+    no_underline = false, -- Force no underline
+    styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
+        comments = { "italic" }, -- Change the style of comments
+        conditionals = { "italic" },
+        loops = {},
+        functions = {},
+        keywords = { "italic" },
+        strings = {},
+        variables = {},
+        numbers = {},
+        booleans = { "bold" },
+        properties = {},
+        types = { "bold" },
+        operators = { "bold" },
+    },
+    color_overrides = {},
+    custom_highlights = {},
+    integrations = {
+        cmp = true,
+        gitsigns = true,
+        nvimtree = true,
+        treesitter = true,
+        notify = false,
+        hop = true,
+        -- mini = {
+        --     enabled = true,
+        --     indentscope_color = "",
+        -- },
+        -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
+    },
+})
+
+
 vim.o.background = "dark"
-cmd'colorscheme kanagawa'
+cmd'colorscheme catppuccin'
 -- cmd'colorscheme kanagawa'
 
 
+-- uncomment for transparency
 -- Transparency background
-cmd [[
-    highlight! Normal ctermbg=none guibg=none
-    highlight! QuickFixLine ctermbg=none guibg=none
-    highlight! CursorLineSign ctermbg=none guibg=none
-    highlight! CursorLineNr ctermbg=none guibg=none
-    highlight! SignColumn ctermbg=none guibg=none
-]]
+-- cmd [[
+--     highlight! Normal ctermbg=none guibg=none
+--     highlight! QuickFixLine ctermbg=none guibg=none
+--     highlight! CursorLineSign ctermbg=none guibg=none
+--     highlight! CursorLineNr ctermbg=none guibg=none
+--     highlight! SignColumn ctermbg=none guibg=none
+-- ]]
 
 cmd [[
     highlight! NonText guifg=#ccc guibg=none
-    highlight! SpecialKey guifg=#ccc ctermfg=none
     highlight! WhiteSpace guifg=#ccc ctermfg=none
 ]]
 
+-- cmd [[
+--     highlight! SpecialKey guifg=#ccc ctermfg=none
+-- ]]
 
 -- Highlight ERROR NOTE BUG INFO HACK CHANGED CHANGES WARNING FIXME README TODO IDEA CONCEPT
 -- Colors located in ~/.nvim/plugged/gruvbox/colors/gruvbox.vim
