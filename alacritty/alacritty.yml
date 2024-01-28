@@ -53,7 +53,7 @@ window:
     y: 0
   dynamic_padding: true
   decorations: full
-  opacity: 0.85
+  # opacity: 0.85
   title: Alacritty
   # Allow terminal applications to change Alacritty's window title.
   dynamic_title: true
