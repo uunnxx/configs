@@ -33,15 +33,7 @@ return require('lazy').setup({
     -- UI
 
     -- Colorscheme
-    'uunnxx/gruvbox.nvim',
-    -- use "ellisonleao/gruvbox.nvim",
-    'rebelot/kanagawa.nvim',
-    {
-        "catppuccin/nvim",
-        name = "catppuccin",
-        priority = 1000
-    },
-
+    'ellisonleao/gruvbox.nvim',
 
     'folke/lsp-colors.nvim',
     'MunifTanjim/nui.nvim',
