@@ -188,9 +188,18 @@ require'ibl'.setup {
     },
     whitespace = {
         highlight = highlight,
-        remove_blankline_trail = true,
+        remove_blankline_trail = false,
     },
-    scope = { enabled = true },
+    scope = {
+        enabled = true,
+        char = "░",
+        show_start = false,
+        show_end = false,
+        show_exact_scope = true
+    },
+    exclude = {
+        filetypes = { 'lua' }
+    }
 }
 
 

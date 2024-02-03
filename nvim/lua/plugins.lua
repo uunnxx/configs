@@ -26,7 +26,17 @@ return require('lazy').setup({
     -- (Neo)Vim plugin for automatically highlighting other uses of the word
     -- under the cursor using either LSP, Tree-sitter, or regex matching.
     -- Default keymaps: <a-n> and <a-p> as keymaps to move between references.
-    'RRethy/vim-illuminate',
+    -- 'RRethy/vim-illuminate',
+    {
+        'tzachar/local-highlight.nvim',
+        config = function()
+            require('local-highlight').setup({
+                disable_file_types = { 'tex' },
+                hlgroup = 'MoreMsg',
+                cw_hlgroup = nil,
+            })
+        end
+    },
 
 
     ---------------------------------------------------------------------------

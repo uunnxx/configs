@@ -49,7 +49,7 @@ require("gruvbox").setup({
     underline = true,
     bold = true,
     italic = {
-        strings = true,
+        strings = false,
         emphasis = true,
         comments = true,
         operators = true,
