@@ -266,9 +266,9 @@ return require('lazy').setup({
     -- DEBUGGING
     ---------------------------------------------------------------------------
 
-    -- use 'mfussenegger/nvim-dap'
-    -- use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
-    -- use 'mfussenegger/nvim-dap-python'
+    -- 'mfussenegger/nvim-dap',
+    -- 'rcarriga/nvim-dap-ui',
+    -- 'mfussenegger/nvim-dap-python',
 
 
 
