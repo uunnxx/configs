@@ -165,6 +165,8 @@ map('i', '<M-f>', '<C-o>:Telescope live_grep theme=ivy<CR>', noremapnowait)
 -- Filetypes
 map('n', 'FF', ':Telescope filetypes <CR>', noremapnowait)
 
+-- Gitsigns
+map('n', 'git', ':Gitsigns<CR>', noremapnowait)
 
 -------------------------------------------------------------------------------
 

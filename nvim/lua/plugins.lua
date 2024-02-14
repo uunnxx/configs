@@ -192,6 +192,8 @@ return require('lazy').setup({
     'hrsh7th/cmp-omni',
     'onsails/lspkind.nvim',
     'saadparwaiz1/cmp_luasnip',
+    'petertriho/cmp-git',
+    'uga-rosa/cmp-dictionary', -- dictionary /usr/share/dict/words
 
 
     -- Performance
