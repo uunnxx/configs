@@ -25,6 +25,7 @@ require('settings')
 
 require('plugin_configs/completion')
 require('plugin_configs/gitsigns')
+require('plugin_configs/debugging')
 require('plugin_configs/lsp_configs')
 require('plugin_configs/lualine')
 require('plugin_configs/nui')
