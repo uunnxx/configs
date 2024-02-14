@@ -269,7 +269,7 @@ return require('lazy').setup({
     -- 'mfussenegger/nvim-dap',
     -- 'rcarriga/nvim-dap-ui',
     -- 'mfussenegger/nvim-dap-python',
-
+    -- "jay-babu/mason-nvim-dap.nvim",
 
 
     -- lua-ls for neovim config
