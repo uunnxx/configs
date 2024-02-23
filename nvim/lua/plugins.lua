@@ -66,7 +66,8 @@ return require('lazy').setup({
         end,
     },
 
-    -- use { 'stevearc/dressing.nvim' }
+    -- Dressing
+    { 'stevearc/dressing.nvim', opts = {} },
 
     -- Git
     {
@@ -138,20 +139,6 @@ return require('lazy').setup({
 
     -- CamelCaseMotion alternative
     'chaoren/vim-wordmotion',
-
-
-    --- LeetCode
-    -- use {
-    --     'Dhanus3133/LeetBuddy.nvim',
-    --     requires = {"nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim"},
-    --     config = function()
-    --         require("leetbuddy").setup({
-    --             domain = 'com',
-    --             language = 'py'
-    --         })
-    --     end
-    -- }
-
 
     ---------------------------------------------------------------------------
     -- LSP server and autocompletion

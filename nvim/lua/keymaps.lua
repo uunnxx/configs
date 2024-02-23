@@ -124,7 +124,6 @@ map('i', '<M-e>', '<ESC>:edit ', noremapnowait)
 --
 
 -- LSP
--- map('n', 'G', 'Gzz', silentnoremap)
 map('n', 'gtd', ':Telescope lsp_definitions<CR>', silentnoremap)
 map('n', 'gtt', ':Telescope lsp_type_definitions<CR>', silentnoremap)
 map('n', 'gtr', ':Telescope lsp_references<CR>', silentnoremap)
@@ -263,14 +262,16 @@ map('n', 'gP', 'P', silentnoremap)
 
 
 -- Delete || change word separated by underscores or alternatively
+--
+-- some_word
 
 map('n', 'du', 'dt_', noremap)
 map('n', 'Du', 'df_', noremap)
 map('n', 'cu', 'ct_', noremap)
 map('n', 'Cu', 'cf_', noremap)
 
-map('n', 'cU', 'df_ldea', noremap)
-map('n', 'dU', 'bf_de', noremap)
+map('n', 'cU', 'F_lcw', noremap)
+map('n', 'dU', 'F_de', noremap)
 
 
 -------------------------------------------------------------------------------
@@ -414,21 +415,11 @@ map('t', '<leader><leader>', '<C-\\><C-n>', noremapnowait)
 map('t', '<Esc><Esc>', '<C-\\><C-n>:q!<CR>', noremapnowait)
 
 
--- Toggle relative line number
--- map('n', '<C-l><C-l>', ':set invrelativenumber<CR>', silentnoremap)
--- map('i', '<C-l><C-l>', '<C-o>:set invrelativenumber<CR>', silentnoremap)
-
-
 -------------------------------------------------------------------------------
 -- Debugging
 -- map('n', '<leader>db', ':lua require("dapui").toggle()<CR>', silentnoremap)
 -- map('n', '<leader>df', ':lua require("dapui").float_element()<CR>', silentnoremap)
 -- map('v', '<M-k>', ':lua require("dapui").eval()<CR>', silentnoremap)
-
-
--------------------------------------------------------------------------------
--- LeetCode
--- map('n', '<leader>lq', ':LBQuestions<CR>', silentnoremap)
 
 
 -------------------------------------------------------------------------------
@@ -548,12 +539,13 @@ vim.cmd[[
 
     " NOTE: The info is saved in the viminfo file, so make sure that
     " :set viminfo? includes :h viminfo-'.
+    " viminfo is shaDa in neovim. see: :h shada-
 
-    autocmd FileType *.{cpp,c} mark C
-    autocmd FileType *.h mark H
     autocmd FileType cpp,c call CppCOptions()
 
     function! CppCOptions()
+        autocmd FileType *.{cpp,c} mark C
+        autocmd FileType *.h mark H
 
         " inoremap <buffer> iinc #include <><left>
         " inoremap <buffer> innc #include ""<left>

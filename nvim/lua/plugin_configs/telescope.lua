@@ -92,8 +92,8 @@ telescope.setup({
                 override_file_sorter = true,
                 case_mode = "smart_case",
             },
-            ["ui-select"] = { themes.get_dropdown { } },
-        },
+            ["ui-select"] = { themes.get_dropdown {} },
+        }
     },
 })
 -- To get fzf loaded and working with telescope, you need to call
