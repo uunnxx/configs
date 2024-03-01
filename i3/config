@@ -83,8 +83,9 @@ bindsym $mod+$sh+d exec --no-startup-id rofi -show run
 bindsym $mod+n exec --no-startup-id rofi_books
 # bindsym $mod+$sh+n exec --no-startup-id ~/.local/bin/dmenu_books
 
+# wmfocus
 bindsym $mod+g exec --no-startup-id $HOME/.config/i3/scripts/wmfocus.sh
-# bindsym $mod+$sh+g exec --no-startup-id
+bindsym $mod+$sh+g exec --no-startup-id $HOME/.config/i3/scripts/wmfocus_swap.sh
 
 bindsym $ctrl+Print exec "flameshot gui"
 
