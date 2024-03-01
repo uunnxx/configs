@@ -263,7 +263,7 @@ lspconfig.clangd.setup{
     on_attach = on_attach,
     capabilities = capabilities,
     cmd = { "clangd", "--background-index" },
-    filetypes = { "c", "cpp", "objc", "objcpp" },
+    filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
     root_dir = lspconfig.util.root_pattern("compile_commands.json", "compile_flags.txt"),
 }
 
