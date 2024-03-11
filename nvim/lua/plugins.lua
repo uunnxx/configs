@@ -27,6 +27,7 @@ return require('lazy').setup({
     -- under the cursor using either LSP, Tree-sitter, or regex matching.
     -- Default keymaps: <a-n> and <a-p> as keymaps to move between references.
     -- 'RRethy/vim-illuminate',
+
     {
         'tzachar/local-highlight.nvim',
         config = function()
@@ -43,7 +44,12 @@ return require('lazy').setup({
     -- UI
 
     -- Colorscheme
-    'ellisonleao/gruvbox.nvim',
+    { 'ellisonleao/gruvbox.nvim', priority = 1000, config = true },
+
+    -- { 'rebelot/kanagawa.nvim' },
+    -- { 'catppuccin/nvim', name = 'catppuccin', priority = 1000 },
+    -- { 'kepano/flexoki-neovim', name = 'flexoki' },
+    -- { "rose-pine/neovim", name = "rose-pine" },
 
     'folke/lsp-colors.nvim',
     'MunifTanjim/nui.nvim',
@@ -251,13 +257,13 @@ return require('lazy').setup({
 
     ---------------------------------------------------------------------------
     -- DEBUGGING
-    ---------------------------------------------------------------------------
 
     -- 'mfussenegger/nvim-dap',
     -- 'rcarriga/nvim-dap-ui',
     -- 'mfussenegger/nvim-dap-python',
     -- "jay-babu/mason-nvim-dap.nvim",
 
+    ---------------------------------------------------------------------------
 
     -- lua-ls for neovim config
     "folke/neodev.nvim",

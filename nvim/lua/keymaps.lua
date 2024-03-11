@@ -129,6 +129,9 @@ map('n', 'gtt', ':Telescope lsp_type_definitions<CR>', silentnoremap)
 map('n', 'gtr', ':Telescope lsp_references<CR>', silentnoremap)
 map('n', 'gti', ':Telescope lsp_implementations<CR>', silentnoremap)
 
+-- Code Actions
+map('n', 'act', ':lua vim.lsp.buf.code_action()<CR>', silentnoremap)
+
 
 -- Trouble
 map('n', 'gT', ':TroubleToggle<CR>', silentnoremap)

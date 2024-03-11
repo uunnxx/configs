@@ -20,8 +20,8 @@ vim.diagnostic.config({
 })
 
 
--- vim.cmd[[autocmd InsertEnter * lua vim.diagnostic.enable()]]
--- vim.cmd[[autocmd InsertLeave * lua vim.diagnostic.enable()]]
+vim.cmd[[autocmd InsertEnter * lua vim.diagnostic.disable()]]
+vim.cmd[[autocmd InsertLeave * lua vim.diagnostic.enable()]]
 -- vim.cmd[[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 
 -- Uncomment the line below
@@ -30,9 +30,15 @@ vim.diagnostic.config({
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
+    if client.name == 'ruff_lsp' then
+        -- Disable hover in favor of Pyright
+        client.server_capabilities.hoverProvider = false
+    end
+
     if client.server_capabilities.documentSymbolProvider then
         navic.attach(client, bufnr)
     end
+
     -- Enable completion triggered by <c-x><c-o>
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -180,6 +186,24 @@ lspconfig.rust_analyzer.setup{
 }
 
 
+-------------------------------------------------------------------------------
+-- Go
+-- go install github.com/nametake/golangci-lint-langserver@latest
+-- go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+lspconfig.golangci_lint_ls.setup{
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = {'golangci-lint-langserver'},
+    filetypes = {'go', 'gomod'},
+    init_options = {
+        command = { 'golangci-lint', 'run', '--out-format', 'json' }
+    }
+}
+
+-- go install golang.org/x/tools/gopls@latest
+lspconfig.gopls.setup{}
+
+
 
 -------------------------------------------------------------------------------
 -- JavaScript, TypeScript
@@ -283,7 +307,23 @@ lspconfig.crystalline.setup{
 
 -------------------------------------------------------------------------------
 -- Python
-lspconfig.pyright.setup{} -- on_attach = on_attach
+lspconfig.pyright.setup{
+    on_attach = on_attach,
+    settings = {
+        pyright = {
+            -- Using Ruff's import organizer
+            disableOrganizeImports = true
+        },
+        python = {
+            analysis = {
+                -- Ignore all files fro analysis to exclusively use Ruff for linting
+                ignore = { '*' }
+            }
+        }
+
+    }
+}
+
 -- pylsp is TOOOO SLOW
 -- lspconfig.pylsp.setup{
 --     on_attach = on_attach,
@@ -312,6 +352,16 @@ lspconfig.pyright.setup{} -- on_attach = on_attach
 -- }
 
 
+-- pip install pylyzer
+-- It's not ready. It can't find virtually installed modules [issue #22]
+-- lspconfig.pylyzer.setup{}
+
+-- pip install ruff-lsp
+lspconfig.ruff_lsp.setup{
+    on_attach = on_attach,
+}
+
+
 
 -------------------------------------------------------------------------------
 -- Elixir
@@ -324,7 +374,7 @@ lspconfig.elixirls.setup{
         suggestSpecs = true,
         signatureAfterComplete = true,
     },
-    cmd = { "/home/baka/apps/elixir-ls/release/language_server.sh" }
+    cmd = { "/home/baka/apps/elixir_ls_binary/language_server.sh" }
 }
 
 
@@ -336,7 +386,7 @@ lspconfig.erlangls.setup{
     capabilities = capabilities,
     cmd = { "erlang_ls" },
     filetypes = { "erlang" },
-    -- root_dir = root_pattern('rebar.config', 'erlang.mk', '.git')
+    -- root_dir = root_pattern('rebar.config', 'erlang.mk', '.git'),
     single_file_support = true
 }
 
