@@ -13,6 +13,15 @@ set $trans_ru "alacritty --class=alacrittyTransRight -e trans -t ru -I"
 set $trans_en "alacritty --class=alacrittyTransRight -e trans -t en -I"
 set $trans_ru_left "alacritty --class=alacrittyTransLeft -e trans -t ru -I"
 set $trans_en_left "alacritty --class=alacrittyTransLeft -e trans -t en -I"
+
+
+# set $term "contour"
+# set $term_float "alacritty --class=contourFloat"
+# set $trans_ru "alacritty --class=contourTransRight -e trans -t ru -I"
+# set $trans_en "alacritty --class=contourTransRight -e trans -t en -I"
+# set $trans_ru_left "alacritty --class=contourTransLeft -e trans -t ru -I"
+# set $trans_en_left "alacritty --class=contourTransLeft -e trans -t en -I"
+
 set $fm "thunar"
 set $barcmd i3status
 set $calc "qalculate-gtk"

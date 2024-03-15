@@ -227,14 +227,14 @@ lspconfig.tsserver.setup{
 
 -------------------------------------------------------------------------------
 -- FRONT
-require'lspconfig'.cssmodules_ls.setup{
+lspconfig.cssmodules_ls.setup{
     on_attach = on_attach,
     capabilities = capabilities,
     cmd = { "cssmodules-language-server" },
     filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" }
 }
 
-require'lspconfig'.tailwindcss.setup{
+lspconfig.tailwindcss.setup{
     on_attach = on_attach,
     capabilities = capabilities,
     cmd = { "tailwindcss-language-server", "--stdio" },
@@ -256,7 +256,7 @@ require'lspconfig'.tailwindcss.setup{
     }
 }
 
-require'lspconfig'.html.setup{
+lspconfig.html.setup{
     capabilities = capabilities,
     filetypes = { "javascript", "html", "htmldjango", "css" },
     embeddedLanguages = {

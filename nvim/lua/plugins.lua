@@ -61,6 +61,8 @@ return require('lazy').setup({
     },
 
     {
+        -- Simple winbar/statusline plugin that shows
+        -- your current code context
         "SmiteshP/nvim-navic",
         dependencies = "neovim/nvim-lspconfig"
     },
@@ -74,6 +76,16 @@ return require('lazy').setup({
 
     -- Dressing
     { 'stevearc/dressing.nvim', opts = {} },
+
+
+    -- A lua powered greeter like `vim-startify`
+    {
+        'goolord/alpha-nvim',
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        config = function ()
+            require'alpha'.setup(require'alpha.themes.startify'.config)
+        end
+    };
 
     -- Git
     {
@@ -123,7 +135,6 @@ return require('lazy').setup({
     {
         'nvim-tree/nvim-tree.lua',
         version = '*',
-        lazy = false,
         dependencies = 'nvim-tree/nvim-web-devicons',
         config = function() require'nvim-tree'.setup {} end
     },
@@ -190,7 +201,8 @@ return require('lazy').setup({
 
 
     -- Performance
-    'lewis6991/impatient.nvim',
+    -- Archived
+    -- 'lewis6991/impatient.nvim',
 
     -- Snippets plugin
     'dcampos/nvim-snippy',
@@ -273,7 +285,8 @@ return require('lazy').setup({
     'windwp/nvim-autopairs',
 
     -- The fastest Neovim colorizer
-    'norcalli/nvim-colorizer.lua',
+    -- 'norcalli/nvim-colorizer.lua', -- depreacted
+    'NvChad/nvim-colorizer.lua',
 
     -- Auto close (x)html tags
     { 'alvan/vim-closetag', ft = {'html', 'html5', 'htmldjango', 'xhtml', 'xml'} },
@@ -286,10 +299,22 @@ return require('lazy').setup({
     'gabebw/vim-github-link-opener',
 
     -- Basic
+    {
+        "kylechui/nvim-surround",
+        version = "*", -- Use for stability; omit to use `main` branch for the latest features
+        event = "VeryLazy",
+        config = function()
+            require("nvim-surround").setup({
+                -- Configuration here, or leave empty to use defaults
+            })
+        end
+    },
+
+
     'Chiel92/vim-autoformat',
     'tpope/vim-unimpaired',
-    'tpope/vim-surround',
+    -- 'tpope/vim-surround',
     'tpope/vim-repeat',
-    'mhinz/vim-startify',
+    -- 'mhinz/vim-startify', 
     'mattn/emmet-vim'
 })

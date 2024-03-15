@@ -10,14 +10,14 @@ require'nvim-treesitter.configs'.setup {
         "c",
         "cpp",
         "elixir",
-        "graphql",
+        -- "graphql",
         "html",
         "css",
         "javascript",
         "json",
         "lua",
-        "markdown",
-        "markdown_inline",
+        -- "markdown",
+        -- "markdown_inline",
         "python",
         "regex",
         "ruby",
@@ -25,8 +25,8 @@ require'nvim-treesitter.configs'.setup {
         "scss",
         "sql",
         "toml",
-        "tsx",
-        "typescript",
+        -- "tsx",
+        -- "typescript",
         "vim",
         "yaml",
     },
@@ -49,7 +49,7 @@ require('hlargs').setup()
 
 -------------------------------------------------------------------------------
 -- Performance related
-require('impatient').enable_profile()
+-- require('impatient').enable_profile()
 
 
 
