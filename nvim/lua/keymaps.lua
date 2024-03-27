@@ -130,7 +130,7 @@ map('n', 'gtr', ':Telescope lsp_references<CR>', silentnoremap)
 map('n', 'gti', ':Telescope lsp_implementations<CR>', silentnoremap)
 
 -- Code Actions
-map('n', 'act', ':lua vim.lsp.buf.code_action()<CR>', silentnoremap)
+map('n', '<space>ca', ':lua vim.lsp.buf.code_action()<CR>', silentnoremap)
 
 
 -- Trouble
@@ -410,7 +410,6 @@ map('n', '<leader>gg', ':HopLine<CR>', noremap)
 --
 map('n', '<space><space>t', ':split term://zsh<CR>a', silentnoremap)
 map('n', '<space><space>v', ':vsplit term://zsh<CR>a', silentnoremap)
-
 
 -- Use esc or ',,' to quit builtin terminal
 -- tnoremap <esc>   <C-\><C-n>
