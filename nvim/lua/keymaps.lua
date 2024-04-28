@@ -21,7 +21,7 @@ vim.g.maplocalleader = ","
 -------------------------------------------------------------------------------
 -- DEFAULT REMAPS
 --
-map('i', 'eu', '<Esc>', silentnoremap)
+map('i', 'oeu', '<Esc>', silentnoremap)
 
 -- For the sake of in case ; mapped to :
 -- Repeat latest f, t, F or T [count] times. See |cpo-;|
@@ -150,15 +150,15 @@ map('n', '<leader>s', ':Telescope spell_suggest<CR>', silentnoremap)
 
 -- Find Files
 -- without preview
-map('n', 'tt', ':Telescope find_files hidden=true<CR>', noremap)
+map('n', 'tt', ':Telescope find_files hidden=true no_ignore=true<CR>', noremap)
 -- preview
-map('n', '<C-CR>', ':Telescope fd hidden=true<CR>', noremapnowait)
+map('n', '<C-CR>', ':Telescope fd hidden=true no_ignore=true<CR>', noremapnowait)
 map('n', '<S-CR>', ':Telescope buffers<CR>', silentnoremapnowait)
 map('n', '<S-m>', ':Telescope man_pages sections=1,2,3<CR>', noremapnowait)
 
 -- Split windows
-map('n', '<leader><leader>v', '<C-W>v:Telescope find_files hidden=true<CR>', silentnoremapnowait)
-map('n', '<leader><leader>h', '<C-W>s:Telescope find_files hidden=true<CR>', silentnoremapnowait)
+map('n', '<leader><leader>v', '<C-W>v:Telescope find_files hidden=true no_ignore=true<CR>', silentnoremapnowait)
+map('n', '<leader><leader>h', '<C-W>s:Telescope find_files hidden=true no_ignore=true<CR>', silentnoremapnowait)
 
 -- Live Grep
 map('n', '<M-f>', ':Telescope live_grep theme=ivy<CR>', noremapnowait)
