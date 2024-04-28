@@ -4,6 +4,7 @@ packadd matchit
 packadd shellmenu
 ]]
 
+vim.g.user_emmet_leader_key = '<space><space>'
 
 return require('lazy').setup({
     'nvim-lua/popup.nvim',
@@ -316,5 +317,14 @@ return require('lazy').setup({
     -- 'tpope/vim-surround',
     'tpope/vim-repeat',
     -- 'mhinz/vim-startify', 
-    'mattn/emmet-vim'
+
+    {
+        'mattn/emmet-vim',
+        config = function()
+            vim.g.user_emmet_install_global = 0
+            vim.g.user_emmet_mode='i'
+        end,
+        ft = {'html', 'css', 'erb', 'htmldjango', 'html5'}
+
+    }
 })
