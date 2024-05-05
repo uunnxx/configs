@@ -21,7 +21,7 @@ vim.g.maplocalleader = ","
 -------------------------------------------------------------------------------
 -- DEFAULT REMAPS
 --
-map('i', 'oeu', '<Esc>', silentnoremap)
+map('i', '<C-t>', '<Esc>', silentnoremap)
 
 -- For the sake of in case ; mapped to :
 -- Repeat latest f, t, F or T [count] times. See |cpo-;|
@@ -394,7 +394,8 @@ map('n', '0', 'g0', silentnoremap)
 
 
 -- Close buffers
-map('n', '<leader><leader><space>', ':%bd <bar> e# <bar> bd#<CR>', silentnoremap)
+map('n', '<leader><leader><space>', ':bd<CR>', silentnoremap)
+map('n', '<leader><leader>w', ':%bd <bar> e# <bar> bd#<CR>', silentnoremap)
 
 
 -- Line autocompletion
