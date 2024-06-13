@@ -34,7 +34,8 @@ white = "#a89984"
 yellow = "#d79921"
 
 [colors.primary]
-background = "#141c21"
+# background = "#141c21"
+background = "#202020"
 foreground = "#ebdbb2"
 
 [colors.selection]
@@ -60,17 +61,23 @@ WINIT_X11_SCALE_FACTOR = "1.0"
 [font]
 size = 11
 
+[font.normal]
+# family = "mononoki"
+# family = "Monoid"
+family = "Iosevka NF"
+style = "Regular"
+
 [font.bold]
-family = "mononoki"
+# family = "mononoki"
+# style = "Bold"
+family = "Iosevka NF"
 style = "Bold"
 
 [font.italic]
-family = "mononoki"
+# family = "mononoki"
+# style = "Italic"
+family = "Iosevka NF"
 style = "Italic"
-
-[font.normal]
-family = "mononoki"
-style = "Regular"
 
 [[keyboard.bindings]]
 action = "Paste"
@@ -195,7 +202,8 @@ program = "/usr/bin/zsh"
 decorations = "full"
 dynamic_padding = true
 dynamic_title = true
-opacity = 0.8
+# opacity = 0.8
+opacity = 1
 title = "Alacritty"
 
 [window.class]

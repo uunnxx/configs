@@ -234,50 +234,50 @@ lspconfig.cssmodules_ls.setup{
     filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" }
 }
 
-lspconfig.tailwindcss.setup{
-    on_attach = on_attach,
-    capabilities = capabilities,
-    cmd = { "tailwindcss-language-server", "--stdio" },
-    init_options = { userLanguages = { eelixir = "html-eex", eruby = "erb" } },
-    settings = {
-        tailwindCSS = {
-            classAttributes = { "class", "className", "classList", "ngClass" },
-            lint = {
-                cssConflict = "warning",
-                invalidApply = "error",
-                invalidConfigPath = "error",
-                invalidScreen = "error",
-                invalidTailwindDirective = "error",
-                invalidVariant = "error",
-                recommendedVariantOrder = "warning"
-            },
-            validate = true
-        }
-    }
-}
+-- lspconfig.tailwindcss.setup{
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--     cmd = { "tailwindcss-language-server", "--stdio" },
+--     init_options = { userLanguages = { eelixir = "html-eex", eruby = "erb" } },
+--     settings = {
+--         tailwindCSS = {
+--             classAttributes = { "class", "className", "classList", "ngClass" },
+--             lint = {
+--                 cssConflict = "warning",
+--                 invalidApply = "error",
+--                 invalidConfigPath = "error",
+--                 invalidScreen = "error",
+--                 invalidTailwindDirective = "error",
+--                 invalidVariant = "error",
+--                 recommendedVariantOrder = "warning"
+--             },
+--             validate = true
+--         }
+--     }
+-- }
 
-lspconfig.html.setup{
-    capabilities = capabilities,
-    filetypes = { "javascript", "html", "htmldjango", "css" },
-    embeddedLanguages = {
-        css = true,
-        javascript = true,
-    },
-    provideFormatter = true
-}
+-- lspconfig.html.setup{
+--     capabilities = capabilities,
+--     filetypes = { "javascript", "html", "htmldjango", "css" },
+--     embeddedLanguages = {
+--         css = true,
+--         javascript = true,
+--     },
+--     provideFormatter = true
+-- }
 
-lspconfig.emmet_ls.setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-    filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less' },
-    init_options = {
-        html = {
-            -- options = {
-            -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
-            -- ["bem.enabled"] = true,
-        },
-    },
-})
+-- lspconfig.emmet_ls.setup({
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--     filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less' },
+--     init_options = {
+--         html = {
+--             -- options = {
+--             -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
+--             -- ["bem.enabled"] = true,
+--         },
+--     },
+-- })
 
 
 
@@ -299,7 +299,7 @@ lspconfig.crystalline.setup{
     on_attach = on_attach,
     capabilities = capabilities,
     cmd = { "crystalline" },
-    filetypes = { "crystal" },
+    filetypes = { "crystal", "cr" },
     single_file_support = true
 }
 

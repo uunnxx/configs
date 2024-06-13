@@ -1,8 +1,13 @@
-vim.cmd [[
-packadd termdebug
-packadd matchit
-packadd shellmenu
-]]
+-- vim.cmd [[
+-- packadd termdebug
+-- packadd matchit
+-- packadd shellmenu
+-- ]]
+
+vim.g.loaded_synload = 1
+vim.g.loaded_matchparen = 1
+vim.g.matchparen_timeout = 2
+vim.g.matchparen_insert_timeout = 2
 
 vim.g.user_emmet_leader_key = '<space><space>'
 
@@ -62,8 +67,7 @@ return require('lazy').setup({
     },
 
     {
-        -- Simple winbar/statusline plugin that shows
-        -- your current code context
+        -- Simple winbar/statusline plugin that shows your current code context
         "SmiteshP/nvim-navic",
         dependencies = "neovim/nvim-lspconfig"
     },
@@ -143,7 +147,7 @@ return require('lazy').setup({
     -- Tagbra
     'majutsushi/tagbar',
 
-    'google/vim-searchindex',
+    -- 'google/vim-searchindex', -- commented because of neovim slow performance
 
     -- Hop alternative for EasyMotion
     {
@@ -156,7 +160,7 @@ return require('lazy').setup({
     },
 
     -- CamelCaseMotion alternative
-    'chaoren/vim-wordmotion',
+    -- 'chaoren/vim-wordmotion', -- commented because of neovim slow performance
 
     ---------------------------------------------------------------------------
     -- LSP server and autocompletion
@@ -168,7 +172,12 @@ return require('lazy').setup({
     --     dependencies = "nvim-treesitter/nvim-treesitter",
     -- },
 
-    'neovim/nvim-lspconfig',
+    {
+        'neovim/nvim-lspconfig',
+        -- opts = {
+        --     inlay_hints = { enabled = true }
+        -- }
+    },
     -- lsp installer
     "williamboman/mason.nvim",
 
@@ -324,6 +333,7 @@ return require('lazy').setup({
             vim.g.user_emmet_install_global = 0
             vim.g.user_emmet_mode='i'
         end,
+        event = "VeryLazy",
         ft = {'html', 'css', 'erb', 'htmldjango', 'html5'}
 
     }

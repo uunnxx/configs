@@ -18,10 +18,14 @@ vim.g.mapleader = ","
 vim.g.maplocalleader = ","
 
 
+vim.keymap.set('n', '<leader>h', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end)
+
 -------------------------------------------------------------------------------
 -- DEFAULT REMAPS
 --
-map('i', '<C-t>', '<Esc>', silentnoremap)
+map('i', 'TH', '<Esc>', silentnoremap)
+-- <C-t> is used for indenting as opposite of <C-d> in insert mode, so we can't use it
+-- map('i', '<C-t>', '<Esc>', silentnoremap)
 
 -- For the sake of in case ; mapped to :
 -- Repeat latest f, t, F or T [count] times. See |cpo-;|
@@ -563,3 +567,5 @@ vim.cmd[[
 
     endfunction
 ]]
+
+

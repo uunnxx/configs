@@ -1,6 +1,6 @@
-# set sandbox strict
 # open links
 set sandbox none
+# set sandbox strict
 
 set notification-error-bg       "#282828" # bg
 set notification-error-fg       "#fb4934" # bright:red

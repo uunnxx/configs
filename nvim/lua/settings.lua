@@ -27,18 +27,3 @@ exec(
 
 -- Python
 g.python3_host_prog = '/home/baka/venvs/neovim/bin/python'
-
-
--- Toggle numberline
--- exec(
---     [[
---     function! NumberToggle()
---       if(&relativenumber == 1)
---         set norelativenumber
---       else
---         set relativenumber
---       endif
---     endfunc
---
---     nnoremap <leader>nt :call NumberToggle()<cr>
--- ]], false)

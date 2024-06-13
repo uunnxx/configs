@@ -7,12 +7,14 @@ set $ctrl Control
 set $alt Mod1
 set $mod3 Mod3
 set $sh Shift
-set $term "alacritty"
-set $term_float "alacritty --class=alacrittyFloat"
-set $trans_ru "alacritty --class=alacrittyTransRight -e trans -t ru -I"
-set $trans_en "alacritty --class=alacrittyTransRight -e trans -t en -I"
-set $trans_ru_left "alacritty --class=alacrittyTransLeft -e trans -t ru -I"
-set $trans_en_left "alacritty --class=alacrittyTransLeft -e trans -t en -I"
+
+# `msg create-window` as workaround (see: https://github.com/alacritty/alacritty/issues/6892)
+set $term "alacritty msg create-window"
+set $term_float "alacritty msg create-window --class=alacrittyFloat"
+set $trans_ru "alacritty msg create-window --class=alacrittyTransRight -e trans -t ru -I"
+set $trans_en "alacritty msg create-window --class=alacrittyTransRight -e trans -t en -I"
+set $trans_ru_left "alacritty msg create-window --class=alacrittyTransLeft -e trans -t ru -I"
+set $trans_en_left "alacritty msg create-window --class=alacrittyTransLeft -e trans -t en -I"
 
 
 # set $term "contour"
@@ -77,7 +79,7 @@ bindsym $mod+Left exec mpvctl previous; exec dunstify -r 1111 -u low "PREVIOUS T
 bindsym $mod+Right exec mpvctl next; exec dunstify -r 1111 -u low "NEXT TRACK"
 # bindsym $mod+Up exec dunstify -r 9999 -u normal "NOW PLAYING:" "$(exec mpvctl play)"
 bindsym $mod+Up exec mpvctl play; exec dunstify -r 9999 -u normal "PLAY"
-bindsym $mod+Down exec mpvctl pause; exec dunstify -r 1111 -u low "PAUSE"
+bindsym $mod+Down exec mpvctl pause; exec dunstify -r 9999 -u low "PAUSE"
 
 # Diodon
 bindsym $mod+$sh+v exec --no-startup-id diodon, mode "default"
@@ -156,8 +158,8 @@ bindsym $alt+$sh+space exec --no-startup-id rofi -show windowcd
 # OBS related
 # https://github.com/muesli/obs-cli
 # Next: PageDown, Prior: PageUp
-bindsym $ctrl+$alt+Next exec /home/baka/.asdf/shims/obs-cli --password "bakabakabaka" scene switch right; exec dunstify -u low -r 7979 "OBS SCENE SWITCHED" "Active scene: <b>RIGHT</b>"
-bindsym $ctrl+$alt+Prior exec /home/baka/.asdf/shims/obs-cli --password "bakabakabaka" scene switch left; exec dunstify -u low -r 7979 "OBS SCENE SWITCHED" "Active scene: <b>LEFT</b>"
+# bindsym $ctrl+$alt+Next exec /home/baka/.asdf/shims/obs-cli --password "bakabakabaka" scene switch right; exec dunstify -u low -r 7979 "OBS SCENE SWITCHED" "Active scene: <b>RIGHT</b>"
+# bindsym $ctrl+$alt+Prior exec /home/baka/.asdf/shims/obs-cli --password "bakabakabaka" scene switch left; exec dunstify -u low -r 7979 "OBS SCENE SWITCHED" "Active scene: <b>LEFT</b>"
 
 
 
@@ -410,7 +412,7 @@ bar {
     modifier none
     # padding 2px
     colors {
-        background #1D2021DF
+        background #202020
         statusline $gruvB
         separator  $clh
         #                  border     backgr.    text
@@ -440,7 +442,7 @@ bar {
     # mode hide
     modifier none
     colors {
-        background #1D2021DF
+        background #202020
         statusline $gruvB
         separator  $clh
         #                  border     backgr.    text
@@ -464,7 +466,7 @@ client.urgent             $clh      $clh      $fff        $gruv1
 ###############################################################################
 # AUTOSTART APPLICATIONS
 #
-exec --no-startup-id $term
+exec --no-startup-id alacritty
 exec --no-startup-id /usr/bin/fcitx5
 exec --no-startup-id /usr/bin/diodon
 exec --no-startup-id xclip

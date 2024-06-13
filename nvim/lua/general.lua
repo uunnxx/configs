@@ -144,12 +144,12 @@ set.fillchars = {
 
 -- Matchpairs
 -- add vertical bar for Ruby
-set.matchpairs = {
-    '(:)',
-    '{:}',
-    '[:]',
-    '<:>'
-}
+-- set.matchpairs = {
+--     '(:)',
+--     '{:}',
+--     '[:]',
+--     '<:>'
+-- }
 
 
 -- Ignore files vim doesnt use

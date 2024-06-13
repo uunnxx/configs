@@ -11,7 +11,8 @@ require'nvim-treesitter.configs'.setup {
         "cpp",
         "elixir",
         -- "graphql",
-        "html",
+        -- "html",
+        -- "htmldjango",
         "css",
         "javascript",
         "json",
@@ -25,10 +26,11 @@ require'nvim-treesitter.configs'.setup {
         "scss",
         "sql",
         "toml",
-        -- "tsx",
-        -- "typescript",
+        "tsx",
+        "typescript",
         "vim",
         "yaml",
+        "go"
     },
     sync_install = false,
     -- auto_install = true,
@@ -206,21 +208,21 @@ require'ibl'.setup {
 
 -------------------------------------------------------------------------------
 -- Colorizer
-require'colorizer'.setup()
+-- require'colorizer'.setup()
 
 
 
 -------------------------------------------------------------------------------
 -- Autopairs
-require("nvim-autopairs").setup({})
+-- require("nvim-autopairs").setup({})
 
 
 
 -------------------------------------------------------------------------------
 -- Neodev
-require("neodev").setup({
-    library = { plugins = { "nvim-dap-ui" }, types = true },
-})
+-- require("neodev").setup({
+--     library = { plugins = { "nvim-dap-ui" }, types = true },
+-- })
 
 
 
