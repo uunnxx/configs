@@ -40,8 +40,9 @@ set.hidden = true
 -------------------------------------------------------------------------------
 
 -- let &colorcolumn="80,100,".join(range(120,999),",")
+-- let &colorcolumn="80,100,120"
 cmd[[
-    let &colorcolumn="80,100,120"
+    let &colorcolumn="80,120"
     hi! ColorColumn ctermbg=6
 ]]
 set.cursorline = true

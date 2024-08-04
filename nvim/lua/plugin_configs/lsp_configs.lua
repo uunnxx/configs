@@ -5,7 +5,7 @@ local navic = require'nvim-navic'
 
 
 vim.diagnostic.config({
-    float = { source = "always" },
+    float = { source = true },
     virtual_text = false,
     update_in_insert = false,
     signs = true,
@@ -21,7 +21,7 @@ vim.diagnostic.config({
 
 
 vim.cmd[[autocmd InsertEnter * lua vim.diagnostic.disable()]]
-vim.cmd[[autocmd InsertLeave * lua vim.diagnostic.enable()]]
+-- vim.cmd[[autocmd InsertLeave * lua vim.diagnostic.enable()]]
 -- vim.cmd[[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 
 -- Uncomment the line below
@@ -39,8 +39,6 @@ local on_attach = function(client, bufnr)
         navic.attach(client, bufnr)
     end
 
-    -- Enable completion triggered by <c-x><c-o>
-    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     -- Mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -78,29 +76,6 @@ mason.setup({
     max_concurrent_installers = 10
 })
 
-
--- require("mason-nvim-dap").setup({
---     ensure_installed = { "python", "delve" },
---     handlers = {
---     function(config)
---       -- all sources with no handler get passed here
---
---       -- Keep original functionality
---         require('mason-nvim-dap').default_setup(config)
---     end,
---     python = function(config)
---         config.adapters = {
---             type = "executable",
---             command = "/home/baka/.asdf/shims/python",
---             args = {
---                 "-m",
---                 "debugpy.adapter",
---             },
---         }
---         require('mason-nvim-dap').default_setup(config) -- don't forget this!
---     end,
--- },
--- })
 
 -------------------------------------------------------------------------------
 -- Ruby
