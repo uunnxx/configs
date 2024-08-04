@@ -26,7 +26,7 @@ set $trans_en_left "alacritty msg create-window --class=alacrittyTransLeft -e tr
 
 set $fm "thunar"
 set $barcmd i3status
-set $calc "qalculate-gtk"
+set $calc "qalculate"
 
 font pango:Iosevka Nerd Font Bold 10
 
