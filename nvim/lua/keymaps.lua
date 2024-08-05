@@ -23,7 +23,7 @@ vim.keymap.set('n', '<leader>h', function() vim.lsp.inlay_hint.enable(not vim.ls
 -------------------------------------------------------------------------------
 -- DEFAULT REMAPS
 --
-map('i', 'TH', '<Esc>', silentnoremap)
+map('i', 'eu', '<Esc>', silentnoremap)
 -- <C-t> is used for indenting as opposite of <C-d> in insert mode, so we can't use it
 -- map('i', '<C-t>', '<Esc>', silentnoremap)
 
