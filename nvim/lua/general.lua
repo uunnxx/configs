@@ -178,9 +178,9 @@ set.path = {'.','/usr/include', '**'}
 
 set.cindent = true                  -- Copy indent from previous line
 
-set.updatetime = 200
-set.timeoutlen = 500
-set.ttimeoutlen = 5
+set.updatetime = 4000
+set.timeoutlen = 200  -- wait for mapped key sequence in ms
+-- set.ttimeoutlen = 5
 
 
 
