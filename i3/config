@@ -620,12 +620,12 @@ bindsym $mod+r mode "resize"
 
 set $notify [a]ction, [C]lose-all, [c]lose, con[t]ext, [h]istory-pop
 mode "$notify" {
-  bindsym a exec --no-startup-id dunstctl action, mode "default"
+  bindsym a exec --no-startup-id dunstctl action
   bindsym $sh+c exec --no-startup-id dunstctl close-all, mode "default"
-  bindsym c exec --no-startup-id dunstctl close, mode "default"
+  bindsym c exec --no-startup-id dunstctl close
 
-  bindsym t exec --no-startup-id dunstctl context, mode "default"
-  bindsym h exec --no-startup-id dunstctl history-pop, mode "default"
+  bindsym t exec --no-startup-id dunstctl context
+  bindsym h exec --no-startup-id dunstctl history-pop
 
 
   bindsym Return mode "default"

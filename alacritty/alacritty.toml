@@ -24,7 +24,8 @@ cursor = "CellForeground"
 text = "CellBackground"
 
 [colors.normal]
-black = "#282828"
+# black = "#282828"
+black = "#1d2021"
 blue = "#458588"
 cyan = "#689d6a"
 green = "#98971a"
@@ -35,7 +36,7 @@ yellow = "#d79921"
 
 [colors.primary]
 # background = "#141c21"
-background = "#202020"
+background = "#1d2021"
 foreground = "#ebdbb2"
 
 [colors.selection]

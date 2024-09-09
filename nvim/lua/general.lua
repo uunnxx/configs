@@ -12,7 +12,7 @@ local g     = vim.g               -- Global
 -- g.loaded_netrw =  1
 -- g.loaded_netrwPlugin = 1
 
-set.background = "dark"
+-- set.background = "dark"  -- already set in `ui.lua`
 set.termguicolors = true -- true colors
 
 set.encoding = 'utf-8'
@@ -214,3 +214,11 @@ cmd([[
     filetype indent plugin on
     syntax enable
 ]])
+
+
+if g.neovide then
+    g.neovide_cursor_animation_length = 0
+    g.neovide_scroll_animation_length = 0
+    vim.o.guifont = "Iosevka NF:h11"
+    vim.opt.termguicolors=true
+end

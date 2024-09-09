@@ -14,7 +14,7 @@ vim.g.user_emmet_leader_key = '<space><space>'
 return require('lazy').setup({
     'nvim-lua/popup.nvim',
     {
-        'nvim-telescope/telescope.nvim',
+        'nvim-telescope/telescope.nvim', tag = '0.1.8',
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
     'nvim-telescope/telescope-ui-select.nvim',
@@ -32,7 +32,7 @@ return require('lazy').setup({
     -- (Neo)Vim plugin for automatically highlighting other uses of the word
     -- under the cursor using either LSP, Tree-sitter, or regex matching.
     -- Default keymaps: <a-n> and <a-p> as keymaps to move between references.
-    -- 'RRethy/vim-illuminate',
+    'RRethy/vim-illuminate',
 
     {
         'tzachar/local-highlight.nvim',
@@ -147,7 +147,7 @@ return require('lazy').setup({
     -- Tagbra
     'majutsushi/tagbar',
 
-    -- 'google/vim-searchindex', -- commented because of neovim slow performance
+    'google/vim-searchindex', -- commented because of neovim slow performance
 
     -- Hop alternative for EasyMotion
     {
@@ -160,7 +160,7 @@ return require('lazy').setup({
     },
 
     -- CamelCaseMotion alternative
-    -- 'chaoren/vim-wordmotion', -- commented because of neovim slow performance
+    'chaoren/vim-wordmotion', -- commented because of neovim slow performance
 
     ---------------------------------------------------------------------------
     -- LSP server and autocompletion
@@ -187,9 +187,23 @@ return require('lazy').setup({
     {
         "folke/trouble.nvim",
         dependencies = "nvim-tree/nvim-web-devicons",
-        config = function()
-            require("trouble").setup {}
-        end
+        opts = {},
+        cmd = "Trouble",
+        -- config = function()
+        --     require("trouble").setup {}
+        -- end
+        keys = {
+            {
+                "gT",
+                "<cmd>Trouble<cr>",
+                desc = 'Trouble'
+            },
+            {
+                "gR",
+                "<cmd>Trouble lsp_references toggle<cr>",
+                desc = 'LSP References (Trouble)'
+            }
+        }
     },
 
 
