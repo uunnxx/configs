@@ -9,13 +9,19 @@ set $mod3 Mod3
 set $sh Shift
 
 # `msg create-window` as workaround (see: https://github.com/alacritty/alacritty/issues/6892)
-set $term "alacritty msg create-window"
-set $term_float "alacritty msg create-window --class=alacrittyFloat"
-set $trans_ru "alacritty msg create-window --class=alacrittyTransRight -e trans -t ru -I"
-set $trans_en "alacritty msg create-window --class=alacrittyTransRight -e trans -t en -I"
-set $trans_ru_left "alacritty msg create-window --class=alacrittyTransLeft -e trans -t ru -I"
-set $trans_en_left "alacritty msg create-window --class=alacrittyTransLeft -e trans -t en -I"
+# set $term "alacritty msg create-window"
+# set $term_float "alacritty msg create-window --class=alacrittyFloat"
+# set $trans_ru "alacritty msg create-window --class=alacrittyTransRight -e trans -t ru -I"
+# set $trans_en "alacritty msg create-window --class=alacrittyTransRight -e trans -t en -I"
+# set $trans_ru_left "alacritty msg create-window --class=alacrittyTransLeft -e trans -t ru -I"
+# set $trans_en_left "alacritty msg create-window --class=alacrittyTransLeft -e trans -t en -I"
 
+set $term "alacritty"
+set $term_float "alacritty --class=alacrittyFloat"
+set $trans_ru "alacritty --class=alacrittyTransRight -e trans -t ru -I"
+set $trans_en "alacritty --class=alacrittyTransRight -e trans -t en -I"
+set $trans_ru_left "alacritty --class=alacrittyTransLeft -e trans -t ru -I"
+set $trans_en_left "alacritty --class=alacrittyTransLeft -e trans -t en -I"
 
 # set $term "contour"
 # set $term_float "alacritty --class=contourFloat"
@@ -51,8 +57,12 @@ default_floating_border pixel 4
 
 # smart_gaps [on | off | inverse_outer]
 # smart_gaps on
-# gaps inner 8
-# gaps outer 4
+# gaps inner 10
+
+# gaps outer 8
+# gaps horizontal 0
+# gaps vertical 0
+
 
 # tiling_drag modifier titlebar
 
