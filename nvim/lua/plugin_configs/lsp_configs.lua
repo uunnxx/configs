@@ -182,7 +182,7 @@ lspconfig.gopls.setup{}
 
 -------------------------------------------------------------------------------
 -- JavaScript, TypeScript
-lspconfig.tsserver.setup{
+lspconfig.ts_ls.setup{
     on_attach = on_attach,
     capabilities = capabilities,
     cmd = { "typescript-language-server", "--stdio" },
@@ -332,7 +332,7 @@ lspconfig.pyright.setup{
 -- lspconfig.pylyzer.setup{}
 
 -- pip install ruff-lsp
-lspconfig.ruff_lsp.setup{
+lspconfig.ruff.setup{
     on_attach = on_attach,
 }
 

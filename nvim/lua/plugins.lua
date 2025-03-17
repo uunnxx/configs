@@ -75,8 +75,38 @@ return require('lazy').setup({
     {
         "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
         config = function()
-        require("lsp_lines").setup()
+            require("lsp_lines").setup()
         end,
+    },
+
+
+    {
+        "folke/snacks.nvim",
+        priority = 1000,
+        lazy = false,
+        ---@type snacks.Config
+        opts = {
+            -- your configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+            bigfile = { enabled = true },
+            dashboard = { enabled = true },
+            explorer = { enabled = true },
+            indent = { enabled = true },
+            input = { enabled = true },
+            picker = { enabled = true },
+            notifier = { enabled = true },
+            quickfile = { enabled = true },
+            scope = { enabled = true },
+            scroll = { enabled = true },
+            statuscolumn = { enabled = true },
+            words = { enabled = true },
+        },
+    },
+
+    {
+    "SmiteshP/nvim-navic",
+    dependencies = "neovim/nvim-lspconfig"
     },
 
     -- Dressing
@@ -218,17 +248,18 @@ return require('lazy').setup({
     'hrsh7th/cmp-nvim-lua',
     'hrsh7th/cmp-cmdline',
     'hrsh7th/cmp-omni',
+
+    'hrsh7th/cmp-vsnip',
+    'hrsh7th/vim-vsnip',
+
     'onsails/lspkind.nvim',
     'saadparwaiz1/cmp_luasnip',
     'petertriho/cmp-git',
     'uga-rosa/cmp-dictionary', -- dictionary /usr/share/dict/words
 
 
-    -- Performance
-    -- Archived
-    -- 'lewis6991/impatient.nvim',
-
     -- Snippets plugin
+    -- Snippy users
     'dcampos/nvim-snippy',
     'dcampos/cmp-snippy',
     'honza/vim-snippets',
@@ -339,7 +370,7 @@ return require('lazy').setup({
     'tpope/vim-unimpaired',
     -- 'tpope/vim-surround',
     'tpope/vim-repeat',
-    -- 'mhinz/vim-startify', 
+    -- 'mhinz/vim-startify',
 
     {
         'mattn/emmet-vim',
