@@ -89,18 +89,21 @@ return require('lazy').setup({
             -- your configuration comes here
             -- or leave it empty to use the default settings
             -- refer to the configuration section below
-            bigfile = { enabled = true },
-            dashboard = { enabled = true },
-            explorer = { enabled = true },
-            indent = { enabled = true },
-            input = { enabled = true },
-            picker = { enabled = true },
+
             notifier = { enabled = true },
+            indent = { enabled = true },
+
+            input = { enabled = true },
             quickfile = { enabled = true },
             scope = { enabled = true },
-            scroll = { enabled = true },
-            statuscolumn = { enabled = true },
             words = { enabled = true },
+
+            bigfile = { enabled = true },
+            scroll = { enabled = false },
+            picker = { enabled = false },
+            dashboard = { enabled = false },
+            statuscolumn = { enabled = false },
+            explorer = { enabled = false },
         },
     },
 
@@ -113,7 +116,7 @@ return require('lazy').setup({
     { 'stevearc/dressing.nvim', opts = {} },
 
 
-    -- A lua powered greeter like `vim-startify`
+    -- A lua powered greeter like `vim-startify` [MRU -- most recent used]
     {
         'goolord/alpha-nvim',
         dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -174,7 +177,7 @@ return require('lazy').setup({
         config = function() require'nvim-tree'.setup {} end
     },
 
-    -- Tagbra
+    -- Tagbar
     'majutsushi/tagbar',
 
     'google/vim-searchindex', -- commented because of neovim slow performance
@@ -209,7 +212,11 @@ return require('lazy').setup({
         -- }
     },
     -- lsp installer
-    "williamboman/mason.nvim",
+    {
+        "williamboman/mason.nvim",
+        "williamboman/mason-lspconfig.nvim",
+        dependencies = "neovim/nvim-lspconfig",
+    },
 
     -- Highlight arguments' definitions and usages, asynchronously, using Treesitter
     'm-demare/hlargs.nvim',
@@ -341,7 +348,13 @@ return require('lazy').setup({
 
     -- The fastest Neovim colorizer
     -- 'norcalli/nvim-colorizer.lua', -- depreacted
-    'NvChad/nvim-colorizer.lua',
+    {
+        'NvChad/nvim-colorizer.lua',
+        event = "BufReadPre",
+        opts = { -- set to setup table
+
+        }
+    },
 
     -- Auto close (x)html tags
     { 'alvan/vim-closetag', ft = {'html', 'html5', 'htmldjango', 'xhtml', 'xml'} },
@@ -365,8 +378,14 @@ return require('lazy').setup({
         end
     },
 
+    -- https://github.com/stevearc/conform.nvim?tab=readme-ov-file
+    {
+        'stevearc/conform.nvim',
+        opts = {},
+    },
 
-    'Chiel92/vim-autoformat',
+
+    -- 'Chiel92/vim-autoformat',
     'tpope/vim-unimpaired',
     -- 'tpope/vim-surround',
     'tpope/vim-repeat',

@@ -3,6 +3,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protoc
 local mason = require'mason'
 local navic = require'nvim-navic'
 
+require("mason-lspconfig").setup()
 
 vim.diagnostic.config({
     float = { source = true },
@@ -21,7 +22,7 @@ vim.diagnostic.config({
 
 
 vim.cmd[[autocmd InsertEnter * lua vim.diagnostic.disable()]]
--- vim.cmd[[autocmd InsertLeave * lua vim.diagnostic.enable()]]
+vim.cmd[[autocmd InsertLeave * lua vim.diagnostic.enable()]]
 -- vim.cmd[[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 
 -- Uncomment the line below
@@ -58,10 +59,17 @@ end
 mason.setup({
     ui = {
         icons = {
-            package_pending = " ",
-            package_installed = " ",
-            package_uninstalled = " ﮊ",
+            -- package_pending = " ",
+            -- package_installed = " ",
+            -- package_uninstalled = " ﮊ",
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗"
         },
+        check_outdated_packages_on_open = false,
+        border = "none",
+        backdrop = 0,
+
     },
     keymaps = {
         toggle_server_expand = "<CR>",
@@ -69,12 +77,19 @@ mason.setup({
         update_server = "u",
         check_server_version = "c",
         update_all_servers = "U",
-        heck_outdated_servers = "C",
-        uninstall_server = "X",
+        check_outdated_servers = "C",
+        uninstall_package = "X",
         cancel_installation = "<C-c>",
     },
     max_concurrent_installers = 10
 })
+
+
+require("mason-lspconfig").setup_handlers {
+    function(server_name)
+        require('lspconfig')[server_name].setup{}
+    end
+}
 
 
 -------------------------------------------------------------------------------
@@ -263,7 +278,7 @@ lspconfig.clangd.setup{
     capabilities = capabilities,
     cmd = { "clangd", "--background-index" },
     filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
-    root_dir = lspconfig.util.root_pattern("compile_commands.json", "compile_flags.txt"),
+    -- root_dir = lspconfig.util.root_pattern("compile_commands.json", "compile_flags.txt"),
 }
 
 
@@ -282,10 +297,10 @@ lspconfig.crystalline.setup{
 
 -------------------------------------------------------------------------------
 -- Python
-lspconfig.pyright.setup{
+lspconfig.basedpyright.setup{
     on_attach = on_attach,
     settings = {
-        pyright = {
+        basedpyright = {
             -- Using Ruff's import organizer
             disableOrganizeImports = true
         },

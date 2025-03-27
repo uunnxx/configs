@@ -74,17 +74,11 @@ map('x', '<C-h>', ':s/', noremapnowait)
 
 -- Treat long lines as break lines unless we had count
 -- I don't know how to get this effect in Lua
-vim.cmd[[
+vim.cmd [[
     nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
     nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 ]]
 
-
--------------------------------------------------------------------------------
-
--- Autoformat + save as CTRL-s normal, and insert mode
-map('n', '<C-s>', ':Autoformat<CR>',  silentnoremap)
-map('i', '<C-s>', '<C-o>:Autoformat<CR>', silentnoremap)
 
 
 map('n', '<space>;', 'q:', noremap)
@@ -280,18 +274,18 @@ map('n', 'dU', 'F_de', noremap)
 --     test_cmd = `command to execute`
 
 -- Delete array|hash's first key/value
-map('n', 'dcd', '0f[ldW', noremap )
-map('n', 'dhd', '0f{ldf,x', noremap )
+map('n', 'dcd', '0f[ldW', noremap)
+map('n', 'dhd', '0f{ldf,x', noremap)
 -- Delete array|hash's key/values but first
-map('n', 'dcD', '0f[f,dt]', noremap )
-map('n', 'dhD', '0f{f,dt}', noremap )
+map('n', 'dcD', '0f[f,dt]', noremap)
+map('n', 'dhD', '0f{f,dt}', noremap)
 
 -- Change array|hash's first key/value
-map('n', 'ccd', '0f[lcW', noremap )
-map('n', 'chd', '0f{lct,', noremap )
+map('n', 'ccd', '0f[lcW', noremap)
+map('n', 'chd', '0f{lct,', noremap)
 -- Change array|hash's key/values but first
-map('n', 'ccD', '0f[f,lct]', noremap )
-map('n', 'chD', '0f{f,lct}', noremap )
+map('n', 'ccD', '0f[f,lct]', noremap)
+map('n', 'chD', '0f{f,lct}', noremap)
 
 -- " def main(arg, arg2)
 -- "   do_something
@@ -373,8 +367,8 @@ map('n', 'cc', '"_cc', noremap)
 
 
 -- Empty || Change current line
-map ('n', 'dD', '0D', noremapnowait)
-map ('n', 'cC', '0C', noremapnowait)
+map('n', 'dD', '0D', noremapnowait)
+map('n', 'cC', '0C', noremapnowait)
 
 -- Auto-center
 map('n', 'G', 'Gzz', silentnoremap)
@@ -436,7 +430,7 @@ map('t', '<Esc><Esc>', '<C-\\><C-n>:q!<CR>', noremapnowait)
 -- )
 
 
-vim.cmd[[
+vim.cmd [[
     " ; -> :
     " because of the map('n', ';', ':', noremap)
     autocmd FileType ruby          nmap <buffer> ,rr ;w\|:!ruby %:p<CR>
@@ -465,7 +459,7 @@ vim.cmd[[
 -- Table mode custom keymaps
 -- set keywordprg=trans\ :jp
 -- <S-k> to trans current word under cursor
-vim.cmd[[
+vim.cmd [[
     autocmd FileType markdown,md,rb call MarkdownOptions()
 
     function! MarkdownOptions()
@@ -478,7 +472,7 @@ vim.cmd[[
 
 
 -- Python custom keymaps
-vim.cmd[[
+vim.cmd [[
     autocmd FileType python,py call PythonOptions()
 
     function! PythonOptions()
@@ -490,7 +484,7 @@ vim.cmd[[
 
 
 -- Ruby custom keymaps
-vim.cmd[[
+vim.cmd [[
     autocmd BufRead,BufNewFile Rakefile,Capfile,Gemfile,.autotest,.irbrc,*.treetop,*.tt set ft=ruby syntax=ruby
     autocmd FileType ruby,eruby call RubyOptions()
 
@@ -504,7 +498,7 @@ vim.cmd[[
         nmap tH 0f#f{a
         nmap tL 0f#f}i
 
-        imap TTT # => 
+        imap TTT # =>
 
 
         " nnoremap ttL $F}i
@@ -527,7 +521,7 @@ vim.cmd[[
 
 
 -- C++ & C custom keymaps
-vim.cmd[[
+vim.cmd [[
     " Quickly jump to header or source file
     " This technique can probably be applied to many filetypes.
     " It sets file marks (see :h marks) when leaving a source or header file,
@@ -547,7 +541,7 @@ vim.cmd[[
 
         " inoremap <buffer> iinc #include <><left>
         " inoremap <buffer> innc #include ""<left>
-        inoremap TTT # => 
+        inoremap TTT # =>
 
         " inoremap ttP print('')<left><left>
         " inoremap ttL print()<left>
@@ -560,3 +554,21 @@ vim.cmd[[
 ]]
 
 
+-------------------------------------------------------------------------------
+
+-- Autoformat + save as CTRL-s normal, and insert mode
+-- map('n', '<C-s>', ':Autoformat<CR>', silentnoremap)
+-- map('i', '<C-s>', '<C-o>:Autoformat<CR>', silentnoremap)
+
+-- replaced with new plugin: conform
+
+vim.keymap.set({ "n", "v" }, "<C-s>", function()
+    require("conform").format({ async = true, lsp_fallback = true }, function(err)
+        if not err then
+            -- If we formatted in visual mode, escape to normal mode after formatting
+            if vim.startswith(vim.api.nvim_get_mode().mode:lower(), "v") then
+                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+            end
+        end
+    end)
+end, { desc = "Format buffer" })

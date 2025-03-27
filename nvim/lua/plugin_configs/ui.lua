@@ -95,7 +95,7 @@ cmd'colorscheme gruvbox'
 -- Line 576 to Line 579
 
 cmd[[
-    autocmd Syntax * call matchadd('Todo', '\W\zs\(CONCEPT\|TODO\|FIXME\|CHANGED\|CHANGES\|HACK\)')
+    autocmd Syntax * call matchadd('Todo', '\W\zs\(CONCEPT\|TODOS\|TODO\|FIXME\|CHANGED\|CHANGES\|HACK\)')
     autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\|README\|SYNTAX\)')
     autocmd Syntax * call matchadd('Error', '\W\zs\(ERROR\|WARNING\|BUG\|SECURITY WARNING\)')
 

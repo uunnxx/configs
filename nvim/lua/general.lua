@@ -207,7 +207,7 @@ set.mousefocus = true
 
 
 --------------------- Clipboard
-set.clipboard = 'unnamedplus'
+set.clipboard = 'unnamed,unnamedplus'
 
 
 cmd([[
