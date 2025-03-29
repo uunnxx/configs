@@ -56,10 +56,11 @@ default_floating_border pixel 4
 #
 
 # smart_gaps [on | off | inverse_outer]
-# smart_gaps on
-# gaps inner 10
+smart_gaps on
+# smart_gaps inverse_outer
+gaps inner 10
 
-# gaps outer 8
+# gaps outer 10
 # gaps horizontal 0
 # gaps vertical 0
 
@@ -394,6 +395,7 @@ set $clb #745C97
 set $clf #EBA6A9
 set $clh #F0544F
 set $clj #5B3758
+set $clk #b16286
 set $gruv0 #1d2021
 set $gruv1 #CC241D
 set $gruv9 #FB4934
@@ -466,7 +468,7 @@ bar {
 
 # Clients
 # class                   border    backgr.   text        indic.   child_border
-client.focused            $clj      $clj      $fff        $gruv1
+client.focused            $clk      $clk      $gruv0      $gruv1
 client.focused_inactive   $clb      $clb      $fff        $gruv1
 client.unfocused          $cla      $cla      $fff        $gruv1
 client.urgent             $clh      $clh      $fff        $gruv1
