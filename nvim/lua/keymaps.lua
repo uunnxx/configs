@@ -383,8 +383,8 @@ map('n', '0', 'g0', silentnoremap)
 
 
 -- Close buffers
-map('n', '<leader><leader><space>', ':bd<CR>', silentnoremap)
-map('n', '<leader><leader>w', ':%bd <bar> e# <bar> bd#<CR>', silentnoremap)
+map('n', '<leader><leader><space>', ':bd<CR>', silentnoremap) -- current buffer
+map('n', '<leader><leader>w', ':%bd <bar> e# <bar> bd#<CR>', silentnoremap) -- all but current
 
 
 -- Line autocompletion
