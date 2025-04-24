@@ -1,7 +1,11 @@
+; [user]
+; 	signingkey = /home/baka/.ssh/for_github.pub
+;     name = バカです
+; 	email = 
 [user]
-	signingkey = /home/baka/.ssh/for_github.pub
+	signingkey = E326C804DCD03B88
     name = バカです
-	email = unxnpx@gmail.com
+	email = 
 [core]
     editor = nvim
     excludesfile = /home/baka/.gitignore_global
@@ -9,9 +13,14 @@
 [init]
     defaultBranch = main
 [merge]
-    conflictstyle = diff3
+    ; conflictstyle = diff3
+    conflictstyle = zdiff
 [diff]
-    colorMoved = default
+    ; colorMoved = default
+    colorMoved = plain
+    algorithm = histogram
+    mnemonicPrefix = true
+    renames = true
 [difftool]
     prompt = false
 [interactive]
@@ -33,12 +42,43 @@
     hunk-header-style = file line-number syntax
 [alias]
     c = checkout
-    b = branch
     co = commit
+    cp = cherry-pick
+    b = branch
     d = diff
+	show-graph = log --graph --abbrev-commit --pretty=oneline
 [commit]
 	gpgsign = true
-[gpg]
-	format = ssh
+    verbose = true
 [pull]
 	rebase = false
+[push]
+    default = simple
+    autoSetupRemote = true
+    followTags = true
+[fetch]
+    prune = true
+    pruneTags = true
+    all = true
+[rebase]
+    autoSquash = true
+    autoStash = true
+    updateRefs = true
+[rerere]
+    enable = true
+    autoupdate = true
+[color]
+	ui = auto
+[column]
+    ui = auto
+[maintenance]
+	repo = /home/baka/how-to
+[help]
+	autocorrect = prompt
+[branch]
+    sort = -committerdate
+[tag]
+    sort = version:refname
+[feature]
+    experimental = true
+

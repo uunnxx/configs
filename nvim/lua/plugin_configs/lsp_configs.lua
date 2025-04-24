@@ -3,7 +3,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protoc
 local mason = require('mason')
 local navic = require('nvim-navic')
 
-require('mason-lspconfig').setup()
+-- require('mason-lspconfig').setup()
 
 vim.diagnostic.config({
     float = { source = true },
@@ -31,10 +31,22 @@ vim.cmd [[autocmd InsertLeave * lua vim.diagnostic.enable()]]
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-    if client.name == 'ruff' then
-        -- Disable hover in favor of Pyright
-        client.server_capabilities.hoverProvider = false
-    end
+    -- if client.name == 'ruff' then
+    --     -- Disable hover in favor of Pyright
+    --     client.server_capabilities.hoverProvider = false
+    -- end
+    require('lsp_signature').on_attach({
+        bind = true,
+        floating_window_above_cur_line = true,
+        handler_opts = {
+            border = 'rounded'
+        },
+        hint_prefix = {
+            above = "↙ ",  -- when the hint is on the line above the current line
+            current = "← ",  -- when the hint is on the same line
+            below = "↖ "  -- when the hint is on the line below the current line
+        }
+    })
 
     if client.server_capabilities.documentSymbolProvider then
         navic.attach(client, bufnr)
@@ -84,47 +96,47 @@ mason.setup({
 })
 
 
-require('mason-lspconfig').setup_handlers {
-    function(server_name)
-        require('lspconfig')[server_name].setup {}
-    end
-}
+-- require('mason-lspconfig').setup_handlers {
+--     function(server_name)
+--         require('lspconfig')[server_name].setup {}
+--     end
+-- }
 
 
 -------------------------------------------------------------------------------
 -- Ruby
-lspconfig.solargraph.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    cmd = { 'solargraph', 'stdio' },
-    filetypes = { 'ruby', 'rakefile' },
-    init_options = {
-        formatting = true
-    },
-    -- root_dir = root_pattern('Gemfile', '.git'),
-    settings = {
-        solargraph = {
-            definition = true,
-            diagnostics = true,
-            completion = true,
-            autoformat = true,
-            folding = true,
-            references = true,
-            rename = true,
-            symbols = true,
-            --   hover = true
-        }
-    }
-}
+-- lspconfig.solargraph.setup {
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--     cmd = { 'solargraph', 'stdio' },
+--     filetypes = { 'ruby', 'rakefile' },
+--     init_options = {
+--         formatting = true
+--     },
+--     -- root_dir = root_pattern('Gemfile', '.git'),
+--     settings = {
+--         solargraph = {
+--             definition = true,
+--             diagnostics = true,
+--             completion = true,
+--             autoformat = true,
+--             folding = true,
+--             references = true,
+--             rename = true,
+--             symbols = true,
+--             --   hover = true
+--         }
+--     }
+-- }
 
 
-lspconfig.standardrb.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    cmd = { 'standardrb', '--lsp' },
-    filetypes = { 'ruby', 'eruby', 'rakefile' },
-    -- root_dir = root_pattern('Gemfile', '.git')
-}
+-- lspconfig.standardrb.setup {
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--     cmd = { 'standardrb', '--lsp' },
+--     filetypes = { 'ruby', 'eruby', 'rakefile' },
+--     -- root_dir = root_pattern('Gemfile', '.git')
+-- }
 
 
 -------------------------------------------------------------------------------
@@ -189,12 +201,12 @@ lspconfig.ts_ls.setup {
 
 -------------------------------------------------------------------------------
 -- FRONT
-lspconfig.cssmodules_ls.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    cmd = { 'cssmodules-language-server' },
-    filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' }
-}
+-- lspconfig.cssmodules_ls.setup {
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--     cmd = { 'cssmodules-language-server' },
+--     filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' }
+-- }
 
 -- lspconfig.tailwindcss.setup{
 --     on_attach = on_attach,
@@ -271,14 +283,36 @@ lspconfig.crystalline.setup {
 -- Python
 lspconfig.basedpyright.setup {
     on_attach = on_attach,
+    capabilities = capabilities,
     settings = {
         basedpyright = {
             -- Using Ruff's import organizer
-            disableOrganizeImports = true
+            disableOrganizeImports = true,
+            analysis = {
+                autoSearchPaths = true,
+                diagnosticMode = "openFilesOnly",
+                useLibraryCodeForTypes = true,
+                typeCheckingMode = "all",
+                diagnosticSeverityOverrides = {
+                    reportAny = false,
+                    reportMissingTypeArgument = false,
+                    reportMissingParameterType = false,
+                    reportMissingTypeStubs = false,
+                    reportUnknownArgumentType = false,
+                    reportUnknownMemberType = false,
+                    reportUnknownParameterType = false,
+                    reportUnknownVariableType = false,
+                    reportUnusedCallResult = false,
+                    reportUnannotatedClassAttribute = false
+                },
+                inlayHints = {
+                    callArgumentNames = true,
+                }
+            }
         },
         python = {
             analysis = {
-                -- Ignore all files fro analysis to exclusively use Ruff for linting
+                -- Ignore all files for analysis to exclusively use Ruff for linting
                 ignore = { '*' }
             }
         }
@@ -286,32 +320,6 @@ lspconfig.basedpyright.setup {
     }
 }
 
--- pylsp is TOOOO SLOW
--- lspconfig.pylsp.setup{
---     on_attach = on_attach,
---     capabilities = capabilities,
---     single_file_support = true,
---     settings = {
---         pylsp = {
---             plugins = {
---                 -- pycodestyle = {
---                 --     ignore = {
---                 --         'F401',
---                 --         'E501',
---                 --         'W391',
---                 --         'C0103', 'C0114', 'C0116',
---                 --     },
---                 -- },
---                 mypy = { enabled = true, live_mode = true, strict = false },
---                 black = { enabled = true, preview = true },
---                 -- autopep8 = { enabled = true },
---                 -- flake8 = { enabled = false },
---                 -- jedi = { completion = true },
---                 yapf = { enabled = true }
---             }
---         }
---     }
--- }
 
 
 -- pip install pylyzer
@@ -326,30 +334,30 @@ lspconfig.ruff.setup {
 
 -------------------------------------------------------------------------------
 -- Elixir
-lspconfig.elixirls.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    filetypes = { 'elixir', 'eelixir', 'exs', 'ex' },
-    settings = {
-        dialyzerEnabled = true,
-        suggestSpecs = true,
-        signatureAfterComplete = true,
-    },
-    cmd = { '/home/baka/apps/elixir_ls_binary/language_server.sh' }
-}
+-- lspconfig.elixirls.setup {
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--     filetypes = { 'elixir', 'eelixir', 'exs', 'ex' },
+--     settings = {
+--         dialyzerEnabled = true,
+--         suggestSpecs = true,
+--         signatureAfterComplete = true,
+--     },
+--     cmd = { '/home/baka/apps/elixir_ls_binary/language_server.sh' }
+-- }
 
 
 
 -------------------------------------------------------------------------------
 -- Erlang
-lspconfig.erlangls.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    cmd = { 'erlang_ls' },
-    filetypes = { 'erlang' },
-    -- root_dir = root_pattern('rebar.config', 'erlang.mk', '.git'),
-    single_file_support = true
-}
+-- lspconfig.erlangls.setup {
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--     cmd = { 'erlang_ls' },
+--     filetypes = { 'erlang' },
+--     -- root_dir = root_pattern('rebar.config', 'erlang.mk', '.git'),
+--     single_file_support = true
+-- }
 
 
 -------------------------------------------------------------------------------
@@ -382,14 +390,14 @@ lspconfig.lua_ls.setup {
 
 -------------------------------------------------------------------------------
 -- Haskell
-lspconfig.hls.setup {
-   on_attach = on_attach,
-    capabilities = capabilities,
-    filetypes = { 'haskell', 'lhaskell' },
-    settings = { formattingProvider = 'ormolu' },
-    cmd = { 'haskell-language-server-wrapper', '--lsp' },
-    single_file_support = true
-}
+-- lspconfig.hls.setup {
+--    on_attach = on_attach,
+--     capabilities = capabilities,
+--     filetypes = { 'haskell', 'lhaskell' },
+--     settings = { formattingProvider = 'ormolu' },
+--     cmd = { 'haskell-language-server-wrapper', '--lsp' },
+--     single_file_support = true
+-- }
 
 
 

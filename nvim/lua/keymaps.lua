@@ -18,7 +18,6 @@ vim.g.mapleader = ","
 vim.g.maplocalleader = ","
 
 
-vim.keymap.set('n', '<leader>h', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end)
 
 -------------------------------------------------------------------------------
 -- DEFAULT REMAPS
@@ -126,6 +125,9 @@ map('n', 'gtd', ':Telescope lsp_definitions<CR>', silentnoremap)
 map('n', 'gtt', ':Telescope lsp_type_definitions<CR>', silentnoremap)
 map('n', 'gtr', ':Telescope lsp_references<CR>', silentnoremap)
 map('n', 'gti', ':Telescope lsp_implementations<CR>', silentnoremap)
+
+-- lsp show inlay hints
+vim.keymap.set('n', '<leader>h', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end)
 
 -- Code Actions
 map('n', '<space>ca', ':lua vim.lsp.buf.code_action()<CR>', silentnoremap)

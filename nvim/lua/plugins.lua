@@ -112,8 +112,8 @@ return require('lazy').setup({
     dependencies = "neovim/nvim-lspconfig"
     },
 
-    -- Dressing
-    { 'stevearc/dressing.nvim', opts = {} },
+    -- Dressing (archived use `snacks.nvim` instead)
+    -- { 'stevearc/dressing.nvim', opts = {} },
 
 
     -- A lua powered greeter like `vim-startify` [MRU -- most recent used]
@@ -218,6 +218,13 @@ return require('lazy').setup({
         dependencies = "neovim/nvim-lspconfig",
     },
 
+    {
+        'ray-x/lsp_signature.nvim',
+        event = 'InsertEnter',
+        opts = {
+        }
+    },
+
     -- Highlight arguments' definitions and usages, asynchronously, using Treesitter
     'm-demare/hlargs.nvim',
 
@@ -259,7 +266,7 @@ return require('lazy').setup({
     'hrsh7th/cmp-vsnip',
     'hrsh7th/vim-vsnip',
 
-    'onsails/lspkind.nvim',
+    'onsails/lspkind.nvim',  -- we can remove it? not used anymore in `completion.lua` file
     'saadparwaiz1/cmp_luasnip',
     'petertriho/cmp-git',
     'uga-rosa/cmp-dictionary', -- dictionary /usr/share/dict/words
@@ -344,8 +351,11 @@ return require('lazy').setup({
 
     -- Autopair alternative
     'cohama/lexima.vim',
-    'windwp/nvim-autopairs',
-
+    { -- configure it with `cmp` and `lsp`
+        'windwp/nvim-autopairs',
+        event = 'InsertEnter',
+        config = true
+    },
     -- The fastest Neovim colorizer
     -- 'norcalli/nvim-colorizer.lua', -- depreacted
     {
