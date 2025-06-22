@@ -58,7 +58,9 @@ default_floating_border pixel 4
 # smart_gaps [on | off | inverse_outer]
 smart_gaps on
 # smart_gaps inverse_outer
-gaps inner 10
+
+# uncomment this if gaps needed
+# gaps inner 10
 
 # gaps outer 10
 # gaps horizontal 0
@@ -86,11 +88,11 @@ bindsym $alt+Up exec $HOME/.local/bin/volume_up
 bindsym $alt+Down exec $HOME/.local/bin/volume_down
 
 # mpvctl https://gist.github.com/dwgill/a66769e0edef69c04d3b
-bindsym $mod+Left exec mpvctl previous; exec dunstify -r 1111 -u low "PREVIOUS TRACK"
-bindsym $mod+Right exec mpvctl next; exec dunstify -r 1111 -u low "NEXT TRACK"
-# bindsym $mod+Up exec dunstify -r 9999 -u normal "NOW PLAYING:" "$(exec mpvctl play)"
-bindsym $mod+Up exec mpvctl play; exec dunstify -r 9999 -u normal "PLAY"
-bindsym $mod+Down exec mpvctl pause; exec dunstify -r 9999 -u low "PAUSE"
+bindsym $mod+Left exec mpvctl previous; exec notify-send -r 1111 -u low "PREVIOUS TRACK"
+bindsym $mod+Right exec mpvctl next; exec notify-send -r 1111 -u low "NEXT TRACK"
+# bindsym $mod+Up exec notify-send -r 9999 -u normal "NOW PLAYING:" "$(exec mpvctl play)"
+bindsym $mod+Up exec mpvctl play; exec notify-send -r 9999 -u normal "PLAY"
+bindsym $mod+Down exec mpvctl pause; exec notify-send -r 9999 -u low "PAUSE"
 
 # Diodon
 bindsym $mod+$sh+v exec --no-startup-id diodon, mode "default"
@@ -201,8 +203,8 @@ bindsym --whole-window $alt+button9 floating toggle
 # WORKSPACES
 #
 
-set $left HDMI-0
-set $right DP-1
+set $right HDMI-0
+set $left DP-1
 
 bindsym $alt+l focus output right
 bindsym $alt+h focus output left
@@ -351,8 +353,8 @@ for_window [class="alacrittyRanger"] move position center
 for_window [class="alacrittyFloat"] floating enable resize set 900 450
 for_window [class="alacrittyFloat"] move position center
 
-for_window [class="Qalculate-gtk"] floating enable resize set 900 450
-for_window [class="Qalculate-gtk"] move position center
+for_window [class="Qalculate"] floating enable resize set 900 450
+for_window [class="Qalculate"] move position center
 
 for_window [class="Picture-in-picture"] floating enable border none
 
@@ -485,7 +487,8 @@ exec --no-startup-id xclip
 exec --no-startup-id flameshot
 exec --no-startup-id nm-applet
 exec --no-startup-id xscreensaver
-exec --no-startup-id xrandr --output DP-1 --auto --right-of HDMI-0 && xrandr --output DP-1 --primary
+# just change $right and $left variables
+exec --no-startup-id xrandr --output $right --auto --right-of $left && xrandr --output $right --primary
 
 exec_always --no-startup-id /usr/bin/xcompmgr
 exec_always --no-startup-id xset r rate 130 40
@@ -505,7 +508,7 @@ exec_always --no-startup-id redshift -x; exec redshift -O 3500
 ###############################################################################
 # Num_Lock Section
 #
-# Num_Lock off:
+#xrandr --output HDMI-0 --auto --right-of DP-1 && xrandr --output HDMI-0 --primary Num_Lock off:
 # | 1         | 2         | 3           | 4           |
 # |-----------|-----------|-------------|-------------|
 # | Num_Lock  | KP_Divide | KP_Multiply | KP_Subtract |

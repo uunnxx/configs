@@ -200,7 +200,7 @@ program = "/usr/bin/zsh"
 decorations = "full"
 dynamic_padding = true
 dynamic_title = true
-opacity = 0.91
+opacity = 0.95
 # opacity = 1
 title = "Alacritty"
 

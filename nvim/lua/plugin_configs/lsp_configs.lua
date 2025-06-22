@@ -295,6 +295,7 @@ lspconfig.basedpyright.setup {
                 typeCheckingMode = "all",
                 diagnosticSeverityOverrides = {
                     reportAny = false,
+                    reportExplicitAny = false,
                     reportMissingTypeArgument = false,
                     reportMissingParameterType = false,
                     reportMissingTypeStubs = false,
@@ -302,7 +303,9 @@ lspconfig.basedpyright.setup {
                     reportUnknownMemberType = false,
                     reportUnknownParameterType = false,
                     reportUnknownVariableType = false,
+                    reportUnknownLambdaType = false,
                     reportUnusedCallResult = false,
+                    reportUnusedVariable = false,
                     reportUnannotatedClassAttribute = false
                 },
                 inlayHints = {

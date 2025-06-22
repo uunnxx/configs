@@ -1,0 +1,7 @@
+# exec_always --no-startup-id xset r rate 130 40
+
+# sway version:
+input "type:keyboard" {
+    repeat_rate 40
+    repeat_delay 130
+}
