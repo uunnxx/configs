@@ -6,17 +6,22 @@ local function map(kind, lhs, rhs, opts)
     vim.api.nvim_set_keymap(kind, lhs, rhs, opts)
 end
 
+
+local function map_with_desc(kind, lhs, rhs, base_opts, desc)
+    local opts = vim.tbl_extend('force', base_opts, { desc = desc })
+    vim.api.nvim_set_keymap(kind, lhs, rhs, opts)
+end
+
+
 local noremap = { noremap = true }
 local noremapnowait = { noremap = true, nowait = true }
 local silentnoremap = { noremap = true, silent = true }
 local silentnoremapnowait = { nowait = true, noremap = true, silent = true }
 
 
-
 -- Leader
 vim.g.mapleader = ","
 vim.g.maplocalleader = ","
-
 
 
 -------------------------------------------------------------------------------
@@ -40,21 +45,19 @@ map('n', "'", '`', noremap)
 map('n', '`', "'", noremap)
 
 
-map('n', '<leader>ww', ':update<CR>', noremap)
-map('i', '<leader>ww', '<C-o>:update<CR>', noremap)
-map('n', '<space>qq', ':x<CR>', silentnoremap)
-map('n', 'QQ', ':q<CR>', silentnoremap)
-map('n', 'Qt', ':q!<CR>', silentnoremap)
-map('n', 'Qa', ':qall<CR>', silentnoremap)
-map('n', 'QA', ':qall!<CR>', silentnoremap)
+map_with_desc('n', '<leader>ww', ':update<CR>', noremap, 'Update/Save')
+map_with_desc('i', '<leader>ww', '<C-o>:update<CR>', noremap, 'Update/Save in insert mode')
+map_with_desc('n', '<space>qq', ':x<CR>', silentnoremap, 'Save and Quit')
+map_with_desc('n', 'QQ', ':q<CR>', silentnoremap, 'Quit')
+map_with_desc('n', 'Qt', ':q!<CR>', silentnoremap, 'QUIT!')
+map_with_desc('n', 'Qa', ':qall<CR>', silentnoremap, 'Quit all')
+map_with_desc('n', 'QA', ':qall!<CR>', silentnoremap, 'QUIT ALL!')
+
+map_with_desc('n', 'J', 'mjJ`j', silentnoremap, 'Join lines and restore cursor location')
 
 
--- Join lines and restore cursor location
-map('n', 'J', 'mjJ`j', silentnoremap)
-
-
-map('n', 'U', '<C-r>', silentnoremap)
-map('n', '<leader>R', ':redo<CR>', silentnoremap)
+map_with_desc('n', 'U', '<C-r>', silentnoremap, 'Undo')
+map_with_desc('n', '<leader>R', ':redo<CR>', silentnoremap, 'Redo')
 
 
 -- Go to start or end of line easier
@@ -65,8 +68,8 @@ map('x', 'L', 'g_', silentnoremapnowait)
 
 
 -- Find and replace
-map('n', '<C-h>', ':%s/\\C\\<<C-r><C-w>\\>//g<left><left>', noremapnowait)
-map('x', '<C-h>', ':s/', noremapnowait)
+map_with_desc('n', '<C-h>', ':%s/\\C\\<<C-r><C-w>\\>//g<left><left>', noremapnowait, 'Find and Replace Current Word')
+map_with_desc('x', '<C-h>', ':s/', noremapnowait, 'Find and Replace')
 -- map('v', '<leader>*', '"hy:%s/\\V<C-r>h//g<left><left>', silentnoremapnowait)
 
 
@@ -81,7 +84,7 @@ vim.cmd [[
 
 
 map('n', '<space>;', 'q:', noremap)
-map('n', '<leader>cd', ':cd %:p:h<CR>:pwd<CR>', noremap)
+map_with_desc('n', '<leader>cd', ':cd %:p:h<CR>:pwd<CR>', noremap, 'PWD to current files directory/path')
 
 
 map('n', '<left>;', 'g;', noremap)
@@ -98,22 +101,22 @@ map('n', '<space>l', '<C-W>l', silentnoremapnowait)
 map('t', '\\', '<C-\\><C-n><C-W>w', silentnoremap)
 
 -- Move Window
-map('n', '<space><space>j', '<C-W>J', silentnoremapnowait)
-map('n', '<space><space>k', '<C-W>K', silentnoremapnowait)
-map('n', '<space><space>h', '<C-W>H', silentnoremapnowait)
-map('n', '<space><space>l', '<C-W>L', silentnoremapnowait)
+map_with_desc('n', '<space><space>j', '<C-W>J', silentnoremapnowait, 'Move window down')
+map_with_desc('n', '<space><space>k', '<C-W>K', silentnoremapnowait, 'Move window up')
+map_with_desc('n', '<space><space>h', '<C-W>H', silentnoremapnowait, 'Move window left')
+map_with_desc('n', '<space><space>l', '<C-W>L', silentnoremapnowait, 'Move window right')
 
 -- Window resize
-map('n', '<up>', ':resize +1<CR>', silentnoremap)
-map('n', '<down>', ':resize -1<CR>', silentnoremap)
-map('n', '<M-left>', ':vertical resize -1<CR>', silentnoremap)
-map('n', '<M-right>', ':vertical resize +1<CR>', silentnoremap)
+map_with_desc('n', '<up>', ':resize +1<CR>', silentnoremap, 'Horizontally resize window +1')
+map_with_desc('n', '<down>', ':resize -1<CR>', silentnoremap, 'Horizontally resize window -1')
+map_with_desc('n', '<M-left>', ':vertical resize -1<CR>', silentnoremap, 'Vertically resize window +1')
+map_with_desc('n', '<M-right>', ':vertical resize +1<CR>', silentnoremap, 'Vertically resize window -1')
 
 -- Open files [ref. this]
-map('n', '<M-t>', ':tabedit ', noremapnowait)
-map('i', '<M-t>', '<ESC>:tabedit ', noremapnowait)
-map('n', '<M-e>', ':edit ', noremapnowait)
-map('i', '<M-e>', '<ESC>:edit ', noremapnowait)
+map_with_desc('n', '<M-t>', ':tabedit ', noremapnowait, 'Edit in new tab')
+map_with_desc('i', '<M-t>', '<ESC>:tabedit ', noremapnowait, 'Edit in new tab [insert mode]')
+map_with_desc('n', '<M-e>', ':edit ', noremapnowait, 'Edit [current buffer]')
+map_with_desc('i', '<M-e>', '<ESC>:edit ', noremapnowait, 'Edit [current buffer: insert mode]')
 
 
 -------------------------------------------------------------------------------
@@ -121,102 +124,95 @@ map('i', '<M-e>', '<ESC>:edit ', noremapnowait)
 --
 
 -- LSP
-map('n', 'gtd', ':Telescope lsp_definitions<CR>', silentnoremap)
-map('n', 'gtt', ':Telescope lsp_type_definitions<CR>', silentnoremap)
-map('n', 'gtr', ':Telescope lsp_references<CR>', silentnoremap)
-map('n', 'gti', ':Telescope lsp_implementations<CR>', silentnoremap)
+map_with_desc('n', 'gtd', ':Telescope lsp_definitions<CR>', silentnoremap, 'Go to Definitions')
+map_with_desc('n', 'gtt', ':Telescope lsp_type_definitions<CR>', silentnoremap, 'Go to Type Definitions')
+map_with_desc('n', 'gtr', ':Telescope lsp_references<CR>', silentnoremap, 'Go to References')
+map_with_desc('n', 'gti', ':Telescope lsp_implementations<CR>', silentnoremap, 'Go to Implementations')
 
 -- lsp show inlay hints
 vim.keymap.set('n', '<leader>h', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end)
 
 -- Code Actions
-map('n', '<space>ca', ':lua vim.lsp.buf.code_action()<CR>', silentnoremap)
+map_with_desc('n', '<space>ca', ':lua vim.lsp.buf.code_action()<CR>', silentnoremap, 'Code Actions')
 
 
 -- Telescope
-map('n', 'TT', ':Telescope ', noremap)
-map('n', '<leader>gd', ':Telescope diagnostics<CR>', silentnoremap)
-map('n', 'gst', ':Telescope git_status<CR>', silentnoremap)
-map('n', '<leader>s', ':Telescope spell_suggest<CR>', silentnoremap)
+map_with_desc('n', 'TT', ':Telescope ', noremap, 'Open Telescope')
+map_with_desc('n', '<leader>gd', ':Telescope diagnostics<CR>', silentnoremap, 'Telescope Diagnostics')
+map_with_desc('n', 'gst', ':Telescope git_status<CR>', silentnoremap, 'Telescope Git Status')
+map_with_desc('n', '<leader>s', ':Telescope spell_suggest<CR>', silentnoremap, 'Telescope Spell Suggest')
 
 -- Find Files
 -- without preview
-map('n', 'tt', ':Telescope find_files hidden=true no_ignore=true<CR>', noremap)
+map_with_desc('n', 'tt', ':Telescope find_files hidden=true no_ignore=true<CR>', noremap, 'Telescope Find Files')
 -- preview
-map('n', '<C-CR>', ':Telescope fd hidden=true no_ignore=true<CR>', noremapnowait)
-map('n', '<S-CR>', ':Telescope buffers<CR>', silentnoremapnowait)
-map('n', '<S-m>', ':Telescope man_pages sections=1,2,3<CR>', noremapnowait)
+map_with_desc('n', '<C-CR>', ':Telescope fd hidden=true no_ignore=true<CR>', noremapnowait, 'Telescope Find Files [preview]')
+map_with_desc('n', '<S-CR>', ':Telescope buffers<CR>', silentnoremapnowait, 'Telescope Buffers')
+map_with_desc('n', '<S-m>', ':Telescope man_pages sections=1,2,3<CR>', noremapnowait, 'Telescope Man Pages (sections: 1, 2, 3)')
 
 -- Split windows
-map('n', '<leader><leader>v', '<C-W>v:Telescope find_files hidden=true no_ignore=true<CR>', silentnoremapnowait)
-map('n', '<leader><leader>h', '<C-W>s:Telescope find_files hidden=true no_ignore=true<CR>', silentnoremapnowait)
+map_with_desc('n', '<leader><leader>v', '<C-W>v:Telescope find_files hidden=true no_ignore=true<CR>', silentnoremapnowait, 'Telescope Find Files [split virtically]')
+map_with_desc('n', '<leader><leader>h', '<C-W>s:Telescope find_files hidden=true no_ignore=true<CR>', silentnoremapnowait, 'Telescope Find Files [split horizontally]')
 
 -- Live Grep
-map('n', '<M-f>', ':Telescope live_grep theme=ivy<CR>', noremapnowait)
-map('i', '<M-f>', '<C-o>:Telescope live_grep theme=ivy<CR>', noremapnowait)
+map_with_desc('n', '<M-f>', ':Telescope live_grep theme=ivy<CR>', noremapnowait, 'Telescope Live Grep')
+map_with_desc('i', '<M-f>', '<C-o>:Telescope live_grep theme=ivy<CR>', noremapnowait, 'Telescope Live Grep')
 
 -- Filetypes
-map('n', 'FF', ':Telescope filetypes <CR>', noremapnowait)
+map_with_desc('n', 'FF', ':Telescope filetypes <CR>', noremapnowait, 'Telescope Select Filetypes')
 
 -- Gitsigns
-map('n', 'git', ':Gitsigns<CR>', noremapnowait)
+map_with_desc('n', 'git', ':Gitsigns<CR>', noremapnowait, 'Gitsigns')
 
 -------------------------------------------------------------------------------
 
 -- F-keys
 -- map('n', '<F2>', ':source /home/baka/.config/nvim/source_me.lua<CR>', silentnoremap)
 
-map('n', '<F4>', ':set wrap!<CR>', noremap)
-map('i', '<F4>', '<C-o>:set wrap!<CR>', noremap)
+map_with_desc('n', '<F4>', ':set wrap!<CR>', noremap, 'Wrap')
+map_with_desc('i', '<F4>', '<C-o>:set wrap!<CR>', noremap, 'Wrap [insert mode]')
 
-map('n', '<F5>', ':exec &nu==&rnu? "se nu!" : "se rnu!"<CR>', silentnoremap)
-map('i', '<F5>', '<C-o>:exec &nu==&rnu? "se nu!" : "se rnu!"<CR>', silentnoremap)
+map_with_desc('n', '<F5>', ':exec &nu==&rnu? "se nu!" : "se rnu!"<CR>', silentnoremap, 'Line Number')
+map_with_desc('i', '<F5>', '<C-o>:exec &nu==&rnu? "se nu!" : "se rnu!"<CR>', silentnoremap, 'Line Number [insert mode]')
 
-map('n', '<F6>', ':set cursorline!<CR>', silentnoremap)
-map('i', '<F6>', '<C-o>:set cursorline!<CR>', silentnoremap)
+map_with_desc('n', '<F6>', ':set cursorline!<CR>', silentnoremap, 'Cursorline')
+map_with_desc('i', '<F6>', '<C-o>:set cursorline!<CR>', silentnoremap, 'Cursorline [insert mode]')
 
-map('n', '<F7>', ':set list!<CR>', silentnoremap)
-map('i', '<F7>', '<C-o>:set list!<CR>', silentnoremap)
+map_with_desc('n', '<F7>', ':set list!<CR>', silentnoremap, 'Show Hidden Symbols')
+map_with_desc('i', '<F7>', '<C-o>:set list!<CR>', silentnoremap, 'Show Hidden Symbols [insert mode]')
 
-map('n', '<F8>', ':TagbarToggle<CR>', silentnoremap)
-map('i', '<F8>', '<C-o>:TagbarToggle<CR>', silentnoremap)
+map_with_desc('n', '<F8>', ':TagbarToggle<CR>', silentnoremap, 'Tagbar')
+map_with_desc('i', '<F8>', '<C-o>:TagbarToggle<CR>', silentnoremap, 'Tagbar [insert mode]')
 
-map('n', '<F11>', ':set spell!<CR>', silentnoremap)
-map('i', '<F11>', '<C-o>:set spell!<CR>', silentnoremap)
+map_with_desc('n', '<F11>', ':set spell!<CR>', silentnoremap, 'Spell')
+map_with_desc('i', '<F11>', '<C-o>:set spell!<CR>', silentnoremap, 'Spell [insert mode]')
 
 
 -------------------------------------------------------------------------------
 
 -- TAGS
-map('n', '<space>tg', ':Telescope tags<CR>', silentnoremap)
+map_with_desc('n', '<space>tg', ':Telescope tags<CR>', silentnoremap, 'Telescope Tags')
 
 -- NvimTree
 -- map('n', '<leader>nn', ':NvimTreeRefresh<CR>:NvimTreeToggle<CR>', silentnoremap)
-map('n', '<C-n>', ':NvimTreeRefresh<CR>:NvimTreeToggle<CR>', silentnoremapnowait)
-map('i', '<C-n>', '<C-o>:NvimTreeRefresh<CR><C-o>:NvimTreeToggle<CR>', silentnoremapnowait)
+map_with_desc('n', '<C-n>', ':NvimTreeRefresh<CR>:NvimTreeToggle<CR>', silentnoremapnowait, 'Nvim Tree')
+map_with_desc('i', '<C-n>', '<C-o>:NvimTreeRefresh<CR><C-o>:NvimTreeToggle<CR>', silentnoremapnowait, 'Nvim Tree [insert mode]')
 
--- Move current line
-map('i', '<down>', '<ESC>ddpi', silentnoremap)
-map('i', '<up>', '<ESC>ddkPi', silentnoremap)
-
--- Go to file under cursor (vim default)
-map('n', 'gf', '<C-]>', silentnoremap)
-
--- Back to location you were
-map('n', '<BS>', '<C-o>', silentnoremap)
-
--- Switch between the last two files
-map('n', '|', '<C-^>', silentnoremap)
+map_with_desc('i', '<down>', '<ESC>ddpi', silentnoremap, 'Move current line down')
+map_with_desc('i', '<up>', '<ESC>ddkPi', silentnoremap, 'Move current line up')
+map_with_desc('n', 'gf', '<C-]>', silentnoremap, 'Go to file under cursor')
+map_with_desc('n', '<BS>', '<C-o>', silentnoremap, 'Back to location you were')
+map_with_desc('n', '|', '<C-^>', silentnoremap, 'Switch between the last two files')
 
 
 --------- Bufferline
-map('n', '<Tab>', ':BufferLineCycleNext<CR>', silentnoremap)
-map('n', '<S-Tab>', ':BufferLineCyclePrev<CR>', silentnoremap)
+map_with_desc('n', '<Tab>', ':BufferLineCycleNext<CR>', silentnoremap, 'Buffer Next')
+map_with_desc('n', '<S-Tab>', ':BufferLineCyclePrev<CR>', silentnoremap, 'Buffer Previous')
 
 
 -- Clear highlight
-map('n', '<C-l>', ':nohl<CR>', silentnoremapnowait)
-map('i', '<C-l>', '<C-o>:nohl<CR>', silentnoremapnowait)
+map_with_desc('n', '<C-l>', ':nohl<CR>', silentnoremapnowait, 'Clear Highlight')
+map_with_desc('i', '<C-l>', '<C-o>:nohl<CR>', silentnoremapnowait, 'Clear Highlight')
 
 
 -- C-a C-x enumerate
@@ -230,18 +226,15 @@ map('v', '-', 'g<C-x>gv', silentnoremapnowait)
 map('v', '<ESC>', 'o<ESC>', silentnoremap)
 map('v', 'v', 'o<ESC>', silentnoremap)
 
-
--- Highlight last inserted text
-map('n', 'gV', '`[v`]', silentnoremap)
+map_with_desc('n', 'gV', '`[v`]', silentnoremap, 'Highlight last inserted text')
 
 
 ------------------------ Yank
 -- System clipboard shift - y
 -- map('v', '<S-y>', '"+y', silentnoremap)
 
--- copy entire file
-map('n', '<C-c>', ':%y+<CR>', noremap)
-map('i', '<C-c>', '<C-o>:%y+<CR>', noremap)
+map_with_desc('n', '<C-c>', ':%y+<CR>', noremap, 'Copy Entire File')
+map_with_desc('i', '<C-c>', '<C-o>:%y+<CR>', noremap, 'Copy Entire File [insert mode]')
 
 map('n', 'Y', 'yy', noremap)
 map('n', 'yy', 'y$', noremap)
@@ -384,29 +377,22 @@ map('n', '{', '{zz', silentnoremapnowait)
 map('n', '0', 'g0', silentnoremap)
 
 
--- Close buffers
-map('n', '<leader><leader><space>', ':bd<CR>', silentnoremap) -- current buffer
-map('n', '<leader><leader>w', ':%bd <bar> e# <bar> bd#<CR>', silentnoremap) -- all but current
+map_with_desc('n', '<leader><leader><space>', ':bd<CR>', silentnoremap, 'Close current buffer')
+map_with_desc('n', '<leader><leader>w', ':%bd <bar> e# <bar> bd#<CR>', silentnoremap, 'Close all buffers but current')
 
+map_with_desc('i', '<leader><leader>l', '<C-x><C-l>', noremapnowait, 'Line autocompletion')
 
--- Line autocompletion
-map('i', '<leader><leader>l', '<C-x><C-l>', noremapnowait)
-
-
--- HOP
-map('n', '<leader>m', ':HopWord<CR>', noremap)
-map('n', '<leader>gg', ':HopLine<CR>', noremap)
+map_with_desc('n', '<leader>m', ':HopWord<CR>', noremap, 'Hop to word')
+map_with_desc('n', '<leader>gg', ':HopLine<CR>', noremap, 'Hop to line')
 
 -------------------------------------------------------------------------------
 -- TERMINAL SECTION:
 --
-map('n', '<space><space>t', ':split term://zsh<CR>a', silentnoremap)
-map('n', '<space><space>v', ':vsplit term://zsh<CR>a', silentnoremap)
+map_with_desc('n', '<space><space>t', ':split term://zsh<CR>a', silentnoremap, 'Horizontal Terminal')
+map_with_desc('n', '<space><space>v', ':vsplit term://zsh<CR>a', silentnoremap, 'Vertical Terminal')
 
--- Use esc or ',,' to quit builtin terminal
--- tnoremap <esc>   <C-\><C-n>
-map('t', '<leader><leader>', '<C-\\><C-n>', noremapnowait)
-map('t', '<Esc><Esc>', '<C-\\><C-n>:q!<CR>', noremapnowait)
+map_with_desc('t', '<leader><leader>', '<C-\\><C-n>', noremapnowait, 'Normal mode in Terminal')
+map_with_desc('t', '<Esc><Esc>', '<C-\\><C-n>:q!<CR>', noremapnowait, 'Close Terminal')
 
 
 -------------------------------------------------------------------------------
