@@ -72,6 +72,55 @@ vim.o.background = "dark"
 cmd'colorscheme gruvbox'
 
 
+require("bufferline").setup({
+    options = {
+        mode = "buffers", -- set to "tabs" to only show tabpages instead
+        -- style_preset = bufferline.style_preset.default, -- or bufferline.style_preset.minimal,
+        themable = true, -- allows highlight groups to be overriden i.e. sets highlights as default
+        -- numbers = "none" | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
+        numbers = "none",
+        indicator = {
+            icon = '▎', -- this should be omitted if indicator style is not 'icon'
+            -- style = 'icon' | 'underline' | 'none',
+            style = 'none',
+        },
+        buffer_close_icon = '󰅖',
+        modified_icon = '● ',
+        close_icon = ' ',
+        left_trunc_marker = ' ',
+        right_trunc_marker = ' ',
+        truncate_names = true, -- whether or not tab names should be truncated
+        tab_size = 18,
+        -- The diagnostics indicator can be set to nil to keep the buffer name highlight but delete the highlighting
+        offsets = {
+            {
+                filetype = "NvimTree",
+                text = "File Explorer",
+                -- text_align = "left" | "center" | "right"
+                text_align = "left",
+                separator = true
+            }
+        },
+        color_icons = true, -- whether or not to add the filetype icon highlights
+        show_buffer_icons = true, -- disable filetype icons for buffers
+        show_buffer_close_icons = false,
+        show_close_icon = false,
+        show_tab_indicators = true,
+        show_duplicate_prefix = true, -- whether to show duplicate buffer prefix
+        duplicates_across_groups = true, -- whether to consider duplicate paths in different groups as duplicates
+        move_wraps_at_ends = true, -- whether or not the move command "wraps" at the first or last position
+        -- separator_style = "slant" | "slope" | "thick" | "thin" | { 'any', 'any' },
+        separator_style = "thick",
+        enforce_regular_tabs = false,
+        auto_toggle_bufferline = true,
+        -- sort_by = 'insert_after_current' |'insert_at_end' | 'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs' | function(buffer_a, buffer_b)
+        sort_by = 'insert_after_current',
+        pick = {
+            alphabet = "abcdefghijklmopqrstuvwxyzABCDEFGHIJKLMOPQRSTUVWXYZ1234567890",
+        },
+    }
+})
+
 -- uncomment for transparency
 -- Transparency background
 -- cmd [[
