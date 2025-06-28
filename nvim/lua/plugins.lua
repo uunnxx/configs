@@ -4,10 +4,10 @@
 -- packadd shellmenu
 -- ]]
 
-vim.g.loaded_synload = 1
-vim.g.loaded_matchparen = 1
-vim.g.matchparen_timeout = 2
-vim.g.matchparen_insert_timeout = 2
+-- vim.g.loaded_synload = 1
+-- vim.g.loaded_matchparen = 1
+-- vim.g.matchparen_timeout = 2
+-- vim.g.matchparen_insert_timeout = 2
 
 vim.g.user_emmet_leader_key = '<space><space>'
 
@@ -372,10 +372,7 @@ return require('lazy').setup({
     },
 
     -- https://github.com/stevearc/conform.nvim?tab=readme-ov-file
-    {
-        'stevearc/conform.nvim',
-        opts = {},
-    },
+    {'stevearc/conform.nvim'},
 
 
     -- 'Chiel92/vim-autoformat',

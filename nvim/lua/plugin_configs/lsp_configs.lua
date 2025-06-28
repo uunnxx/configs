@@ -1,28 +1,45 @@
-local lspconfig = require('lspconfig')
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local mason = require('mason')
 local navic = require('nvim-navic')
 
--- require('mason-lspconfig').setup()
+
+-- This will watch changed files so I don't have to :LspRestart every fucking time when I created a new fucking file
+capabilities = {
+    workspace = {
+        didChangeWatchedFiles = {
+            dynamicRegistration = true
+        }
+    }
+}
 
 vim.diagnostic.config({
     float = { source = true },
-    virtual_text = false,
-    update_in_insert = false,
-    signs = true,
-    underline = true,
-
+    -- virtual_text = {
+    --     current_line = true
+    -- },
     virtual_lines = {
-        -- To show virtual lines only for the current line's diagnostics:
-        only_current_line = true,
-        -- If you don't want to highlight the entire diagnostic line, use:
-        highlight_whole_line = false
+        current_line = true,
+    },
+    update_in_insert = false,
+    serevity_sort = true,
+    underline = true,
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = ' ',
+            [vim.diagnostic.severity.WARN]  = ' ',
+            [vim.diagnostic.severity.INFO]  = ' ',
+            [vim.diagnostic.severity.HINT]  = ' ',
+        },
+        -- numhl = {
+        --     [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
+        --     [vim.diagnostic.severity.WARN] = 'WarningMsg',
+        -- }
     }
 })
 
+-- vim.cmd[[autocmd InsertEnter * lua vim.diagnostic.enable(false)]]
+-- vim.cmd[[autocmd InsertLeave * lua vim.diagnostic.enable(true)]]
 
-vim.cmd [[autocmd InsertEnter * lua vim.diagnostic.disable()]]
-vim.cmd [[autocmd InsertLeave * lua vim.diagnostic.enable()]]
 -- vim.cmd[[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 
 -- Uncomment the line below
@@ -56,8 +73,6 @@ local on_attach = function(client, bufnr)
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
     vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, bufopts)
-    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-    vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts) -- press 2 times to focus float window
@@ -96,57 +111,14 @@ mason.setup({
 })
 
 
--- require('mason-lspconfig').setup_handlers {
---     function(server_name)
---         require('lspconfig')[server_name].setup {}
---     end
--- }
-
-
--------------------------------------------------------------------------------
--- Ruby
--- lspconfig.solargraph.setup {
---     on_attach = on_attach,
---     capabilities = capabilities,
---     cmd = { 'solargraph', 'stdio' },
---     filetypes = { 'ruby', 'rakefile' },
---     init_options = {
---         formatting = true
---     },
---     -- root_dir = root_pattern('Gemfile', '.git'),
---     settings = {
---         solargraph = {
---             definition = true,
---             diagnostics = true,
---             completion = true,
---             autoformat = true,
---             folding = true,
---             references = true,
---             rename = true,
---             symbols = true,
---             --   hover = true
---         }
---     }
--- }
-
-
--- lspconfig.standardrb.setup {
---     on_attach = on_attach,
---     capabilities = capabilities,
---     cmd = { 'standardrb', '--lsp' },
---     filetypes = { 'ruby', 'eruby', 'rakefile' },
---     -- root_dir = root_pattern('Gemfile', '.git')
--- }
-
 
 -------------------------------------------------------------------------------
 -- Rust
-lspconfig.rust_analyzer.setup {
+vim.lsp.config.rust_analyzer = {
     on_attach = on_attach,
     capabilities = capabilities,
     cmd = { 'rust-analyzer' },
     filetypes = { 'rust' },
-    root_dir = lspconfig.util.root_pattern('Cargo.toml', 'rust-project.json'),
     settings = {
         ['rust-analyzer'] = {
             imports = {
@@ -158,13 +130,13 @@ lspconfig.rust_analyzer.setup {
         }
     }
 }
-
+vim.lsp.enable('rust_analyzer')
 
 -------------------------------------------------------------------------------
 -- Go
 -- go install github.com/nametake/golangci-lint-langserver@latest
 -- go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
-lspconfig.golangci_lint_ls.setup {
+vim.lsp.config.golangci_lint_ls = {
     on_attach = on_attach,
     capabilities = capabilities,
     cmd = { 'golangci-lint-langserver' },
@@ -173,115 +145,27 @@ lspconfig.golangci_lint_ls.setup {
         command = { 'golangci-lint', 'run', '--out-format', 'json' }
     }
 }
+vim.lsp.enable('golangci_lint_ls')
 
 -- go install golang.org/x/tools/gopls@latest
-lspconfig.gopls.setup {}
-
-
-
--------------------------------------------------------------------------------
--- JavaScript, TypeScript
-lspconfig.ts_ls.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    cmd = { 'typescript-language-server', '--stdio' },
-    filetypes = {
-        'javascript',
-        'javascriptreact',
-        'javascript.jsx',
-        'typescript',
-        'typescriptreact',
-        'typescript.tsx'
-    },
-    init_options = { hostInfo = 'neovim' },
-    -- root_dir = root_pattern('package.json', 'tsconfig.json', 'jsconfig.json', '.git')
-}
-
-
-
--------------------------------------------------------------------------------
--- FRONT
--- lspconfig.cssmodules_ls.setup {
---     on_attach = on_attach,
---     capabilities = capabilities,
---     cmd = { 'cssmodules-language-server' },
---     filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' }
--- }
-
--- lspconfig.tailwindcss.setup{
---     on_attach = on_attach,
---     capabilities = capabilities,
---     cmd = { 'tailwindcss-language-server', '--stdio' },
---     init_options = { userLanguages = { eelixir = 'html-eex', eruby = 'erb' } },
---     settings = {
---         tailwindCSS = {
---             classAttributes = { 'class', 'className', 'classList', 'ngClass' },
---             lint = {
---                 cssConflict = 'warning',
---                 invalidApply = 'error',
---                 invalidConfigPath = 'error',
---                 invalidScreen = 'error',
---                 invalidTailwindDirective = 'error',
---                 invalidVariant = 'error',
---                 recommendedVariantOrder = 'warning'
---             },
---             validate = true
---         }
---     }
--- }
-
--- lspconfig.html.setup{
---     capabilities = capabilities,
---     filetypes = { 'javascript', 'html', 'htmldjango', 'css' },
---     embeddedLanguages = {
---         css = true,
---         javascript = true,
---     },
---     provideFormatter = true
--- }
-
--- lspconfig.emmet_ls.setup({
---     on_attach = on_attach,
---     capabilities = capabilities,
---     filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less' },
---     init_options = {
---         html = {
---             -- options = {
---             -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
---             -- ['bem.enabled'] = true,
---         },
---     },
--- })
-
+vim.lsp.config.gopls = {}
+vim.lsp.enable('gopls')
 
 
 -------------------------------------------------------------------------------
 -- C lang
-lspconfig.clangd.setup {
+vim.lsp.config.clangd = {
     on_attach = on_attach,
     capabilities = capabilities,
     cmd = { 'clangd', '--background-index' },
     filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto' },
-    -- root_dir = lspconfig.util.root_pattern('compile_commands.json', 'compile_flags.txt'),
 }
-
-
-
--------------------------------------------------------------------------------
--- Crystal
-lspconfig.crystalline.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    cmd = { 'crystalline' },
-    filetypes = { 'crystal', 'cr' },
-    single_file_support = true
-}
-
+vim.lsp.enable('clangd')
 
 
 -------------------------------------------------------------------------------
 -- Python
-lspconfig.basedpyright.setup {
+vim.lsp.config.basedpyright = {
     on_attach = on_attach,
     capabilities = capabilities,
     settings = {
@@ -306,6 +190,7 @@ lspconfig.basedpyright.setup {
                     reportUnknownLambdaType = false,
                     reportUnusedCallResult = false,
                     reportUnusedVariable = false,
+                    reportUnusedImport = false,
                     reportUnannotatedClassAttribute = false
                 },
                 inlayHints = {
@@ -322,45 +207,17 @@ lspconfig.basedpyright.setup {
 
     }
 }
-
+vim.lsp.enable('basedpyright')
 
 
 -- pip install pylyzer
 -- It's not ready. It can't find virtually installed modules [issue #22]
--- lspconfig.pylyzer.setup{}
 
 -- pip install ruff-lsp
-lspconfig.ruff.setup {
+vim.lsp.config.ruff = {
     on_attach = on_attach,
 }
-
-
--------------------------------------------------------------------------------
--- Elixir
--- lspconfig.elixirls.setup {
---     on_attach = on_attach,
---     capabilities = capabilities,
---     filetypes = { 'elixir', 'eelixir', 'exs', 'ex' },
---     settings = {
---         dialyzerEnabled = true,
---         suggestSpecs = true,
---         signatureAfterComplete = true,
---     },
---     cmd = { '/home/baka/apps/elixir_ls_binary/language_server.sh' }
--- }
-
-
-
--------------------------------------------------------------------------------
--- Erlang
--- lspconfig.erlangls.setup {
---     on_attach = on_attach,
---     capabilities = capabilities,
---     cmd = { 'erlang_ls' },
---     filetypes = { 'erlang' },
---     -- root_dir = root_pattern('rebar.config', 'erlang.mk', '.git'),
---     single_file_support = true
--- }
+vim.lsp.enable('ruff')
 
 
 -------------------------------------------------------------------------------
@@ -370,7 +227,7 @@ table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
 
 
-lspconfig.lua_ls.setup {
+vim.lsp.config.lua_ls = {
     on_attach = on_attach,
     capabilities = capabilities,
 
@@ -388,27 +245,4 @@ lspconfig.lua_ls.setup {
         },
     },
 }
-
-
-
--------------------------------------------------------------------------------
--- Haskell
--- lspconfig.hls.setup {
---    on_attach = on_attach,
---     capabilities = capabilities,
---     filetypes = { 'haskell', 'lhaskell' },
---     settings = { formattingProvider = 'ormolu' },
---     cmd = { 'haskell-language-server-wrapper', '--lsp' },
---     single_file_support = true
--- }
-
-
-
--------------------------------------------------------------------------------
--- LSP Lines
-vim.keymap.set(
-    '',
-    '<leader>l',
-    require('lsp_lines').toggle,
-    { desc = 'Toggle lsp_lines' }
-)
+vim.lsp.enable('lua_ls')

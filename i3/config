@@ -599,16 +599,17 @@ mode "$more_workspaces" {
 bindsym $mod+p mode "$more_workspaces"
 
 
-set $mode_system [P]ause, [R]eboot, [S]hutdown, | I3:[e]xit, [r]estart, re[l]oad, [c]aps2mod | [w]allpapers
+# set $mode_system [P]ause, [R]eboot, [S]hutdown, | I3:[e]xit, [r]estart, re[l]oad, [c]aps2mod | [w]allpapers
+set $mode_system I3: [r]estart, re[l]oad, [c]aps2mod | [w]allpapers
 mode "$mode_system" {
-  bindsym e exec --no-startup-id i3-msg exit, mode "default"
+  # bindsym e exec --no-startup-id i3-msg exit, mode "default"
   bindsym r exec --no-startup-id i3-msg restart, "default"
   bindsym l exec --no-startup-id i3-msg reload, "default"
   bindsym c exec --no-startup-id "setxkbmap -option caps:super", mode "default"
   bindsym w exec --no-startup-id feh --bg-scale --randomize ~/Pictures/wallpapers/*
-  bindsym $sh+r exec --no-startup-id reboot, mode "default"
-  bindsym $sh+s exec --no-startup-id shutdown, mode "default"
-  bindsym $sh+p exec --no-startup-id systemctl suspend, mode "default"
+  # bindsym $sh+r exec --no-startup-id reboot, mode "default"
+  # bindsym $sh+s exec --no-startup-id shutdown, mode "default"
+  # bindsym $sh+p exec --no-startup-id systemctl suspend, mode "default"
 
   bindsym Return mode "default"
   bindsym Escape mode "default"

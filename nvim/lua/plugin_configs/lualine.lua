@@ -31,8 +31,10 @@ require('lualine').setup {
         refresh = {
             statusline = 1000,
             tabline = 1000,
-            winbar = 1000
-        }
+            winbar = 1000,
+
+            refresh_time = 16,
+        },
     },
     sections = {
         lualine_a = {'mode'},
@@ -40,7 +42,25 @@ require('lualine').setup {
         lualine_c = {'getcwd', 'filename', 'filesize'},
 
         -- %B hex code
-        lualine_x = {'diagnostics', 'encoding', 'fileformat', 'filetype', '%B', wordCount},
+        lualine_x = {
+            {
+                'diagnostics',
+                sources = {'nvim_diagnostic'},
+                sections = {'error', 'warn', 'info', 'hint'},
+                diagnostics_color = {
+                    error = 'DiagnosticError',
+                    warn = 'DiagnosticWarn',
+                    info = 'DiagnosticInfo',
+                    hint = 'DiagnosticHint',
+                },
+                -- symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'},
+                symbols = {error = ' ', warn = ' ', info = ' ', hint = ' '},
+                colored = true,
+                update_in_insert = false,
+                always_visible = false
+            }
+            , 'encoding', 'fileformat', 'filetype', '%B', wordCount
+        },
         lualine_y = {'progress', 'location'},
         lualine_z = {'hostname'}
     },

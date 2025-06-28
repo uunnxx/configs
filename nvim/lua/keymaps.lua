@@ -19,10 +19,6 @@ local silentnoremap = { noremap = true, silent = true }
 local silentnoremapnowait = { nowait = true, noremap = true, silent = true }
 
 
--- Leader
-vim.g.mapleader = ","
-vim.g.maplocalleader = ","
-
 
 -------------------------------------------------------------------------------
 -- DEFAULT REMAPS
@@ -560,3 +556,10 @@ vim.keymap.set({ "n", "v" }, "<C-s>", function()
         end
     end)
 end, { desc = "Format buffer" })
+
+
+
+vim.keymap.set('n', '<leader>l', function()
+  local new_config = not vim.diagnostic.config().virtual_lines
+  vim.diagnostic.config({ virtual_lines = new_config })
+end, { desc = 'Toggle diagnostic virtual_lines' })
