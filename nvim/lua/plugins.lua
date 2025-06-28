@@ -12,11 +12,6 @@ vim.g.matchparen_insert_timeout = 2
 vim.g.user_emmet_leader_key = '<space><space>'
 
 return require('lazy').setup({
-    'nvim-lua/popup.nvim',
-    {
-        'nvim-telescope/telescope.nvim', tag = '0.1.8',
-        dependencies = { 'nvim-lua/plenary.nvim' }
-    },
     'nvim-telescope/telescope-ui-select.nvim',
     {
         'nvim-telescope/telescope-fzf-native.nvim',
@@ -58,7 +53,7 @@ return require('lazy').setup({
     -- { "rose-pine/neovim", name = "rose-pine" },
 
     'folke/lsp-colors.nvim',
-    'MunifTanjim/nui.nvim',
+    -- 'MunifTanjim/nui.nvim',
 
     -- Statusline
     {
@@ -72,19 +67,11 @@ return require('lazy').setup({
         dependencies = "neovim/nvim-lspconfig"
     },
 
-    {
-        "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-        config = function()
-            require("lsp_lines").setup()
-        end,
-    },
-
 
     {
         "folke/snacks.nvim",
         priority = 1000,
         lazy = false,
-        ---@type snacks.Config
         opts = {
             -- your configuration comes here
             -- or leave it empty to use the default settings
@@ -222,7 +209,7 @@ return require('lazy').setup({
     },
 
     -- Highlight arguments' definitions and usages, asynchronously, using Treesitter
-    'm-demare/hlargs.nvim',
+    {'m-demare/hlargs.nvim'},
 
     {
         "folke/trouble.nvim",
