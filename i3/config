@@ -483,6 +483,7 @@ client.urgent             $clh      $clh      $fff        $gruv1
 exec --no-startup-id alacritty
 exec --no-startup-id /usr/bin/fcitx5
 exec --no-startup-id /usr/bin/diodon
+exec --no-startup-id /usr/bin/warpd
 exec --no-startup-id xclip
 exec --no-startup-id flameshot
 exec --no-startup-id nm-applet
