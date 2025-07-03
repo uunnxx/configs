@@ -202,7 +202,7 @@ set.mouse = ''
 set.mousefocus = true
 
 -- use g for reverse
--- set.gdefault = true
+set.gdefault = true
 
 
 
