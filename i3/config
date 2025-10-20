@@ -10,11 +10,6 @@ set $sh Shift
 
 # `msg create-window` as workaround (see: https://github.com/alacritty/alacritty/issues/6892)
 # set $term "alacritty msg create-window"
-# set $term_float "alacritty msg create-window --class=alacrittyFloat"
-# set $trans_ru "alacritty msg create-window --class=alacrittyTransRight -e trans -t ru -I"
-# set $trans_en "alacritty msg create-window --class=alacrittyTransRight -e trans -t en -I"
-# set $trans_ru_left "alacritty msg create-window --class=alacrittyTransLeft -e trans -t ru -I"
-# set $trans_en_left "alacritty msg create-window --class=alacrittyTransLeft -e trans -t en -I"
 
 set $term "alacritty"
 set $term_float "alacritty --class=alacrittyFloat"
@@ -23,12 +18,6 @@ set $trans_en "alacritty --class=alacrittyTransRight -e trans -t en -I"
 set $trans_ru_left "alacritty --class=alacrittyTransLeft -e trans -t ru -I"
 set $trans_en_left "alacritty --class=alacrittyTransLeft -e trans -t en -I"
 
-# set $term "contour"
-# set $term_float "alacritty --class=contourFloat"
-# set $trans_ru "alacritty --class=contourTransRight -e trans -t ru -I"
-# set $trans_en "alacritty --class=contourTransRight -e trans -t en -I"
-# set $trans_ru_left "alacritty --class=contourTransLeft -e trans -t ru -I"
-# set $trans_en_left "alacritty --class=contourTransLeft -e trans -t en -I"
 
 set $fm "thunar"
 set $barcmd i3status
@@ -60,9 +49,9 @@ smart_gaps on
 # smart_gaps inverse_outer
 
 # uncomment this if gaps needed
-# gaps inner 10
+gaps inner 8
+gaps outer -8
 
-# gaps outer 10
 # gaps horizontal 0
 # gaps vertical 0
 
@@ -90,9 +79,10 @@ bindsym $alt+Down exec $HOME/.local/bin/volume_down
 # mpvctl https://gist.github.com/dwgill/a66769e0edef69c04d3b
 bindsym $mod+Left exec mpvctl previous; exec notify-send -r 1111 -u low "PREVIOUS TRACK"
 bindsym $mod+Right exec mpvctl next; exec notify-send -r 1111 -u low "NEXT TRACK"
-# bindsym $mod+Up exec notify-send -r 9999 -u normal "NOW PLAYING:" "$(exec mpvctl play)"
-bindsym $mod+Up exec mpvctl play; exec notify-send -r 9999 -u normal "PLAY"
-bindsym $mod+Down exec mpvctl pause; exec notify-send -r 9999 -u low "PAUSE"
+bindsym $mod+$sh+Left exec mpvctl seek_left; exec notify-send -r 1111 -u low "SEEK -5"
+bindsym $mod+$sh+Right exec mpvctl seek_right; exec notify-send -r 1111 -u low "SEEK +5"
+bindsym $mod+Up exec mpvctl play
+bindsym $mod+Down exec mpvctl pause
 
 # Diodon
 bindsym $mod+$sh+v exec --no-startup-id diodon, mode "default"
@@ -127,10 +117,10 @@ bindsym $mod+$sh+h move left
 bindsym $mod+$sh+j move down
 bindsym $mod+$sh+k move up
 bindsym $mod+$sh+l move right
-bindsym $mod+$sh+Left move left 50 px
-bindsym $mod+$sh+Down move down 50 px
-bindsym $mod+$sh+Up move up 50 px
-bindsym $mod+$sh+Right move right 50 px
+# bindsym $mod+$sh+Left move left 50 px
+# bindsym $mod+$sh+Down move down 50 px
+# bindsym $mod+$sh+Up move up 50 px
+# bindsym $mod+$sh+Right move right 50 px
 
 # workspace back and forth (with/without active container)
 workspace_auto_back_and_forth yes
@@ -491,9 +481,23 @@ exec --no-startup-id xscreensaver
 # just change $right and $left variables
 exec --no-startup-id xrandr --output $right --auto --right-of $left && xrandr --output $right --primary
 
+
 exec_always --no-startup-id /usr/bin/xcompmgr
 exec_always --no-startup-id xset r rate 130 40
 exec_always --no-startup-id setxkbmap -option caps:super
+
+# disable mouse wheel
+# ```
+# xinput list (to check ID)
+# xinput list ID
+# xinput test
+# xinput set-button-map ID <mouse buttons>
+# ```
+exec_always --no-startup-id xinput set-button-map 12 1 2 3 0 0 6 7 8 9 10 11
+
+# 108 is Alt_R
+# exec --no-startup-id xmodmap -e "keycode 108 = Menu"
+# exec_always --no-startup-id xmodmap -e "keycode 108 = Menu"
 # https://github.com/sagb/alttab
 exec_always --no-startup-id alttab -w 1 -fg "#fabd2f" -bg "#141c21" -frame "#fabd2f" -t 128x150 -i 127x64
 # Redshift, reset settings, and set 3500
@@ -549,7 +553,7 @@ bindsym --release $mod+KP_Subtract exec xkill
 # $mode_system
 # $resize
 # $notify
-set $run [bB]rave, [fF]irefox, [lL - tT]ranslate | [Uppercase: incognito]
+set $run [Bb]rave, [Ff]irefox | [lL - tT]ranslate
 mode "$run" {
   bindsym b exec --no-startup-id brave-browser, mode "default"
   bindsym $sh+b exec --no-startup-id brave-browser --incognito, mode "default"
@@ -601,13 +605,14 @@ bindsym $mod+p mode "$more_workspaces"
 
 
 # set $mode_system [P]ause, [R]eboot, [S]hutdown, | I3:[e]xit, [r]estart, re[l]oad, [c]aps2mod | [w]allpapers
-set $mode_system I3: [r]estart, re[l]oad, [c]aps2mod | [w]allpapers
+set $mode_system I3: [r]estart, re[l]oad, [c]aps2mod, [m]enu_is_alt | [w]allpapers
 mode "$mode_system" {
   # bindsym e exec --no-startup-id i3-msg exit, mode "default"
   bindsym r exec --no-startup-id i3-msg restart, "default"
   bindsym l exec --no-startup-id i3-msg reload, "default"
   bindsym c exec --no-startup-id "setxkbmap -option caps:super", mode "default"
   bindsym w exec --no-startup-id feh --bg-scale --randomize ~/Pictures/wallpapers/*
+  bindsym m exec --no-startup-id xmodmap -e "keycode 108 = Menu", mode "default"
   # bindsym $sh+r exec --no-startup-id reboot, mode "default"
   # bindsym $sh+s exec --no-startup-id shutdown, mode "default"
   # bindsym $sh+p exec --no-startup-id systemctl suspend, mode "default"

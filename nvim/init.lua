@@ -39,5 +39,6 @@ require('plugin_configs.lualine')
 -- require('plugin_configs/nui')
 require('plugin_configs.telescope')
 require('plugin_configs.ui')
+require('functions')
 
 require('plugin_configs.cloak')

@@ -62,18 +62,19 @@ size = 11
 [font.normal]
 # family = "mononoki"
 # family = "Monoid"
+# family = "Terminess Nerd Font Mono"
 family = "Iosevka NF"
 style = "Regular"
 
 [font.bold]
 # family = "mononoki"
-# style = "Bold"
+# family = "Terminess Nerd Font Mono"
 family = "Iosevka NF"
 style = "Bold"
 
 [font.italic]
 # family = "mononoki"
-# style = "Italic"
+# family = "Terminess Nerd Font Mono"
 family = "Iosevka NF"
 style = "Italic"
 

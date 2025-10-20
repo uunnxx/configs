@@ -134,21 +134,10 @@ vim.lsp.enable('rust_analyzer')
 
 -------------------------------------------------------------------------------
 -- Go
--- go install github.com/nametake/golangci-lint-langserver@latest
--- go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
-vim.lsp.config.golangci_lint_ls = {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    cmd = { 'golangci-lint-langserver' },
-    filetypes = { 'go', 'gomod' },
-    init_options = {
-        command = { 'golangci-lint', 'run', '--out-format', 'json' }
-    }
-}
-vim.lsp.enable('golangci_lint_ls')
-
 -- go install golang.org/x/tools/gopls@latest
-vim.lsp.config.gopls = {}
+vim.lsp.config.gopls = {
+    cmd = { "gopls" }
+}
 vim.lsp.enable('gopls')
 
 
@@ -191,7 +180,8 @@ vim.lsp.config.basedpyright = {
                     reportUnusedCallResult = false,
                     reportUnusedVariable = false,
                     reportUnusedImport = false,
-                    reportUnannotatedClassAttribute = false
+                    reportUnannotatedClassAttribute = false,
+                    reportImplicitOverride = false
                 },
                 inlayHints = {
                     callArgumentNames = true,

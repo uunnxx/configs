@@ -21,7 +21,7 @@ cmd [[autocmd FileType text,markdown,html,xhtml,css setlocal cc=0]]
 cmd [[ autocmd FileType xml,html,xhtml,css,scss,javascript,lua,yaml,htmljinja setlocal shiftwidth=4 tabstop=4 ]]
 
 -- Jinja2
-cmd[[ autocmd BufNewFile,BufRead *.html set filetype=htmldjango ]]
+-- cmd[[ autocmd BufNewFile,BufRead *.html set filetype=htmldjango ]]
 
 -- Call `Autoformat` python files on save
 -- cmd[[autocmd BufWritePost,FileWritePost *.py Autoformat]]

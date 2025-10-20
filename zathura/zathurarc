@@ -3,9 +3,9 @@ set sandbox none
 # set sandbox strict
 
 set notification-error-bg       "#282828" # bg
-set notification-error-fg       "#fb4934" # bright:red
+set notification-error-fg       "#FB4934" # bright:red
 set notification-warning-bg     "#282828" # bg
-set notification-warning-fg     "#fabd2f" # bright:yellow
+set notification-warning-fg     "#FABD2F" # bright:yellow
 set notification-bg             "#282828" # bg
 set notification-fg             "#b8bb26" # bright:green
 
@@ -23,23 +23,26 @@ set index-active-bg             "#745C97" # bright:blue
 set index-active-fg             "#FFFFFF" # bg2
 
 set inputbar-bg                 "#282828" # bg
-set inputbar-fg                 "#ebdbb2" # fg
+set inputbar-fg                 "#EBDBB2" # fg
 
 set statusbar-bg                "#745C97" # bg2
 set statusbar-fg                "#FFFFFF" # fg
 
-set highlight-color             "#fabd2f" # bright:yellow
-set highlight-active-color      "#fe8019" # bright:orange
+set highlight-color             "#FABD2FAA" # bright:yellow
+set highlight-fg                "#000000" # bright:black
+
+# set highlight-active-color      "#FABD2FAA" # bright:yellow
+set highlight-active-color      "#FE8019AA" # bright:orange
 
 set default-bg                  "#282828" # bg
-set default-fg                  "#ebdbb2" # fg
+set default-fg                  "#EBDBB2" # fg
 set render-loading              true
 set render-loading-bg           "#282828" # bg
-set render-loading-fg           "#ebdbb2" # fg
+set render-loading-fg           "#EBDBB2" # fg
 
 # Recolor book content's color
 set recolor-lightcolor          "#282828" # bg
-set recolor-darkcolor           "#ebdbb2" # fg
+set recolor-darkcolor           "#EBDBB2" # fg
 set recolor-keephue             true      # keep original color
 set recolor false
 
