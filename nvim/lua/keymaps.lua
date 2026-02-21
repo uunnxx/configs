@@ -6,7 +6,7 @@ local function map(kind, lhs, rhs, opts)
     vim.api.nvim_set_keymap(kind, lhs, rhs, opts)
 end
 
-
+-- map('mode', 'map', 'action', {nowait = bool, noremap = bool, silent = true}, 'description')
 local function map_with_desc(kind, lhs, rhs, base_opts, desc)
     local opts = vim.tbl_extend('force', base_opts, { desc = desc })
     vim.api.nvim_set_keymap(kind, lhs, rhs, opts)
@@ -55,7 +55,7 @@ map_with_desc('n', 'J', 'mjJ`j', silentnoremap, 'Join lines and restore cursor l
 map_with_desc('n', 'U', '<C-r>', silentnoremap, 'Undo')
 map_with_desc('n', '<leader>R', ':redo<CR>', silentnoremap, 'Redo')
 
-           
+
 -- Go to start or end of line easier
 map('n', 'H', 'g0', silentnoremapnowait)
 map('x', 'H', 'g0', silentnoremapnowait)
@@ -119,11 +119,6 @@ map_with_desc('i', '<M-e>', '<ESC>:edit ', noremapnowait, 'Edit [current buffer:
 -- GENERAL
 --
 
--- LSP
-map_with_desc('n', 'gtd', ':Telescope lsp_definitions<CR>', silentnoremap, 'Go to Definitions')
-map_with_desc('n', 'gtt', ':Telescope lsp_type_definitions<CR>', silentnoremap, 'Go to Type Definitions')
-map_with_desc('n', 'gtr', ':Telescope lsp_references<CR>', silentnoremap, 'Go to References')
-map_with_desc('n', 'gti', ':Telescope lsp_implementations<CR>', silentnoremap, 'Go to Implementations')
 
 -- lsp show inlay hints
 vim.keymap.set('n', '<leader>h', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end)
@@ -131,28 +126,8 @@ vim.keymap.set('n', '<leader>h', function() vim.lsp.inlay_hint.enable(not vim.ls
 -- Code Actions
 map_with_desc('n', '<space>ca', ':lua vim.lsp.buf.code_action()<CR>', silentnoremap, 'Code Actions')
 
-
 -- Telescope
-map_with_desc('n', 'TT', ':Telescope ', noremap, 'Open Telescope')
-map_with_desc('n', '<leader>gd', ':Telescope diagnostics<CR>', silentnoremap, 'Telescope Diagnostics')
-map_with_desc('n', 'gst', ':Telescope git_status<CR>', silentnoremap, 'Telescope Git Status')
 map_with_desc('n', '<leader>s', ':Telescope spell_suggest<CR>', silentnoremap, 'Telescope Spell Suggest')
-
--- Find Files
--- without preview
-map_with_desc('n', 'tt', ':Telescope find_files hidden=true no_ignore=true<CR>', noremap, 'Telescope Find Files')
--- preview
-map_with_desc('n', '<C-CR>', ':Telescope fd hidden=true no_ignore=true<CR>', noremapnowait, 'Telescope Find Files [preview]')
-map_with_desc('n', '<S-CR>', ':Telescope buffers<CR>', silentnoremapnowait, 'Telescope Buffers')
-map_with_desc('n', '<S-m>', ':Telescope man_pages sections=1,2,3<CR>', noremapnowait, 'Telescope Man Pages (sections: 1, 2, 3)')
-
--- Split windows
-map_with_desc('n', '<leader><leader>v', '<C-W>v:Telescope find_files hidden=true no_ignore=true<CR>', silentnoremapnowait, 'Telescope Find Files [split virtically]')
-map_with_desc('n', '<leader><leader>h', '<C-W>s:Telescope find_files hidden=true no_ignore=true<CR>', silentnoremapnowait, 'Telescope Find Files [split horizontally]')
-
--- Live Grep
-map_with_desc('n', '<M-f>', ':Telescope live_grep theme=ivy<CR>', noremapnowait, 'Telescope Live Grep')
-map_with_desc('i', '<M-f>', '<C-o>:Telescope live_grep theme=ivy<CR>', noremapnowait, 'Telescope Live Grep')
 
 -- Filetypes
 map_with_desc('n', 'FF', ':Telescope filetypes <CR>', noremapnowait, 'Telescope Select Filetypes')
@@ -189,10 +164,6 @@ map_with_desc('i', '<F11>', '<C-o>:set spell!<CR>', silentnoremap, 'Spell [inser
 -- TAGS
 map_with_desc('n', '<space>tg', ':Telescope tags<CR>', silentnoremap, 'Telescope Tags')
 
--- NvimTree
--- map('n', '<leader>nn', ':NvimTreeRefresh<CR>:NvimTreeToggle<CR>', silentnoremap)
-map_with_desc('n', '<C-n>', ':NvimTreeRefresh<CR>:NvimTreeToggle<CR>', silentnoremapnowait, 'Nvim Tree')
-map_with_desc('i', '<C-n>', '<C-o>:NvimTreeRefresh<CR><C-o>:NvimTreeToggle<CR>', silentnoremapnowait, 'Nvim Tree [insert mode]')
 
 map_with_desc('i', '<down>', '<ESC>ddpi', silentnoremap, 'Move current line down')
 map_with_desc('i', '<up>', '<ESC>ddkPi', silentnoremap, 'Move current line up')
@@ -563,3 +534,103 @@ vim.keymap.set('n', '<leader>l', function()
   local new_config = not vim.diagnostic.config().virtual_lines
   vim.diagnostic.config({ virtual_lines = new_config })
 end, { desc = 'Toggle diagnostic virtual_lines' })
+
+
+
+
+
+-------------------------------------------------------------------------------
+
+
+map_with_desc('n', '<C-n>', ':lua Snacks.explorer()<CR>', silentnoremapnowait, 'Nvim Tree')
+map_with_desc('i', '<C-n>', '<C-o>:lua Snacks.explorer()<CR>', silentnoremapnowait, 'Nvim Tree [insert mode]')
+
+map_with_desc('n', 'TT', '<C-o>:lua Snacks.picker.smart()<CR>', silentnoremapnowait, 'Find Files')
+map_with_desc('n', '<S-CR>', '<C-o>:lua Snacks.picker.files()<CR>', silentnoremapnowait, 'Smart Find Files')
+map_with_desc('n', '<C-CR>', '<C-o>:lua Snacks.picker.buffers()<CR>', silentnoremapnowait, 'Buffers')
+
+map_with_desc('n', '<M-f>', ':lua Snacks.picker.grep()<CR>', noremapnowait, 'Live Grep')
+map_with_desc('i', '<M-f>', '<C-o>:lua Snacks.picker.grep()<CR>', noremapnowait, 'Live Grep')
+
+map_with_desc('n', '<S-m>', ':lua Snacks.picker.man()<CR>', noremapnowait, 'Man Pages')
+
+map_with_desc('n', 'gtd', ':lua Snacks.picker.lsp_definitions()<CR>', silentnoremap, 'Goto Definitions')
+map_with_desc('n', 'gtD', ':lua Snacks.picker.lsp_declarations()<CR>', silentnoremap, 'Goto Declaration')
+map_with_desc('n', 'gtt', ':lua Snacks.picker.lsp_type_definitions()<CR>', silentnoremap, 'Goto Type Definitions')
+map_with_desc('n', 'gtr', ':lua Snacks.picker.lsp_references()<CR>', silentnoremap, 'References')
+map_with_desc('n', 'gti', ':lua Snacks.picker.lsp_implementations()<CR>', silentnoremap, 'Goto Implementations')
+
+map_with_desc('n', '<leader>sd', ':lua Snacks.picker.diagnostics()<CR>', silentnoremap, 'Diagnostics')
+map_with_desc('n', '<leader>sD', ':lua Snacks.picker.diagnostics_buffer()<CR>', silentnoremap, 'Buffer Diagnostics')
+
+
+map_with_desc('n', 'gst', ':lua Snacks.picker.git_status()<CR>', silentnoremap, 'Git Status')
+map_with_desc('n', '<space>bb', ':lua Snacks.picker.git_branches()<CR>', silentnoremap, 'Git Branches')
+map_with_desc('n', '<space>dd', ':lua Snacks.picker.git_diff()<CR>', silentnoremap, 'Git Diff (Hunks)')
+map_with_desc('n', '<space>ss', ':lua Snacks.picker.git_stash()<CR>', silentnoremap, 'Git Stash')
+
+map_with_desc('n', '<space>KK', ':lua Snacks.picker.keymaps()<CR>', silentnoremap, 'Keymaps')
+
+-- map_with_desc('n', '<leader>h', ':lua Snacks.toggle.inlay_hints()<CR>', silentnoremap, 'Inlay Hints')
+
+-- -- git
+-- { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log" },
+-- { "<leader>gL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },
+-- { "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
+-- -- LSP
+-- { "gai", function() Snacks.picker.lsp_incoming_calls() end, desc = "C[a]lls Incoming" },
+-- { "gao", function() Snacks.picker.lsp_outgoing_calls() end, desc = "C[a]lls Outgoing" },
+-- { "<leader>ss", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
+-- { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
+
+-- -- Grep
+-- { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
+-- { "<leader>sB", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
+-- { "<leader>sw", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
+
+-- { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
+-- { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
+-- -- find
+-- { "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
+-- { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
+-- { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
+-- { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
+-- -- gh
+-- { "<leader>gi", function() Snacks.picker.gh_issue() end, desc = "GitHub Issues (open)" },
+-- { "<leader>gI", function() Snacks.picker.gh_issue({ state = "all" }) end, desc = "GitHub Issues (all)" },
+-- { "<leader>gp", function() Snacks.picker.gh_pr() end, desc = "GitHub Pull Requests (open)" },
+-- { "<leader>gP", function() Snacks.picker.gh_pr({ state = "all" }) end, desc = "GitHub Pull Requests (all)" },
+-- -- search
+-- { '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers" },
+-- { '<leader>s/', function() Snacks.picker.search_history() end, desc = "Search History" },
+-- { "<leader>sa", function() Snacks.picker.autocmds() end, desc = "Autocmds" },
+-- { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
+-- { "<leader>sc", function() Snacks.picker.command_history() end, desc = "Command History" },
+-- { "<leader>sC", function() Snacks.picker.commands() end, desc = "Commands" },
+-- { "<leader>sh", function() Snacks.picker.help() end, desc = "Help Pages" },
+-- { "<leader>sH", function() Snacks.picker.highlights() end, desc = "Highlights" },
+-- { "<leader>si", function() Snacks.picker.icons() end, desc = "Icons" },
+-- { "<leader>sj", function() Snacks.picker.jumps() end, desc = "Jumps" },
+-- { "<leader>sk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
+-- { "<leader>sl", function() Snacks.picker.loclist() end, desc = "Location List" },
+-- { "<leader>sm", function() Snacks.picker.marks() end, desc = "Marks" },
+-- { "<leader>sp", function() Snacks.picker.lazy() end, desc = "Search for Plugin Spec" },
+-- { "<leader>sq", function() Snacks.picker.qflist() end, desc = "Quickfix List" },
+-- { "<leader>sR", function() Snacks.picker.resume() end, desc = "Resume" },
+-- { "<leader>su", function() Snacks.picker.undo() end, desc = "Undo History" },
+-- { "<leader>uC", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
+-- -- Other
+-- { "<leader>z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
+-- { "<leader>Z",  function() Snacks.zen.zoom() end, desc = "Toggle Zoom" },
+-- { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
+-- { "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
+-- { "<leader>n",  function() Snacks.notifier.show_history() end, desc = "Notification History" },
+-- { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
+-- { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File" },
+-- { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse", mode = { "n", "v" } },
+-- { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
+-- { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
+-- { "<c-/>",      function() Snacks.terminal() end, desc = "Toggle Terminal" },
+-- { "<c-_>",      function() Snacks.terminal() end, desc = "which_key_ignore" },
+-- { "]]",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
+-- { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },

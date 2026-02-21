@@ -7,6 +7,7 @@ local g     = vim.g               -- Global
 
 
 
+vim.lsp.set_log_level("off")
 
 -- disable netrw [disabling it will block some plugins, like open in Browser]
 -- g.loaded_netrw =  1
@@ -179,7 +180,7 @@ set.path = {'.','/usr/include', '**'}
 set.cindent = true                  -- Copy indent from previous line
 
 set.updatetime = 4000
-set.timeoutlen = 200  -- wait for mapped key sequence in ms
+set.timeoutlen = 300  -- wait for mapped key sequence in ms
 -- set.ttimeoutlen = 5
 
 
