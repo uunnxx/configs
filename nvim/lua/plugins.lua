@@ -9,24 +9,22 @@ vim.g.loaded_matchparen = 1
 vim.g.matchparen_timeout = 2
 vim.g.matchparen_insert_timeout = 2
 
-vim.g.user_emmet_leader_key = "<space><space>"
-
 return require("lazy").setup({
 	"nvim-telescope/telescope.nvim",
+	"nvim-lua/plenary.nvim", -- do not remove [dependencies]
+	"neovim/nvim-lspconfig", -- do not remove [dependencies]
+	"nvim-tree/nvim-web-devicons", -- do not remove [dependencies]
 
 	-- Diffview
 	"sindrets/diffview.nvim",
 
 	{ "tzachar/local-highlight.nvim", opts = {} },
-
 	{ "ellisonleao/gruvbox.nvim", priority = 1000, config = true },
-
 	{ "nvim-lualine/lualine.nvim", event = "VeryLazy" },
 
 	{
 		-- Simple winbar/statusline plugin that shows your current code context
 		"SmiteshP/nvim-navic",
-		dependencies = "neovim/nvim-lspconfig",
 	},
 
 	{
@@ -34,7 +32,6 @@ return require("lazy").setup({
 		priority = 1000,
 		lazy = false,
 		opts = {
-
 			notifier = {
 				enabled = true,
 				timeout = 3000,
@@ -45,12 +42,25 @@ return require("lazy").setup({
 			dashboard = { enabled = true },
 			bigfile = { enabled = true },
 			scroll = { enabled = true },
-			picker = { enabled = true },
-
-			input = { enabled = false },
-			scope = { enabled = false },
-			words = { enabled = false },
-			statuscolumn = { enabled = false },
+			picker = {
+				win = {
+					input = {
+						keys = {
+							-- Remap Tab to move down (instead of select_and_next)
+							["<Tab>"] = { "list_down", mode = { "i", "n" } },
+							-- Remap Shift-Tab to move up (instead of select_and_prev)
+							["<S-Tab>"] = { "list_up", mode = { "i", "n" } },
+							-- Remap Space to toggle selection
+							["<C-Space>"] = { "select_and_next", mode = { "i", "n" } },
+							["<S-Space>"] = { "select_and_prev", mode = { "i", "n" } },
+						},
+					},
+				},
+			},
+			input = { enabled = true },
+			scope = { enabled = true },
+			words = { enabled = true },
+			statuscolumn = { enabled = true },
 
 			styles = {
 				notification = {
@@ -58,13 +68,20 @@ return require("lazy").setup({
 				},
 			},
 		},
+		keys = {
+			{
+				"TT",
+				-- custom command-palette function
+				function()
+					require("command-palette").show_commands()
+				end,
+				desc = "Command Palette",
+			},
+		},
 	},
 
 	-- Git
-	{
-		"lewis6991/gitsigns.nvim",
-		dependencies = "nvim-lua/plenary.nvim",
-	},
+	"lewis6991/gitsigns.nvim",
 	-- use {'kdheepak/lazygit.nvim'}
 
 	-- Glow (markdown viewer)
@@ -111,6 +128,24 @@ return require("lazy").setup({
 		lazy = false,
 		build = ":TSUpdate",
 	},
+	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		branch = "main",
+		init = function()
+			-- Disable entire built-in ftplugin mappings to avoid conflicts.
+			-- See https://github.com/neovim/neovim/tree/master/runtime/ftplugin for built-in ftplugins.
+			vim.g.no_plugin_maps = true
+
+			-- Or, disable per filetype (add as you like)
+			-- vim.g.no_python_maps = true
+			-- vim.g.no_ruby_maps = true
+			-- vim.g.no_rust_maps = true
+			-- vim.g.no_go_maps = true
+		end,
+		config = function()
+			-- put your config here
+		end,
+	},
 
 	"neovim/nvim-lspconfig",
 	-- lsp installer
@@ -127,7 +162,6 @@ return require("lazy").setup({
 
 	{
 		"folke/trouble.nvim",
-		dependencies = "nvim-tree/nvim-web-devicons",
 		opts = {},
 		cmd = "Trouble",
 		keys = {
@@ -155,7 +189,6 @@ return require("lazy").setup({
 	"ray-x/cmp-sql",
 	{
 		"vrslev/cmp-pypi",
-		dependencies = { "nvim-lua/plenary.nvim" },
 		ft = "toml",
 	},
 	"hrsh7th/cmp-calc",
@@ -240,7 +273,7 @@ return require("lazy").setup({
 	-- Basic
 	{
 		"kylechui/nvim-surround",
-		version = "*", -- Use for stability; omit to use `main` branch for the latest features
+		version = "^4.0.0", -- Use for stability; omit to use `main` branch for the latest features
 		event = "VeryLazy",
 		config = function()
 			require("nvim-surround").setup({
@@ -256,17 +289,25 @@ return require("lazy").setup({
 	"tpope/vim-unimpaired",
 	-- 'tpope/vim-surround',
 	-- 'tpope/vim-repeat',
-	-- 'mhinz/vim-startify',
-
 	{
-		"mattn/emmet-vim",
+		"olrtg/nvim-emmet",
 		config = function()
-			vim.g.user_emmet_install_global = 0
-			vim.g.user_emmet_mode = "i"
+			vim.keymap.set({ "n", "v" }, "<space><space><leader>", require("nvim-emmet").wrap_with_abbreviation)
 		end,
-		event = "VeryLazy",
-		ft = { "html", "css", "erb", "htmldjango", "html5" },
 	},
 
 	{ "https://github.com/laytan/cloak.nvim" },
+
+	{
+		"tajirhas9/muslim.nvim",
+		lazy = false,
+	},
+
+	{
+		"jiaoshijie/undotree",
+		opts = {},
+		-- keys = { -- load the plugin only when using it's keybinding:
+		-- 	{ "<leader>u", "<cmd>lua require('undotree').toggle()<cr>" },
+		-- },
+	},
 })

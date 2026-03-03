@@ -223,3 +223,7 @@ if g.neovide then
     vim.o.guifont = "Iosevka NF:h11"
     vim.opt.termguicolors=true
 end
+
+-- Mise
+-- Prepend mise shims to PATH
+vim.env.PATH = vim.env.HOME .. "/.local/share/mise/shims:" .. vim.env.PATH

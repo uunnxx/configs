@@ -37,6 +37,7 @@ require("plugin_configs.lsp_configs")
 require("plugin_configs.lualine")
 require("plugin_configs.telescope")
 require("plugin_configs.ui")
+require("plugin_configs.cloak")
+
 require("functions")
 
-require("plugin_configs.cloak")

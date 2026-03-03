@@ -5,7 +5,7 @@ require("nvim-treesitter").setup({
 })
 
 require("nvim-treesitter").install({
-	ensure_installed = { "python" },
+	ensure_installed = { "python", "html", "htmldjango", "ruby", "javascript" },
 	highlight = {
 		enable = true, -- Enable general highlighting,
 		additional_vim_regex_highlighting = true,
@@ -14,7 +14,7 @@ require("nvim-treesitter").install({
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "python" },
+	pattern = { "python", "htmldjango", "ruby", "javascript" },
 	callback = function()
 		vim.treesitter.start()
 	end,
@@ -82,8 +82,10 @@ require("trouble").setup({
 	use_diagnostic_signs = false, -- enabling this will use the signs defined in your lsp client
 })
 
+
+-- (some text)
 -------------------------------------------------------------------------------
--- Surround
+-- tpope's surround plugin
 -- Sv or S{ for a variable
 -- Sb       for a block
 -- Si       for an if statement
@@ -92,16 +94,16 @@ require("trouble").setup({
 -- Sf       for a for statement
 -- S%       for other template tags
 
-vim.cmd([[
-    let b:surround_{char2nr('v')} = '{{ \r }}'
-    let b:surround_{char2nr('{')} = '{{ \r }}'
-    let b:surround_{char2nr('%')} = '{% \r %}'
-    let b:surround_{char2nr('b')} = '{% block \1block name: \1 %}\r{% endblock \1\1 %}'
-    let b:surround_{char2nr('i')} = '{% if \1condition: \1 %}\r{% endif %}'
-    let b:surround_{char2nr('w')} = '{% with \1with: \1 %}\r{% endwith %}'
-    let b:surround_{char2nr('f')} = '{% for \1for loop: \1 %}\r{% endfor %}'
-    let b:surround_{char2nr('c')} = '{% comment %}\r{% endcomment %}'
-]])
+-- vim.cmd([[
+--     let b:surround_{char2nr('v')} = '{{ \r }}'
+--     let b:surround_{char2nr('{')} = '{{ \r }}'
+--     let b:surround_{char2nr('%')} = '{% \r %}'
+--     let b:surround_{char2nr('b')} = '{% block \1block name: \1 %}\r{% endblock \1\1 %}'
+--     let b:surround_{char2nr('i')} = '{% if \1condition: \1 %}\r{% endif %}'
+--     let b:surround_{char2nr('w')} = '{% with \1with: \1 %}\r{% endwith %}'
+--     let b:surround_{char2nr('f')} = '{% for \1for loop: \1 %}\r{% endfor %}'
+--     let b:surround_{char2nr('c')} = '{% comment %}\r{% endcomment %}'
+-- ]])
 
 require("conform").setup({
 	formatters_by_ft = {
@@ -114,4 +116,17 @@ require("conform").setup({
 		-- Conform will run the first available formatter
 		javascript = { "prettierd", "prettier", stop_after_first = true },
 	},
+})
+
+local muslim = require("muslim")
+muslim.setup({
+	latitude = 55.9650759,
+	longitude = 38.0545058,
+	timezone = "Europe/Moscow",
+	utc_offset = 3,
+	refresh = 1,
+	school = "hanafi",
+	method = "Russia",
+    time_format = '24H',
+    countdown_only = true
 })

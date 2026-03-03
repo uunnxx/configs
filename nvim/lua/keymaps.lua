@@ -14,6 +14,7 @@ end
 
 
 local noremap = { noremap = true }
+local expr_noremap = { expr = true, noremap = true }
 local noremapnowait = { noremap = true, nowait = true }
 local silentnoremap = { noremap = true, silent = true }
 local silentnoremapnowait = { nowait = true, noremap = true, silent = true }
@@ -62,6 +63,9 @@ map('x', 'H', 'g0', silentnoremapnowait)
 map('n', 'L', 'g_', silentnoremapnowait)
 map('x', 'L', 'g_', silentnoremapnowait)
 
+map('n', '<space>o', 'o<ESC>', silentnoremapnowait)
+map('n', '<space>O', 'O<ESC>', silentnoremapnowait)
+
 
 -- Find and replace
 map_with_desc('n', '<C-h>', ':%s/\\C\\<<C-r><C-w>\\>//g<left><left>', noremapnowait, 'Find and Replace Current Word')
@@ -70,12 +74,11 @@ map_with_desc('x', '<C-h>', ':s/', noremapnowait, 'Find and Replace')
 
 
 
--- Treat long lines as break lines unless we had count
--- I don't know how to get this effect in Lua
-vim.cmd [[
-    nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
-    nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
-]]
+-- nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
+-- nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
+
+map_with_desc('n', 'k', "v:count == 0 ? 'gk' : 'k'", expr_noremap, 'Treat long lines as break lines unless we had count')
+map_with_desc('n', 'j', "v:count == 0 ? 'gj' : 'j'", expr_noremap, 'Treat long lines as break lines unless we had count')
 
 
 
@@ -123,16 +126,9 @@ map_with_desc('i', '<M-e>', '<ESC>:edit ', noremapnowait, 'Edit [current buffer:
 -- lsp show inlay hints
 vim.keymap.set('n', '<leader>h', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end)
 
--- Code Actions
 map_with_desc('n', '<space>ca', ':lua vim.lsp.buf.code_action()<CR>', silentnoremap, 'Code Actions')
-
--- Telescope
 map_with_desc('n', '<leader>s', ':Telescope spell_suggest<CR>', silentnoremap, 'Telescope Spell Suggest')
-
--- Filetypes
 map_with_desc('n', 'FF', ':Telescope filetypes <CR>', noremapnowait, 'Telescope Select Filetypes')
-
--- Gitsigns
 map_with_desc('n', 'git', ':Gitsigns<CR>', noremapnowait, 'Gitsigns')
 
 -------------------------------------------------------------------------------
@@ -540,13 +536,14 @@ end, { desc = 'Toggle diagnostic virtual_lines' })
 
 
 -------------------------------------------------------------------------------
+--- Snacks
 
 
 map_with_desc('n', '<C-n>', ':lua Snacks.explorer()<CR>', silentnoremapnowait, 'Nvim Tree')
 map_with_desc('i', '<C-n>', '<C-o>:lua Snacks.explorer()<CR>', silentnoremapnowait, 'Nvim Tree [insert mode]')
 
-map_with_desc('n', 'TT', '<C-o>:lua Snacks.picker.smart()<CR>', silentnoremapnowait, 'Find Files')
-map_with_desc('n', '<S-CR>', '<C-o>:lua Snacks.picker.files()<CR>', silentnoremapnowait, 'Smart Find Files')
+map_with_desc('n', 'tt', '<C-o>:lua Snacks.picker.smart()<CR>', silentnoremapnowait, 'Find Files [smart]')
+map_with_desc('n', '<S-CR>', '<C-o>:lua Snacks.picker.files()<CR>', silentnoremapnowait, 'Find Files')
 map_with_desc('n', '<C-CR>', '<C-o>:lua Snacks.picker.buffers()<CR>', silentnoremapnowait, 'Buffers')
 
 map_with_desc('n', '<M-f>', ':lua Snacks.picker.grep()<CR>', noremapnowait, 'Live Grep')
@@ -577,6 +574,7 @@ map_with_desc('n', '<space>KK', ':lua Snacks.picker.keymaps()<CR>', silentnorema
 -- { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log" },
 -- { "<leader>gL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },
 -- { "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
+--
 -- -- LSP
 -- { "gai", function() Snacks.picker.lsp_incoming_calls() end, desc = "C[a]lls Incoming" },
 -- { "gao", function() Snacks.picker.lsp_outgoing_calls() end, desc = "C[a]lls Outgoing" },

@@ -137,3 +137,56 @@ cmd[[
 
 -- Disable number in terminal
 cmd[[autocmd TermOpen * setlocal nonumber norelativenumber]]
+
+
+-- nvim-cmp highlights
+
+-- Gruvbox (dark) colors for nvim-cmp
+vim.api.nvim_set_hl(0, "PmenuSel", { fg = "#1d2021", bg = "#d79921" })          -- selected item (dark2)
+vim.api.nvim_set_hl(0, "Pmenu", { fg = "#bdae93", bg = "#282828" })          -- menu background (light0 / dark1)
+
+vim.api.nvim_set_hl(0, "CmpItemAbbrDeprecated", { fg = "#928374", bg = "NONE", strikethrough = true }) -- gray
+vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { fg = "#83a598", bg = "NONE", bold = true })               -- bright blue
+vim.api.nvim_set_hl(0, "CmpItemAbbrMatchFuzzy", { fg = "#83a598", bg = "NONE", bold = true })          -- bright blue
+vim.api.nvim_set_hl(0, "CmpItemMenu", { fg = "#928374", bg = "NONE", italic = true })                   -- purple
+
+-- Field / Property / Event  -> red
+vim.api.nvim_set_hl(0, "CmpItemKindField", { fg = "#ffffff", bg = "#cc241d" })
+vim.api.nvim_set_hl(0, "CmpItemKindProperty", { fg = "#ffffff", bg = "#cc241d" })
+vim.api.nvim_set_hl(0, "CmpItemKindEvent", { fg = "#ffffff", bg = "#cc241d" })
+
+-- Text / Enum / Keyword  -> green
+vim.api.nvim_set_hl(0, "CmpItemKindText", { fg = "#ffffff", bg = "#b8bb26" })
+vim.api.nvim_set_hl(0, "CmpItemKindEnum", { fg = "#ffffff", bg = "#b8bb26" })
+vim.api.nvim_set_hl(0, "CmpItemKindKeyword", { fg = "#ffffff", bg = "#b8bb26" })
+
+-- Constant / Constructor / Reference  -> yellow
+vim.api.nvim_set_hl(0, "CmpItemKindConstant", { fg = "#1d2021", bg = "#d79921" })
+vim.api.nvim_set_hl(0, "CmpItemKindConstructor", { fg = "#1d2021", bg = "#d79921" })
+vim.api.nvim_set_hl(0, "CmpItemKindReference", { fg = "#1d2021", bg = "#d79921" })
+
+-- Function / Struct / Class / Module / Operator  -> purple
+vim.api.nvim_set_hl(0, "CmpItemKindFunction", { fg = "#ffffff", bg = "#b16286" })
+vim.api.nvim_set_hl(0, "CmpItemKindStruct", { fg = "#ffffff", bg = "#b16286" })
+vim.api.nvim_set_hl(0, "CmpItemKindClass", { fg = "#ffffff", bg = "#b16286" })
+vim.api.nvim_set_hl(0, "CmpItemKindModule", { fg = "#ffffff", bg = "#b16286" })
+vim.api.nvim_set_hl(0, "CmpItemKindOperator", { fg = "#ffffff", bg = "#b16286" })
+
+-- Variable / File  -> light gray on dark gray
+vim.api.nvim_set_hl(0, "CmpItemKindVariable", { fg = "#ffffff", bg = "#a89984" })
+vim.api.nvim_set_hl(0, "CmpItemKindFile", { fg = "#ffffff", bg = "#a89984" })
+
+-- Unit / Snippet / Folder  -> aqua
+vim.api.nvim_set_hl(0, "CmpItemKindUnit", { fg = "#ffffff", bg = "#689d6a" })
+vim.api.nvim_set_hl(0, "CmpItemKindSnippet", { fg = "#ffffff", bg = "#689d6a" })
+vim.api.nvim_set_hl(0, "CmpItemKindFolder", { fg = "#ffffff", bg = "#689d6a" })
+
+-- Method / Value / EnumMember  -> blue
+vim.api.nvim_set_hl(0, "CmpItemKindMethod", { fg = "#ffffff", bg = "#458588" })
+vim.api.nvim_set_hl(0, "CmpItemKindValue", { fg = "#ffffff", bg = "#458588" })
+vim.api.nvim_set_hl(0, "CmpItemKindEnumMember", { fg = "#ffffff", bg = "#458588" })
+
+-- Interface / Color / TypeParameter  -> orange
+vim.api.nvim_set_hl(0, "CmpItemKindInterface", { fg = "#ffffff", bg = "#d65d0e" })
+vim.api.nvim_set_hl(0, "CmpItemKindColor", { fg = "#ffffff", bg = "#d65d0e" })
+vim.api.nvim_set_hl(0, "CmpItemKindTypeParameter", { fg = "#ffffff", bg = "#d65d0e" })

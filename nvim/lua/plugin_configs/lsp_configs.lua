@@ -4,8 +4,8 @@ local navic = require("nvim-navic")
 
 -- This will watch changed files so I don't have to :LspRestart every fucking time when I created a new fucking file
 capabilities.workspace = {
-		didChangeWatchedFiles = {
-			dynamicRegistration = true,
+	didChangeWatchedFiles = {
+		dynamicRegistration = true,
 	},
 }
 capabilities.positionEncodings = "utf-16"
@@ -202,13 +202,62 @@ vim.lsp.config.basedpyright = {
 }
 vim.lsp.enable("basedpyright")
 
+vim.lsp.config("emmet_language_server", {
+	on_attach = on_attach,
+	capabilities = capabilities,
+	filetypes = {
+		"css",
+		"eruby",
+		"html",
+		"javascript",
+		"javascriptreact",
+		"less",
+		"sass",
+		"scss",
+		"pug",
+		"typescriptreact",
+	},
+    root_markers = { },
+	-- Read more about this options in the [vscode docs](https://code.visualstudio.com/docs/editor/emmet#_emmet-configuration).
+	-- **Note:** only the options listed in the table are supported.
+	init_options = {
+		---@type table<string, string>
+		includeLanguages = {},
+		--- @type string[]
+		excludeLanguages = {},
+		--- @type string[]
+		extensionsPath = {},
+		--- @type table<string, any> [Emmet Docs](https://docs.emmet.io/customization/preferences/)
+		preferences = {},
+		--- @type boolean Defaults to `true`
+		showAbbreviationSuggestions = true,
+		--- @type "always" | "never" Defaults to `"always"`
+		showExpandedAbbreviation = "always",
+		--- @type boolean Defaults to `false`
+		showSuggestionsAsSnippets = false,
+		--- @type table<string, any> [Emmet Docs](https://docs.emmet.io/customization/syntax-profiles/)
+		syntaxProfiles = {},
+		--- @type table<string, string> [Emmet Docs](https://docs.emmet.io/customization/snippets/#variables)
+		variables = {},
+	},
+})
+
+vim.lsp.enable("emmet_language_server")
+
 -- pip install pylyzer
 -- It's not ready. It can't find virtually installed modules [issue #22]
 
 -- pip install ruff-lsp
 vim.lsp.config.ruff = {
 	on_attach = on_attach,
-    capabilities = capabilities
+	-- capabilities = capabilities
+	init_options = {
+		settings = {
+			lint = {
+				-- ignore = { 'F401' }
+			},
+		},
+	},
 }
 vim.lsp.enable("ruff")
 
