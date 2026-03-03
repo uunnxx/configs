@@ -82,7 +82,6 @@ require("trouble").setup({
 	use_diagnostic_signs = false, -- enabling this will use the signs defined in your lsp client
 })
 
-
 -- (some text)
 -------------------------------------------------------------------------------
 -- tpope's surround plugin
@@ -127,6 +126,16 @@ muslim.setup({
 	refresh = 1,
 	school = "hanafi",
 	method = "Russia",
-    time_format = '24H',
-    countdown_only = true
+	time_format = "24H",
+	countdown_only = true,
+	offset = {
+		fajr = -15,
+		sunrise = -5,
+		dhuhr = 5,
+		asr = 0,
+		sunset = 0,
+		maghrib = 4,
+		isha = 0,
+		midnight = 0,
+	},
 })
