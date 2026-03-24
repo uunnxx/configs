@@ -549,13 +549,16 @@ bindsym --release $mod+KP_Subtract exec xkill
 # $mode_system
 # $resize
 # $notify
-set $run [Bb]rave, [Ff]irefox | [lL - tT]ranslate
+set $run [Bb]rave, [Ff]irefox, [Cc]hrome | [lL - tT]ranslate
 mode "$run" {
     bindsym b exec --no-startup-id brave-browser, mode "default"
     bindsym $sh+b exec --no-startup-id brave-browser --incognito, mode "default"
 
     bindsym f exec --no-startup-id firefox, mode "default"
     bindsym $sh+f exec --no-startup-id firefox --private-window, mode "default"
+
+    bindsym c exec --no-startup-id google-chrome, mode "default"
+    bindsym $sh+c exec --no-startup-id google-chrome --incognito, mode "default"
 
     bindsym t exec --no-startup-id $trans_en, mode "default"
     bindsym $sh+t exec --no-startup-id $trans_ru, mode "default"
