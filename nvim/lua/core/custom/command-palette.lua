@@ -373,38 +373,15 @@ M.commands = {
 
 	{
 		name = "Duplicate selection and comment original",
-		action = 'functions.duplicate_and_comment',
+		action = "functions.duplicate_and_comment",
 		keys = "",
 	},
 
 	{
 		name = "Source Nvim",
-		action = ':source ~/.config/nvim/init.lua',
+		action = ":source ~/.config/nvim/init.lua",
 		keys = "<F2>",
 	},
-
-	{
-		name = "Test",
-		action = ':echo $MYVIMRC',
-		keys = "<F2>",
-	},
-
-	-- { "<leader>si", function() Snacks.picker.icons() end, desc = "Icons" },
-	-- { "<leader>sj", function() Snacks.picker.jumps() end, desc = "Jumps" },
-	-- { "<leader>sl", function() Snacks.picker.loclist() end, desc = "Location List" },
-	-- { "<leader>sm", function() Snacks.picker.marks() end, desc = "Marks" },
-	-- { "<leader>sR", function() Snacks.picker.resume() end, desc = "Resume" },
-	-- { "<leader>su", function() Snacks.picker.undo() end, desc = "Undo History" },
-	-- { "<leader>z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
-	-- { "<leader>Z",  function() Snacks.zen.zoom() end, desc = "Toggle Zoom" },
-	-- { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
-	-- { "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
-	-- { "<leader>n",  function() Snacks.notifier.show_history() end, desc = "Notification History" },
-	-- { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
-	-- { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File" },
-	-- { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse", mode = { "n", "v" } },
-	-- { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
-	-- { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
 }
 
 -------------------------------------------------------------------------------

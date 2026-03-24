@@ -182,6 +182,7 @@ vim.lsp.config.basedpyright = {
 					reportUnknownLambdaType = false,
 					reportUnusedCallResult = false,
 					reportUnusedVariable = false,
+					reportUnusedParameter = true,
 					reportUnusedImport = false,
 					reportUnannotatedClassAttribute = false,
 					reportImplicitOverride = false,

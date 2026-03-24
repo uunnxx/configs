@@ -42,6 +42,9 @@ set.encoding = 'utf-8'
 -- Set how many lines of history Vim has to remember
 set.history = 1000
 
+
+set.fixendofline = true
+set.endofline = true
 -------------------------------------------------------------------------------
 -------------------- Tabs and spaces
 -------------------------------------------------------------------------------

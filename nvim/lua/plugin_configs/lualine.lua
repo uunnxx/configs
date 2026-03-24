@@ -41,17 +41,17 @@ require("lualine").setup({
 
 		-- %B hex code
 		lualine_x = {
-			{
-				function()
-					local ok, muslim = pcall(require, "muslim")
-					if ok and muslim.prayer_time then
-						return muslim.prayer_time()
-					end
-					return ""
-				end,
-				id = "muslim.nvim",
-				color = { fg = "#83a598", bg = "#282828", gui = "bold" }, -- for style check [:h attr-list]
-			},
+			-- {
+			-- 	function()
+			-- 		local ok, muslim = pcall(require, "muslim")
+			-- 		if ok and muslim.prayer_time then
+			-- 			return muslim.prayer_time()
+			-- 		end
+			-- 		return ""
+			-- 	end,
+			-- 	id = "muslim.nvim",
+			-- 	color = { fg = "#83a598", bg = "#282828", gui = "bold" }, -- for style check [:h attr-list]
+			-- },
 			"lsp_status",
 			{
 				"diagnostics",

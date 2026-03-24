@@ -4,9 +4,43 @@ return {
 		global = {},
 		namu_symbols = { -- Specific Module options
 			options = {
-                display = {
-                    format = "tree_guides"
-                },
+				AllowKinds = {
+					default = {
+						"Function",
+						"Method",
+						"Class",
+						"Module",
+						"Property",
+						"Variable",
+						"Constant",
+						"Enum",
+						"Interface",
+						"Field",
+						"Struct",
+					},
+					go = {
+						"Function",
+						"Method",
+						"Struct", -- For struct definitions
+						"Field", -- For struct fields
+						"Interface",
+						"Constant",
+						-- "Variable",
+						"Property",
+						-- "TypeParameter", -- For type parameters if using generics
+					},
+					lua = { "Function", "Method", "Table", "Module" },
+					python = { "Function", "Class", "Method" },
+					-- Filetype specific
+					yaml = { "Object", "Array" },
+					json = { "Module" },
+					toml = { "Object" },
+					markdown = { "String" },
+				},
+
+				display = {
+					format = "tree_guides",
+				},
 				movement = {
 					next = { "<Tab>", "<DOWN>" }, -- Support multiple keys
 					previous = { "<S-Tab>", "<UP>" }, -- Support multiple keys
@@ -20,9 +54,9 @@ return {
 					indicator = "●", -- or "✓"◉
 					keymaps = {
 						toggle = "<C-n>",
+						untoggle = "<C-p>",
 						select_all = "<C-a>",
 						clear_all = "<C-l>",
-						untoggle = "<C-p>",
 					},
 					max_items = nil, -- No limit by default
 				},
@@ -51,12 +85,12 @@ return {
 	},
 
 	-- === Suggested Keymaps: ===
-	vim.keymap.set("n", "<leader>ss", ":Namu symbols<cr>", {
+	vim.keymap.set("n", "<C-t>", ":Namu symbols<cr>", {
 		desc = "Jump to LSP symbol",
 		silent = true,
 	}),
-	vim.keymap.set("n", "<leader>sw", ":Namu workspace<cr>", {
-		desc = "LSP Symbols - Workspace",
-		silent = true,
-	}),
+	-- vim.keymap.set("n", "<leader>sw", ":Namu workspace<cr>", {
+	-- 	desc = "LSP Symbols - Workspace",
+	-- 	silent = true,
+	-- }),
 }

@@ -187,7 +187,6 @@ vim.api.nvim_set_hl(0, "CmpItemKindInterface", { fg = "#ffffff", bg = "#d65d0e" 
 vim.api.nvim_set_hl(0, "CmpItemKindColor", { fg = "#ffffff", bg = "#d65d0e" })
 vim.api.nvim_set_hl(0, "CmpItemKindTypeParameter", { fg = "#ffffff", bg = "#d65d0e" })
 
-
 -- Example: Make the selected item in the namu list stand out with a custom background
 vim.api.nvim_set_hl(0, "NamuSelect", { bg = "#2b294a", bold = true })
 
@@ -196,8 +195,8 @@ vim.api.nvim_set_hl(0, "NamuSelect", { bg = "#2b294a", bold = true })
 
 vim.api.nvim_set_hl(0, "NamuPreview", {
 	fg = "NONE",
-	bg = "#3c3836",
-	-- bg = "#442e2d",
-	bold = false,
-    force = true
+	-- bg = "#3c3836",
+	bg = "#442e2d",
+	bold = true,
+	force = true,
 })

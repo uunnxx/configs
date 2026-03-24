@@ -14,7 +14,7 @@ require("nvim-treesitter").install({
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "python", "htmldjango", "ruby", "javascript" },
+	pattern = { "python", "htmldjango", "ruby", "javascript", "html", "css", "lua" },
 	callback = function()
 		vim.treesitter.start()
 	end,
