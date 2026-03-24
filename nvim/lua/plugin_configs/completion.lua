@@ -12,30 +12,37 @@ end
 cmp.setup({
 	window = {
 		completion = {
-            border = "single", -- single / rounded / none
+			border = "single", -- single / rounded / none
 			autocompletion = false,
 			winhighlight = "Normal:CmpPmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
 			-- winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
 			col_offset = -3,
 			side_padding = 0,
 		},
-        documentation = {
-            border = 'single', -- single / rounded / none
+		documentation = {
+			border = "single", -- single / rounded / none
 			winhighlight = "Normal:CmpPmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
-        }
+		},
 	},
 	formatting = {
 		-- fields = { "kind", "abbr", "menu" },
 		fields = { "icon", "abbr", "menu" },
 		format = function(entry, vim_item)
+			local highlight_info = require("colorful-menu").cmp_highlights(entry)
+
+			if highlight_info ~= nil then
+			    vim_item.abbr_hl_group = highlight_info.highlights
+			    vim_item.abbr = highlight_info.text
+			end
+
 			local kind = lspkind.cmp_format({
 				mode = "symbol_text",
 				maxwidth = {
-					menu = 25, -- leading text (labelDetails)
-					abbr = 25, -- actual suggestion item
+					menu = 10, -- leading text (labelDetails)
+					abbr = 100, -- actual suggestion item
 				},
 				ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
-				show_labelDetails = true, -- show labelDetails in menu. Disabled by default
+				show_labelDetails = false, -- show labelDetails in menu. Disabled by default
 				menu = {
 					async_path = "[PATH] ",
 					buffer = "[BUF] ",
@@ -44,45 +51,13 @@ cmp.setup({
 					sql = "[SQL] ",
 					snippy = "[SNIP] ",
 					dotenv = "[ENV] ",
-					pypi = "[VER] ",
+					pypi = "[VERS] ",
 					calc = "[CALC] ",
 				},
-			})(entry, vim_item)
+			})(entry, vim.deepcopy(vim_item))
 			kind.icon = " " .. (kind.icon or "") .. "  "
-			-- kind.kind = "   [" .. (kind.kind or "") .. "]"
-
 			return kind
 		end,
-		-- format = lspkind.cmp_format({
-		-- 	mode = "symbol_text",
-		-- 	menu = {
-		-- 		async_path = "[PATH] ",
-		-- 		buffer = "[BUF] ",
-		-- 		nvim_lsp = "[LSP] ",
-		-- 		nvim_lua = "[LUA] ",
-		-- 		sql = "[SQL] ",
-		-- 		snippy = "[SNIP] ",
-		-- 		dotenv = "[ENV] ",
-		-- 		pypi = "[VER] ",
-		-- 		calc = "[CALC] ",
-		-- 	},
-		-- 	maxwidth = {
-		-- 		-- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-		-- 		-- can also be a function to dynamically calculate max width such as
-		-- 		-- menu = function() return math.floor(0.45 * vim.o.columns) end,
-		-- 		menu = 25, -- leading text (labelDetails)
-		-- 		abbr = 25, -- actual suggestion item
-		-- 	},
-		-- 	ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
-		-- 	show_labelDetails = true, -- show labelDetails in menu. Disabled by default
-		--
-		-- 	-- The function below will be called before any actual modifications from lspkind
-		-- 	-- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
-		-- 	before = function(entry, vim_item)
-		-- 		-- ...
-		-- 		return vim_item
-		-- 	end,
-		-- }),
 	},
 
 	snippet = {
@@ -156,4 +131,8 @@ cmp.setup.cmdline(":", {
 	}, {
 		{ name = "cmdline" },
 	}),
+})
+
+cmp.setup.filetype({"namu_prompt", "namu_sidebar"}, {
+    enabled = false
 })

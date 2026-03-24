@@ -1,5 +1,7 @@
 local M = {}
 
+local functions = require("core.functions")
+
 -------------------------------------------------------------------------------
 --- Commands
 M.commands = {
@@ -257,12 +259,12 @@ M.commands = {
 	{
 		name = "Close current buffer",
 		action = ":bd",
-		keys = "<leader><leader><space>",
+		keys = "<space><space>q",
 	},
 	{
 		name = "Close all buffers but current",
 		action = ":%bd <bar> e# <bar> bd#",
-		keys = "<leader><leader>w",
+		keys = "<space><space>Q",
 	},
 	{
 		name = "Copy Entire File",
@@ -300,9 +302,15 @@ M.commands = {
 		keys = "<F11>",
 	},
 	{
+		name = "Colorcolumn",
+		action = ":let &colorcolumn = &colorcolumn == '' ? '80,120' : ''",
+		keys = "<F12>",
+	},
+
+	{
 		name = "Nvim: Code Actions",
 		action = ":lua vim.lsp.buf.code_action()",
-		keys = "<space>ca",
+		keys = "g.",
 	},
 	{
 		name = "Telescope Spell Suggest",
@@ -343,6 +351,42 @@ M.commands = {
 		name = "Update | Save in insert",
 		action = "<C-o>:update",
 		keys = "<leader>ww",
+	},
+
+	{
+		name = "Namu: symbols",
+		action = ":Namu symbols",
+		keys = "<leader>ss",
+	},
+
+	{
+		name = "Namu: workspace",
+		action = ":Namu workspace",
+		keys = "<leader>sw",
+	},
+
+	{
+		name = "Namu: watchtower",
+		action = ":Namu watchtower",
+		keys = "",
+	},
+
+	{
+		name = "Duplicate selection and comment original",
+		action = 'functions.duplicate_and_comment',
+		keys = "",
+	},
+
+	{
+		name = "Source Nvim",
+		action = ':source ~/.config/nvim/init.lua',
+		keys = "<F2>",
+	},
+
+	{
+		name = "Test",
+		action = ':echo $MYVIMRC',
+		keys = "<F2>",
 	},
 
 	-- { "<leader>si", function() Snacks.picker.icons() end, desc = "Icons" },

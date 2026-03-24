@@ -147,14 +147,13 @@ mason.setup({
 
 -------------------------------------------------------------------------------
 -- C lang
--- vim.lsp.config.clangd = {
---     on_attach = on_attach,
---     capabilities = capabilities,
---     cmd = { 'clangd', '--background-index' },
---     filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto' },
--- }
--- vim.lsp.enable('clangd')
---
+vim.lsp.config.clangd = {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = { 'clangd', '--background-index' },
+    filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto' },
+}
+vim.lsp.enable('clangd')
 
 -------------------------------------------------------------------------------
 -- Python

@@ -1,16 +1,19 @@
 -------------------------------------------------------------------------------
 -- map('mode', 'map', 'action', {nowait = bool, noremap = bool, silent = true})
---
 
 local function map(kind, lhs, rhs, opts)
-    vim.api.nvim_set_keymap(kind, lhs, rhs, opts)
+    vim.keymap.set(kind, lhs, rhs, opts)
 end
 
+
 -- map('mode', 'map', 'action', {nowait = bool, noremap = bool, silent = true}, 'description')
+
 local function map_with_desc(kind, lhs, rhs, base_opts, desc)
     local opts = vim.tbl_extend('force', base_opts, { desc = desc })
-    vim.api.nvim_set_keymap(kind, lhs, rhs, opts)
+    vim.keymap.set(kind, lhs, rhs, opts)
 end
+
+-------------------------------------------------------------------------------
 
 
 local noremap = { noremap = true }
@@ -44,7 +47,6 @@ map('n', '`', "'", noremap)
 
 map_with_desc('n', '<leader>ww', ':update<CR>', noremap, 'Update/Save')
 map_with_desc('i', '<leader>ww', '<C-o>:update<CR>', noremap, 'Update/Save in insert mode')
-map_with_desc('n', '<space>qq', ':x<CR>', silentnoremap, 'Save and Quit')
 map_with_desc('n', 'QQ', ':q<CR>', silentnoremap, 'Quit')
 map_with_desc('n', 'Qt', ':q!<CR>', silentnoremap, 'QUIT!')
 map_with_desc('n', 'Qa', ':qall<CR>', silentnoremap, 'Quit all')
@@ -58,13 +60,20 @@ map_with_desc('n', '<leader>R', ':redo<CR>', silentnoremap, 'Redo')
 
 
 -- Go to start or end of line easier
-map('n', 'H', 'g0', silentnoremapnowait)
-map('x', 'H', 'g0', silentnoremapnowait)
+-- map('n', '^', 'g^', silentnoremap)
+map('n', '0', 'g0', silentnoremap)
+
+map('n', 'H', '0', silentnoremapnowait)
+map('x', 'H', '0', silentnoremapnowait)
 map('n', 'L', 'g_', silentnoremapnowait)
 map('x', 'L', 'g_', silentnoremapnowait)
 
+
 map('n', '<space>o', 'o<ESC>', silentnoremapnowait)
 map('n', '<space>O', 'O<ESC>', silentnoremapnowait)
+
+
+map_with_desc('n', 'yc', 'yy<cmd>normal gcc<CR>p', noremap, 'Duplicate line and comment original')
 
 
 -- Find and replace
@@ -72,10 +81,6 @@ map_with_desc('n', '<C-h>', ':%s/\\C\\<<C-r><C-w>\\>//g<left><left>', noremapnow
 map_with_desc('x', '<C-h>', ':s/', noremapnowait, 'Find and Replace')
 -- map('v', '<leader>*', '"hy:%s/\\V<C-r>h//g<left><left>', silentnoremapnowait)
 
-
-
--- nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
--- nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 
 map_with_desc('n', 'k', "v:count == 0 ? 'gk' : 'k'", expr_noremap, 'Treat long lines as break lines unless we had count')
 map_with_desc('n', 'j', "v:count == 0 ? 'gj' : 'j'", expr_noremap, 'Treat long lines as break lines unless we had count')
@@ -86,8 +91,10 @@ map('n', '<space>;', 'q:', noremap)
 map_with_desc('n', '<leader>cd', ':cd %:p:h<CR>:pwd<CR>', noremap, 'PWD to current files directory/path')
 
 
-map('n', '<left>;', 'g;', noremap)
-map('n', '<right>;', 'g,', noremap)
+-- :h g;
+-- :h g,
+-- map('n', '<left>;', 'g;', noremap)
+-- map('n', '<right>;', 'g,', noremap)
 
 
 -- Simple way to move between windows
@@ -108,8 +115,8 @@ map_with_desc('n', '<space><space>l', '<C-W>L', silentnoremapnowait, 'Move windo
 -- Window resize
 map_with_desc('n', '<up>', ':resize +1<CR>', silentnoremap, 'Horizontally resize window +1')
 map_with_desc('n', '<down>', ':resize -1<CR>', silentnoremap, 'Horizontally resize window -1')
-map_with_desc('n', '<M-left>', ':vertical resize -1<CR>', silentnoremap, 'Vertically resize window +1')
-map_with_desc('n', '<M-right>', ':vertical resize +1<CR>', silentnoremap, 'Vertically resize window -1')
+map_with_desc('n', '<left>', ':vertical resize -1<CR>', silentnoremap, 'Vertically resize window +1')
+map_with_desc('n', '<right>', ':vertical resize +1<CR>', silentnoremap, 'Vertically resize window -1')
 
 -- Open files [ref. this]
 map_with_desc('n', '<M-t>', ':tabedit ', noremapnowait, 'Edit in new tab')
@@ -126,15 +133,22 @@ map_with_desc('i', '<M-e>', '<ESC>:edit ', noremapnowait, 'Edit [current buffer:
 -- lsp show inlay hints
 vim.keymap.set('n', '<leader>h', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end)
 
-map_with_desc('n', '<space>ca', ':lua vim.lsp.buf.code_action()<CR>', silentnoremap, 'Code Actions')
+
+
+vim.api.nvim_create_user_command('CommandPalette', function()
+    require('core.custom.command-palette').show_commands()
+end, {})
+
+map_with_desc('n', 'TT', ':CommandPalette<CR>', silentnoremap, 'Command Palette')
+
+map_with_desc('n', 'g.', ':lua vim.lsp.buf.code_action()<CR>', silentnoremap, 'Code Actions')
 map_with_desc('n', '<leader>s', ':Telescope spell_suggest<CR>', silentnoremap, 'Telescope Spell Suggest')
 map_with_desc('n', 'FF', ':Telescope filetypes <CR>', noremapnowait, 'Telescope Select Filetypes')
 map_with_desc('n', 'git', ':Gitsigns<CR>', noremapnowait, 'Gitsigns')
 
 -------------------------------------------------------------------------------
 
--- F-keys
--- map('n', '<F2>', ':source /home/baka/.config/nvim/source_me.lua<CR>', silentnoremap)
+map_with_desc('n', '<F2>', ':source $MYVIMRC<CR>', noremap, 'Source Neovim')
 
 map_with_desc('n', '<F4>', ':set wrap!<CR>', noremap, 'Wrap')
 map_with_desc('i', '<F4>', '<C-o>:set wrap!<CR>', noremap, 'Wrap [insert mode]')
@@ -154,6 +168,8 @@ map_with_desc('i', '<F8>', '<C-o>:TagbarToggle<CR>', silentnoremap, 'Tagbar [ins
 map_with_desc('n', '<F11>', ':set spell!<CR>', silentnoremap, 'Spell')
 map_with_desc('i', '<F11>', '<C-o>:set spell!<CR>', silentnoremap, 'Spell [insert mode]')
 
+map_with_desc('n', '<F12>', ':let &colorcolumn = &colorcolumn == "" ? "80,120" : ""<CR>', silentnoremap, 'Colorcolumn')
+map_with_desc('i', '<F12>', ':let &colorcolumn = &colorcolumn == "" ? "80,120" : ""<CR>', silentnoremap, 'Colorcolumn')
 
 -------------------------------------------------------------------------------
 
@@ -330,18 +346,18 @@ map('n', 'cC', '0C', noremapnowait)
 
 -- Auto-center
 map('n', 'G', 'Gzz', silentnoremap)
+map('n', 'g*', 'g*zz', silentnoremap)
+map('n', 'g#', 'g#zz', silentnoremap)
 map('n', 'n', 'nzz', silentnoremap)
 map('n', 'N', 'Nzz', silentnoremap)
+map('n', '*', '*zz', silentnoremap)
+map('n', '#', '#zz', silentnoremap)
 map('n', '}', '}zz', silentnoremapnowait)
 map('n', '{', '{zz', silentnoremapnowait)
 
 
--- map('n', '^', 'g^', silentnoremap)
-map('n', '0', 'g0', silentnoremap)
-
-
-map_with_desc('n', '<leader><leader><space>', ':bd<CR>', silentnoremap, 'Close current buffer')
-map_with_desc('n', '<leader><leader>w', ':%bd <bar> e# <bar> bd#<CR>', silentnoremap, 'Close all buffers but current')
+map_with_desc('n', '<space><space>q', ':bd<CR>', silentnoremap, 'Close current buffer')
+map_with_desc('n', '<space><space>Q', ':%bd <bar> e# <bar> bd#<CR>', silentnoremap, 'Close all buffers but current')
 
 map_with_desc('i', '<leader><leader>l', '<C-x><C-l>', noremapnowait, 'Line autocompletion')
 
@@ -568,67 +584,23 @@ map_with_desc('n', '<space>ss', ':lua Snacks.picker.git_stash()<CR>', silentnore
 
 map_with_desc('n', '<space>KK', ':lua Snacks.picker.keymaps()<CR>', silentnoremap, 'Keymaps')
 
--- map_with_desc('n', '<leader>h', ':lua Snacks.toggle.inlay_hints()<CR>', silentnoremap, 'Inlay Hints')
 
--- -- git
--- { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log" },
--- { "<leader>gL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },
--- { "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
---
--- -- LSP
--- { "gai", function() Snacks.picker.lsp_incoming_calls() end, desc = "C[a]lls Incoming" },
--- { "gao", function() Snacks.picker.lsp_outgoing_calls() end, desc = "C[a]lls Outgoing" },
--- { "<leader>ss", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
--- { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
+map_with_desc('n', 'gpp', "<cmd>lua require('goto-preview').goto_preview_declaration()<CR>", noremap, 'Go to Declaration POP UP')
+map_with_desc('n', 'gpd', "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", noremap, 'Go to Definitions POP UP')
+map_with_desc('n', 'gpt', "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>", noremap, 'Go to Type Definitions POP UP')
+map_with_desc('n', 'gpr', "<cmd>lua require('goto-preview').goto_preview_references()<CR>", noremap, 'Go to References POP UP')
+map_with_desc('n', 'gpi', "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>", noremap, 'Go to Implementations POP UP')
+map_with_desc('n', 'gpc', "<cmd>lua require('goto-preview').close_all_win()<CR>", noremap, 'Go to Preview: Close All Win POP UP')
 
--- -- Grep
--- { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
--- { "<leader>sB", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
--- { "<leader>sw", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
 
--- { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
--- { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
--- -- find
--- { "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
--- { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
--- { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
--- { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
--- -- gh
--- { "<leader>gi", function() Snacks.picker.gh_issue() end, desc = "GitHub Issues (open)" },
--- { "<leader>gI", function() Snacks.picker.gh_issue({ state = "all" }) end, desc = "GitHub Issues (all)" },
--- { "<leader>gp", function() Snacks.picker.gh_pr() end, desc = "GitHub Pull Requests (open)" },
--- { "<leader>gP", function() Snacks.picker.gh_pr({ state = "all" }) end, desc = "GitHub Pull Requests (all)" },
--- -- search
--- { '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers" },
--- { '<leader>s/', function() Snacks.picker.search_history() end, desc = "Search History" },
--- { "<leader>sa", function() Snacks.picker.autocmds() end, desc = "Autocmds" },
--- { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
--- { "<leader>sc", function() Snacks.picker.command_history() end, desc = "Command History" },
--- { "<leader>sC", function() Snacks.picker.commands() end, desc = "Commands" },
--- { "<leader>sh", function() Snacks.picker.help() end, desc = "Help Pages" },
--- { "<leader>sH", function() Snacks.picker.highlights() end, desc = "Highlights" },
--- { "<leader>si", function() Snacks.picker.icons() end, desc = "Icons" },
--- { "<leader>sj", function() Snacks.picker.jumps() end, desc = "Jumps" },
--- { "<leader>sk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
--- { "<leader>sl", function() Snacks.picker.loclist() end, desc = "Location List" },
--- { "<leader>sm", function() Snacks.picker.marks() end, desc = "Marks" },
--- { "<leader>sp", function() Snacks.picker.lazy() end, desc = "Search for Plugin Spec" },
--- { "<leader>sq", function() Snacks.picker.qflist() end, desc = "Quickfix List" },
--- { "<leader>sR", function() Snacks.picker.resume() end, desc = "Resume" },
--- { "<leader>su", function() Snacks.picker.undo() end, desc = "Undo History" },
--- { "<leader>uC", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
--- -- Other
--- { "<leader>z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
--- { "<leader>Z",  function() Snacks.zen.zoom() end, desc = "Toggle Zoom" },
--- { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
--- { "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
--- { "<leader>n",  function() Snacks.notifier.show_history() end, desc = "Notification History" },
--- { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
--- { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File" },
--- { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse", mode = { "n", "v" } },
--- { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
--- { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
--- { "<c-/>",      function() Snacks.terminal() end, desc = "Toggle Terminal" },
--- { "<c-_>",      function() Snacks.terminal() end, desc = "which_key_ignore" },
--- { "]]",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
--- { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
+
+-- Hop.nvim
+local hop = require("hop")
+local directions = require("hop.hint").HintDirection
+
+vim.keymap.set("", "f", function()
+	hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true })
+end, { remap = true })
+vim.keymap.set("", "F", function()
+	hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true })
+end, { remap = true })

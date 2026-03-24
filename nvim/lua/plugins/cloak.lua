@@ -1,4 +1,5 @@
-require("cloak").setup({
+return {
+	"https://github.com/laytan/cloak.nvim",
 	enabled = true,
 	cloak_character = "*",
 	-- The applied highlight group (colors) on the cloaking, see `:h highlight`.
@@ -28,4 +29,4 @@ require("cloak").setup({
 			replace = nil,
 		},
 	},
-})
+}

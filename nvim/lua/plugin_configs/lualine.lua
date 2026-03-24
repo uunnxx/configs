@@ -50,9 +50,9 @@ require("lualine").setup({
 					return ""
 				end,
 				id = "muslim.nvim",
-				color = { fg = "#83a598", bg = '#282828', gui = 'bold' },  -- for style check [:h attr-list]
+				color = { fg = "#83a598", bg = "#282828", gui = "bold" }, -- for style check [:h attr-list]
 			},
-            -- "lsp_status",
+			"lsp_status",
 			{
 				"diagnostics",
 				sources = { "nvim_diagnostic" },
