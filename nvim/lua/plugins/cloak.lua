@@ -1,6 +1,7 @@
 return {
 	"https://github.com/laytan/cloak.nvim",
 	enabled = true,
+    lazy = false,
 	opts = {
 
 		cloak_character = "*",

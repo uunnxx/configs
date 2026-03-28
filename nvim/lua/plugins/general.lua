@@ -14,7 +14,7 @@ return {
 	{ "h-hg/fcitx.nvim", lazy = false },
 
 	-- Tagbar
-	{ "majutsushi/tagbar" },
+	{ "majutsushi/tagbar", lazy = true },
 	-- CamelCaseMotion alternative
 	{ "chaoren/vim-wordmotion" }, -- commented because of neovim slow performance
 	-- Autopair alternative
@@ -24,6 +24,7 @@ return {
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
 		config = true,
+		lazy = false,
 	},
 	{ "tpope/vim-unimpaired" },
 	-- {'Chiel92/vim-autoformat'},

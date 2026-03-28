@@ -102,7 +102,7 @@ cmp.setup({
 	sources = {
 		{ name = "nvim_lsp" },
 		{ name = "snippy" },
-		{ name = "buffer", keyword_length = 3 },
+		{ name = "buffer", keyword_length = 2 },
 		{ name = "async_path" },
 		{ name = "nvim_lua" },
 		{ name = "dotenv" },

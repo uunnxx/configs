@@ -19,6 +19,7 @@ return {
 			html = { "prettierd", "prettier" },
 			css = { "prettierd", "prettier" },
 			yaml = { "yamlfmt", "yamlfix", "prettierd" },
+			sh = { "beautysh" },
 			["_"] = { "trim_whitespace" },
 		},
 

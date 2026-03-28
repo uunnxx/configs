@@ -20,6 +20,18 @@ return {
 						-- preview = false,
 					},
 				},
+				explorer = {
+					win = {
+						list = {
+							keys = {
+								["<Tab>"] = "list_down",
+								["<S-Tab>"] = "list_up",
+								["s"] = "select_and_next",
+								["<C-n>"] = "cancel",
+							},
+						},
+					},
+				},
 			},
 			win = {
 				input = {

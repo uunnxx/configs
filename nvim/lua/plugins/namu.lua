@@ -1,5 +1,6 @@
 return {
 	"bassamsdata/namu.nvim",
+	lazy = false,
 	opts = {
 		global = {},
 		namu_symbols = { -- Specific Module options
@@ -39,8 +40,30 @@ return {
 				},
 
 				display = {
+					-- 'tree_guides', 'indent'
 					format = "tree_guides",
+                    mode = 'icon'
 				},
+				row_position = "top10",
+				-- row_position = "top10_right",
+				window = {
+					auto_size = true,
+					min_height = 1,
+					min_width = 50,
+					max_width = 120,
+					max_height = 100,
+					padding = 2,
+					border = "rounded",
+					title_pos = "left",
+					show_footer = true,
+					footer_pos = "right",
+					relative = "editor",
+					style = "minimal",
+					width_ratio = 0.6,
+					height_ratio = 0.6,
+					title_prefix = "󱠦 ",
+				},
+
 				movement = {
 					next = { "<Tab>", "<DOWN>" }, -- Support multiple keys
 					previous = { "<S-Tab>", "<UP>" }, -- Support multiple keys

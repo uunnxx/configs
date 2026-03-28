@@ -1,6 +1,7 @@
 return {
 	-- Git
 	"lewis6991/gitsigns.nvim",
+	lazy = false,
 	opts = function()
 		local config = {
 			signs = {

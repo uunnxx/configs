@@ -148,12 +148,12 @@ mason.setup({
 -------------------------------------------------------------------------------
 -- C lang
 vim.lsp.config.clangd = {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    cmd = { 'clangd', '--background-index' },
-    filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto' },
+	on_attach = on_attach,
+	capabilities = capabilities,
+	cmd = { "clangd", "--background-index" },
+	filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
 }
-vim.lsp.enable('clangd')
+vim.lsp.enable("clangd")
 
 -------------------------------------------------------------------------------
 -- Python
@@ -217,7 +217,7 @@ vim.lsp.config("emmet_language_server", {
 		"pug",
 		"typescriptreact",
 	},
-    root_markers = { },
+	root_markers = {},
 	-- Read more about this options in the [vscode docs](https://code.visualstudio.com/docs/editor/emmet#_emmet-configuration).
 	-- **Note:** only the options listed in the table are supported.
 	init_options = {
@@ -286,3 +286,4 @@ vim.lsp.config.lua_ls = {
 	},
 }
 vim.lsp.enable("lua_ls")
+

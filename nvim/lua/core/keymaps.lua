@@ -2,15 +2,15 @@
 -- map('mode', 'map', 'action', {nowait = bool, noremap = bool, silent = true})
 
 local function map(kind, lhs, rhs, opts)
-    vim.keymap.set(kind, lhs, rhs, opts)
+	vim.keymap.set(kind, lhs, rhs, opts)
 end
 
 
 -- map('mode', 'map', 'action', {nowait = bool, noremap = bool, silent = true}, 'description')
 
 local function map_with_desc(kind, lhs, rhs, base_opts, desc)
-    local opts = vim.tbl_extend('force', base_opts, { desc = desc })
-    vim.keymap.set(kind, lhs, rhs, opts)
+	local opts = vim.tbl_extend("force", base_opts, { desc = desc })
+	vim.keymap.set(kind, lhs, rhs, opts)
 end
 
 -------------------------------------------------------------------------------
@@ -136,40 +136,33 @@ vim.keymap.set('n', '<leader>h', function() vim.lsp.inlay_hint.enable(not vim.ls
 
 
 vim.api.nvim_create_user_command('CommandPalette', function()
-    require('core.custom.command-palette').show_commands()
+	require("core.custom.command-palette").show_commands()
 end, {})
 
 map_with_desc('n', 'TT', ':CommandPalette<CR>', silentnoremap, 'Command Palette')
 
-map_with_desc('n', 'g.', ':lua vim.lsp.buf.code_action()<CR>', silentnoremap, 'Code Actions')
+-- map_with_desc('n', 'g.', ':lua vim.lsp.buf.code_action()<CR>', silentnoremap, 'Code Actions')
 map_with_desc('n', '<leader>s', ':Telescope spell_suggest<CR>', silentnoremap, 'Telescope Spell Suggest')
 map_with_desc('n', 'FF', ':Telescope filetypes <CR>', noremapnowait, 'Telescope Select Filetypes')
 map_with_desc('n', 'git', ':Gitsigns<CR>', noremapnowait, 'Gitsigns')
 
 -------------------------------------------------------------------------------
 
-map_with_desc('n', '<F2>', ':source $MYVIMRC<CR>', noremap, 'Source Neovim')
-
-map_with_desc('n', '<F4>', ':set wrap!<CR>', noremap, 'Wrap')
-map_with_desc('i', '<F4>', '<C-o>:set wrap!<CR>', noremap, 'Wrap [insert mode]')
-
-map_with_desc('n', '<F5>', ':exec &nu==&rnu? "se nu!" : "se rnu!"<CR>', silentnoremap, 'Line Number')
-map_with_desc('i', '<F5>', '<C-o>:exec &nu==&rnu? "se nu!" : "se rnu!"<CR>', silentnoremap, 'Line Number [insert mode]')
-
-map_with_desc('n', '<F6>', ':set cursorline!<CR>', silentnoremap, 'Cursorline')
-map_with_desc('i', '<F6>', '<C-o>:set cursorline!<CR>', silentnoremap, 'Cursorline [insert mode]')
-
-map_with_desc('n', '<F7>', ':set list!<CR>', silentnoremap, 'Show Hidden Symbols')
-map_with_desc('i', '<F7>', '<C-o>:set list!<CR>', silentnoremap, 'Show Hidden Symbols [insert mode]')
-
-map_with_desc('n', '<F8>', ':TagbarToggle<CR>', silentnoremap, 'Tagbar')
-map_with_desc('i', '<F8>', '<C-o>:TagbarToggle<CR>', silentnoremap, 'Tagbar [insert mode]')
-
-map_with_desc('n', '<F11>', ':set spell!<CR>', silentnoremap, 'Spell')
-map_with_desc('i', '<F11>', '<C-o>:set spell!<CR>', silentnoremap, 'Spell [insert mode]')
-
-map_with_desc('n', '<F12>', ':let &colorcolumn = &colorcolumn == "" ? "80,120" : ""<CR>', silentnoremap, 'Colorcolumn')
-map_with_desc('i', '<F12>', ':let &colorcolumn = &colorcolumn == "" ? "80,120" : ""<CR>', silentnoremap, 'Colorcolumn')
+-- map_with_desc('n', '<F2>', ':source $MYVIMRC<CR>', noremap, 'Source Neovim')
+-- map_with_desc('n', '<F4>', ':set wrap!<CR>', noremap, 'Wrap')
+-- map_with_desc('i', '<F4>', '<C-o>:set wrap!<CR>', noremap, 'Wrap [insert mode]')
+-- map_with_desc('n', '<F5>', ':exec &nu==&rnu? "se nu!" : "se rnu!"<CR>', silentnoremap, 'Line Number')
+-- map_with_desc('i', '<F5>', '<C-o>:exec &nu==&rnu? "se nu!" : "se rnu!"<CR>', silentnoremap, 'Line Number [insert mode]')
+-- map_with_desc('n', '<F6>', ':set cursorline!<CR>', silentnoremap, 'Cursorline')
+-- map_with_desc('i', '<F6>', '<C-o>:set cursorline!<CR>', silentnoremap, 'Cursorline [insert mode]')
+-- map_with_desc('n', '<F7>', ':set list!<CR>', silentnoremap, 'Show Hidden Symbols')
+-- map_with_desc('i', '<F7>', '<C-o>:set list!<CR>', silentnoremap, 'Show Hidden Symbols [insert mode]')
+-- map_with_desc('n', '<F8>', ':TagbarToggle<CR>', silentnoremap, 'Tagbar')
+-- map_with_desc('i', '<F8>', '<C-o>:TagbarToggle<CR>', silentnoremap, 'Tagbar [insert mode]')
+-- map_with_desc('n', '<F11>', ':set spell!<CR>', silentnoremap, 'Spell')
+-- map_with_desc('i', '<F11>', '<C-o>:set spell!<CR>', silentnoremap, 'Spell [insert mode]')
+-- map_with_desc('n', '<F12>', ':let &colorcolumn = &colorcolumn == "" ? "80,120" : ""<CR>', silentnoremap, 'Colorcolumn')
+-- map_with_desc('i', '<F12>', ':let &colorcolumn = &colorcolumn == "" ? "80,120" : ""<CR>', silentnoremap, 'Colorcolumn')
 
 -------------------------------------------------------------------------------
 
@@ -212,8 +205,8 @@ map_with_desc('n', 'gV', '`[v`]', silentnoremap, 'Highlight last inserted text')
 -- System clipboard shift - y
 -- map('v', '<S-y>', '"+y', silentnoremap)
 
-map_with_desc('n', '<C-c>', ':%y+<CR>', noremap, 'Copy Entire File')
-map_with_desc('i', '<C-c>', '<C-o>:%y+<CR>', noremap, 'Copy Entire File [insert mode]')
+-- map_with_desc('n', '<C-c>', ':%y+<CR>', noremap, 'Copy Entire File')
+-- map_with_desc('i', '<C-c>', '<C-o>:%y+<CR>', noremap, 'Copy Entire File [insert mode]')
 
 map('n', 'Y', 'yy', noremap)
 map('n', 'yy', 'y$', noremap)
@@ -367,8 +360,8 @@ map_with_desc('n', '<leader>gg', ':HopLine<CR>', noremap, 'Hop to line')
 -------------------------------------------------------------------------------
 -- TERMINAL SECTION:
 --
-map_with_desc('n', '<space><space>t', ':split term://zsh<CR>a', silentnoremap, 'Horizontal Terminal')
-map_with_desc('n', '<space><space>v', ':vsplit term://zsh<CR>a', silentnoremap, 'Vertical Terminal')
+map_with_desc('n', '<space><space>t', '<cmd>split | term<CR>a', silentnoremap, 'Horizontal Terminal')
+map_with_desc('n', '<space><space>v', '<cmd>vsplit term<CR>a', silentnoremap, 'Vertical Terminal')
 
 map_with_desc('t', '<leader><leader>', '<C-\\><C-n>', noremapnowait, 'Normal mode in Terminal')
 map_with_desc('t', '<Esc><Esc>', '<C-\\><C-n>:q!<CR>', noremapnowait, 'Close Terminal')
@@ -423,19 +416,20 @@ vim.cmd [[
 ]]
 
 
--- Table mode custom keymaps
 -- set keywordprg=trans\ :jp
 -- <S-k> to trans current word under cursor
-vim.cmd [[
-    autocmd FileType markdown,md,rb call MarkdownOptions()
 
-    function! MarkdownOptions()
-        nmap Th [\|
-        nmap Tl ]\|
-        nmap Tj }\|
-        nmap Tk {\|
-    endfunction
-]]
+-- Table mode custom keymaps
+-- vim.cmd [[
+--     autocmd FileType markdown,md,rb call MarkdownOptions()
+--
+--     function! MarkdownOptions()
+--         nmap Th [\|
+--         nmap Tl ]\|
+--         nmap Tj }\|
+--         nmap Tk {\|
+--     endfunction
+-- ]]
 
 
 -- Python custom keymaps
@@ -520,7 +514,6 @@ vim.cmd [[
     endfunction
 ]]
 
-
 -------------------------------------------------------------------------------
 
 -- Autoformat + save as CTRL-s normal, and insert mode
@@ -530,21 +523,21 @@ vim.cmd [[
 -- replaced with new plugin: conform
 
 vim.keymap.set({ "n", "v" }, "<C-s>", function()
-    require("conform").format({ async = true, lsp_fallback = true }, function(err)
-        if not err then
-            -- If we formatted in visual mode, escape to normal mode after formatting
-            if vim.startswith(vim.api.nvim_get_mode().mode:lower(), "v") then
-                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
-            end
-        end
-    end)
+	require("conform").format({ async = true, lsp_fallback = true }, function(err)
+		if not err then
+			-- If we formatted in visual mode, escape to normal mode after formatting
+			if vim.startswith(vim.api.nvim_get_mode().mode:lower(), "v") then
+				vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+			end
+		end
+	end)
 end, { desc = "Format buffer" })
 
 
 
 vim.keymap.set('n', '<leader>l', function()
-  local new_config = not vim.diagnostic.config().virtual_lines
-  vim.diagnostic.config({ virtual_lines = new_config })
+	local new_config = not vim.diagnostic.config().virtual_lines
+	vim.diagnostic.config({ virtual_lines = new_config })
 end, { desc = 'Toggle diagnostic virtual_lines' })
 
 
@@ -558,23 +551,45 @@ end, { desc = 'Toggle diagnostic virtual_lines' })
 map_with_desc('n', '<C-n>', ':lua Snacks.explorer()<CR>', silentnoremapnowait, 'Nvim Tree')
 map_with_desc('i', '<C-n>', '<C-o>:lua Snacks.explorer()<CR>', silentnoremapnowait, 'Nvim Tree [insert mode]')
 
-map_with_desc('n', 'tt', '<C-o>:lua Snacks.picker.smart()<CR>', silentnoremapnowait, 'Find Files [smart]')
-map_with_desc('n', '<S-CR>', '<C-o>:lua Snacks.picker.files()<CR>', silentnoremapnowait, 'Find Files')
-map_with_desc('n', '<C-CR>', '<C-o>:lua Snacks.picker.buffers()<CR>', silentnoremapnowait, 'Buffers')
+-- vim.keymap.set("n", "<C-n>", function()
+-- 	local explorer = Snacks.picker.get({ source = "explorer" })[1]
+-- 	if explorer then
+-- 		explorer:focus()
+-- 	else
+-- 		Snacks.explorer()
+-- 	end
+-- end, { desc = "Focus or Open Explorer" })
+
+
+map_with_desc('n', 'tt', ':lua Snacks.picker.smart()<CR>', silentnoremapnowait, 'Find Files [smart]')
+
+map_with_desc('n', '<S-CR>', ':lua Snacks.picker.files()<CR>', silentnoremapnowait, 'Find Files')
+map_with_desc('i', '<S-CR>', '<C-o>:lua Snacks.picker.files()<CR>', silentnoremapnowait, 'Find Files')
+
+map_with_desc('n', '<C-CR>', ':lua Snacks.picker.buffers()<CR>', silentnoremapnowait, 'Buffers')
+map_with_desc('i', '<C-CR>', '<C-o>:lua Snacks.picker.buffers()<CR>', silentnoremapnowait, 'Buffers')
 
 map_with_desc('n', '<M-f>', ':lua Snacks.picker.grep()<CR>', noremapnowait, 'Live Grep')
 map_with_desc('i', '<M-f>', '<C-o>:lua Snacks.picker.grep()<CR>', noremapnowait, 'Live Grep')
 
-map_with_desc('n', '<S-m>', ':lua Snacks.picker.man()<CR>', noremapnowait, 'Man Pages')
+-- map_with_desc('n', '<S-m>', ':lua Snacks.picker.man()<CR>', noremapnowait, 'Man Pages')
 
-map_with_desc('n', 'gtd', ':lua Snacks.picker.lsp_definitions()<CR>', silentnoremap, 'Goto Definitions')
-map_with_desc('n', 'gtD', ':lua Snacks.picker.lsp_declarations()<CR>', silentnoremap, 'Goto Declaration')
-map_with_desc('n', 'gtt', ':lua Snacks.picker.lsp_type_definitions()<CR>', silentnoremap, 'Goto Type Definitions')
-map_with_desc('n', 'gtr', ':lua Snacks.picker.lsp_references()<CR>', silentnoremap, 'References')
-map_with_desc('n', 'gti', ':lua Snacks.picker.lsp_implementations()<CR>', silentnoremap, 'Goto Implementations')
+-- map_with_desc('n', 'gtd', ':lua Snacks.picker.lsp_definitions()<CR>', silentnoremap, 'Goto Definitions')
+-- map_with_desc('n', 'gtD', ':lua Snacks.picker.lsp_declarations()<CR>', silentnoremap, 'Goto Declaration')
+-- map_with_desc('n', 'gtt', ':lua Snacks.picker.lsp_type_definitions()<CR>', silentnoremap, 'Goto Type Definitions')
+-- map_with_desc('n', 'gtr', ':lua Snacks.picker.lsp_references()<CR>', silentnoremap, 'References')
+-- map_with_desc('n', 'gti', ':lua Snacks.picker.lsp_implementations()<CR>', silentnoremap, 'Goto Implementations')
 
-map_with_desc('n', '<leader>sd', ':lua Snacks.picker.diagnostics()<CR>', silentnoremap, 'Diagnostics')
-map_with_desc('n', '<leader>sD', ':lua Snacks.picker.diagnostics_buffer()<CR>', silentnoremap, 'Buffer Diagnostics')
+
+-- map_with_desc('n', '<leader>sd', ':lua Snacks.picker.diagnostics()<CR>', silentnoremap, 'Diagnostics')
+-- map_with_desc('n', '<leader>sD', ':lua Snacks.picker.diagnostics_buffer()<CR>', silentnoremap, 'Buffer Diagnostics')
+
+map_with_desc('n', 'gpp', "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", noremap, 'Go to Definitions POP UP')
+map_with_desc('n', 'gpd', "<cmd>lua require('goto-preview').goto_preview_declaration()<CR>", noremap, 'Go to Declaration POP UP')
+map_with_desc('n', 'gpt', "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>", noremap, 'Go to Type Definitions POP UP')
+map_with_desc('n', 'gpr', "<cmd>lua require('goto-preview').goto_preview_references()<CR>", noremap, 'Go to References POP UP')
+map_with_desc('n', 'gpi', "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>", noremap, 'Go to Implementations POP UP')
+map_with_desc('n', 'gpc', "<cmd>lua require('goto-preview').close_all_win()<CR>", noremap, 'Go to Preview: Close All Win POP UP')
 
 
 map_with_desc('n', 'gst', ':lua Snacks.picker.git_status()<CR>', silentnoremap, 'Git Status')
@@ -582,15 +597,9 @@ map_with_desc('n', '<space>bb', ':lua Snacks.picker.git_branches()<CR>', silentn
 map_with_desc('n', '<space>dd', ':lua Snacks.picker.git_diff()<CR>', silentnoremap, 'Git Diff (Hunks)')
 map_with_desc('n', '<space>ss', ':lua Snacks.picker.git_stash()<CR>', silentnoremap, 'Git Stash')
 
-map_with_desc('n', '<space>KK', ':lua Snacks.picker.keymaps()<CR>', silentnoremap, 'Keymaps')
+-- map_with_desc('n', '<space>KK', ':lua Snacks.picker.keymaps()<CR>', silentnoremap, 'Keymaps')
 
 
-map_with_desc('n', 'gpp', "<cmd>lua require('goto-preview').goto_preview_declaration()<CR>", noremap, 'Go to Declaration POP UP')
-map_with_desc('n', 'gpd', "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", noremap, 'Go to Definitions POP UP')
-map_with_desc('n', 'gpt', "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>", noremap, 'Go to Type Definitions POP UP')
-map_with_desc('n', 'gpr', "<cmd>lua require('goto-preview').goto_preview_references()<CR>", noremap, 'Go to References POP UP')
-map_with_desc('n', 'gpi', "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>", noremap, 'Go to Implementations POP UP')
-map_with_desc('n', 'gpc', "<cmd>lua require('goto-preview').close_all_win()<CR>", noremap, 'Go to Preview: Close All Win POP UP')
 
 
 
@@ -604,3 +613,9 @@ end, { remap = true })
 vim.keymap.set("", "F", function()
 	hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true })
 end, { remap = true })
+
+
+
+-- vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>")
+-- vim.keymap.set("n", "<space>x", ":.lua<CR>")
+-- vim.keymap.set("v", "<space>x", ":lua<CR>")

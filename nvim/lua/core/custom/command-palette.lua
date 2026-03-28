@@ -1,7 +1,5 @@
 local M = {}
 
-local functions = require("core.functions")
-
 -------------------------------------------------------------------------------
 --- Commands
 M.commands = {
@@ -68,7 +66,7 @@ M.commands = {
 	{
 		name = "Man Pages",
 		action = ":lua Snacks.picker.man()",
-		keys = "<S-m>",
+		keys = "",
 	},
 	{
 		name = "Goto LSP Definition",
@@ -118,12 +116,12 @@ M.commands = {
 	{
 		name = "Diagnostics",
 		action = ":lua Snacks.picker.diagnostics()",
-		keys = "<leader>sd",
+		keys = "",
 	},
 	{
 		name = "Buffer Diagnostics",
 		action = ":lua Snacks.picker.diagnostics_buffer()",
-		keys = "<leader>sD",
+		keys = "",
 	},
 	{
 		name = "Git Status",
@@ -163,6 +161,11 @@ M.commands = {
 	{
 		name = "Keymaps",
 		action = ":lua Snacks.picker.keymaps()",
+		keys = "<space>KK",
+	},
+	{
+		name = "Keymaps Telescope",
+		action = ":Telescope keymaps ",
 		keys = "<space>KK",
 	},
 	{
@@ -266,10 +269,18 @@ M.commands = {
 		action = ":%bd <bar> e# <bar> bd#",
 		keys = "<space><space>Q",
 	},
+
 	{
 		name = "Copy Entire File",
 		action = ":%y+",
 		keys = "<C-c>",
+	},
+
+	-- Function keys
+	{
+		name = "Source Nvim",
+		action = ":source ~/.config/nvim/init.lua",
+		keys = "<F2>",
 	},
 	{
 		name = "Wrap",
@@ -287,7 +298,7 @@ M.commands = {
 		keys = "<F6>",
 	},
 	{
-		name = "Show Hidden Symbols",
+		name = "Show Hidden Symbols [listchars]",
 		action = ":set list!",
 		keys = "<F7>",
 	},
@@ -310,8 +321,14 @@ M.commands = {
 	{
 		name = "Nvim: Code Actions",
 		action = ":lua vim.lsp.buf.code_action()",
-		keys = "g.",
+		keys = "gra",
 	},
+	{
+		name = "Nvim: Rename",
+		action = ":lua vim.lsp.buf.rename()",
+		keys = "grn",
+	},
+
 	{
 		name = "Telescope Spell Suggest",
 		action = ":Telescope spell_suggest",
@@ -322,13 +339,14 @@ M.commands = {
 		action = ":Telescope filetypes",
 		keys = "FF",
 	},
+
 	{
 		name = "Gitsigns",
 		action = ":Gitsigns",
 		keys = "git",
 	},
 	{
-		name = "Sensitivity: Cloak",
+		name = "Sensitivity: Cloak [toggle]",
 		action = ":CloakToggle",
 		keys = "",
 	},
@@ -358,13 +376,11 @@ M.commands = {
 		action = ":Namu symbols",
 		keys = "<leader>ss",
 	},
-
 	{
 		name = "Namu: workspace",
 		action = ":Namu workspace",
 		keys = "<leader>sw",
 	},
-
 	{
 		name = "Namu: watchtower",
 		action = ":Namu watchtower",
@@ -372,16 +388,11 @@ M.commands = {
 	},
 
 	{
-		name = "Duplicate selection and comment original",
-		action = "functions.duplicate_and_comment",
+		name = "Copy Entire File",
+		action = ":%y",
 		keys = "",
 	},
 
-	{
-		name = "Source Nvim",
-		action = ":source ~/.config/nvim/init.lua",
-		keys = "<F2>",
-	},
 }
 
 -------------------------------------------------------------------------------

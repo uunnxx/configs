@@ -23,4 +23,9 @@ return {
 			-- put your config here
 		end,
 	},
+
+	{
+		"nvim-treesitter/nvim-treesitter-context",
+	},
 }
+

@@ -2,6 +2,7 @@ return {
 	"rmagatti/goto-preview",
 	dependencies = { "rmagatti/logger.nvim" },
 	event = "BufEnter",
+	lazy = true,
 	config = true, -- necessary as per https://github.com/rmagatti/goto-preview/issues/88
 	opts = {
 		width = 120, -- Width of the floating window
