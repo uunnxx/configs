@@ -63,19 +63,22 @@ size = 11
 # family = "mononoki"
 # family = "Monoid"
 # family = "Terminess Nerd Font Mono"
-family = "Iosevka NF"
+# family = "Iosevka NF"
+family = "0x Proto"
 style = "Regular"
 
 [font.bold]
 # family = "mononoki"
 # family = "Terminess Nerd Font Mono"
-family = "Iosevka NF"
+# family = "Iosevka NF"
+family = "0x Proto"
 style = "Bold"
 
 [font.italic]
 # family = "mononoki"
 # family = "Terminess Nerd Font Mono"
-family = "Iosevka NF"
+# family = "Iosevka NF"
+family = "0x Proto"
 style = "Italic"
 
 [[keyboard.bindings]]
