@@ -7,8 +7,8 @@ require("core.keymaps")
 require("core.functions")
 
 
-require("plugin_configs.completion")
-require("plugin_configs.tree-sitter")
-require("plugin_configs.lsp_configs")
-require("plugin_configs.lualine")
-require("plugin_configs.ui")
+require("configs.completion")
+require("configs.tree-sitter")
+require("configs.lsp_configs")
+require("configs.lualine")
+require("configs.ui")
