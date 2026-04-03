@@ -123,14 +123,14 @@ require("bufferline").setup({
 -- Colors located in ~/.nvim/plugged/gruvbox/colors/gruvbox.vim
 -- Line 576 to Line 579
 
-cmd([[
-    autocmd Syntax * call matchadd('Todo', '\W\zs\(CONCEPT\|TODOS\|TODO\|FIXME\|CHANGED\|CHANGES\|HACK\)')
-    autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\|README\|SYNTAX\)')
-    autocmd Syntax * call matchadd('Error', '\W\zs\(ERROR\|WARNING\|BUG\|SECURITY WARNING\)')
-
-    autocmd Filetype python,ruby,c,cpp,elixir,rust match Error /\s\+$/
-    " match Error /\s\+$/
-]])
+-- cmd([[
+--     autocmd Syntax * call matchadd('Todo', '\W\zs\(CONCEPT\|TODOS\|TODO\|FIXME\|CHANGED\|CHANGES\|HACK\)')
+--     autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\|README\|SYNTAX\)')
+--     autocmd Syntax * call matchadd('Error', '\W\zs\(ERROR\|WARNING\|BUG\|SECURITY WARNING\)')
+--
+--     autocmd Filetype python,ruby,c,cpp,elixir,rust match Error /\s\+$/
+--     " match Error /\s\+$/
+-- ]])
 
 -- Disable number in terminal
 cmd([[autocmd TermOpen * setlocal nonumber norelativenumber]])

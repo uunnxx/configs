@@ -25,21 +25,35 @@ require("lualine").setup({
 			statusline = {},
 			winbar = {},
 		},
+		ignore_focus = {},
 		always_divide_middle = true,
+		always_show_tabline = true,
 		globalstatus = true,
 		refresh = {
 			statusline = 1000,
 			tabline = 1000,
 			winbar = 1000,
 			refresh_time = 16,
+			events = {
+				"WinEnter",
+				"BufEnter",
+				"BufWritePost",
+				"SessionLoadPost",
+				"FileChangedShellPost",
+				"VimResized",
+				"Filetype",
+				"CursorMoved",
+				"CursorMovedI",
+				"ModeChanged",
+			},
 		},
 	},
 	sections = {
 		lualine_a = { "mode" },
 		lualine_b = { "branch", "diff", "searchcount", "selectioncount" },
-		lualine_c = { "getcwd", "filename", "filesize" },
+		-- lualine_c = { "getcwd", "filename", "filesize" },
+		lualine_c = { "filename" },
 
-		-- %B hex code
 		lualine_x = {
 			-- {
 			-- 	function()
@@ -52,7 +66,6 @@ require("lualine").setup({
 			-- 	id = "muslim.nvim",
 			-- 	color = { fg = "#83a598", bg = "#282828", gui = "bold" }, -- for style check [:h attr-list]
 			-- },
-			"lsp_status",
 			{
 				"diagnostics",
 				sources = { "nvim_diagnostic" },
@@ -72,11 +85,12 @@ require("lualine").setup({
 			"encoding",
 			"fileformat",
 			"filetype",
-			"%B",
 			wordCount,
 		},
-		lualine_y = { "progress", "location" },
-		lualine_z = { "hostname" },
+		-- %B hex code
+		lualine_y = { "%B", "progress", "location" },
+		-- lualine_z = { "hostname" },
+		lualine_z = { "lsp_status" },
 	},
 	inactive_sections = {
 		lualine_a = {},

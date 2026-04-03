@@ -214,7 +214,6 @@ vim.lsp.config("emmet_language_server", {
 		"less",
 		"sass",
 		"scss",
-		"pug",
 		"typescriptreact",
 	},
 	root_markers = {},

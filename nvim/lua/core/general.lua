@@ -13,9 +13,12 @@ cmd'colorscheme gruvbox'
 
 -- cmd [[
 -- packadd termdebug
--- packadd matchit
 -- packadd shellmenu
 -- ]]
+cmd[[
+    packadd nvim.undotree
+    packadd matchit
+]]
 
 -- Tagbar
 g.tagbar_compact = 1
@@ -28,8 +31,6 @@ g.loaded_synload = 1
 g.loaded_matchparen = 1
 g.matchparen_timeout = 2
 g.matchparen_insert_timeout = 2
-
-vim.lsp.set_log_level("off")
 
 -- disable netrw [disabling it will block some plugins, like open in Browser]
 -- g.loaded_netrw =  1
@@ -222,8 +223,8 @@ set.shell = '/usr/bin/zsh'
 
 -- No fucking swap files
 cmd[[
-set nobackup
-set noswapfile
+    set nobackup
+    set noswapfile
 ]]
 
 
@@ -232,7 +233,7 @@ set noswapfile
 set.mouse = ''
 set.mousefocus = true
 
--- use g for reverse
+-- use /g for reverse
 set.gdefault = true
 
 
@@ -241,28 +242,16 @@ set.gdefault = true
 set.clipboard = 'unnamed,unnamedplus'
 
 
-cmd([[
-    filetype indent plugin on
-    syntax enable
-]])
+-- cmd([[
+--     filetype indent plugin on
+--     syntax enable
+-- ]])
 
-
-if g.neovide then
-    g.neovide_cursor_animation_length = 0
-    g.neovide_scroll_animation_length = 0
-    vim.o.guifont = "Iosevka NF:h11"
-    vim.opt.termguicolors=true
-end
 
 -- Mise
 -- Prepend mise shims to PATH
 vim.env.PATH = vim.env.HOME .. "/.local/share/mise/shims:" .. vim.env.PATH
 
-
-
-
-
-local cmd  = vim.cmd             -- execute Vim commands
 
 -- noexpandtab
 -- copyindent

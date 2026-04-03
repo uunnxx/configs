@@ -21,6 +21,14 @@ return {
 					},
 				},
 				explorer = {
+					layout = {
+						layout = {
+							-- width = 0.12,
+							width = function()
+								return math.max(20, math.floor(vim.o.columns * 0.15))
+							end,
+						},
+					},
 					win = {
 						list = {
 							keys = {

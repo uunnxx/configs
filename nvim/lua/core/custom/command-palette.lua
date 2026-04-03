@@ -351,8 +351,8 @@ M.commands = {
 		keys = "",
 	},
 	{
-		name = "Undo Tree",
-		action = ":lua require('undotree').toggle()",
+		name = "UndoTree",
+		action = ":lua require('undotree').open()",
 		keys = "",
 	},
 	{
@@ -393,6 +393,11 @@ M.commands = {
 		keys = "",
 	},
 
+	{
+		name = "Hardtime toggle",
+		action = ":Hardtime toggle",
+		keys = "",
+	},
 }
 
 -------------------------------------------------------------------------------
