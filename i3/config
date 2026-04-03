@@ -82,7 +82,7 @@ bindsym $mod+Down exec mpvctl pause
 
 # Diodon
 bindsym $mod+$sh+v exec --no-startup-id diodon, mode "default"
- 
+
 # Input method settings
 # bindsym d exec --no-startup-id "setxkbmap -layout us,ru -variant dvp, -option grp:alt_space_toggle", mode "default"
 # bindsym q exec --no-startup-id "setxkbmap -layout us,ru -option grp:alt_space_toggle", mode "default"
@@ -610,7 +610,7 @@ mode "$mode_system" {
     bindsym r exec --no-startup-id i3-msg restart, "default"
     bindsym l exec --no-startup-id i3-msg reload, "default"
     bindsym c exec --no-startup-id "setxkbmap -option caps:super", mode "default"
-    bindsym w exec --no-startup-id feh --bg-scale --randomize ~/Pictures/wallpapers/*
+    bindsym w exec --no-startup-id feh --bg-fill --randomize ~/Pictures/wallpapers/*
     bindsym m exec --no-startup-id xmodmap -e "keycode 108 = Menu", mode "default"
     # bindsym $sh+r exec --no-startup-id reboot, mode "default"
     # bindsym $sh+s exec --no-startup-id shutdown, mode "default"

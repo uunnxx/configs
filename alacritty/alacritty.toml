@@ -57,28 +57,28 @@ TERM = "screen-256color"
 WINIT_X11_SCALE_FACTOR = "1.0"
 
 [font]
-size = 11
+size = 10
 
 [font.normal]
 # family = "mononoki"
 # family = "Monoid"
 # family = "Terminess Nerd Font Mono"
 # family = "Iosevka NF"
-family = "0x Proto"
+family = "0x Proto Nerd Font"
 style = "Regular"
 
 [font.bold]
 # family = "mononoki"
 # family = "Terminess Nerd Font Mono"
 # family = "Iosevka NF"
-family = "0x Proto"
+family = "0x Proto Nerd Font"
 style = "Bold"
 
 [font.italic]
 # family = "mononoki"
 # family = "Terminess Nerd Font Mono"
 # family = "Iosevka NF"
-family = "0x Proto"
+family = "0x Proto Nerd Font"
 style = "Italic"
 
 [[keyboard.bindings]]
