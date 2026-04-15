@@ -53,6 +53,7 @@ gaps outer -8
 
 
 # tiling_drag modifier titlebar
+tiling_drag swap_modifier Shift
 
 
 
@@ -179,7 +180,7 @@ bindsym $alt+$sh+space exec --no-startup-id rofi -show windowcd
 
 bindsym --whole-window $alt+button1 move scratchpad
 bindsym --whole-window $alt+button2 move position center
-bindsym --whole-window $alt+button3 kill
+bindsym --whole-window $alt+$sh+button3 kill
 bindsym --whole-window $alt+button8 fullscreen toggle
 bindsym --whole-window $alt+button9 floating toggle
 

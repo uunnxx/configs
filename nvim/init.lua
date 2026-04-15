@@ -12,3 +12,6 @@ require("configs.tree-sitter")
 require("configs.lsp_configs")
 require("configs.lualine")
 require("configs.ui")
+require('configs.autopairs-config')
+
+require("core.custom.palette-commands")

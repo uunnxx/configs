@@ -12,8 +12,9 @@ return {
 		{ "dcampos/nvim-snippy" },
 		{ "honza/vim-snippets" },
 		{ "SergioRibera/cmp-dotenv" },
-		{ "ray-x/cmp-sql", ft = { "py", "python", "sql" } },
-		{ "vrslev/cmp-pypi", ft = "toml" },
+		-- { "ray-x/cmp-sql", ft = { "py", "python", "sql" } },
+		{ "ray-x/cmp-sql", ft = { "sql" } },
+		{ "vrslev/cmp-pypi", ft = { "toml" } },
 		{ "hrsh7th/cmp-calc" },
 
 		{ "onsails/lspkind.nvim" },

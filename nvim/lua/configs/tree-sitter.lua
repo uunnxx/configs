@@ -12,52 +12,97 @@ require("nvim-treesitter").setup({
 	},
 	indent = {
 		enable = true,
-		-- disable = { "python" },
 	},
 })
 
 
-require("nvim-treesitter").install({
-	"python",
+local ts_parsers = {
+	"bash",
+	"c",
+	"css",
+	"dockerfile",
+	"fish",
+	"gitattributes",
+	"gitcommit",
+	"git_config",
+	"gitignore",
+	"git_rebase",
 	"html",
 	"htmldjango",
-	"ruby",
 	"javascript",
-	"lua",
-	"css",
+	"json",
 	"jsx",
-	"zig",
-	"yaml",
-	"toml",
+	"lua",
+	"make",
 	"markdown",
-})
+	"python",
+	"ruby",
+	"rust",
+	"sql",
+	"toml",
+	"tsx",
+	"typescript",
+	"typst",
+	"vim",
+	"yaml",
+	"zig",
+}
 
 
+require("nvim-treesitter").install(ts_parsers)
+
+
+-- vim.api.nvim_create_autocmd("FileType", {
+-- 	pattern = ts_parsers,
+-- 	callback = function()
+-- 		vim.treesitter.start()
+-- 		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+-- 	end,
+-- })
+
+
+-- uncommented above to check this one
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "python", "htmldjango", "ruby", "javascript", "html", "css", "lua", "zig", "yaml", "toml", "markdown" },
-	callback = function()
-		vim.treesitter.start()
+	pattern = { "*" },
+	callback = function(args)
+		local ft = vim.bo[args.buf].filetype
+		local lang = vim.treesitter.language.get_lang(ft)
+
+		if not vim.treesitter.language.add(lang) then
+			local available = vim.g.ts_available or require("nvim-treesitter").get_available()
+			if not vim.g.ts_available then
+				vim.g.ts_available = available
+			end
+			if vim.tbl_contains(available, lang) then
+				require("nvim-treesitter").install(lang)
+			end
+		end
+
+		if vim.treesitter.language.add(lang) then
+			vim.treesitter.start(args.buf, lang)
+			vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+			-- vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+			-- vim.wo[0][0].foldmethod = "expr"
+		end
 	end,
 })
 
 
 -- without it, indentation will be fucked
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "python", "htmldjango", "ruby", "javascript", "html", "css", "lua", "zig", "yaml", "toml", "markdown" },
-	callback = function()
-		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-	end,
-})
-
+-- vim.api.nvim_create_autocmd("FileType", {
+-- 	pattern = ts_parsers
+-- 	callback = function()
+-- 	end,
+-- })
 
 -- Treesitter-based folding
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "python", "htmldjango", "ruby", "javascript", "html", "css", "lua", "zig", "yaml", "toml", "markdown" },
-	callback = function()
-		vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
-		vim.wo[0][0].foldmethod = "expr"
-	end,
-})
+-- vim.api.nvim_create_autocmd("FileType", {
+-- 	pattern = ts_parsers
+-- 	callback = function()
+-- 		vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+-- 		vim.wo[0][0].foldmethod = "expr"
+-- 	end,
+-- })
 
 
 require("treesitter-context").setup({

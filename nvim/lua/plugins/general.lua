@@ -5,6 +5,7 @@ return {
 	{ "nvim-tree/nvim-web-devicons" },
 	{ -- Use `gx` to open github related links as "user/git_repo"
 		"gabebw/vim-github-link-opener",
+		branch = "main",
 	},
 
 	-- :Align
@@ -26,6 +27,7 @@ return {
 		config = true,
 		lazy = false,
 	},
+
 	{ "tpope/vim-unimpaired" },
 	-- {'Chiel92/vim-autoformat'},
 	-- {'tpope/vim-surround'},

@@ -88,7 +88,7 @@ set.splitbelow = true               -- bottom, which feels more natural
 
 wset.wrap = false
 
-set.cmdheight = 1
+set.cmdheight = 0
 -- Global statusline. Default 2
 set.laststatus = 3
 
@@ -106,7 +106,7 @@ set.winbar = "    %{%v:lua.require'nvim-navic'.get_location()%}"
 -- Commented out just because Snacks.picker not working properly when
 -- using 'edit_split', 'edit_vsplit' keybindings]
 -- https://github.com/folke/snacks.nvim/discussions/1783
-
+--
 -- Specify the behavior when switching between buffers
 -- set.switchbuf = { 'useopen', 'usetab', 'newtab' }
 
@@ -268,10 +268,10 @@ cmd[[ autocmd FileType c,cpp,java setlocal noet ci pi sts=0 sw=4 ts=4 ]]
 -- cmd [[au BufEnter * set fo-=c fo-=r fo-=o]]
 
 -- remove line lenght marker for selected filetypes
-cmd [[autocmd FileType text,markdown,html,xhtml,css setlocal cc=0]]
+-- cmd [[autocmd FileType text,markdown,html,xhtml,css setlocal cc=0]]
 
 -- 2 spaces for selected filetypes
-cmd [[ autocmd FileType xml,html,xhtml,css,scss,javascript,lua,yaml,htmljinja setlocal shiftwidth=4 tabstop=4 ]]
+-- cmd [[ autocmd FileType xml,html,xhtml,css,scss,javascript,lua,yaml,htmljinja setlocal shiftwidth=4 tabstop=4 ]]
 
 -- Jinja2
 -- cmd[[ autocmd BufNewFile,BufRead *.html set filetype=htmldjango ]]
@@ -297,3 +297,46 @@ exec(
     ]],
     false
 )
+
+
+vim.api.nvim_create_user_command('CurrBufOnly', function()
+	vim.cmd("%bd|e#|bd#")
+end, {})
+
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "python",
+	callback = function()
+		-- Add django to the filetype if it's not already there
+		vim.bo.filetype = "python.django"
+	end,
+})
+
+
+
+-- local runners = {
+-- 	ruby = "ruby",
+-- 	javascript = "node",
+-- 	crystal = "crystal",
+-- 	python = "python",
+-- 	sh = "", -- shell scripts just need execution
+-- 	cpp = "g++ %:p -g -o %:p:r_temp && %:p:r_temp",
+-- 	c = "gcc %:p -g -o %:p:r_temp && %:p:r_temp",
+-- }
+--
+-- for filetype, command_to_execute in pairs(runners) do
+-- 	vim.api.nvim_create_autocmd("FileType", {
+-- 		pattern = filetype,
+-- 		callback = function()
+-- 			local run_cmd = ":" .. (command_to_execute ~= "" and "!" .. command_to_execute or "!") .. " %:p"
+--
+-- 			-- ,rr -> Save and Run
+-- 			vim.keymap.set("n", ",rr", ":w<CR>" .. run_cmd .. "<CR>", { buffer = true, silent = true })
+--
+-- 			-- ,rc -> Save and Prepare command (no Enter)
+-- 			vim.keymap.set("n", ",rc", ":w<CR>" .. run_cmd, { buffer = true })
+-- 		end,
+-- 	})
+-- end
+
+

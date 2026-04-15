@@ -135,11 +135,6 @@ vim.keymap.set('n', '<leader>h', function() vim.lsp.inlay_hint.enable(not vim.ls
 
 
 
-vim.api.nvim_create_user_command('CommandPalette', function()
-	require("core.custom.command-palette").show_commands()
-end, {})
-
-map_with_desc('n', 'TT', ':CommandPalette<CR>', silentnoremap, 'Command Palette')
 
 -- map_with_desc('n', 'g.', ':lua vim.lsp.buf.code_action()<CR>', silentnoremap, 'Code Actions')
 map_with_desc('n', '<leader>s', ':Telescope spell_suggest<CR>', silentnoremap, 'Telescope Spell Suggest')
@@ -350,7 +345,7 @@ map('n', '{', '{zz', silentnoremapnowait)
 
 
 map_with_desc('n', '<space><space>q', ':bd<CR>', silentnoremap, 'Close current buffer')
-map_with_desc('n', '<space><space>Q', ':%bd <bar> e# <bar> bd#<CR>', silentnoremap, 'Close all buffers but current')
+map_with_desc('n', '<space><space>Q', ':CurrBufOnly<CR>', silentnoremap, 'Close all buffers but current')
 
 map_with_desc('i', '<leader><leader>l', '<C-x><C-l>', noremapnowait, 'Line autocompletion')
 
@@ -390,32 +385,6 @@ map_with_desc('t', '<Esc><Esc>', '<C-\\><C-n>:q!<CR>', noremapnowait, 'Close Ter
 -- )
 
 
-vim.cmd [[
-    " ; -> :
-    " because of the map('n', ';', ':', noremap)
-    autocmd FileType ruby          nmap <buffer> ,rr ;w\|:!ruby %:p<CR>
-    autocmd FileType ruby          nmap <buffer> ,rc ;w\|:!ruby %:p
-
-    autocmd FileType javascript    nmap <buffer> ,rr ;w\|:!node %:p<CR>
-    autocmd FileType javascript    nmap <buffer> ,rc ;w\|:!node %:p
-
-    autocmd FileType crystal       nmap <buffer> ,rr ;w\|:!crystal %:p<CR>
-    autocmd FileType crystal       nmap <buffer> ,rc ;w\|:!crystal %:p
-
-    autocmd FileType python        nmap <buffer> ,rr ;w\|:!python %:p<CR>
-    autocmd FileType python        nmap <buffer> ,rc ;w\|:!python %:p
-
-    autocmd FileType cpp           nmap <buffer> ,rr ;w\|:!g++ %:p -g -o %:p:r_temp && %:p:r_temp<CR>
-    autocmd FileType cpp           nmap <buffer> ,rc ;w\|:!g++ %:p -g -o %:p:r_temp && %:p:r_temp
-
-    autocmd FileType c             nmap <buffer> ,rr ;w\|:!gcc %:p -g -o %:p:r_temp && %:p:r_temp<CR>
-    autocmd FileType c             nmap <buffer> ,rc ;w\|:!gcc %:p -g -o %:p:r_temp && %:p:r_temp
-
-    autocmd FileType sh            nmap <buffer> ,rr ;w\|:!%:p<CR>
-    autocmd FileType sh            nmap <buffer> ,rc ;w\|:!%:p
-]]
-
-
 -- set keywordprg=trans\ :jp
 -- <S-k> to trans current word under cursor
 
@@ -433,94 +402,88 @@ vim.cmd [[
 
 
 -- Python custom keymaps
-vim.cmd [[
-    autocmd FileType python,py call PythonOptions()
-
-    function! PythonOptions()
-        imap ttL print()<left>
-        imap ttD print(f"{=}")<left><left><left><left>
-        imap ttF print(f"{}")<left><left><left>
-    endfunction
-]]
+-- vim.cmd [[
+--     autocmd FileType python,py call PythonOptions()
+--
+--     function! PythonOptions()
+--         imap ttL print()<left>
+--         imap ttD print(f"{=}")<left><left><left><left>
+--         imap ttF print(f"{}")<left><left><left>
+--     endfunction
+-- ]]
 
 
 -- Ruby custom keymaps
-vim.cmd [[
-    autocmd BufRead,BufNewFile Rakefile,Capfile,Gemfile,.autotest,.irbrc,*.treetop,*.tt set ft=ruby syntax=ruby
-    autocmd FileType ruby,eruby call RubyOptions()
-
-    function! RubyOptions()
-        imap ttH "#{}"<left><left>
-        imap ttL #{}<left>
-        imap ttP puts "#{}"<left><left>
-        imap ppI puts %Q{  }<left><left>
-        imap ppL puts %q{  }<left><left>
-
-        nmap tH 0f#f{a
-        nmap tL 0f#f}i
-
-        imap TTT # =>
-
-
-        " nnoremap ttL $F}i
-        " nnoremap ttH 0f{a
-
-        set iskeyword=@,!,?,_,48-57,192-255
-
-        set tags+=./tags
-
-
-        " eRuby
-        " Evaluate and print out: _erbout << something.to_s
-        imap eHH <%=  %><left><left><left>
-        " Evaluate without printing out: something_else
-        imap eLL <%  %><left><left><left>
-        " Comment
-        imap eCC <%#  %><left><left><left>
-    endfunction
-]]
+-- vim.cmd [[
+--     autocmd BufRead,BufNewFile Rakefile,Capfile,Gemfile,.autotest,.irbrc,*.treetop,*.tt set ft=ruby syntax=ruby
+--     autocmd FileType ruby,eruby call RubyOptions()
+--
+--     function! RubyOptions()
+--         imap ttH "#{}"<left><left>
+--         imap ttL #{}<left>
+--         imap ttP puts "#{}"<left><left>
+--         imap ppI puts %Q{  }<left><left>
+--         imap ppL puts %q{  }<left><left>
+--
+--         nmap tH 0f#f{a
+--         nmap tL 0f#f}i
+--
+--         imap TTT # =>
+--
+--
+--         " nnoremap ttL $F}i
+--         " nnoremap ttH 0f{a
+--
+--         set iskeyword=@,!,?,_,48-57,192-255
+--
+--         set tags+=./tags
+--
+--
+--         " eRuby
+--         " Evaluate and print out: _erbout << something.to_s
+--         imap eHH <%=  %><left><left><left>
+--         " Evaluate without printing out: something_else
+--         imap eLL <%  %><left><left><left>
+--         " Comment
+--         imap eCC <%#  %><left><left><left>
+--     endfunction
+-- ]]
 
 
 -- C++ & C custom keymaps
-vim.cmd [[
-    " Quickly jump to header or source file
-    " This technique can probably be applied to many filetypes.
-    " It sets file marks (see :h marks) when leaving a source or header file,
-    " so you can quickly jump back to the last accessed one
-    " by using 'C or 'H (see :h 'A).
-
-
-    " NOTE: The info is saved in the viminfo file, so make sure that
-    " :set viminfo? includes :h viminfo-'.
-    " viminfo is shaDa in neovim. see: :h shada-
-
-    autocmd FileType cpp,c call CppCOptions()
-
-    function! CppCOptions()
-        autocmd FileType *.{cpp,c} mark C
-        autocmd FileType *.h mark H
-
-        " inoremap <buffer> iinc #include <><left>
-        " inoremap <buffer> innc #include ""<left>
-        inoremap TTT # =>
-
-        " inoremap ttP print('')<left><left>
-        " inoremap ttL print()<left>
-
-        " nnoremap tH 0f#f{a
-        " nnoremap tL 0f#f}i
-
-
-    endfunction
-]]
+-- vim.cmd [[
+--     " Quickly jump to header or source file
+--     " This technique can probably be applied to many filetypes.
+--     " It sets file marks (see :h marks) when leaving a source or header file,
+--     " so you can quickly jump back to the last accessed one
+--     " by using 'C or 'H (see :h 'A).
+--
+--
+--     " NOTE: The info is saved in the viminfo file, so make sure that
+--     " :set viminfo? includes :h viminfo-'.
+--     " viminfo is shaDa in neovim. see: :h shada-
+--
+--     autocmd FileType cpp,c call CppCOptions()
+--
+--     function! CppCOptions()
+--         autocmd FileType *.{cpp,c} mark C
+--         autocmd FileType *.h mark H
+--
+--         " inoremap <buffer> iinc #include <><left>
+--         " inoremap <buffer> innc #include ""<left>
+--         inoremap TTT # =>
+--
+--         " inoremap ttP print('')<left><left>
+--         " inoremap ttL print()<left>
+--
+--         " nnoremap tH 0f#f{a
+--         " nnoremap tL 0f#f}i
+--
+--
+--     endfunction
+-- ]]
 
 -------------------------------------------------------------------------------
-
--- Autoformat + save as CTRL-s normal, and insert mode
--- map('n', '<C-s>', ':Autoformat<CR>', silentnoremap)
--- map('i', '<C-s>', '<C-o>:Autoformat<CR>', silentnoremap)
-
--- replaced with new plugin: conform
 
 vim.keymap.set({ "n", "v" }, "<C-s>", function()
 	require("conform").format({ async = true, lsp_fallback = true }, function(err)
@@ -539,9 +502,6 @@ vim.keymap.set('n', '<leader>l', function()
 	local new_config = not vim.diagnostic.config().virtual_lines
 	vim.diagnostic.config({ virtual_lines = new_config })
 end, { desc = 'Toggle diagnostic virtual_lines' })
-
-
-
 
 
 -------------------------------------------------------------------------------
@@ -600,22 +560,7 @@ map_with_desc('n', '<space>ss', ':lua Snacks.picker.git_stash()<CR>', silentnore
 -- map_with_desc('n', '<space>KK', ':lua Snacks.picker.keymaps()<CR>', silentnoremap, 'Keymaps')
 
 
-
-
-
--- Hop.nvim
-local hop = require("hop")
-local directions = require("hop.hint").HintDirection
-
-vim.keymap.set("", "f", function()
-	hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true })
-end, { remap = true })
-vim.keymap.set("", "F", function()
-	hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true })
-end, { remap = true })
-
-
-
+-- Execute updates
 -- vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>")
 -- vim.keymap.set("n", "<space>x", ":.lua<CR>")
 -- vim.keymap.set("v", "<space>x", ":lua<CR>")

@@ -31,8 +31,8 @@ cmp.setup({
 			local highlight_info = require("colorful-menu").cmp_highlights(entry)
 
 			if highlight_info ~= nil then
-			    vim_item.abbr_hl_group = highlight_info.highlights
-			    vim_item.abbr = highlight_info.text
+				vim_item.abbr_hl_group = highlight_info.highlights
+				vim_item.abbr = highlight_info.text
 			end
 
 			local kind = lspkind.cmp_format({
@@ -70,6 +70,8 @@ cmp.setup({
 		["<C-b>"] = cmp.mapping.scroll_docs(-4),
 		["<C-Space>"] = cmp.mapping.scroll_docs(4),
 		-- ['<C-Space>'] = cmp.mapping.complete(),
+		-- ['<C-e>'] = cmp.mapping.abort(),
+		['<C-c>'] = cmp.mapping.close(),
 		["<CR>"] = cmp.mapping.confirm({
 			behavior = cmp.ConfirmBehavior.Replace,
 			-- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
@@ -79,8 +81,8 @@ cmp.setup({
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
-			elseif snippy.can_expand_or_advance() then
-				snippy.expand_or_advance()
+			elseif snippy.can_jump(1) then
+				snippy.next()
 			elseif has_words_before() then
 				cmp.complete()
 			else
@@ -97,6 +99,28 @@ cmp.setup({
 				fallback()
 			end
 		end, { "i", "s" }),
+
+		-- ["<Tab>"] = cmp.mapping(function(fallback)
+		-- 	if snippy.can_expand_or_advance() then
+		-- 		snippy.expand_or_advance()
+		-- 	elseif cmp.visible() then
+		-- 		cmp.select_next_item()
+		-- 	elseif has_words_before() then
+		-- 		cmp.complete()
+		-- 	else
+		-- 		fallback()
+		-- 	end
+		-- end, { "i", "s" }),
+		--
+		-- ["<S-Tab>"] = cmp.mapping(function(fallback)
+		-- 	if snippy.can_jump(-1) then
+		-- 		snippy.previous()
+		-- 	elseif cmp.visible() then
+		-- 		cmp.select_prev_item()
+		-- 	else
+		-- 		fallback()
+		-- 	end
+		-- end, { "i", "s" }),
 	},
 
 	sources = {
@@ -106,7 +130,7 @@ cmp.setup({
 		{ name = "async_path" },
 		{ name = "nvim_lua" },
 		{ name = "dotenv" },
-		{ name = "sql" },
+		-- { name = "sql" },
 		{ name = "pypi", keyword_length = 4 },
 		{ name = "calc" },
 	},
@@ -133,6 +157,29 @@ cmp.setup.cmdline(":", {
 	}),
 })
 
-cmp.setup.filetype({"namu_prompt", "namu_sidebar"}, {
-    enabled = false
+cmp.setup.filetype({ "namu_prompt", "namu_sidebar" }, {
+	enabled = false,
 })
+
+-- If you want insert `(` after select function or method item
+-- local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+-- cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "sql",
+	callback = function()
+		require("cmp").setup.buffer({
+			sources = {
+				{ name = "nvim_lsp" },
+				{ name = "snippy" },
+				{ name = "buffer", keyword_length = 2 },
+				{ name = "async_path" },
+				{ name = "nvim_lua" },
+				{ name = "dotenv" },
+				{ name = "sql" },
+				{ name = "calc" },
+			},
+		})
+	end,
+})
+

@@ -82,8 +82,8 @@ local on_attach = function(client, bufnr)
 	-- See `:help vim.lsp.*` for documentation on any of the below functions
 	local bufopts = { noremap = true, silent = true, buffer = bufnr }
 	vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, bufopts)
-	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
-	vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+	-- vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
+	-- vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
 	vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts) -- press 2 times to focus float window
 end
 
@@ -160,6 +160,7 @@ vim.lsp.enable("clangd")
 vim.lsp.config.basedpyright = {
 	on_attach = on_attach,
 	capabilities = capabilities,
+	filetypes = { "python", "py", "python.django" },
 	settings = {
 		basedpyright = {
 			-- Using Ruff's import organizer
@@ -209,6 +210,7 @@ vim.lsp.config("emmet_language_server", {
 		"css",
 		"eruby",
 		"html",
+		"htmldjango",
 		"javascript",
 		"javascriptreact",
 		"less",
@@ -285,4 +287,3 @@ vim.lsp.config.lua_ls = {
 	},
 }
 vim.lsp.enable("lua_ls")
-
