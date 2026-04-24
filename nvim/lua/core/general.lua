@@ -344,27 +344,57 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+
+-- llama.vim
+-- related to typing artifacts on some picker's fields
+
+-- No need for these autocmd's, autocmd below works much better because it checks for ft
+-- llama stops after switching to another buffer
+-- vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+-- 	pattern = "*",
+-- 	callback = function()
+-- 		vim.fn["llama#init"]()
+-- 	end,
+-- })
+--
 -- disable llama on snacks buffer
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "snacks_picker_input",
+-- vim.api.nvim_create_autocmd("FileType", {
+-- 	pattern = "snacks_picker_input",
+-- 	callback = function()
+-- 		-- Disable llama.vim for this specific buffer
+-- 		vim.b.llama_config = { enabled = false }
+-- 		-- If the above doesn't work, try the global disable command for the buffer
+-- 		if vim.fn.exists(":LlamaDisable") == 2 then
+-- 			vim.cmd("LlamaDisable")
+-- 		end
+-- 	end,
+-- })
+--
+
+-- Should disable llama.vim on picker's input fields, if not it'll:
+-- 'after first char inserted -> go normal mode, press i, start typing
+-- so if I want to search function, it will be unctionf
+--
+local llama_group = vim.api.nvim_create_augroup("LlamaAutoInit", { clear = true })
+
+vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter" }, {
+	group = llama_group,
 	callback = function()
-		-- Disable llama.vim for this specific buffer
-		vim.b.llama_config = { enabled = false }
-		-- If the above doesn't work, try the global disable command for the buffer
-		if vim.fn.exists(":LlamaDisable") == 2 then
-			vim.cmd("LlamaDisable")
+		local ft = vim.bo.filetype
+		-- List all filetypes where llama should NOT run
+		local ignore_fts = { "snacks_picker_input", "snacks_picker", "TelescopePrompt", "NvimTree", "neo-tree" }
+
+		if not vim.tbl_contains(ignore_fts, ft) then
+			-- Only initialize if it's a valid code/text buffer
+			pcall(vim.fn["llama#init"])
+		else
+			vim.b.llama_config = { enabled = false }
+			if vim.fn.exists(":LlamaDisable") == 2 then
+				vim.cmd("LlamaDisable")
+			end
 		end
 	end,
 })
-
--- llama stops after switching to another buffer
-vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-	pattern = "*",
-	callback = function()
-		vim.fn["llama#init"]()
-	end,
-})
-
 
 
 

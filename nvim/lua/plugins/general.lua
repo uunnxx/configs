@@ -3,10 +3,6 @@ return {
 	{ "nvim-lua/plenary.nvim" },
 	{ "neovim/nvim-lspconfig" },
 	{ "nvim-tree/nvim-web-devicons" },
-	{ -- Use `gx` to open github related links as "user/git_repo"
-		"gabebw/vim-github-link-opener",
-		branch = "main",
-	},
 
 	-- :Align
 	{ "RRethy/nvim-align" },
