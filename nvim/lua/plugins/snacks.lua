@@ -9,7 +9,7 @@ return {
 		},
 		indent = { enabled = true },
 		quickfile = { enabled = true },
-		explorer = { enabled = true },
+		explorer = { enabled = false },
 		dashboard = { enabled = true },
 		bigfile = { enabled = true },
 		scroll = { enabled = true },
@@ -49,8 +49,8 @@ return {
 						-- Remap Shift-Tab to move up (instead of select_and_prev)
 						["<S-Tab>"] = { "list_up", mode = { "i", "n" } },
 						-- Remap Space to toggle selection
-						["<C-Space>"] = { "select_and_next", mode = { "i", "n" } },
-						["<S-Space>"] = { "select_and_prev", mode = { "i", "n" } },
+						-- ["<C-Space>"] = { "select_and_next", mode = { "i", "n" } },
+						-- ["<S-Space>"] = { "select_and_prev", mode = { "i", "n" } },
 
 						["/"] = "toggle_focus",
 						["<C-Down>"] = { "history_forward", mode = { "i", "n" } },
@@ -58,24 +58,25 @@ return {
 						["<C-c>"] = { "cancel", mode = "i" },
 						["<C-w>"] = { "<c-s-w>", mode = { "i" }, expr = true, desc = "delete word" },
 						["<CR>"] = { "confirm", mode = { "n", "i" } },
-						["<Esc>"] = "cancel",
+						-- ["<Esc>"] = "cancel",
+						["<Esc>"] = { "close", mode = { "n", "i" } },
 						["<S-CR>"] = { { "pick_win", "jump" }, mode = { "n", "i" } },
 						["<a-d>"] = { "inspect", mode = { "n", "i" } },
 						["<a-f>"] = { "toggle_follow", mode = { "i", "n" } },
-						["<a-h>"] = { "toggle_hidden", mode = { "i", "n" } },
-						["<a-i>"] = { "toggle_ignored", mode = { "i", "n" } },
+						["<S-h>"] = { "toggle_hidden", mode = { "i", "n" } },
+						["<S-i>"] = { "toggle_ignored", mode = { "i", "n" } },
 						["<a-r>"] = { "toggle_regex", mode = { "i", "n" } },
 						["<a-m>"] = { "toggle_maximize", mode = { "i", "n" } },
 						["<a-p>"] = { "toggle_preview", mode = { "i", "n" } },
 						["<a-w>"] = { "cycle_win", mode = { "i", "n" } },
 						["<C-a>"] = { "select_all", mode = { "n", "i" } },
-						["<C-b>"] = { "preview_scroll_up", mode = { "i", "n" } },
-						["<C-d>"] = { "list_scroll_down", mode = { "i", "n" } },
-						["<C-f>"] = { "preview_scroll_down", mode = { "i", "n" } },
+						["<C-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
+						["<C-Space>"] = { "preview_scroll_down", mode = { "i", "n" } },
+						-- ["<C-u>"] = { "list_scroll_up", mode = { "i", "n" } },
+						-- ["<C-d>"] = { "list_scroll_down", mode = { "i", "n" } },
 						["<C-g>"] = { "toggle_live", mode = { "i", "n" } },
 						["<C-q>"] = { "qflist", mode = { "i", "n" } },
 						["<C-t>"] = { "tab", mode = { "n", "i" } },
-						["<C-u>"] = { "list_scroll_up", mode = { "i", "n" } },
 						["<C-v>"] = { "edit_vsplit", mode = { "i", "n" } },
 						["<C-h>"] = { "edit_split", mode = { "i", "n" } },
 						["<C-r>#"] = { "insert_alt", mode = "i" },
@@ -104,18 +105,9 @@ return {
 
 		styles = {
 			notification = {
-				-- wo = { wrap = true } -- Wrap notifications
+				wo = { wrap = true }, -- Wrap notifications
 			},
 		},
 	},
-	keys = {
-		-- {
-		-- 	"TT",
-		-- 	-- custom command-palette function
-		-- 	function()
-		-- 		require("core.custom.command-palette").show_commands()
-		-- 	end,
-		-- 	desc = "Command Palette",
-		-- },
-	},
+	keys = {},
 }

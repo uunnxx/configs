@@ -1,0 +1,79 @@
+return {
+	-- "olimorris/codecompanion.nvim",
+	-- dependencies = {
+	-- 	"nvim-lua/plenary.nvim",
+	-- 	"nvim-treesitter/nvim-treesitter",
+	-- },
+	-- opts = {
+	-- 	interactions = {
+	-- 		chat = {
+	-- 			adapter = "llama.cpp",
+	-- 			opts = {
+	-- 				completion_provider = "cmp",
+	-- 			},
+	-- 		},
+	-- 		inline = {
+	-- 			adapter = "llama.cpp",
+	-- 			opts = {
+	-- 				completion_provider = "cmp",
+	-- 			},
+	-- 			keymaps = {
+	-- 				accept_change = {
+	-- 					modes = { n = "ga" },
+	-- 					description = "Accept the suggested change",
+	-- 				},
+	-- 				reqect_change = {
+	-- 					modes = { n = "gr" },
+	-- 					description = "Reject the suggested change",
+	-- 				},
+	-- 				stop = {
+	-- 					modes = { n = "q" },
+	-- 					index = 4,
+	-- 					callback = "keymaps.stop",
+	-- 					description = "Stop request",
+	-- 				},
+	-- 			},
+	-- 		},
+	-- 		agent = { adapter = "llama.cpp" },
+	-- 		inline_completion = {
+	-- 			enabled = true,
+	-- 			autostart = true,
+	-- 			adapter = "llama.cpp",
+	-- 			debounce = 300,
+	-- 			trigger = "InsertCharPre",
+	-- 		},
+	-- 	},
+	-- 	opts = {
+	-- 		log_level = "TRACE", -- or "TRACE"
+	-- 	},
+	-- 	adapters = {
+	-- 		http = {
+	-- 			["llama.cpp"] = function()
+	-- return require("codecompanion.adapters").extend("openai_compatible", {
+	-- 	env = {
+	-- 		url = "http://127.0.0.1:8012", -- replace with your llama.cpp instance
+	-- 		-- api_key = "TERM",
+	-- 		-- chat_url = "/v1/chat/completions",
+	-- 	},
+	-- 	-- handlers = {
+	-- 	-- 	parse_message_meta = function(self, data)
+	-- 	-- 		local extra = data.extra
+	-- 	-- 		if extra and extra.reasoning_content then
+	-- 	-- 			data.output.reasoning = { content = extra.reasoning_content }
+	-- 	-- 			if data.output.content == "" then
+	-- 	-- 				data.output.content = nil
+	-- 	-- 			end
+	-- 	-- 		end
+	-- 	-- 		return data
+	-- 	-- 	end,
+	-- 	-- },
+	-- })
+	-- 			end,
+	-- 		},
+	-- 	},
+	-- 	inline_completion = {
+	-- 		enabled = true,
+	-- 		autostart = true,
+	-- 	},
+	-- },
+}

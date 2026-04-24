@@ -43,6 +43,17 @@ require("gruvbox").setup({
 			bold = config.bold,
 			reverse = config.invert_signs,
 		},
+
+		-- Link OilGit groups to standard Gruvbox colors
+		OilGitAdded = { fg = "#b8bb26" }, -- green
+		OilGitModifiedUnstaged = { fg = "#fabd2f" }, -- yellow
+		OilGitModifiedStaged = { fg = "#fe8019" }, -- orange
+		OilGitDeleted = { fg = "#fb4934" }, -- red
+		OilGitIgnored = { fg = "#928374" }, -- gray
+		OilGitRenamed = { fg = "#cba6f7" },
+		OilGitCopied = { fg = "#cba6f7" },
+		OilGitConflict = { fg = "#fab387" },
+		OilGitUntracked = { fg = "#83a598" }, -- blue
 	},
 	terminal_colors = true, -- add neovim terminal colors
 	undercurl = true,
@@ -200,3 +211,12 @@ vim.api.nvim_set_hl(0, "NamuPreview", {
 	bold = true,
 	force = true,
 })
+
+-- llama.nvim highlight groups
+--
+vim.api.nvim_set_hl(0, "llama_hl_fim_hint", { link = "LspInlayHint" })
+vim.api.nvim_set_hl(0, "llama_hl_inst_src", { link = "LspInlayHint" })
+
+vim.api.nvim_set_hl(0, "llama_hl_inst_virt_gen", { link = "LspInlayHint" })
+-- vim.api.nvim_set_hl(0, "llama_hl_inst_virt_ready", { link = "LspInlayHint" })
+vim.api.nvim_set_hl(0, "llama_hl_inst_virt_proc", { link = "LspInlayHint" })

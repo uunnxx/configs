@@ -1,6 +1,6 @@
 return {
 	"windwp/nvim-ts-autotag",
-
+    -- ft = {'html', 'htmldjango'},
 	opts = {
 		opts = {
 			-- Defaults

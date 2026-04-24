@@ -10,6 +10,9 @@ local has_words_before = function()
 end
 
 cmp.setup({
+	experimental = {
+		ghost_text = true,
+	},
 	window = {
 		completion = {
 			border = "single", -- single / rounded / none
@@ -67,11 +70,12 @@ cmp.setup({
 	},
 
 	mapping = {
-		["<C-b>"] = cmp.mapping.scroll_docs(-4),
-		["<C-Space>"] = cmp.mapping.scroll_docs(4),
+		["<C-d>"] = cmp.mapping.scroll_docs(-4),
+		["<C-b>"] = cmp.mapping.scroll_docs(4),
 		-- ['<C-Space>'] = cmp.mapping.complete(),
 		-- ['<C-e>'] = cmp.mapping.abort(),
-		['<C-c>'] = cmp.mapping.close(),
+        -- ['C-Space'] = cmp.mapping.confirm(),
+		["<C-c>"] = cmp.mapping.close(),
 		["<CR>"] = cmp.mapping.confirm({
 			behavior = cmp.ConfirmBehavior.Replace,
 			-- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
@@ -157,7 +161,7 @@ cmp.setup.cmdline(":", {
 	}),
 })
 
-cmp.setup.filetype({ "namu_prompt", "namu_sidebar" }, {
+cmp.setup.filetype({ "namu_prompt", "namu_sidebar", "snacks_picker_input" }, {
 	enabled = false,
 })
 
@@ -182,4 +186,3 @@ vim.api.nvim_create_autocmd("FileType", {
 		})
 	end,
 })
-

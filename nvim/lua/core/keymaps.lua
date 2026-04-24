@@ -5,7 +5,6 @@ local function map(kind, lhs, rhs, opts)
 	vim.keymap.set(kind, lhs, rhs, opts)
 end
 
-
 -- map('mode', 'map', 'action', {nowait = bool, noremap = bool, silent = true}, 'description')
 
 local function map_with_desc(kind, lhs, rhs, base_opts, desc)
@@ -15,131 +14,126 @@ end
 
 -------------------------------------------------------------------------------
 
-
 local noremap = { noremap = true }
 local expr_noremap = { expr = true, noremap = true }
 local noremapnowait = { noremap = true, nowait = true }
 local silentnoremap = { noremap = true, silent = true }
 local silentnoremapnowait = { nowait = true, noremap = true, silent = true }
 
-
-
 -------------------------------------------------------------------------------
 -- DEFAULT REMAPS
 --
-map('i', 'eu', '<Esc>', silentnoremap)
+map("i", "eu", "<Esc>", silentnoremap)
 -- <C-t> is used for indenting as opposite of <C-d> in insert mode, so we can't use it
 -- map('i', '<C-t>', '<Esc>', silentnoremap)
 
 -- For the sake of in case ; mapped to :
 -- Repeat latest f, t, F or T [count] times. See |cpo-;|
 -- Opposite to this is ,
-map('n', ';', ':', noremap)
-map('x', ';', ':', noremap)
-map('n', ':', ';', noremap)
-map('x', ':', ';', noremap)
+map("n", ";", ":", noremap)
+map("x", ";", ":", noremap)
+map("n", ":", ";", noremap)
+map("x", ":", ";", noremap)
 
-map('n', '&', '%', noremap)
-map('x', '&', '%', noremap)
-map('n', "'", '`', noremap)
-map('n', '`', "'", noremap)
+map("n", "&", "%", noremap)
+map("x", "&", "%", noremap)
+map("n", "'", "`", noremap)
+map("n", "`", "'", noremap)
 
+map_with_desc("n", "<leader>ww", ":update<CR>", noremap, "Update/Save")
+map_with_desc("i", "<leader>ww", "<C-o>:update<CR>", noremap, "Update/Save in insert mode")
+map_with_desc("n", "QQ", ":q<CR>", silentnoremap, "Quit")
+map_with_desc("n", "Qt", ":q!<CR>", silentnoremap, "QUIT!")
+map_with_desc("n", "Qa", ":qall<CR>", silentnoremap, "Quit all")
+map_with_desc("n", "QA", ":qall!<CR>", silentnoremap, "QUIT ALL!")
 
-map_with_desc('n', '<leader>ww', ':update<CR>', noremap, 'Update/Save')
-map_with_desc('i', '<leader>ww', '<C-o>:update<CR>', noremap, 'Update/Save in insert mode')
-map_with_desc('n', 'QQ', ':q<CR>', silentnoremap, 'Quit')
-map_with_desc('n', 'Qt', ':q!<CR>', silentnoremap, 'QUIT!')
-map_with_desc('n', 'Qa', ':qall<CR>', silentnoremap, 'Quit all')
-map_with_desc('n', 'QA', ':qall!<CR>', silentnoremap, 'QUIT ALL!')
+map_with_desc("n", "J", "mjJ`j", silentnoremap, "Join lines and restore cursor location")
 
-map_with_desc('n', 'J', 'mjJ`j', silentnoremap, 'Join lines and restore cursor location')
-
-
-map_with_desc('n', 'U', '<C-r>', silentnoremap, 'Undo')
-map_with_desc('n', '<leader>R', ':redo<CR>', silentnoremap, 'Redo')
-
+map_with_desc("n", "U", "<C-r>", silentnoremap, "Undo")
+map_with_desc("n", "<leader>R", ":redo<CR>", silentnoremap, "Redo")
 
 -- Go to start or end of line easier
 -- map('n', '^', 'g^', silentnoremap)
-map('n', '0', 'g0', silentnoremap)
+map("n", "0", "g0", silentnoremap)
 
-map('n', 'H', '0', silentnoremapnowait)
-map('x', 'H', '0', silentnoremapnowait)
-map('n', 'L', 'g_', silentnoremapnowait)
-map('x', 'L', 'g_', silentnoremapnowait)
+map("n", "H", "0", silentnoremapnowait)
+map("x", "H", "0", silentnoremapnowait)
+map("n", "L", "g_", silentnoremapnowait)
+map("x", "L", "g_", silentnoremapnowait)
 
+map("n", "<space>o", "o<ESC>", silentnoremapnowait)
+map("n", "<space>O", "O<ESC>", silentnoremapnowait)
 
-map('n', '<space>o', 'o<ESC>', silentnoremapnowait)
-map('n', '<space>O', 'O<ESC>', silentnoremapnowait)
-
-
-map_with_desc('n', 'yc', 'yy<cmd>normal gcc<CR>p', noremap, 'Duplicate line and comment original')
-
+map_with_desc("n", "yc", "yy<cmd>normal gcc<CR>p", noremap, "Duplicate line and comment original")
 
 -- Find and replace
-map_with_desc('n', '<C-h>', ':%s/\\C\\<<C-r><C-w>\\>//g<left><left>', noremapnowait, 'Find and Replace Current Word')
-map_with_desc('x', '<C-h>', ':s/', noremapnowait, 'Find and Replace')
+map_with_desc("n", "<C-h>", ":%s/\\C\\<<C-r><C-w>\\>//g<left><left>", noremapnowait, "Find and Replace Current Word")
+map_with_desc("x", "<C-h>", ":s/", noremapnowait, "Find and Replace")
 -- map('v', '<leader>*', '"hy:%s/\\V<C-r>h//g<left><left>', silentnoremapnowait)
 
+map_with_desc(
+	"n",
+	"k",
+	"v:count == 0 ? 'gk' : 'k'",
+	expr_noremap,
+	"Treat long lines as break lines unless we had count"
+)
+map_with_desc(
+	"n",
+	"j",
+	"v:count == 0 ? 'gj' : 'j'",
+	expr_noremap,
+	"Treat long lines as break lines unless we had count"
+)
 
-map_with_desc('n', 'k', "v:count == 0 ? 'gk' : 'k'", expr_noremap, 'Treat long lines as break lines unless we had count')
-map_with_desc('n', 'j', "v:count == 0 ? 'gj' : 'j'", expr_noremap, 'Treat long lines as break lines unless we had count')
-
-
-
-map('n', '<space>;', 'q:', noremap)
-map_with_desc('n', '<leader>cd', ':cd %:p:h<CR>:pwd<CR>', noremap, 'PWD to current files directory/path')
-
+map("n", "<space>;", "q:", noremap)
+map_with_desc("n", "<leader>cd", ":cd %:p:h<CR>:pwd<CR>", noremap, "PWD to current files directory/path")
 
 -- :h g;
 -- :h g,
 -- map('n', '<left>;', 'g;', noremap)
 -- map('n', '<right>;', 'g,', noremap)
 
-
 -- Simple way to move between windows
-map('n', '\\', '<C-W>w', noremap)
-map('n', '<space><space>w', '<C-W>x', silentnoremapnowait)
-map('n', '<space>j', '<C-W>j', silentnoremapnowait)
-map('n', '<space>k', '<C-W>k', silentnoremapnowait)
-map('n', '<space>h', '<C-W>h', silentnoremapnowait)
-map('n', '<space>l', '<C-W>l', silentnoremapnowait)
-map('t', '\\', '<C-\\><C-n><C-W>w', silentnoremap)
+map("n", "\\", "<C-W>w", noremap)
+map("n", "<space><space>w", "<C-W>x", silentnoremapnowait)
+map("n", "<space>j", "<C-W>j", silentnoremapnowait)
+map("n", "<space>k", "<C-W>k", silentnoremapnowait)
+map("n", "<space>h", "<C-W>h", silentnoremapnowait)
+map("n", "<space>l", "<C-W>l", silentnoremapnowait)
+map("t", "\\", "<C-\\><C-n><C-W>w", silentnoremap)
 
 -- Move Window
-map_with_desc('n', '<space><space>j', '<C-W>J', silentnoremapnowait, 'Move window down')
-map_with_desc('n', '<space><space>k', '<C-W>K', silentnoremapnowait, 'Move window up')
-map_with_desc('n', '<space><space>h', '<C-W>H', silentnoremapnowait, 'Move window left')
-map_with_desc('n', '<space><space>l', '<C-W>L', silentnoremapnowait, 'Move window right')
+map_with_desc("n", "<space><space>j", "<C-W>J", silentnoremapnowait, "Move window down")
+map_with_desc("n", "<space><space>k", "<C-W>K", silentnoremapnowait, "Move window up")
+map_with_desc("n", "<space><space>h", "<C-W>H", silentnoremapnowait, "Move window left")
+map_with_desc("n", "<space><space>l", "<C-W>L", silentnoremapnowait, "Move window right")
 
 -- Window resize
-map_with_desc('n', '<up>', ':resize +1<CR>', silentnoremap, 'Horizontally resize window +1')
-map_with_desc('n', '<down>', ':resize -1<CR>', silentnoremap, 'Horizontally resize window -1')
-map_with_desc('n', '<left>', ':vertical resize -1<CR>', silentnoremap, 'Vertically resize window +1')
-map_with_desc('n', '<right>', ':vertical resize +1<CR>', silentnoremap, 'Vertically resize window -1')
+map_with_desc("n", "<up>", ":resize +1<CR>", silentnoremap, "Horizontally resize window +1")
+map_with_desc("n", "<down>", ":resize -1<CR>", silentnoremap, "Horizontally resize window -1")
+map_with_desc("n", "<left>", ":vertical resize -1<CR>", silentnoremap, "Vertically resize window +1")
+map_with_desc("n", "<right>", ":vertical resize +1<CR>", silentnoremap, "Vertically resize window -1")
 
 -- Open files [ref. this]
-map_with_desc('n', '<M-t>', ':tabedit ', noremapnowait, 'Edit in new tab')
-map_with_desc('i', '<M-t>', '<ESC>:tabedit ', noremapnowait, 'Edit in new tab [insert mode]')
-map_with_desc('n', '<M-e>', ':edit ', noremapnowait, 'Edit [current buffer]')
-map_with_desc('i', '<M-e>', '<ESC>:edit ', noremapnowait, 'Edit [current buffer: insert mode]')
-
+map_with_desc("n", "<M-t>", ":tabedit ", noremapnowait, "Edit in new tab")
+map_with_desc("i", "<M-t>", "<ESC>:tabedit ", noremapnowait, "Edit in new tab [insert mode]")
+map_with_desc("n", "<M-e>", ":edit ", noremapnowait, "Edit [current buffer]")
+map_with_desc("i", "<M-e>", "<ESC>:edit ", noremapnowait, "Edit [current buffer: insert mode]")
 
 -------------------------------------------------------------------------------
 -- GENERAL
 --
 
-
 -- lsp show inlay hints
-vim.keymap.set('n', '<leader>h', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end)
-
-
-
+vim.keymap.set("n", "<leader>h", function()
+	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end)
 
 -- map_with_desc('n', 'g.', ':lua vim.lsp.buf.code_action()<CR>', silentnoremap, 'Code Actions')
-map_with_desc('n', '<leader>s', ':Telescope spell_suggest<CR>', silentnoremap, 'Telescope Spell Suggest')
-map_with_desc('n', 'FF', ':Telescope filetypes <CR>', noremapnowait, 'Telescope Select Filetypes')
-map_with_desc('n', 'git', ':Gitsigns<CR>', noremapnowait, 'Gitsigns')
+map_with_desc("n", "<leader>s", ":Telescope spell_suggest<CR>", silentnoremap, "Telescope Spell Suggest")
+map_with_desc("n", "FF", ":Telescope filetypes <CR>", noremapnowait, "Telescope Select Filetypes")
+map_with_desc("n", "git", ":Gitsigns<CR>", noremapnowait, "Gitsigns")
 
 -------------------------------------------------------------------------------
 
@@ -162,39 +156,33 @@ map_with_desc('n', 'git', ':Gitsigns<CR>', noremapnowait, 'Gitsigns')
 -------------------------------------------------------------------------------
 
 -- TAGS
-map_with_desc('n', '<space>tg', ':Telescope tags<CR>', silentnoremap, 'Telescope Tags')
+map_with_desc("n", "<space>tg", ":Telescope tags<CR>", silentnoremap, "Telescope Tags")
 
-
-map_with_desc('i', '<down>', '<ESC>ddpi', silentnoremap, 'Move current line down')
-map_with_desc('i', '<up>', '<ESC>ddkPi', silentnoremap, 'Move current line up')
-map_with_desc('n', 'gf', '<C-]>', silentnoremap, 'Go to file under cursor')
-map_with_desc('n', '<BS>', '<C-o>', silentnoremap, 'Back to location you were')
-map_with_desc('n', '|', '<C-^>', silentnoremap, 'Switch between the last two files')
-
+map_with_desc("i", "<down>", "<ESC>ddpi", silentnoremap, "Move current line down")
+map_with_desc("i", "<up>", "<ESC>ddkPi", silentnoremap, "Move current line up")
+map_with_desc("n", "gf", "<C-]>", silentnoremap, "Go to file under cursor")
+map_with_desc("n", "<BS>", "<C-o>", silentnoremap, "Back to location you were")
+map_with_desc("n", "|", "<C-^>", silentnoremap, "Switch between the last two files")
 
 --------- Bufferline
-map_with_desc('n', '<Tab>', ':BufferLineCycleNext<CR>', silentnoremap, 'Buffer Next')
-map_with_desc('n', '<S-Tab>', ':BufferLineCyclePrev<CR>', silentnoremap, 'Buffer Previous')
-
+map_with_desc("n", "<Tab>", ":BufferLineCycleNext<CR>", silentnoremap, "Buffer Next")
+map_with_desc("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", silentnoremap, "Buffer Previous")
 
 -- Clear highlight
-map_with_desc('n', '<C-l>', ':nohl<CR>', silentnoremapnowait, 'Clear Highlight')
-map_with_desc('i', '<C-l>', '<C-o>:nohl<CR>', silentnoremapnowait, 'Clear Highlight')
-
+map_with_desc("n", "<C-l>", ":nohl<CR>", silentnoremapnowait, "Clear Highlight")
+map_with_desc("i", "<C-l>", "<C-o>:nohl<CR>", silentnoremapnowait, "Clear Highlight")
 
 -- C-a C-x enumerate
-map('n', '+', '<C-a>', silentnoremapnowait)
-map('n', '-', '<C-x>', silentnoremapnowait)
-map('v', '+', 'g<C-a>gv', silentnoremapnowait)
-map('v', '-', 'g<C-x>gv', silentnoremapnowait)
-
+map("n", "+", "<C-a>", silentnoremapnowait)
+map("n", "-", "<C-x>", silentnoremapnowait)
+map("v", "+", "g<C-a>gv", silentnoremapnowait)
+map("v", "-", "g<C-x>gv", silentnoremapnowait)
 
 -- Go to the starting position after visual modes
-map('v', '<ESC>', 'o<ESC>', silentnoremap)
-map('v', 'v', 'o<ESC>', silentnoremap)
+map("v", "<ESC>", "o<ESC>", silentnoremap)
+map("v", "v", "o<ESC>", silentnoremap)
 
-map_with_desc('n', 'gV', '`[v`]', silentnoremap, 'Highlight last inserted text')
-
+map_with_desc("n", "gV", "`[v`]", silentnoremap, "Highlight last inserted text")
 
 ------------------------ Yank
 -- System clipboard shift - y
@@ -203,30 +191,27 @@ map_with_desc('n', 'gV', '`[v`]', silentnoremap, 'Highlight last inserted text')
 -- map_with_desc('n', '<C-c>', ':%y+<CR>', noremap, 'Copy Entire File')
 -- map_with_desc('i', '<C-c>', '<C-o>:%y+<CR>', noremap, 'Copy Entire File [insert mode]')
 
-map('n', 'Y', 'yy', noremap)
-map('n', 'yy', 'y$', noremap)
+map("n", "Y", "yy", noremap)
+map("n", "yy", "y$", noremap)
 -- map('v', 'yy', '"+y', noremap)
 
-
 -- Use gp and gP instead fo p and P to leave the cursor after the pasted text.
-map('n', 'p', 'gp', silentnoremap)
-map('n', 'P', 'gP', silentnoremap)
-map('n', 'gp', 'p', silentnoremap)
-map('n', 'gP', 'P', silentnoremap)
-
+map("n", "p", "gp", silentnoremap)
+map("n", "P", "gP", silentnoremap)
+map("n", "gp", "p", silentnoremap)
+map("n", "gP", "P", silentnoremap)
 
 -- Delete || change word separated by underscores or alternatively
 --
 -- some_word
 
-map('n', 'du', 'dt_', noremap)
-map('n', 'Du', 'df_', noremap)
-map('n', 'cu', 'ct_', noremap)
-map('n', 'Cu', 'cf_', noremap)
+map("n", "du", "dt_", noremap)
+map("n", "Du", "df_", noremap)
+map("n", "cu", "ct_", noremap)
+map("n", "Cu", "cf_", noremap)
 
-map('n', 'cU', 'F_lcw', noremap)
-map('n', 'dU', 'F_de', noremap)
-
+map("n", "cU", "F_lcw", noremap)
+map("n", "dU", "F_de", noremap)
 
 -------------------------------------------------------------------------------
 -- CUSTOM KEYMAPS
@@ -236,23 +221,22 @@ map('n', 'dU', 'F_de', noremap)
 --     test_cmd = `command to execute`
 
 -- Delete array|hash's first key/value
-map('n', 'dcd', '0f[ldW', noremap)
-map('n', 'dhd', '0f{ldf,x', noremap)
+map("n", "dcd", "0f[ldW", noremap)
+map("n", "dhd", "0f{ldf,x", noremap)
 -- Delete array|hash's key/values but first
-map('n', 'dcD', '0f[f,dt]', noremap)
-map('n', 'dhD', '0f{f,dt}', noremap)
+map("n", "dcD", "0f[f,dt]", noremap)
+map("n", "dhD", "0f{f,dt}", noremap)
 
 -- Change array|hash's first key/value
-map('n', 'ccd', '0f[lcW', noremap)
-map('n', 'chd', '0f{lct,', noremap)
+map("n", "ccd", "0f[lcW", noremap)
+map("n", "chd", "0f{lct,", noremap)
 -- Change array|hash's key/values but first
-map('n', 'ccD', '0f[f,lct]', noremap)
-map('n', 'chD', '0f{f,lct}', noremap)
+map("n", "ccD", "0f[f,lct]", noremap)
+map("n", "chD", "0f{f,lct}", noremap)
 
 -- " def main(arg, arg2)
 -- "   do_something
 -- " end
-
 
 -- VIM core functionality (as example):
 --   cib => ci(
@@ -274,7 +258,6 @@ map('n', 'chD', '0f{f,lct}', noremap)
 --   yab => ya(
 --   yiB => yi{
 --   yaB => ya{
-
 
 -- CUSTOM MAPS:
 --   Because of dvp keyboard layout I don't know the exact place of the
@@ -300,67 +283,72 @@ map('n', 'chD', '0f{f,lct}', noremap)
 --     yiD => yi`
 --     yaD => ya`
 
-map('n', 'cid', 'ci[', noremap)
-map('n', 'cad', 'ca[', noremap)
-map('n', 'ciD', 'ci`', noremap)
-map('n', 'caD', 'ca`', noremap)
+map("n", "cid", "ci[", noremap)
+map("n", "cad", "ca[", noremap)
+map("n", "ciD", "ci`", noremap)
+map("n", "caD", "ca`", noremap)
 
-map('n', 'did', 'di[', noremap)
-map('n', 'dad', 'da[', noremap)
-map('n', 'diD', 'di`', noremap)
-map('n', 'daD', 'da`', noremap)
+map("n", "did", "di[", noremap)
+map("n", "dad", "da[", noremap)
+map("n", "diD", "di`", noremap)
+map("n", "daD", "da`", noremap)
 
-map('n', 'vid', 'vi[', noremap)
-map('n', 'vad', 'va[', noremap)
-map('n', 'viD', 'vi`', noremap)
-map('n', 'vaD', 'va`', noremap)
+map("n", "vid", "vi[", noremap)
+map("n", "vad", "va[", noremap)
+map("n", "viD", "vi`", noremap)
+map("n", "vaD", "va`", noremap)
 
-map('n', 'yid', 'yi[', noremap)
-map('n', 'yad', 'ya[', noremap)
-map('n', 'yiD', 'yi`', noremap)
-map('n', 'yaD', 'ya`', noremap)
-
-
+map("n", "yid", "yi[", noremap)
+map("n", "yad", "ya[", noremap)
+map("n", "yiD", "yi`", noremap)
+map("n", "yaD", "ya`", noremap)
 
 -- Change text _without putting the text into register,
-map('n', 'c', '"_c', noremap)
-map('n', 'C', '"_C', noremap)
-map('n', 'cc', '"_cc', noremap)
-
+map("n", "c", '"_c', noremap)
+map("n", "C", '"_C', noremap)
+map("n", "cc", '"_cc', noremap)
 
 -- Empty || Change current line
-map('n', 'dD', '0D', noremapnowait)
-map('n', 'cC', '0C', noremapnowait)
+map("n", "dD", "0D", noremapnowait)
+map("n", "cC", "0C", noremapnowait)
 
 -- Auto-center
-map('n', 'G', 'Gzz', silentnoremap)
-map('n', 'g*', 'g*zz', silentnoremap)
-map('n', 'g#', 'g#zz', silentnoremap)
-map('n', 'n', 'nzz', silentnoremap)
-map('n', 'N', 'Nzz', silentnoremap)
-map('n', '*', '*zz', silentnoremap)
-map('n', '#', '#zz', silentnoremap)
-map('n', '}', '}zz', silentnoremapnowait)
-map('n', '{', '{zz', silentnoremapnowait)
+map("n", "G", "Gzz", silentnoremap)
+map("n", "g*", "g*zz", silentnoremap)
+map("n", "g#", "g#zz", silentnoremap)
+map("n", "n", "nzz", silentnoremap)
+map("n", "N", "Nzz", silentnoremap)
+map("n", "*", "*zz", silentnoremap)
+map("n", "#", "#zz", silentnoremap)
+map("n", "}", "}zz", silentnoremapnowait)
+map("n", "{", "{zz", silentnoremapnowait)
 
+map_with_desc("n", "<space><space>q", ":bd<CR>", silentnoremap, "Close current buffer")
+map_with_desc("n", "<space><space>Q", ":CurrBufOnly<CR>", silentnoremap, "Close all buffers but current")
 
-map_with_desc('n', '<space><space>q', ':bd<CR>', silentnoremap, 'Close current buffer')
-map_with_desc('n', '<space><space>Q', ':CurrBufOnly<CR>', silentnoremap, 'Close all buffers but current')
+map_with_desc("i", "<leader><leader>l", "<C-x><C-l>", noremapnowait, "Line autocompletion")
 
-map_with_desc('i', '<leader><leader>l', '<C-x><C-l>', noremapnowait, 'Line autocompletion')
+-- Flash.nvim
+map_with_desc("n", "<leader>m", '<cmd>lua require("flash").jump()<CR>', noremap, "Flash Jump")
+-- map_with_desc("n", "<leader>gg", '<cmd>lua require("flash").jump({ search = { mode = "search", max_length = 0 }, label = { after = { 0, 0 } }, pattern = "^" })<CR>', noremap, "Flash Line")
 
-map_with_desc('n', '<leader>m', ':HopWord<CR>', noremap, 'Hop to word')
-map_with_desc('n', '<leader>gg', ':HopLine<CR>', noremap, 'Hop to line')
+vim.keymap.set({ "n", "x", "o" }, "<c-space>", function()
+	require("flash").treesitter({
+		actions = {
+			["<c-space>"] = "next",
+			["<BS>"] = "prev",
+		},
+	})
+end, { desc = "Treesitter incremental selection" })
 
 -------------------------------------------------------------------------------
 -- TERMINAL SECTION:
 --
-map_with_desc('n', '<space><space>t', '<cmd>split | term<CR>a', silentnoremap, 'Horizontal Terminal')
-map_with_desc('n', '<space><space>v', '<cmd>vsplit term<CR>a', silentnoremap, 'Vertical Terminal')
+map_with_desc("n", "<space><space>t", "<cmd>split | term<CR>a", silentnoremap, "Horizontal Terminal")
+map_with_desc("n", "<space><space>v", "<cmd>vsplit | term<CR>a", silentnoremap, "Vertical Terminal")
 
-map_with_desc('t', '<leader><leader>', '<C-\\><C-n>', noremapnowait, 'Normal mode in Terminal')
-map_with_desc('t', '<Esc><Esc>', '<C-\\><C-n>:q!<CR>', noremapnowait, 'Close Terminal')
-
+map_with_desc("t", "<leader><leader>", "<C-\\><C-n>", noremapnowait, "Normal mode in Terminal")
+map_with_desc("t", "<Esc><Esc>", "<C-\\><C-n><cmd>q!<CR>", noremapnowait, "Close Terminal")
 
 -------------------------------------------------------------------------------
 -- Debugging
@@ -368,9 +356,7 @@ map_with_desc('t', '<Esc><Esc>', '<C-\\><C-n>:q!<CR>', noremapnowait, 'Close Ter
 -- map('n', '<leader>df', ':lua require("dapui").float_element()<CR>', silentnoremap)
 -- map('v', '<M-k>', ':lua require("dapui").eval()<CR>', silentnoremap)
 
-
 -------------------------------------------------------------------------------
-
 
 -- shift + F1 = delete empty lines
 -- map('n', '<S-F1>', ':g/^$/d<CR>', silentnoremap)
@@ -383,7 +369,6 @@ map_with_desc('t', '<Esc><Esc>', '<C-\\><C-n>:q!<CR>', noremapnowait, 'Close Ter
 --         command = [[nnoremap <buffer> ,rr :w<CR>:python %<CR>]]
 --     }
 -- )
-
 
 -- set keywordprg=trans\ :jp
 -- <S-k> to trans current word under cursor
@@ -400,7 +385,6 @@ map_with_desc('t', '<Esc><Esc>', '<C-\\><C-n>:q!<CR>', noremapnowait, 'Close Ter
 --     endfunction
 -- ]]
 
-
 -- Python custom keymaps
 -- vim.cmd [[
 --     autocmd FileType python,py call PythonOptions()
@@ -411,7 +395,6 @@ map_with_desc('t', '<Esc><Esc>', '<C-\\><C-n>:q!<CR>', noremapnowait, 'Close Ter
 --         imap ttF print(f"{}")<left><left><left>
 --     endfunction
 -- ]]
-
 
 -- Ruby custom keymaps
 -- vim.cmd [[
@@ -448,7 +431,6 @@ map_with_desc('t', '<Esc><Esc>', '<C-\\><C-n>:q!<CR>', noremapnowait, 'Close Ter
 --         imap eCC <%#  %><left><left><left>
 --     endfunction
 -- ]]
-
 
 -- C++ & C custom keymaps
 -- vim.cmd [[
@@ -496,21 +478,19 @@ vim.keymap.set({ "n", "v" }, "<C-s>", function()
 	end)
 end, { desc = "Format buffer" })
 
-
-
-vim.keymap.set('n', '<leader>l', function()
+vim.keymap.set("n", "<leader>l", function()
 	local new_config = not vim.diagnostic.config().virtual_lines
 	vim.diagnostic.config({ virtual_lines = new_config })
-end, { desc = 'Toggle diagnostic virtual_lines' })
-
+end, { desc = "Toggle diagnostic virtual_lines" })
 
 -------------------------------------------------------------------------------
 --- Snacks
 
+-- map_with_desc('n', '<C-S-n>', ':lua Snacks.explorer()<CR>', silentnoremapnowait, 'Nvim Tree')
+-- map_with_desc('i', '<C-S-n>', '<C-o>:lua Snacks.explorer()<CR>', silentnoremapnowait, 'Nvim Tree [insert mode]')
 
-map_with_desc('n', '<C-n>', ':lua Snacks.explorer()<CR>', silentnoremapnowait, 'Nvim Tree')
-map_with_desc('i', '<C-n>', '<C-o>:lua Snacks.explorer()<CR>', silentnoremapnowait, 'Nvim Tree [insert mode]')
-
+map_with_desc("n", "<C-n>", ":Oil<CR>", silentnoremapnowait, "Oil")
+map_with_desc("i", "<C-n>", "<C-o>:Oil<CR>", silentnoremapnowait, "Oil [insert mode]")
 -- vim.keymap.set("n", "<C-n>", function()
 -- 	local explorer = Snacks.picker.get({ source = "explorer" })[1]
 -- 	if explorer then
@@ -520,17 +500,16 @@ map_with_desc('i', '<C-n>', '<C-o>:lua Snacks.explorer()<CR>', silentnoremapnowa
 -- 	end
 -- end, { desc = "Focus or Open Explorer" })
 
+map_with_desc("n", "tt", ":lua Snacks.picker.smart()<CR>", silentnoremapnowait, "Find Files [smart]")
 
-map_with_desc('n', 'tt', ':lua Snacks.picker.smart()<CR>', silentnoremapnowait, 'Find Files [smart]')
+map_with_desc("n", "<S-CR>", ":lua Snacks.picker.files()<CR>", silentnoremapnowait, "Find Files")
+map_with_desc("i", "<S-CR>", "<C-o>:lua Snacks.picker.files()<CR>", silentnoremapnowait, "Find Files")
 
-map_with_desc('n', '<S-CR>', ':lua Snacks.picker.files()<CR>', silentnoremapnowait, 'Find Files')
-map_with_desc('i', '<S-CR>', '<C-o>:lua Snacks.picker.files()<CR>', silentnoremapnowait, 'Find Files')
+map_with_desc("n", "<C-CR>", ":lua Snacks.picker.buffers()<CR>", silentnoremapnowait, "Buffers")
+map_with_desc("i", "<C-CR>", "<C-o>:lua Snacks.picker.buffers()<CR>", silentnoremapnowait, "Buffers")
 
-map_with_desc('n', '<C-CR>', ':lua Snacks.picker.buffers()<CR>', silentnoremapnowait, 'Buffers')
-map_with_desc('i', '<C-CR>', '<C-o>:lua Snacks.picker.buffers()<CR>', silentnoremapnowait, 'Buffers')
-
-map_with_desc('n', '<M-f>', ':lua Snacks.picker.grep()<CR>', noremapnowait, 'Live Grep')
-map_with_desc('i', '<M-f>', '<C-o>:lua Snacks.picker.grep()<CR>', noremapnowait, 'Live Grep')
+map_with_desc("n", "<M-f>", ":lua Snacks.picker.grep()<CR>", noremapnowait, "Live Grep")
+map_with_desc("i", "<M-f>", "<C-o>:lua Snacks.picker.grep()<CR>", noremapnowait, "Live Grep")
 
 -- map_with_desc('n', '<S-m>', ':lua Snacks.picker.man()<CR>', noremapnowait, 'Man Pages')
 
@@ -540,25 +519,58 @@ map_with_desc('i', '<M-f>', '<C-o>:lua Snacks.picker.grep()<CR>', noremapnowait,
 -- map_with_desc('n', 'gtr', ':lua Snacks.picker.lsp_references()<CR>', silentnoremap, 'References')
 -- map_with_desc('n', 'gti', ':lua Snacks.picker.lsp_implementations()<CR>', silentnoremap, 'Goto Implementations')
 
-
 -- map_with_desc('n', '<leader>sd', ':lua Snacks.picker.diagnostics()<CR>', silentnoremap, 'Diagnostics')
 -- map_with_desc('n', '<leader>sD', ':lua Snacks.picker.diagnostics_buffer()<CR>', silentnoremap, 'Buffer Diagnostics')
 
-map_with_desc('n', 'gpp', "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", noremap, 'Go to Definitions POP UP')
-map_with_desc('n', 'gpd', "<cmd>lua require('goto-preview').goto_preview_declaration()<CR>", noremap, 'Go to Declaration POP UP')
-map_with_desc('n', 'gpt', "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>", noremap, 'Go to Type Definitions POP UP')
-map_with_desc('n', 'gpr', "<cmd>lua require('goto-preview').goto_preview_references()<CR>", noremap, 'Go to References POP UP')
-map_with_desc('n', 'gpi', "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>", noremap, 'Go to Implementations POP UP')
-map_with_desc('n', 'gpc', "<cmd>lua require('goto-preview').close_all_win()<CR>", noremap, 'Go to Preview: Close All Win POP UP')
+map_with_desc(
+	"n",
+	"gpp",
+	"<cmd>lua require('goto-preview').goto_preview_definition()<CR>",
+	noremap,
+	"Go to Definitions POP UP"
+)
+map_with_desc(
+	"n",
+	"gpd",
+	"<cmd>lua require('goto-preview').goto_preview_declaration()<CR>",
+	noremap,
+	"Go to Declaration POP UP"
+)
+map_with_desc(
+	"n",
+	"gpt",
+	"<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>",
+	noremap,
+	"Go to Type Definitions POP UP"
+)
+map_with_desc(
+	"n",
+	"gpr",
+	"<cmd>lua require('goto-preview').goto_preview_references()<CR>",
+	noremap,
+	"Go to References POP UP"
+)
+map_with_desc(
+	"n",
+	"gpi",
+	"<cmd>lua require('goto-preview').goto_preview_implementation()<CR>",
+	noremap,
+	"Go to Implementations POP UP"
+)
+map_with_desc(
+	"n",
+	"gpc",
+	"<cmd>lua require('goto-preview').close_all_win()<CR>",
+	noremap,
+	"Go to Preview: Close All Win POP UP"
+)
 
-
-map_with_desc('n', 'gst', ':lua Snacks.picker.git_status()<CR>', silentnoremap, 'Git Status')
-map_with_desc('n', '<space>bb', ':lua Snacks.picker.git_branches()<CR>', silentnoremap, 'Git Branches')
-map_with_desc('n', '<space>dd', ':lua Snacks.picker.git_diff()<CR>', silentnoremap, 'Git Diff (Hunks)')
-map_with_desc('n', '<space>ss', ':lua Snacks.picker.git_stash()<CR>', silentnoremap, 'Git Stash')
+map_with_desc("n", "gst", ":lua Snacks.picker.git_status()<CR>", silentnoremap, "Git Status")
+map_with_desc("n", "<space>bb", ":lua Snacks.picker.git_branches()<CR>", silentnoremap, "Git Branches")
+map_with_desc("n", "<space>dd", ":lua Snacks.picker.git_diff()<CR>", silentnoremap, "Git Diff (Hunks)")
+map_with_desc("n", "<space>ss", ":lua Snacks.picker.git_stash()<CR>", silentnoremap, "Git Stash")
 
 -- map_with_desc('n', '<space>KK', ':lua Snacks.picker.keymaps()<CR>', silentnoremap, 'Keymaps')
-
 
 -- Execute updates
 -- vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>")
@@ -566,3 +578,12 @@ map_with_desc('n', '<space>ss', ':lua Snacks.picker.git_stash()<CR>', silentnore
 -- vim.keymap.set("v", "<space>x", ":lua<CR>")
 
 -- map_with_desc('n', '<space>u', require('undotree').open, noremap, 'UndoTree (built in)')
+
+-- vim.keymap.set('v', '<space>la', function()
+--     vim.cmd('normal! "ay')
+--
+--     vim.api.nvim_input("<Esc>'>o")
+--     vim.schedule(function()
+--         vim.cmd('LlamaInstruct')
+--     end)
+-- end, { desc = 'Llama Instruct: Generate below selection' })

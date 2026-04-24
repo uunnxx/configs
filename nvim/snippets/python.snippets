@@ -1,0 +1,63 @@
+snippet def
+	def ${1:classname}(self):
+		return ${0}
+
+snippet defm
+	def ${1:classname}(self, ${2}):
+		return ${0}
+
+snippet defs
+	def __str__(self):
+		return self.${1:name}
+
+
+# django related
+snippet ar
+	@admin.register(${1:modelname})
+	class ${1}Admin(admin.ModelAdmin):
+		${0}
+
+snippet dmm
+	class ${1:Model}(models.Model):
+		${0}
+
+snippet dmf
+	class ${1:Model}Form(forms.ModelForm):
+		${0}
+
+snippet dmn
+	class ${1:Model}(models.${2:Model}):
+		${0}
+
+
+snippet fv
+	def ${1:viewname}(request: HttpRequest) -> HttpResponse:
+		${0}
+
+		context = {
+
+		}
+
+		return render(request, '${2:template_name}.html', context)
+
+
+
+snippet functionview
+	def ${1:viewname}(request: HttpRequest) -> HttpResponse:
+		${0}
+
+		context = {
+
+		}
+
+		return render(request, '${2:template_name}.html', context)
+
+snippet classview
+	def ${1:viewname}(request: HttpRequest) -> HttpResponse:
+		${0}
+
+		context = {
+
+		}
+
+		return render(request, '${2:template_name}.html', context)

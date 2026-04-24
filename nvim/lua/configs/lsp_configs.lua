@@ -155,6 +155,16 @@ vim.lsp.config.clangd = {
 }
 vim.lsp.enable("clangd")
 
+
+vim.lsp.config.beautysh = {
+	on_attach = on_attach,
+	capabilities = capabilities,
+	cmd = { "clangd", "--background-index" },
+	filetypes = { "sh", "shell" },
+}
+vim.lsp.enable("beautysh")
+
+
 -------------------------------------------------------------------------------
 -- Python
 vim.lsp.config.basedpyright = {

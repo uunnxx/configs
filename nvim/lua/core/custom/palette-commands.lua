@@ -394,6 +394,31 @@ palette.add_command({
 	keys = "",
 })
 
+-- Llama
+palette.add_command({
+	name = "llama toggle",
+	action = ":LlamaToggle",
+	keys = "",
+})
+palette.add_command({
+	name = "llama toggle autofim",
+	action = ":LlamaToggleAutoFim",
+	keys = "",
+})
+
+-- apidocs.nvim
+palette.add_command({
+	name = "Search API Docs",
+	action = ":ApidocsOpen",
+	keys = "",
+})
+
+palette.add_command({
+	name = "Restart",
+	action = ":restart",
+	keys = "",
+})
+
 -- vim.api.nvim_create_user_command('CMD', function()
 -- 	require("core.custom.command-palette").show_commands()
 -- end, {})

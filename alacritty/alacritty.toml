@@ -111,8 +111,13 @@ chars = "\u001B[13;5u"
 key = "Return"
 mods = "Control"
 
+# [[keyboard.bindings]]
+# chars = "\\\b "
+# key = "Space"
+# mods = "Shift"
+
 [[keyboard.bindings]]
-chars = "\\\b "
+chars = "\u001B[32;2u"
 key = "Space"
 mods = "Shift"
 
