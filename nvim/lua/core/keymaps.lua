@@ -13,6 +13,8 @@ local function map_with_desc(kind, lhs, rhs, base_opts, desc)
 end
 
 -------------------------------------------------------------------------------
+local user_functions = require('core.functions')
+
 
 local noremap = { noremap = true }
 local expr_noremap = { expr = true, noremap = true }
@@ -486,8 +488,8 @@ end, { desc = "Toggle diagnostic virtual_lines" })
 -------------------------------------------------------------------------------
 --- Snacks
 
--- map_with_desc('n', '<C-S-n>', ':lua Snacks.explorer()<CR>', silentnoremapnowait, 'Nvim Tree')
--- map_with_desc('i', '<C-S-n>', '<C-o>:lua Snacks.explorer()<CR>', silentnoremapnowait, 'Nvim Tree [insert mode]')
+map_with_desc('n', '<C-S-n>', ':lua Snacks.explorer()<CR>', silentnoremapnowait, 'Nvim Tree')
+map_with_desc('i', '<C-S-n>', '<C-o>:lua Snacks.explorer()<CR>', silentnoremapnowait, 'Nvim Tree [insert mode]')
 
 map_with_desc("n", "<C-n>", ":Oil<CR>", silentnoremapnowait, "Oil")
 map_with_desc("i", "<C-n>", "<C-o>:Oil<CR>", silentnoremapnowait, "Oil [insert mode]")
@@ -587,3 +589,7 @@ map_with_desc("n", "<space>ss", ":lua Snacks.picker.git_stash()<CR>", silentnore
 --         vim.cmd('LlamaInstruct')
 --     end)
 -- end, { desc = 'Llama Instruct: Generate below selection' })
+
+
+map_with_desc("n", "tog", user_functions.toggle_word, silentnoremap, 'Toggle the word under the cursor')
+

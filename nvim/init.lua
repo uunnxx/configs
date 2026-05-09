@@ -4,6 +4,7 @@ require('core.lazy')
 require("core.general")
 require("core.plugins_settings")
 require("core.keymaps")
+require("core.autocmds")
 require("core.functions")
 
 

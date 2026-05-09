@@ -51,8 +51,11 @@ require("lualine").setup({
 	sections = {
 		lualine_a = { "mode" },
 		lualine_b = { "branch", "diff", "searchcount", "selectioncount" },
+		-- lualine_c = { "getcwd", "filename" },
 		-- lualine_c = { "getcwd", "filename", "filesize" },
-		lualine_c = { "filename" },
+		lualine_c = {
+			{ "filename", path = 1, shorting_target = 40 },
+		},
 
 		lualine_x = {
 			-- {

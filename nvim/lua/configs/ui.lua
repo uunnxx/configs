@@ -1,4 +1,4 @@
------------------------------------------------------------
+----------------------------------------------------------
 -- User Interface
 -----------------------------------------------------------
 
@@ -10,15 +10,15 @@ local config = require("gruvbox").config
 
 require("gruvbox").setup({
 	overrides = {
-		GruvboxRedSign = { bg = "NONE" },
-		GruvboxYellowSign = { bg = "NONE" },
-		GruvboxGreenSign = { bg = "NONE" },
-		GruvboxAquaSign = { bg = "NONE" },
-		Normal = { bg = "NONE" },
-		QuickFixLine = { bg = "NONE" },
-		CursorLineSign = { bg = "NONE" },
-		CursorLineNr = { bg = "NONE" },
-		SignColumn = { bg = "NONE" },
+		-- GruvboxRedSign = { bg = "NONE" },
+		-- GruvboxYellowSign = { bg = "NONE" },
+		-- GruvboxGreenSign = { bg = "NONE" },
+		-- GruvboxAquaSign = { bg = "NONE" },
+		-- Normal = { bg = "NONE" },
+		-- QuickFixLine = { bg = "NONE" },
+		-- CursorLineSign = { bg = "NONE" },
+		-- CursorLineNr = { bg = "NONE" },
+		-- SignColumn = { bg = "NONE" },
 
 		-- LspReferenceRead = { bg = "NONE" },
 		-- LspReferenceText = { bg = "NONE" },
@@ -75,7 +75,7 @@ require("gruvbox").setup({
 	contrast = "hard", -- can be "hard", "soft" or empty string
 	-- palette_overrides = {},
 	dim_inactive = false,
-	transparent_mode = true,
+	transparent_mode = false,
 })
 
 vim.o.background = "dark"

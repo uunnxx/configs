@@ -9,7 +9,7 @@ return {
 		},
 		indent = { enabled = true },
 		quickfile = { enabled = true },
-		explorer = { enabled = false },
+		explorer = { enabled = true },
 		dashboard = { enabled = true },
 		bigfile = { enabled = true },
 		scroll = { enabled = true },
@@ -71,7 +71,7 @@ return {
 						["<a-w>"] = { "cycle_win", mode = { "i", "n" } },
 						["<C-a>"] = { "select_all", mode = { "n", "i" } },
 						["<C-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
-						["<C-Space>"] = { "preview_scroll_down", mode = { "i", "n" } },
+						["<C-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
 						-- ["<C-u>"] = { "list_scroll_up", mode = { "i", "n" } },
 						-- ["<C-d>"] = { "list_scroll_down", mode = { "i", "n" } },
 						["<C-g>"] = { "toggle_live", mode = { "i", "n" } },
@@ -101,7 +101,7 @@ return {
 		input = { enabled = true },
 		scope = { enabled = true },
 		words = { enabled = true },
-		statuscolumn = { enabled = true },
+		statuscolumn = { enabled = false },
 
 		styles = {
 			notification = {

@@ -18,12 +18,19 @@ cmd([[
     packadd matchit
 ]])
 
+-- set border
+set.winborder = "single"
+
 -- Tagbar
 g.tagbar_compact = 1
 g.tagbar_sort = 0
 
 -- Python
 g.python3_host_prog = "/home/baka/venvs/neovim/bin/python"
+g.python_indent = {
+	disable_parentheses_indenting = 1,
+	closed_paren_align_last_line = 0,
+}
 
 g.loaded_synload = 1
 g.loaded_matchparen = 1
@@ -50,8 +57,8 @@ set.endofline = true
 set.expandtab = true -- use spaces instead of tabs
 set.shiftwidth = 4 -- shift 4 spaces when tab
 set.tabstop = 4 -- 1 tab == 4 spaces
-set.autoindent = true -- autoindent new lines
-set.smartindent = true --
+set.autoindent = false -- autoindent new lines
+-- set.smartindent = true --
 set.softtabstop = 4 -- let backspace delete indent
 -- set.noexpandtab = true -- Tabs are tabs
 
@@ -165,13 +172,12 @@ set.fillchars = {
 }
 
 -- Matchpairs
--- add vertical bar for Ruby
--- set.matchpairs = {
---     '(:)',
---     '{:}',
---     '[:]',
---     '<:>'
--- }
+set.matchpairs = {
+	"(:)",
+	"{:}",
+	"[:]",
+	"<:>",
+}
 
 -- Ignore files vim doesnt use
 set.wildignore = {
@@ -286,7 +292,7 @@ vim.env.PATH = vim.env.HOME .. "/.local/share/mise/shims:" .. vim.env.PATH
 -- softtabstop=0
 -- shiftwidth=4
 -- tabstop=4
-cmd([[ autocmd FileType c,cpp,java setlocal noet ci pi sts=0 sw=4 ts=4 ]])
+-- cmd([[ autocmd FileType c,cpp,java setlocal noet ci pi sts=0 sw=4 ts=4 ]])
 
 -- set lsp_markdown filetype for '*.md' files
 -- cmd[[ autocmd BufNew,BufNewFile,BufRead *.txt,*.text,*.md,*.markdown setlocal ft=lsp_markdown ]]
@@ -328,13 +334,13 @@ vim.api.nvim_create_user_command("CurrBufOnly", function()
 	vim.cmd("%bd|e#|bd#")
 end, {})
 
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "python",
-	callback = function()
-		-- Add django to the filetype if it's not already there
-		vim.bo.filetype = "python.django"
-	end,
-})
+-- vim.api.nvim_create_autocmd("FileType", {
+-- 	pattern = "python",
+-- 	callback = function()
+-- 		-- Add django to the filetype if it's not already there
+-- 		vim.bo.filetype = "python.django"
+-- 	end,
+-- })
 
 -- disable autotag on snacks buffer
 vim.api.nvim_create_autocmd("FileType", {
@@ -343,7 +349,6 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.b.ts_autotag_enabled = false
 	end,
 })
-
 
 -- llama.vim
 -- related to typing artifacts on some picker's fields
@@ -374,7 +379,7 @@ vim.api.nvim_create_autocmd("FileType", {
 -- Should disable llama.vim on picker's input fields, if not it'll:
 -- 'after first char inserted -> go normal mode, press i, start typing
 -- so if I want to search function, it will be unctionf
---
+
 local llama_group = vim.api.nvim_create_augroup("LlamaAutoInit", { clear = true })
 
 vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter" }, {
@@ -396,8 +401,6 @@ vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter" }, {
 	end,
 })
 
-
-
 -- Oil get current dir
 -- Declare a global function to retrieve the current directory
 function _G.get_oil_winbar()
@@ -411,34 +414,57 @@ function _G.get_oil_winbar()
 	end
 end
 
-
--- vim.api.nvim_create_autocmd("InsertEnter", {
+-- Let filetype's of `html` files inner django project be `htmldjango`
+-- vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+-- 	pattern = "**/templates/**/*.html",
 -- 	callback = function()
--- 		vim.opt_local.scrolloff = 999
--- 	end,
--- })
---
--- vim.api.nvim_create_autocmd("InsertLeave", {
--- 	callback = function()
--- 		vim.opt_local.scrolloff = 10
+-- 		vim.bo.filetype = "htmldjango"
 -- 	end,
 -- })
 
--- 	cpp = "g++ %:p -g -o %:p:r_temp && %:p:r_temp",
--- 	c = "gcc %:p -g -o %:p:r_temp && %:p:r_temp",
--- }
---
--- for filetype, command_to_execute in pairs(runners) do
--- 	vim.api.nvim_create_autocmd("FileType", {
--- 		pattern = filetype,
--- 		callback = function()
--- 			local run_cmd = ":" .. (command_to_execute ~= "" and "!" .. command_to_execute or "!") .. " %:p"
---
--- 			-- ,rr -> Save and Run
--- 			vim.keymap.set("n", ",rr", ":w<CR>" .. run_cmd .. "<CR>", { buffer = true, silent = true })
---
--- 			-- ,rc -> Save and Prepare command (no Enter)
--- 			vim.keymap.set("n", ",rc", ":w<CR>" .. run_cmd, { buffer = true })
--- 		end,
--- 	})
--- end
+-- modern way to do what is above
+vim.filetype.add({
+	pattern = {
+		[".*/templates/.*%.html"] = "htmldjango",
+	},
+})
+
+local runners = {
+	ruby = "ruby",
+	javascript = "node",
+	crystal = "crystal",
+	python = "python",
+	sh = "", -- shell scripts just need execution
+	cpp = "g++ %:p -g -o %:p:r_temp && %:p:r_temp",
+	c = "gcc %:p -g -o %:p:r_temp && %:p:r_temp",
+}
+
+for filetype, command_to_execute in pairs(runners) do
+	vim.api.nvim_create_autocmd("FileType", {
+		pattern = filetype,
+		callback = function()
+			local run_cmd = ":" .. (command_to_execute ~= "" and "!" .. command_to_execute or "!") .. " %:p"
+
+			-- ,rr -> run it
+			vim.keymap.set("n", "<leader>rr", ":w<CR>" .. run_cmd .. "<CR>", { buffer = true, silent = true })
+
+			-- ,rc -> prepare to run with arguments
+			vim.keymap.set("n", "<leader>rc", ":w<CR>" .. run_cmd, { buffer = true })
+		end,
+	})
+end
+
+-- Set colorcolumn at 50,72 for the sake of 50,72 rule
+-- Create an augroup to prevent duplicate autocmds when reloading config
+local git_commit_group = vim.api.nvim_create_augroup("GitCommitSettings", { clear = true })
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "gitcommit",
+	group = git_commit_group,
+	callback = function()
+		-- Set local columns at 50 (summary) and 72 (body)
+		vim.opt_local.colorcolumn = "50,72"
+		-- Optional: also set textwidth to 72 to auto-wrap the body
+		vim.opt_local.textwidth = 72
+	end,
+})

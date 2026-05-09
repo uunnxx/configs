@@ -11,7 +11,7 @@ end
 
 cmp.setup({
 	experimental = {
-		ghost_text = true,
+		ghost_text = false,
 	},
 	window = {
 		completion = {
@@ -92,7 +92,7 @@ cmp.setup({
 			else
 				fallback()
 			end
-		end, { "i", "s" }),
+		end, { "i"}),
 
 		["<S-Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
@@ -102,29 +102,7 @@ cmp.setup({
 			else
 				fallback()
 			end
-		end, { "i", "s" }),
-
-		-- ["<Tab>"] = cmp.mapping(function(fallback)
-		-- 	if snippy.can_expand_or_advance() then
-		-- 		snippy.expand_or_advance()
-		-- 	elseif cmp.visible() then
-		-- 		cmp.select_next_item()
-		-- 	elseif has_words_before() then
-		-- 		cmp.complete()
-		-- 	else
-		-- 		fallback()
-		-- 	end
-		-- end, { "i", "s" }),
-		--
-		-- ["<S-Tab>"] = cmp.mapping(function(fallback)
-		-- 	if snippy.can_jump(-1) then
-		-- 		snippy.previous()
-		-- 	elseif cmp.visible() then
-		-- 		cmp.select_prev_item()
-		-- 	else
-		-- 		fallback()
-		-- 	end
-		-- end, { "i", "s" }),
+		end, { "i" }),
 	},
 
 	sources = {

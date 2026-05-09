@@ -31,8 +31,8 @@ return {
 	-- Auto close (x)html tags
 	-- { 'alvan/vim-closetag', ft = {'html', 'html5', 'htmldjango', 'xhtml', 'xml'} },
 	-- {'AndrewRadev/tagalong.vim'}
-	{
-		"MeanderingProgrammer/render-markdown.nvim",
-		ft = { "markdown", "codecompanion" },
-	},
+	-- {
+	-- 	"MeanderingProgrammer/render-markdown.nvim",
+	-- 	ft = { "markdown", "codecompanion" },
+	-- },
 }

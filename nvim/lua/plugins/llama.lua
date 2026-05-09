@@ -4,17 +4,17 @@ return {
 		vim.g.llama_config = {
 			endpoint_fim = "http://127.0.0.1:8012/infill",
 			endpoint_inst = "http://127.0.0.1:8012/v1/chat/completions",
-			auto_fim = true,
+			auto_fim = false,
 			n_prefix = 256, -- Lines of prefix context
 			n_suffix = 64, -- Lines of suffix context
-			stop_strings = {
-				"\nclass",
-				"\ndef",
-				"assert",
-				"<|file_sep|>",
-				"<|endoftext|>",
-				"<|im_end|>",
-			},
+			-- stop_strings = {
+			-- 	"\nclass",
+			-- 	"\ndef",
+			-- 	"assert",
+			-- 	"<|file_sep|>",
+			-- 	"<|endoftext|>",
+			-- 	"<|im_end|>",
+			-- },
 			show_info = false,
 			-- custom keymaps
 			keymap_fim_trigger = "<leader>llf",

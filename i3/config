@@ -168,9 +168,9 @@ bindsym $alt+$sh+space exec --no-startup-id rofi -show windowcd
 #
 # GET KEY CODES: `xev | grep button`
 #
-# button 1 left primary
-# button 2 middle
-# button 3 right
+# button 1 left button
+# button 2 middle button
+# button 3 right button
 # button 4 scroll up
 # button 5 scroll down
 # button 6 scroll left
@@ -178,11 +178,12 @@ bindsym $alt+$sh+space exec --no-startup-id rofi -show windowcd
 # button 8 left side 1st button
 # button 9 left side 2nd button
 
-bindsym --whole-window $alt+button1 move scratchpad
-bindsym --whole-window $alt+button2 move position center
+# use with shift
+bindsym --whole-window $alt+$sh+button1 move scratchpad
+bindsym --whole-window $alt+$sh+button2 move position center
 bindsym --whole-window $alt+$sh+button3 kill
-bindsym --whole-window $alt+button8 fullscreen toggle
-bindsym --whole-window $alt+button9 floating toggle
+bindsym --whole-window $alt+$sh+button8 fullscreen toggle
+bindsym --whole-window $alt+$sh+button9 floating toggle
 
 
 
@@ -478,6 +479,9 @@ exec --no-startup-id xscreensaver
 # just change $right and $left variables
 exec --no-startup-id xrandr --output $right --auto --right-of $left && xrandr --output $right --primary
 
+# set single wallpaper, we can chaneg it later with mod+esc w
+exec --no-startup-id feh --bg-fill --no-xinerama ~/Pictures/wall/wallhaven-queen.jpg
+
 
 exec_always --no-startup-id /usr/bin/xcompmgr
 exec_always --no-startup-id xset r rate 130 40
@@ -550,7 +554,7 @@ bindsym --release $mod+KP_Subtract exec xkill
 # $mode_system
 # $resize
 # $notify
-set $run [Bb]rave, [Ff]irefox, [Cc]hrome | [lL - tT]ranslate
+set $run [Bb]rave, [Ff]irefox, [Cc]hrome | [lL - tT]rans | Fa[r]ge
 mode "$run" {
     bindsym b exec --no-startup-id brave-browser, mode "default"
     bindsym $sh+b exec --no-startup-id brave-browser --incognito, mode "default"
@@ -566,6 +570,8 @@ mode "$run" {
 
     bindsym l exec --no-startup-id $trans_en_left, mode "default"
     bindsym $sh+l exec --no-startup-id $trans_ru_left, mode "default"
+
+    bindsym r exec --no-startup-id farge, mode "default"
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -624,15 +630,16 @@ bindsym $mod+Escape mode "$mode_system"
 
 
 mode "resize" {
-    bindsym h resize shrink width 5 px or 5 ppt
-    bindsym j resize grow height 5 px or 5 ppt
-    bindsym k resize shrink height 5 px or 5 ppt
-    bindsym l resize grow width 5 px or 5 ppt
+    bindsym h resize shrink width 10 px
+    bindsym j resize grow height 10 px
+    bindsym k resize shrink height 10 px
+    bindsym l resize grow width 10 px
 
-    bindsym $sh+h resize shrink width 50 px or 50 ppt
-    bindsym $sh+j resize grow height 50 px or 50 ppt
-    bindsym $sh+k resize shrink height 50 px or 50 ppt
-    bindsym $sh+l resize grow width 50 px or 50 ppt
+    bindsym $sh+h resize shrink width 50 px
+    bindsym $sh+j resize grow height 50 px
+    bindsym $sh+k resize shrink height 50 px
+    bindsym $sh+l resize grow width 50 px
+    # bindsym $sh+l resize grow width 50 px or 50 ppt
 
     bindsym Return mode "default"
     bindsym Escape mode "default"

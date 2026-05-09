@@ -419,6 +419,12 @@ palette.add_command({
 	keys = "",
 })
 
+palette.add_command({
+	name = "Toggle Codelense Reference Counter",
+	action = ":lua vim.lsp.codelens.enable(not vim.lsp.codelens.is_enabled())",
+	keys = "",
+})
+
 -- vim.api.nvim_create_user_command('CMD', function()
 -- 	require("core.custom.command-palette").show_commands()
 -- end, {})

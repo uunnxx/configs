@@ -12,9 +12,9 @@ require("nvim-treesitter").setup({
 	},
 	indent = {
 		enable = true,
+		disable = { "python", "python.django" },
 	},
 })
-
 
 local ts_parsers = {
 	"bash",
@@ -48,9 +48,7 @@ local ts_parsers = {
 	"zig",
 }
 
-
 require("nvim-treesitter").install(ts_parsers)
-
 
 -- vim.api.nvim_create_autocmd("FileType", {
 -- 	pattern = ts_parsers,
@@ -59,7 +57,6 @@ require("nvim-treesitter").install(ts_parsers)
 -- 		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 -- 	end,
 -- })
-
 
 -- uncommented above to check this one
 vim.api.nvim_create_autocmd("FileType", {
@@ -80,13 +77,19 @@ vim.api.nvim_create_autocmd("FileType", {
 
 		if vim.treesitter.language.add(lang) then
 			vim.treesitter.start(args.buf, lang)
-			vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+
+			if lang ~= "python" then
+				vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+				-- else
+				--     -- Optional: Force the built-in python indent script back on
+				--     vim.cmd("runtime! indent/python.vim")
+			end
+
 			-- vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
 			-- vim.wo[0][0].foldmethod = "expr"
 		end
 	end,
 })
-
 
 -- without it, indentation will be fucked
 -- vim.api.nvim_create_autocmd("FileType", {
@@ -103,7 +106,6 @@ vim.api.nvim_create_autocmd("FileType", {
 -- 		vim.wo[0][0].foldmethod = "expr"
 -- 	end,
 -- })
-
 
 require("treesitter-context").setup({
 	enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)

@@ -4,7 +4,7 @@ return {
 	---@type Flash.Config
 	opts = {
 		-- labels = "abcdefghijklmnopqrstuvwxyz",
-		labels = "asdfghjklqwertyuiopzxcvbnm",
+		labels = "aoeuidhtns;,.pyfgcrl'qjkxbwvz",
 		search = {
 			-- search/jump in all windows
 			multi_window = true,
@@ -22,7 +22,7 @@ return {
 			--   mode = function(str)
 			--     return "\\<" .. str
 			--   end,
-			mode = "fuzzy",
+			mode = "exact",
 			-- behave like `incsearch`
 			incremental = false,
 			-- Excluded filetypes and custom window filters
@@ -232,6 +232,7 @@ return {
 				remote_op = { restore = true, motion = true },
 			},
 		},
+
 		-- options for the floating window that shows the prompt,
 		-- for regular jumps
 		-- `require("flash").prompt()` is always available to get the prompt text
@@ -248,6 +249,7 @@ return {
 				zindex = 1000,
 			},
 		},
+
 		-- options for remote operator pending mode
 		remote_op = {
 			-- restore window views and cursor position

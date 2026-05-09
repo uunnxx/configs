@@ -30,10 +30,6 @@ vim.diagnostic.config({
 			[vim.diagnostic.severity.INFO] = " ",
 			[vim.diagnostic.severity.HINT] = " ",
 		},
-		-- numhl = {
-		--     [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
-		--     [vim.diagnostic.severity.WARN] = 'WarningMsg',
-		-- }
 	},
 })
 
@@ -69,9 +65,6 @@ local on_attach = function(client, bufnr)
 		navic.attach(client, bufnr)
 	end
 
-	local function buf_set_keymap(...)
-		vim.api.nvim_buf_set_keymap(bufnr, ...)
-	end
 	local function buf_set_option(...)
 		vim.api.nvim_buf_set_option(bufnr, ...)
 	end
@@ -92,9 +85,6 @@ end
 mason.setup({
 	ui = {
 		icons = {
-			-- package_pending = ' ',
-			-- package_installed = ' ',
-			-- package_uninstalled = ' ﮊ',
 			package_installed = "✓",
 			package_pending = "➜",
 			package_uninstalled = "✗",
@@ -116,34 +106,6 @@ mason.setup({
 	max_concurrent_installers = 10,
 })
 
--------------------------------------------------------------------------------
--- Rust
--- vim.lsp.config.rust_analyzer = {
---     on_attach = on_attach,
---     capabilities = capabilities,
---     cmd = { 'rust-analyzer' },
---     filetypes = { 'rust' },
---     settings = {
---         ['rust-analyzer'] = {
---             imports = {
---                 granularity = { group = 'module', },
---                 prefix = 'self',
---             },
---             cargo = { buildScripts = { enable = true, }, },
---             procMacro = { enable = true },
---         }
---     }
--- }
--- vim.lsp.enable('rust_analyzer')
-
--------------------------------------------------------------------------------
--- Go
--- -- go install golang.org/x/tools/gopls@latest
--- vim.lsp.config.gopls = {
---     cmd = { "gopls" }
--- }
--- vim.lsp.enable('gopls')
---
 
 -------------------------------------------------------------------------------
 -- C lang
@@ -155,22 +117,32 @@ vim.lsp.config.clangd = {
 }
 vim.lsp.enable("clangd")
 
+-------------------------------------------------------------------------------
+-- Zig lang
+vim.lsp.config.zls = {
+	on_attach = on_attach,
+	capabilities = capabilities,
+	cmd = { "zls" },
+	filetypes = { "zig", "zir" },
+}
+vim.lsp.enable("zls")
 
+-------------------------------------------------------------------------------
+-- Shell
 vim.lsp.config.beautysh = {
 	on_attach = on_attach,
 	capabilities = capabilities,
 	cmd = { "clangd", "--background-index" },
-	filetypes = { "sh", "shell" },
+	filetypes = { "sh" },
 }
 vim.lsp.enable("beautysh")
-
 
 -------------------------------------------------------------------------------
 -- Python
 vim.lsp.config.basedpyright = {
 	on_attach = on_attach,
 	capabilities = capabilities,
-	filetypes = { "python", "py", "python.django" },
+	filetypes = { "python" },
 	settings = {
 		basedpyright = {
 			-- Using Ruff's import organizer
@@ -213,50 +185,15 @@ vim.lsp.config.basedpyright = {
 }
 vim.lsp.enable("basedpyright")
 
-vim.lsp.config("emmet_language_server", {
+-- Django
+-- uv tool install django-language-server
+vim.lsp.config("djls", {
 	on_attach = on_attach,
-	capabilities = capabilities,
-	filetypes = {
-		"css",
-		"eruby",
-		"html",
-		"htmldjango",
-		"javascript",
-		"javascriptreact",
-		"less",
-		"sass",
-		"scss",
-		"typescriptreact",
-	},
-	root_markers = {},
-	-- Read more about this options in the [vscode docs](https://code.visualstudio.com/docs/editor/emmet#_emmet-configuration).
-	-- **Note:** only the options listed in the table are supported.
-	init_options = {
-		---@type table<string, string>
-		includeLanguages = {},
-		--- @type string[]
-		excludeLanguages = {},
-		--- @type string[]
-		extensionsPath = {},
-		--- @type table<string, any> [Emmet Docs](https://docs.emmet.io/customization/preferences/)
-		preferences = {},
-		--- @type boolean Defaults to `true`
-		showAbbreviationSuggestions = true,
-		--- @type "always" | "never" Defaults to `"always"`
-		showExpandedAbbreviation = "always",
-		--- @type boolean Defaults to `false`
-		showSuggestionsAsSnippets = false,
-		--- @type table<string, any> [Emmet Docs](https://docs.emmet.io/customization/syntax-profiles/)
-		syntaxProfiles = {},
-		--- @type table<string, string> [Emmet Docs](https://docs.emmet.io/customization/snippets/#variables)
-		variables = {},
-	},
+	cmd = { "djls", "serve" },
+	filetypes = { "htmldjango", "html", "python" },
+	root_markers = { "manage.py", "pyproject.toml", ".git" },
 })
-
-vim.lsp.enable("emmet_language_server")
-
--- pip install pylyzer
--- It's not ready. It can't find virtually installed modules [issue #22]
+vim.lsp.enable("djls")
 
 -- pip install ruff-lsp
 vim.lsp.config.ruff = {
