@@ -238,6 +238,8 @@ return {
 				show_directory_symbols = true,
 				show_ignored_files = true, -- Show ignored file status
 				show_ignored_directories = true, -- Show ignored directory status
+				show_branch = true, -- Show current Git branch in oil buffers
+				branch_format = " %s    ", -- Format string for branch display
 				symbol_position = "signcolumn", -- "eol", "signcolumn", or "none"
 				can_use_signcolumn = function(bufnr)
 					return "number"

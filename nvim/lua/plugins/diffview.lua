@@ -1,4 +1,3 @@
-return {
-	"sindrets/diffview.nvim",
-	lazy = false,
-}
+-- return {
+-- 	"dlyongemallo/diffview-plus.nvim",
+-- }

@@ -1,7 +1,8 @@
 return {
 
 	{ "neovim/nvim-lspconfig" },
-	{ "williamboman/mason.nvim" },
+
+	{ "mason-org/mason.nvim", opts = {} },
 
 	{
 		"ray-x/lsp_signature.nvim",
