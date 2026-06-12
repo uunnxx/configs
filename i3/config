@@ -494,7 +494,8 @@ exec_always --no-startup-id setxkbmap -option caps:super
 # xinput test
 # xinput set-button-map ID <mouse buttons>
 # ```
-exec_always --no-startup-id xinput set-button-map 12 1 2 3 0 0 6 7 8 9 10 11
+# exec --no-startup-id xinput set-button-map ID array[int* buttons]
+exec --no-startup-id xinput set-button-map 9 1 2 3 0 0 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
 
 # 108 is Alt_R
 # exec --no-startup-id xmodmap -e "keycode 108 = Menu"

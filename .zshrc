@@ -185,9 +185,6 @@ export PSQL_PAGER='pspg -X -s 5'
 
 export QT_QPA_PLATFORMTHEME=qt5ct
 
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/home/baka/.lmstudio/bin"
-
 # Podman related
 export KIND_EXPERIMENTAL_PROVIDER=podman
 
