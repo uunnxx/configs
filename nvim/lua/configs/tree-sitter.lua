@@ -12,7 +12,7 @@ require("nvim-treesitter").setup({
 	},
 	indent = {
 		enable = true,
-		disable = { "python", "python.django" },
+		-- disable = { "python", "python.django" },
 	},
 })
 
@@ -85,8 +85,8 @@ vim.api.nvim_create_autocmd("FileType", {
 				--     vim.cmd("runtime! indent/python.vim")
 			end
 
-			-- vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
-			-- vim.wo[0][0].foldmethod = "expr"
+			vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+			vim.wo[0][0].foldmethod = "expr"
 		end
 	end,
 })

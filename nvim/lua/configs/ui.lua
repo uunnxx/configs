@@ -18,7 +18,7 @@ require("gruvbox").setup({
 		-- QuickFixLine = { bg = "NONE" },
 		-- CursorLineSign = { bg = "NONE" },
 		-- CursorLineNr = { bg = "NONE" },
-		-- SignColumn = { bg = "NONE" },
+		SignColumn = { bg = "NONE" },
 
 		-- LspReferenceRead = { bg = "NONE" },
 		-- LspReferenceText = { bg = "NONE" },
@@ -220,3 +220,13 @@ vim.api.nvim_set_hl(0, "llama_hl_inst_src", { link = "LspInlayHint" })
 vim.api.nvim_set_hl(0, "llama_hl_inst_virt_gen", { link = "LspInlayHint" })
 -- vim.api.nvim_set_hl(0, "llama_hl_inst_virt_ready", { link = "LspInlayHint" })
 vim.api.nvim_set_hl(0, "llama_hl_inst_virt_proc", { link = "LspInlayHint" })
+
+local comment_hl = vim.api.nvim_get_hl(0, { name = "Comment" })
+
+-- Remove the background from the custom fold icons / column area
+vim.api.nvim_set_hl(0, "FoldColumn", { bg = "none", fg = comment_hl.fg })
+-- vim.api.nvim_set_hl(0, "LineNr",     { bg = "none" })
+-- vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
+
+-- Clear the native code-line highlight if lines are collapsed
+-- vim.api.nvim_set_hl(0, "Folded",     { bg = "none" })

@@ -3,7 +3,6 @@ local cmd = vim.cmd -- execute Vim commands
 local fn = vim.fn --
 local wset = vim.wo -- Window-scoped
 local g = vim.g -- Global
-local exec = vim.api.nvim_exec -- execute Vimscript
 -- local bset  = vim.bo              -- Buffer-scoped
 
 vim.o.background = "dark"
@@ -52,7 +51,6 @@ set.fixendofline = true
 set.endofline = true
 -------------------------------------------------------------------------------
 -------------------- Tabs and spaces
--------------------------------------------------------------------------------
 
 set.expandtab = true -- use spaces instead of tabs
 set.shiftwidth = 4 -- shift 4 spaces when tab
@@ -67,7 +65,6 @@ set.hidden = true
 
 -------------------------------------------------------------------------------
 -- UI
--------------------------------------------------------------------------------
 
 -- let &colorcolumn="80,100,".join(range(120,999),",")
 -- let &colorcolumn="80,100,120"
@@ -125,29 +122,38 @@ set.scrolloff = 10
 set.sidescrolloff = 10
 
 -- Folding
--- Disable folding
+-- Fold method is set on lua/configs/tree-sitter
+-- set.foldmethod = "syntax"
 -- set.nofoldenable
+set.foldlevel = 99
+set.foldlevelstart = 99
+set.foldenable = true
+-- set.foldtext = ""
+-- set.foldcolumn = "auto"
+
+-- vim.opt.fillchars:append({
+-- 	foldopen = "▼",
+-- 	foldclose = "▶",
+-- 	foldsep = " ",
+-- })
 
 -- Treat underscore as separator
 -- set iskeyword-=_
 
 -------------------------------------------------------------------------------
 -------------------- Spelling
--------------------------------------------------------------------------------
 set.dictionary = "~/.config/nvim/spell/"
 set.spell = false
 set.spelllang = { "en_us", "cjk", "ru" } -- Dictionary for spellcheck
 
 -------------------------------------------------------------------------------
 -------------------- Completion
--------------------------------------------------------------------------------
-set.completeopt = "menu,menuone,noselect"
+set.completeopt = { "menu", "menuone", "noselect", "popup" }
 -- set.completeopt = 'noinsert,menu,menuone,noselect'
 -- set.completeopt = '.,w,b,u,t,i'
 
 -------------------------------------------------------------------------------
 -------------------- Invisible Chars
--------------------------------------------------------------------------------
 set.list = true
 set.listchars = {
 	tab = "▸ ",
@@ -159,17 +165,18 @@ set.listchars = {
 	space = "·",
 }
 
-set.fillchars = {
+set.fillchars:append({
 	vert = "┃",
-	fold = "⠀",
 	eob = " ", -- suppress ~ at EndOfBuffer
 	-- diff = "⣿", -- alternatives = ⣿ ░ ─ ╱
 	diff = "░", -- alternatives = ⣿ ░ ─ ╱
 	msgsep = "‾",
-	foldopen = "▾",
-	foldsep = "│",
-	foldclose = "▸",
-}
+
+	-- fold = " ",
+	-- foldopen = "",
+	-- foldclose = "",
+	-- foldsep = "│",
+})
 
 -- Matchpairs
 set.matchpairs = {
@@ -177,68 +184,6 @@ set.matchpairs = {
 	"{:}",
 	"[:]",
 	"<:>",
-}
-
--- Ignore files vim doesnt use
-set.wildignore = {
-	"*.o",
-	"*.a",
-	"__pycache__",
-	".git",
-	".hg",
-	".svn",
-	"node_modules",
-	"*.aux",
-	"*.out",
-	"*.toc",
-	"*.obj",
-	"*.exe",
-	"*.dll",
-	"*.manifest",
-	"*.rbc",
-	"*.class",
-	"*.ai",
-	"*.bmp",
-	"*.gif",
-	"*.ico",
-	"*.jpg",
-	"*.jpeg",
-	"*.png",
-	"*.psd",
-	"*.webp",
-	"*.avi",
-	"*.divx",
-	"*.mp4",
-	"*.webm",
-	"*.mov",
-	"*.m2ts",
-	"*.mkv",
-	"*.vob",
-	"*.mpg",
-	"*.mpeg",
-	"*.mp3",
-	"*.oga",
-	"*.ogg",
-	"*.wav",
-	"*.flac",
-	"*.eot",
-	"*.otf",
-	"*.ttf",
-	"*.woff",
-	"*.doc",
-	"*.pdf",
-	"*.cbr",
-	"*.cbz",
-	"*.zip",
-	"*.tar.gz",
-	"*.tar.bz2",
-	"*.tar.xz",
-	"*.rar",
-	"*.kgb",
-	"*.swp",
-	".lock",
-	".DS_Store",
-	"._*",
 }
 
 -- Search, Find
@@ -277,70 +222,41 @@ set.gdefault = true
 --------------------- Clipboard
 set.clipboard = "unnamed,unnamedplus"
 
--- cmd([[
---     filetype indent plugin on
---     syntax enable
--- ]])
-
 -- Mise
 -- Prepend mise shims to PATH
 vim.env.PATH = vim.env.HOME .. "/.local/share/mise/shims:" .. vim.env.PATH
 
--- noexpandtab
--- copyindent
--- preserveindent
--- softtabstop=0
--- shiftwidth=4
--- tabstop=4
--- cmd([[ autocmd FileType c,cpp,java setlocal noet ci pi sts=0 sw=4 ts=4 ]])
-
--- set lsp_markdown filetype for '*.md' files
--- cmd[[ autocmd BufNew,BufNewFile,BufRead *.txt,*.text,*.md,*.markdown setlocal ft=lsp_markdown ]]
-
--- don't auto comment new lines
--- cmd [[au BufEnter * set fo-=c fo-=r fo-=o]]
-
--- remove line lenght marker for selected filetypes
--- cmd [[autocmd FileType text,markdown,html,xhtml,css setlocal cc=0]]
-
--- 2 spaces for selected filetypes
--- cmd [[ autocmd FileType xml,html,xhtml,css,scss,javascript,lua,yaml,htmljinja setlocal shiftwidth=4 tabstop=4 ]]
-
--- Jinja2
--- cmd[[ autocmd BufNewFile,BufRead *.html set filetype=htmldjango ]]
-
--- Call `Autoformat` python files on save
--- cmd[[autocmd BufWritePost,FileWritePost *.py Autoformat]]
-
 cmd([[let g:v_warnings = 1]])
 
 -- Remember last edit position
-cmd([[
-    autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-]])
+vim.api.nvim_create_autocmd("BufReadPost", {
+	desc = "Jump to last edit position on opening a file",
+	callback = function(args)
+		local mark = vim.api.nvim_buf_get_mark(args.buf, '"')
+		local line_count = vim.api.nvim_buf_line_count(args.buf)
+		if mark[1] > 0 and mark[1] <= line_count then
+			vim.cmd('normal! g`"')
+		end
+	end,
+})
 
 -- highlight Yanks
-exec(
-	[[
-        augroup YankHighlight
-        autocmd!
-        autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=400}
-        augroup end
-    ]],
-	false
-)
+local yank_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+
+-- i was here here ?
+vim.api.nvim_create_autocmd("TextYankPost", {
+	group = yank_group,
+	callback = function()
+		vim.highlight.on_yank({
+			higroup = "IncSearch",
+			timeout = 400,
+		})
+	end,
+})
 
 vim.api.nvim_create_user_command("CurrBufOnly", function()
 	vim.cmd("%bd|e#|bd#")
 end, {})
-
--- vim.api.nvim_create_autocmd("FileType", {
--- 	pattern = "python",
--- 	callback = function()
--- 		-- Add django to the filetype if it's not already there
--- 		vim.bo.filetype = "python.django"
--- 	end,
--- })
 
 -- disable autotag on snacks buffer
 vim.api.nvim_create_autocmd("FileType", {
@@ -352,34 +268,6 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- llama.vim
 -- related to typing artifacts on some picker's fields
-
--- No need for these autocmd's, autocmd below works much better because it checks for ft
--- llama stops after switching to another buffer
--- vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
--- 	pattern = "*",
--- 	callback = function()
--- 		vim.fn["llama#init"]()
--- 	end,
--- })
---
--- disable llama on snacks buffer
--- vim.api.nvim_create_autocmd("FileType", {
--- 	pattern = "snacks_picker_input",
--- 	callback = function()
--- 		-- Disable llama.vim for this specific buffer
--- 		vim.b.llama_config = { enabled = false }
--- 		-- If the above doesn't work, try the global disable command for the buffer
--- 		if vim.fn.exists(":LlamaDisable") == 2 then
--- 			vim.cmd("LlamaDisable")
--- 		end
--- 	end,
--- })
---
-
--- Should disable llama.vim on picker's input fields, if not it'll:
--- 'after first char inserted -> go normal mode, press i, start typing
--- so if I want to search function, it will be unctionf
-
 local llama_group = vim.api.nvim_create_augroup("LlamaAutoInit", { clear = true })
 
 vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter" }, {
@@ -414,15 +302,7 @@ function _G.get_oil_winbar()
 	end
 end
 
--- Let filetype's of `html` files inner django project be `htmldjango`
--- vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
--- 	pattern = "**/templates/**/*.html",
--- 	callback = function()
--- 		vim.bo.filetype = "htmldjango"
--- 	end,
--- })
-
--- modern way to do what is above
+-- Django related [there are better ways of locating django project, but this one is simplest]
 vim.filetype.add({
 	pattern = {
 		[".*/templates/.*%.html"] = "htmldjango",
@@ -454,7 +334,7 @@ for filetype, command_to_execute in pairs(runners) do
 	})
 end
 
--- Set colorcolumn at 50,72 for the sake of 50,72 rule
+-- Set colorcolumn at 50,72 for the sake of 50,72 git commit rule
 -- Create an augroup to prevent duplicate autocmds when reloading config
 local git_commit_group = vim.api.nvim_create_augroup("GitCommitSettings", { clear = true })
 

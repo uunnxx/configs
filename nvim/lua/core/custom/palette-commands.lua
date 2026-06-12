@@ -425,6 +425,14 @@ palette.add_command({
 	keys = "",
 })
 
+-- Python
+palette.add_command({
+	name = "Django: Run Server",
+	action = ":vsplit | terminal python manage.py runserver",
+	keys = "",
+})
+
+
 -- vim.api.nvim_create_user_command('CMD', function()
 -- 	require("core.custom.command-palette").show_commands()
 -- end, {})

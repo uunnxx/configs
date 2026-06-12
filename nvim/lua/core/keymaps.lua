@@ -13,8 +13,7 @@ local function map_with_desc(kind, lhs, rhs, base_opts, desc)
 end
 
 -------------------------------------------------------------------------------
-local user_functions = require('core.functions')
-
+local user_functions = require("core.functions")
 
 local noremap = { noremap = true }
 local expr_noremap = { expr = true, noremap = true }
@@ -488,8 +487,8 @@ end, { desc = "Toggle diagnostic virtual_lines" })
 -------------------------------------------------------------------------------
 --- Snacks
 
-map_with_desc('n', '<C-S-n>', ':lua Snacks.explorer()<CR>', silentnoremapnowait, 'Nvim Tree')
-map_with_desc('i', '<C-S-n>', '<C-o>:lua Snacks.explorer()<CR>', silentnoremapnowait, 'Nvim Tree [insert mode]')
+map_with_desc("n", "<C-S-n>", ":lua Snacks.explorer()<CR>", silentnoremapnowait, "Nvim Tree")
+map_with_desc("i", "<C-S-n>", "<C-o>:lua Snacks.explorer()<CR>", silentnoremapnowait, "Nvim Tree [insert mode]")
 
 map_with_desc("n", "<C-n>", ":Oil<CR>", silentnoremapnowait, "Oil")
 map_with_desc("i", "<C-n>", "<C-o>:Oil<CR>", silentnoremapnowait, "Oil [insert mode]")
@@ -524,48 +523,12 @@ map_with_desc("i", "<M-f>", "<C-o>:lua Snacks.picker.grep()<CR>", noremapnowait,
 -- map_with_desc('n', '<leader>sd', ':lua Snacks.picker.diagnostics()<CR>', silentnoremap, 'Diagnostics')
 -- map_with_desc('n', '<leader>sD', ':lua Snacks.picker.diagnostics_buffer()<CR>', silentnoremap, 'Buffer Diagnostics')
 
-map_with_desc(
-	"n",
-	"gpp",
-	"<cmd>lua require('goto-preview').goto_preview_definition()<CR>",
-	noremap,
-	"Go to Definitions POP UP"
-)
-map_with_desc(
-	"n",
-	"gpd",
-	"<cmd>lua require('goto-preview').goto_preview_declaration()<CR>",
-	noremap,
-	"Go to Declaration POP UP"
-)
-map_with_desc(
-	"n",
-	"gpt",
-	"<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>",
-	noremap,
-	"Go to Type Definitions POP UP"
-)
-map_with_desc(
-	"n",
-	"gpr",
-	"<cmd>lua require('goto-preview').goto_preview_references()<CR>",
-	noremap,
-	"Go to References POP UP"
-)
-map_with_desc(
-	"n",
-	"gpi",
-	"<cmd>lua require('goto-preview').goto_preview_implementation()<CR>",
-	noremap,
-	"Go to Implementations POP UP"
-)
-map_with_desc(
-	"n",
-	"gpc",
-	"<cmd>lua require('goto-preview').close_all_win()<CR>",
-	noremap,
-	"Go to Preview: Close All Win POP UP"
-)
+map_with_desc("n", "gpp", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", noremap, "Go to Definitions POP UP")
+map_with_desc("n", "gpd", "<cmd>lua require('goto-preview').goto_preview_declaration()<CR>", noremap, "Go to Declaration POP UP")
+map_with_desc("n", "gpt", "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>", noremap, "Go to Type Definitions POP UP")
+map_with_desc("n", "gpr", "<cmd>lua require('goto-preview').goto_preview_references()<CR>", noremap, "Go to References POP UP")
+map_with_desc("n", "gpi", "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>", noremap, "Go to Implementations POP UP")
+map_with_desc("n", "gpc", "<cmd>lua require('goto-preview').close_all_win()<CR>", noremap, "Go to Preview: Close All Win POP UP")
 
 map_with_desc("n", "gst", ":lua Snacks.picker.git_status()<CR>", silentnoremap, "Git Status")
 map_with_desc("n", "<space>bb", ":lua Snacks.picker.git_branches()<CR>", silentnoremap, "Git Branches")
@@ -590,6 +553,4 @@ map_with_desc("n", "<space>ss", ":lua Snacks.picker.git_stash()<CR>", silentnore
 --     end)
 -- end, { desc = 'Llama Instruct: Generate below selection' })
 
-
-map_with_desc("n", "tog", user_functions.toggle_word, silentnoremap, 'Toggle the word under the cursor')
-
+map_with_desc("n", "tog", user_functions.toggle_word, silentnoremap, "Toggle the word under the cursor")

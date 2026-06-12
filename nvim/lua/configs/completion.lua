@@ -50,7 +50,6 @@ cmp.setup({
 					async_path = "[PATH] ",
 					buffer = "[BUF] ",
 					nvim_lsp = "[LSP] ",
-					nvim_lua = "[LUA] ",
 					sql = "[SQL] ",
 					snippy = "[SNIP] ",
 					dotenv = "[ENV] ",
@@ -74,7 +73,7 @@ cmp.setup({
 		["<C-b>"] = cmp.mapping.scroll_docs(4),
 		-- ['<C-Space>'] = cmp.mapping.complete(),
 		-- ['<C-e>'] = cmp.mapping.abort(),
-        -- ['C-Space'] = cmp.mapping.confirm(),
+		-- ['C-Space'] = cmp.mapping.confirm(),
 		["<C-c>"] = cmp.mapping.close(),
 		["<CR>"] = cmp.mapping.confirm({
 			behavior = cmp.ConfirmBehavior.Replace,
@@ -92,7 +91,7 @@ cmp.setup({
 			else
 				fallback()
 			end
-		end, { "i"}),
+		end, { "i" }),
 
 		["<S-Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
@@ -110,7 +109,6 @@ cmp.setup({
 		{ name = "snippy" },
 		{ name = "buffer", keyword_length = 2 },
 		{ name = "async_path" },
-		{ name = "nvim_lua" },
 		{ name = "dotenv" },
 		-- { name = "sql" },
 		{ name = "pypi", keyword_length = 4 },
