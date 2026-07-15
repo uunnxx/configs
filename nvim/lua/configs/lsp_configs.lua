@@ -15,6 +15,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			require("nvim-navic").attach(client, bufnr)
 		end
 
+		-- on-demand type check (shows in floating window)
 		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 		vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, opts)
 	end,
@@ -37,13 +38,16 @@ vim.diagnostic.config({
 			[vim.diagnostic.severity.ERROR] = " ",
 			[vim.diagnostic.severity.WARN] = " ",
 			[vim.diagnostic.severity.INFO] = " ",
-			[vim.diagnostic.severity.HINT] = " ",
+			-- [vim.diagnostic.severity.HINT] = " ",
+			-- [vim.diagnostic.severity.HINT] = " ",
+			[vim.diagnostic.severity.HINT] = " ",
 		},
 	},
 })
 
 -- activate all servers
-local servers = { "clangd", "zls", "beautysh", "basedpyright", "ruff", "djls", "lua_ls" }
+-- local servers = { "clangd", "zls", "beautysh", "basedpyright", "ruff", "dj", "lua_ls", "ty" }
+local servers = { "clangd", "zls", "beautysh", "basedpyright", "ruff", "dj", "lua_ls" }
 for _, server_name in ipairs(servers) do
 	vim.lsp.config(server_name, {
 		capabilities = capabilities,
