@@ -14,6 +14,8 @@ local function wordCount()
 	end
 end
 
+local navic = require("nvim-navic")
+
 require("lualine").setup({
 	options = {
 		icons_enabled = true,
@@ -52,10 +54,11 @@ require("lualine").setup({
 		lualine_a = { "mode" },
 		lualine_b = { "branch", "diff", "searchcount", "selectioncount" },
 		-- lualine_c = { "getcwd", "filename" },
+		lualine_c = {},
 		-- lualine_c = { "getcwd", "filename", "filesize" },
-		lualine_c = {
-			{ "filename", path = 1, shorting_target = 40 },
-		},
+		-- lualine_c = {
+		-- 	{ "filename", path = 1, shorting_target = 40 },
+		-- },
 
 		lualine_x = {
 			-- {
@@ -80,7 +83,8 @@ require("lualine").setup({
 					hint = "DiagnosticHint",
 				},
 				-- symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'},
-				symbols = { error = " ", warn = " ", info = " ", hint = " " },
+				-- symbols = { error = " ", warn = " ", info = " ", hint = " " },
+				symbols = { error = " ", warn = " ", info = " ", hint = " " },
 				colored = true,
 				update_in_insert = false,
 				always_visible = false,
@@ -95,6 +99,22 @@ require("lualine").setup({
 		-- lualine_z = { "hostname" },
 		lualine_z = { "lsp_status" },
 	},
+	winbar = {
+		-- lualine_a = {
+		-- 	{ "filename", path = 1, shorting_target = 40 },
+		-- },
+		-- lualine_b = {
+		-- 	{
+		-- 		"navic",
+		-- 		color_correction = "dynamic",
+		-- 		navic_opts = nil,
+		-- 	},
+		-- },
+		-- lualine_x = {
+		-- 	{ "lsp_status" },
+		-- },
+	},
+
 	inactive_sections = {
 		lualine_a = {},
 		lualine_b = {},
@@ -104,7 +124,6 @@ require("lualine").setup({
 		lualine_z = {},
 	},
 	tabline = {},
-	winbar = {},
 	inactive_winbar = {},
 	extensions = {
 		"quickfix",
