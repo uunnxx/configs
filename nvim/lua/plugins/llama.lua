@@ -5,6 +5,7 @@ return {
 			endpoint_fim = "http://127.0.0.1:8012/infill",
 			endpoint_inst = "http://127.0.0.1:8012/v1/chat/completions",
 			auto_fim = false,
+			show_info = false,
 			n_prefix = 256, -- Lines of prefix context
 			n_suffix = 64, -- Lines of suffix context
 			-- stop_strings = {
@@ -15,7 +16,6 @@ return {
 			-- 	"<|endoftext|>",
 			-- 	"<|im_end|>",
 			-- },
-			show_info = false,
 			-- custom keymaps
 			keymap_fim_trigger = "<leader>llf",
 			keymap_fim_accept_line = "<C-Space>",
