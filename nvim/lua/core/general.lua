@@ -102,7 +102,7 @@ set.shortmess:append("c")
 -- Virtual Edit
 -- set.virtualedit = 'all'
 
-set.winbar = "    %{%v:lua.require'nvim-navic'.get_location()%}"
+set.winbar = "   %f | %{%v:lua.require'nvim-navic'.get_location()%}"
 
 -- Commented out just because Snacks.picker not working properly when
 -- using 'edit_split', 'edit_vsplit' keybindings]
@@ -197,13 +197,16 @@ set.path = { ".", "/usr/include", "**" }
 
 set.cindent = true -- Copy indent from previous line
 
-set.updatetime = 4000
+set.updatetime = 100
 set.timeoutlen = 200 -- wait for mapped key sequence in ms
--- set.ttimeoutlen = 5
+set.ttimeoutlen = 10
+set.redrawtime = 1500
+
+set.showmode = false
 
 -- Undo
 set.undofile = true
-set.undodir = fn.stdpath("data") .. "undo"
+set.undodir = fn.stdpath("data") .. "/undo"
 set.shell = "/usr/bin/zsh"
 
 -- No fucking swap files
@@ -216,7 +219,7 @@ cmd([[
 set.mouse = ""
 set.mousefocus = true
 
--- use /g for reverse
+-- /g by default; use /g for reverse
 set.gdefault = true
 
 --------------------- Clipboard
@@ -314,7 +317,8 @@ local runners = {
 	javascript = "node",
 	crystal = "crystal",
 	python = "python",
-	sh = "", -- shell scripts just need execution
+	-- sh = "", -- shell scripts just need execution
+	sh = "sh",
 	cpp = "g++ %:p -g -o %:p:r_temp && %:p:r_temp",
 	c = "gcc %:p -g -o %:p:r_temp && %:p:r_temp",
 }
@@ -323,7 +327,7 @@ for filetype, command_to_execute in pairs(runners) do
 	vim.api.nvim_create_autocmd("FileType", {
 		pattern = filetype,
 		callback = function()
-			local run_cmd = ":" .. (command_to_execute ~= "" and "!" .. command_to_execute or "!") .. " %:p"
+			local run_cmd = ":" .. (command_to_execute ~= "" and "!" .. command_to_execute or "!") .. " %:p "
 
 			-- ,rr -> run it
 			vim.keymap.set("n", "<leader>rr", ":w<CR>" .. run_cmd .. "<CR>", { buffer = true, silent = true })
@@ -336,15 +340,26 @@ end
 
 -- Set colorcolumn at 50,72 for the sake of 50,72 git commit rule
 -- Create an augroup to prevent duplicate autocmds when reloading config
+--
+-- <type>(<scope>): <subject>          <- line 1: max 50 chars
+-- <BLANK LINE>
+-- <body>                              <- line 3+: wrap at 72 chars
+-- <BLANK LINE>
+-- <footer>                            <- references, breaking changes
+
 local git_commit_group = vim.api.nvim_create_augroup("GitCommitSettings", { clear = true })
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "gitcommit",
 	group = git_commit_group,
 	callback = function()
-		-- Set local columns at 50 (summary) and 72 (body)
+		-- local columns: 50 for (summary) and 72 for (body) as recommended
 		vim.opt_local.colorcolumn = "50,72"
-		-- Optional: also set textwidth to 72 to auto-wrap the body
+		-- auto-wrap
 		vim.opt_local.textwidth = 72
 	end,
 })
+
+-- without this Lazy.nvim will fail
+vim.env.GIT_DEFAULT_REF_FORMAT = 'files'
+
