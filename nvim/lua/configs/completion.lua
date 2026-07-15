@@ -10,8 +10,12 @@ local has_words_before = function()
 end
 
 cmp.setup({
+	preselect = cmp.PreselectMode.None,
+	completion = {
+		completeopt = "menu,menuone,noselect",
+	},
 	experimental = {
-		ghost_text = false,
+		ghost_text = true,
 	},
 	window = {
 		completion = {
@@ -41,7 +45,7 @@ cmp.setup({
 			local kind = lspkind.cmp_format({
 				mode = "symbol_text",
 				maxwidth = {
-					menu = 10, -- leading text (labelDetails)
+					menu = 40, -- leading text (labelDetails)
 					abbr = 100, -- actual suggestion item
 				},
 				ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
