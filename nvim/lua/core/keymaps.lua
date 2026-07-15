@@ -127,9 +127,19 @@ map_with_desc("i", "<M-e>", "<ESC>:edit ", noremapnowait, "Edit [current buffer:
 --
 
 -- lsp show inlay hints
-vim.keymap.set("n", "<leader>h", function()
-	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-end)
+-- vim.keymap.set("n", "<leader>h", function()
+-- 	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+-- end)
+
+-- toggle inline type hints
+map_with_desc("n", "<leader>th", function()
+    local buf = vim.api.nvim_get_current_buf()
+	local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = buf })
+	vim.lsp.inlay_hint.enable(not enabled, { bufnr = buf })
+end, noremapnowait, "Toggle inlay hints")
+
+-- function signature help (for calls under cursor)
+map_with_desc("n", "<leader>tf", function() vim.lsp.buf.signature_help() end, noremapnowait, "Show function signature")
 
 -- map_with_desc('n', 'g.', ':lua vim.lsp.buf.code_action()<CR>', silentnoremap, 'Code Actions')
 map_with_desc("n", "<leader>s", ":Telescope spell_suggest<CR>", silentnoremap, "Telescope Spell Suggest")
@@ -330,7 +340,7 @@ map_with_desc("n", "<space><space>Q", ":CurrBufOnly<CR>", silentnoremap, "Close 
 map_with_desc("i", "<leader><leader>l", "<C-x><C-l>", noremapnowait, "Line autocompletion")
 
 -- Flash.nvim
-map_with_desc("n", "<leader>m", '<cmd>lua require("flash").jump()<CR>', noremap, "Flash Jump")
+-- map_with_desc("n", "<leader>m", '<cmd>lua require("flash").jump()<CR>', noremap, "Flash Jump")
 -- map_with_desc("n", "<leader>gg", '<cmd>lua require("flash").jump({ search = { mode = "search", max_length = 0 }, label = { after = { 0, 0 } }, pattern = "^" })<CR>', noremap, "Flash Line")
 
 vim.keymap.set({ "n", "x", "o" }, "<c-space>", function()
@@ -501,16 +511,15 @@ map_with_desc("i", "<C-n>", "<C-o>:Oil<CR>", silentnoremapnowait, "Oil [insert m
 -- 	end
 -- end, { desc = "Focus or Open Explorer" })
 
-map_with_desc("n", "tt", ":lua Snacks.picker.smart()<CR>", silentnoremapnowait, "Find Files [smart]")
+-- map_with_desc("n", "<C-CR", "<cmd>lua Snacks.picker.smart()<CR>", silentnoremapnowait, "Find Files [smart]")
 
-map_with_desc("n", "<S-CR>", ":lua Snacks.picker.files()<CR>", silentnoremapnowait, "Find Files")
-map_with_desc("i", "<S-CR>", "<C-o>:lua Snacks.picker.files()<CR>", silentnoremapnowait, "Find Files")
+-- map_with_desc("n", "tt", "<cmd>lua Snacks.picker.files()<CR>", silentnoremapnowait, "Find Files")
 
-map_with_desc("n", "<C-CR>", ":lua Snacks.picker.buffers()<CR>", silentnoremapnowait, "Buffers")
-map_with_desc("i", "<C-CR>", "<C-o>:lua Snacks.picker.buffers()<CR>", silentnoremapnowait, "Buffers")
+map_with_desc("n", "<S-CR>", "<cmd>lua Snacks.picker.buffers()<CR>", silentnoremapnowait, "Buffers")
+map_with_desc("i", "<S-CR>", "<C-o><cmd>lua Snacks.picker.buffers()<CR>", silentnoremapnowait, "Buffers")
 
-map_with_desc("n", "<M-f>", ":lua Snacks.picker.grep()<CR>", noremapnowait, "Live Grep")
-map_with_desc("i", "<M-f>", "<C-o>:lua Snacks.picker.grep()<CR>", noremapnowait, "Live Grep")
+-- map_with_desc("n", "<M-f>", "<cmd>lua Snacks.picker.grep()<CR>", noremapnowait, "Live Grep")
+-- map_with_desc("i", "<M-f>", "<C-o><cmd>lua Snacks.picker.grep()<CR>", noremapnowait, "Live Grep")
 
 -- map_with_desc('n', '<S-m>', ':lua Snacks.picker.man()<CR>', noremapnowait, 'Man Pages')
 
@@ -535,22 +544,11 @@ map_with_desc("n", "<space>bb", ":lua Snacks.picker.git_branches()<CR>", silentn
 map_with_desc("n", "<space>dd", ":lua Snacks.picker.git_diff()<CR>", silentnoremap, "Git Diff (Hunks)")
 map_with_desc("n", "<space>ss", ":lua Snacks.picker.git_stash()<CR>", silentnoremap, "Git Stash")
 
--- map_with_desc('n', '<space>KK', ':lua Snacks.picker.keymaps()<CR>', silentnoremap, 'Keymaps')
 
+-- Development related
 -- Execute updates
 -- vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>")
 -- vim.keymap.set("n", "<space>x", ":.lua<CR>")
 -- vim.keymap.set("v", "<space>x", ":lua<CR>")
-
--- map_with_desc('n', '<space>u', require('undotree').open, noremap, 'UndoTree (built in)')
-
--- vim.keymap.set('v', '<space>la', function()
---     vim.cmd('normal! "ay')
---
---     vim.api.nvim_input("<Esc>'>o")
---     vim.schedule(function()
---         vim.cmd('LlamaInstruct')
---     end)
--- end, { desc = 'Llama Instruct: Generate below selection' })
 
 map_with_desc("n", "tog", user_functions.toggle_word, silentnoremap, "Toggle the word under the cursor")
