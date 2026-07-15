@@ -5,8 +5,8 @@ return {
 	lazy = true,
 	config = true, -- necessary as per https://github.com/rmagatti/goto-preview/issues/88
 	opts = {
-		width = 120, -- Width of the floating window
-		height = 22, -- Height of the floating window
+		width = 150, -- Width of the floating window
+		height = 30, -- Height of the floating window
 		border = { "↖", "─", "┐", "│", "┘", "─", "└", "│" }, -- Border characters of the floating window
 		default_mappings = false, -- Bind default mappings
 		debug = false, -- Print debug information
