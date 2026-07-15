@@ -65,6 +65,10 @@ vim.api.nvim_create_autocmd("FileType", {
 		local ft = vim.bo[args.buf].filetype
 		local lang = vim.treesitter.language.get_lang(ft)
 
+		if not lang or lang == "" then
+			return
+		end
+
 		if not vim.treesitter.language.add(lang) then
 			local available = vim.g.ts_available or require("nvim-treesitter").get_available()
 			if not vim.g.ts_available then
