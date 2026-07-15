@@ -8,6 +8,18 @@ local cmd = vim.cmd -- execute Vim commands
 local colors = require("gruvbox").palette
 local config = require("gruvbox").config
 
+-- Change colors of NormalFloat, FloatBorder
+vim.api.nvim_create_autocmd("ColorScheme", {
+	pattern = "gruvbox",
+	callback = function()
+		local normal_hl = vim.api.nvim_get_hl(0, { name = "Normal" })
+		local bg_hard = normal_hl.bg
+
+		vim.api.nvim_set_hl(0, "NormalFloat", { bg = bg_hard })
+		vim.api.nvim_set_hl(0, "FloatBorder", { bg = bg_hard, fg = "#665c54" }) -- fg - border color
+	end,
+})
+
 require("gruvbox").setup({
 	overrides = {
 		-- GruvboxRedSign = { bg = "NONE" },
@@ -40,6 +52,12 @@ require("gruvbox").setup({
 		DiagnosticSignInfo = {
 			bg = "NONE",
 			fg = colors.bright_blue,
+			bold = config.bold,
+			reverse = config.invert_signs,
+		},
+		DiagnosticSignHint = {
+			bg = "NONE",
+			fg = colors.bright_green,
 			bold = config.bold,
 			reverse = config.invert_signs,
 		},
@@ -230,3 +248,10 @@ vim.api.nvim_set_hl(0, "FoldColumn", { bg = "none", fg = comment_hl.fg })
 
 -- Clear the native code-line highlight if lines are collapsed
 -- vim.api.nvim_set_hl(0, "Folded",     { bg = "none" })
+
+-- this line is in case if we call it after calling `colorscheme`
+-- if vim.g.colors_name == "gruvbox" then
+-- 	vim.fn.execute("doautocmd ColorScheme gruvbox")
+-- end
+
+vim.api.nvim_set_hl(0, "NavicSeparator", { fg = "#FFA500", bold = true })
