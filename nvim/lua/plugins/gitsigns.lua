@@ -10,11 +10,6 @@ return {
 				delete       = {hl = 'GitSignsDelete', text = '▎', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
 				topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
 				changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
-				-- add = { text = "┃" },
-				-- change = { text = "┃" },
-				-- delete = { text = "_" },
-				-- topdelete = { text = "‾" },
-				-- changedelete = { text = "~" },
 				untracked = { text = "┇" },
 			},
 			signs_staged = {
