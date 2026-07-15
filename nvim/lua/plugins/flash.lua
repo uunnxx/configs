@@ -3,8 +3,7 @@ return {
 	event = "VeryLazy",
 	---@type Flash.Config
 	opts = {
-		-- labels = "abcdefghijklmnopqrstuvwxyz",
-		labels = "aoeuidhtns;,.pyfgcrl'qjkxbwvz",
+		labels = "thgcrlmaoeu.,pyjkix", -- dvorak programmer
 		search = {
 			-- search/jump in all windows
 			multi_window = true,
@@ -59,7 +58,7 @@ return {
 			-- clear highlight after jump
 			nohlsearch = true,
 			-- automatically jump when there is only one match
-			autojump = true,
+			autojump = false,
 			-- You can force inclusive/exclusive jumps by setting the
 			-- `inclusive` option. By default it will be automatically
 			-- set based on the mode.
@@ -143,7 +142,7 @@ return {
 			search = {
 				-- when `true`, flash will be activated during regular search by default.
 				-- You can always toggle when searching with `require("flash").toggle()`
-				enabled = true,
+				enabled = false,
 				highlight = { backdrop = true },
 				jump = { history = true, register = true, nohlsearch = true },
 				search = {
@@ -206,14 +205,14 @@ return {
 					register = true,
 					-- when using jump labels, set to 'true' to automatically jump
 					-- or execute a motion when there is only one match
-					autojump = true,
+					autojump = false,
 				},
 			},
 			-- options used for treesitter selections
 			-- `require("flash").treesitter()`
 			treesitter = {
 				labels = "abcdefghijklmnopqrstuvwxyz",
-				jump = { pos = "range", autojump = true },
+				jump = { pos = "range", autojump = false },
 				search = { incremental = false },
 				label = { before = true, after = true, style = "inline" },
 				highlight = {
@@ -279,30 +278,6 @@ return {
 				require("flash").treesitter()
 			end,
 			desc = "Flash Treesitter",
-		},
-		{
-			"r",
-			mode = "o",
-			function()
-				require("flash").remote()
-			end,
-			desc = "Remote Flash",
-		},
-		{
-			"R",
-			mode = { "o", "x" },
-			function()
-				require("flash").treesitter_search()
-			end,
-			desc = "Treesitter Search",
-		},
-		{
-			"<c-s>",
-			mode = { "c" },
-			function()
-				require("flash").toggle()
-			end,
-			desc = "Toggle Flash Search",
 		},
 	},
 }
